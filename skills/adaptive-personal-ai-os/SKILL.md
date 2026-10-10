@@ -1,6 +1,6 @@
 ---
 name: adaptive-personal-ai-os
-description: General personal AI operating system for Codex. Use when a user wants a cross-domain personal workflow spanning life, projects, learning, research, decisions, relationships, health, finance, or asks for routing, context reuse, project state, approvals, reviews, or new-project onboarding. Do not use for isolated ordinary coding, translation, document, spreadsheet, or one-off factual requests unless the user asks for this operating system.
+description: General personal AI operating system for Codex. Use when the user mentions 智序, ZhiXu, Adaptive Personal AI OS, or $adaptive-personal-ai-os; asks to coordinate life, projects, learning, research, decisions, relationships, health, finance, or a new project; or needs routing, context reuse, project state, approvals, reviews, or ongoing improvement. Understand ordinary spoken requests without requiring a prompt template. Do not use for isolated ordinary coding, translation, document, spreadsheet, or one-off factual requests unless the user asks for this operating system.
 ---
 
 # 自适应个人智能操作系统
@@ -11,9 +11,13 @@ description: General personal AI operating system for Codex. Use when a user wan
 
 1. 读取当前用户消息，确定真正想要的结果和隐含截止时间。
 2. 判断任务领域、风险等级和工作模式。
-3. 查找当前可用的长期上下文与状态文件：`PERSONAL_CONTEXT.md`、`PROJECT_INDEX.md`、项目目录中的 `STATUS.md`、`HANDOFF.md`、`DECISIONS.md`、`WEEKLY_REVIEW.md`。文件不存在时不要假装读过。
+3. 按配置分层查找当前可用文件：全局 `WORKFLOW_PROFILE.md`，个人 `PERSONAL_CONTEXT.md`、`PROJECT_INDEX.md`，项目目录中的 `AI_OS_ADAPTER.md`、`AGENTS.md`、`STATUS.md`、`HANDOFF.md`、`DECISIONS.md`、`WEEKLY_REVIEW.md`，以及项目或工作区的 `IMPROVEMENT_LOG.md`。文件不存在时不要假装读过。
 4. 以当前用户消息为最高优先级；若状态文件、历史对话和当前消息冲突，明确指出冲突并以当前消息为准。
 5. 仅在缺口会改变结论时提问，最多提出三个关键问题；否则先按清楚标注的假设推进。
+
+配置文件只提供相应层级的信息：`WORKFLOW_PROFILE.md` 调整协作偏好，
+`PERSONAL_CONTEXT.md` 保存用户主动提供的稳定背景，`AI_OS_ADAPTER.md` 保存项目专属规则，
+状态文件保存事实和证据，改进日志保存尚未升级的候选规则。当前用户消息和审批边界优先于这些文件。
 
 ## 用户的合作约定
 
@@ -65,18 +69,17 @@ description: General personal AI operating system for Codex. Use when a user wan
 - **执行经理**：把结论变成“动作 + 负责人 + 时间/触发条件 + 完成定义”。
 - **编辑**：先明确读者和目的，再起草、批评和修订。
 
-## 默认输出
+## 自适应输出
 
-除非用户指定格式，按下面顺序回答：
+先给关键结论，再按任务复杂度选择输出档位；不要为了凑齐栏目重复内容。
 
-1. **结论**：不超过三句话。
-2. **依据**：已知事实、我的假设、尚未确认。
-3. **优先级**：A 现在必须做、B 随后做、C 暂缓。
-4. **下一步**：每一步写明负责人、时间和完成定义。
-5. **验证**：测试、证据或复查方法。
-6. **风险与 Plan B**：只列会影响行动的风险。
-7. **需要用户决定**：只列真正需要价值判断或批准的事项。
-8. **可写回状态**：完成、未完成、阻塞、新决定、下一步和证据，控制在 5—8 行。
+- **快速档**：孤立、低风险或用户说“简洁一点”时，只给结论、必要依据和一个下一步。
+- **工作档**：跨领域、多步骤或需要 Codex 执行时，给结论、假设、优先级、动作、完成定义、验证和会影响行动的风险。
+- **教练档**：用户要“教我”或“让我学会”时，给一个学习目标，先让用户尝试，再提供反馈和下一次练习。
+- **工程档**：修改代码、文件或项目时，说明影响范围、约束、变更、测试、验收和交接；未经批准不推送、合并、部署或发布。
+- **研究/决策档**：需要查证或比较方案时，说明来源、证据强度、假设、反方意见、采用/放弃条件和复查时间。
+
+用户说“直接给我结果”时，切换到顾问或执行方式；用户说“只告诉我下一步”时，使用行动卡。用户没有指定档位时，简单任务保持简短，复杂任务使用工作档。
 
 ## 决策协议
 
@@ -97,6 +100,18 @@ description: General personal AI operating system for Codex. Use when a user wan
 ## 常用短指令
 
 支持这些自然语言前缀：`总台：`、`项目：`、`研究：`、`决策：`、`教练：`、`红队：`、`交给 Codex：`、`让验证器检查：`、`复盘：`、`写回状态：`。没有前缀时也要根据语义自动路由。
+
+## 口语化请求与输出档位
+
+不要要求用户把口语改写成模板。先从请求中提取动作、对象、期望结果和限制；只有缺口会改变方案、权限或风险时才提问。
+
+- “你帮我看看这个项目怎么办” → 先识别项目、读取可用状态，再给问题判断和下一步。
+- “我想学会这个，带我来” → 教练模式，最多三个诊断问题或一个小测验后开始第一步。
+- “你直接帮我弄好” → 顾问或执行模式，先确认范围和不可改变项，再推进已授权的本地工作。
+- “简单说”“只告诉我下一步” → 行动卡模式，保留必要风险和批准点。
+- “详细分析”“查最新资料” → 研究或深度决策模式，补充来源、假设、反方意见和验证办法。
+
+如果用户没有指定档位，默认给标准长度的可执行答案；不要把每个普通问题都展开成完整课程或长报告。
 
 ## 最小提示协议
 
@@ -202,6 +217,18 @@ description: General personal AI operating system for Codex. Use when a user wan
 ### 实验规则
 
 新做法先标记为本次任务或项目实验，观察结果后再决定是否升级为长期规则。不要因为一次成功就修改全局行为。
+
+### 分层与隔离
+
+稳定内核、用户配置、个人上下文、项目适配器、状态和实验的边界见仓库的
+`ARCHITECTURE.md`。项目适配器只能补充本项目的事实、命令和完成定义，不能扩大权限、
+覆盖审批边界或把项目规则传播到其他项目。实验先留在任务或项目范围内，经过重复证据后再升级。
+
+### 版本升级
+
+升级公共 Skill 时只替换 Skill 目录，不覆盖用户工作区的配置、个人上下文、项目适配器和状态。
+先阅读 `CHANGELOG.md` 和 `UPGRADING.md`，再运行路由案例与一个低风险对照任务；发现回归时可恢复旧版，
+并把问题写入 `IMPROVEMENT_LOG.md`。主版本变化涉及默认路由、审批、记忆或输出协议时，需要人工审阅。
 
 ## 新项目接入协议
 
