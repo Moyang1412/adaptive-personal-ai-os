@@ -1,0 +1,10 @@
+interface:
+  display_name: 智序 · Adaptive Personal AI OS
+  short_description: An evolving, human-directed Codex workflow for life, projects, learning, decisions, and personal context
+  default_prompt: Use $adaptive-personal-ai-os to route this request, reuse relevant context, and return a concrete next action.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - codex
+  allow_implicit_invocation: true
