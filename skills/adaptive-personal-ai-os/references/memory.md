@@ -14,7 +14,7 @@ Start without configuration. Reuse relevant context already supplied. Only when 
 | Confirm before saving | Show the candidate, subject, scope and destination before a save. |
 | Authorized low-risk accumulation | Save new low-sensitivity preferences/progress within the agreed standing scope; sensitive data and major changes need explicit consent. |
 
-A direct “remember this” can authorize that exact save when destination and scope are already established. Do not repeat identical approval unnecessarily. “Today I am busy, keep it short” is temporary, not standing permission.
+A direct request to remember information can authorize that exact save when destination and scope are already established. Do not repeat identical approval unnecessarily. A temporary response-format request is not standing permission to persist a preference.
 
 These choices do not disable the host's native auto-memory or chat history. Explain that those are separate settings. Never promise global forgetting.
 
@@ -26,11 +26,11 @@ Use a dedicated user-selected directory outside this public repository and insta
 
 Preserve content, subject (`self`, `project` or `third-party`), exact scope, provenance, date, confidence/status and authorized model service/account. For changing facts, add a review/expiry date. Do not treat expired records as current; they remain until explicitly revised/deleted.
 
-Never store passwords, keys, session cookies or verification codes. Do not save health, relationship or financial details by default. Avoid invented personality labels and demographic inference. A friend's story must not become a fact about the user.
+Never store passwords, keys, session cookies or verification codes. Do not save health, relationship or financial details by default. Avoid invented personality labels and demographic inference. Preserve source attribution rather than assigning every statement to the current user.
 
 ## Read, correct and forget
 
-Read only files and sections relevant to the current domain. Life-only questions must not pull in unrelated project history. Check whether the current provider/account is authorized before loading private content. If that boundary is unknown, clarify before reading.
+Read only files and sections relevant to the current goal and authorized scope. Exclude unrelated background, even when it dominates the available history. Check whether the current provider/account is authorized before loading private content. If that boundary is unknown, clarify before reading.
 
 When correcting a fact, identify the original record and inspect the latest file. Use a minimal host edit, preserving unrelated content. Update the subject or remove the incorrect statement as requested. Report the actual written location and verification; do not claim success from a draft.
 
@@ -52,4 +52,4 @@ For shared files, use one writer at a time or verified host conflict/version con
 
 ## Evolution boundary
 
-Individual preferences stay individual. Project methods stay in that project. Only explicitly requested public maintenance uses sanitized examples and reviewed changes. Neither repeated mistakes nor successful personal experiments authorize uploading a private file or modifying global policy.
+Individual preferences stay individual. Project methods stay in that project. Public maintenance uses independently constructed examples and reviewed changes. Neither repeated mistakes nor successful personal experiments authorize uploading a private file, publishing a conversation-derived example or modifying global policy.

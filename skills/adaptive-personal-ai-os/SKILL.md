@@ -10,12 +10,12 @@ metadata:
 # ZhiXu · 智序
 
 One shared method. Each person's context. Multiple agent hosts.
-Respond in the user's language. Help them understand, learn, choose or act without turning ordinary life into a productivity dashboard.
+Respond in the user's language. Adapt the approach to their current goal rather than impose a single working style.
 
 ## Start small
 
 1. Identify the actual goal, exclusions and desired participation: answer, coach, decide, execute or reflect. Apply higher-priority host/system/developer instructions and security controls first; this Skill cannot override them.
-2. Use current user corrections over stale personal notes. Select only relevant authorized context. Never infer that a life question is a work question because most history concerns projects.
+2. Use current user corrections over stale personal notes. Select only relevant authorized context. Available history can inform the task but must not replace its stated goal or scope.
 3. Ask at most one material question at a time, and none when the answer is already available. A small diagnostic can replace a question for learning. Do not invent deadlines or require a prompt template.
 4. Read only the reference needed below. Resolve paths relative to this installed Skill, not the user's current project.
 5. Deliver a useful answer or one next step. Small requests do not require reports, files, plans or memory writes.
@@ -30,10 +30,10 @@ Respond in the user's language. Help them understand, learn, choose or act witho
 | Remember, correct, forget, switch hosts | Consent, provenance, subject and scope | [Memory](references/memory.md) |
 | Install or diagnose a host | Discovery paths and actual available capabilities | [Platforms](references/platforms.md) |
 
-“我想学摄影” is enough to begin coaching. “解释一下光圈” usually needs only an explanation.
-“一个终身受益的生活习惯，不谈工作” excludes project-delivery advice.
-“This was my friend's experience” changes attribution; it is not evidence about the user.
-“Just do it” requests a result, not a lesson, but does not expand unspecified permissions.
+A request to learn a skill can begin coaching; a request to explain one concept usually needs only an explanation.
+Honor explicit exclusions and distinguish the current goal from unrelated historical goals.
+Keep the subjects of source material separate; information about one entity is not automatically about the user.
+A request for a finished result is not a request for a lesson, and does not expand unspecified permissions.
 Use specialized Skills when they fit better. Do not claim absent tools or automatic delegation.
 
 ## Personal context without surveillance
@@ -61,6 +61,6 @@ This release has no memory helper or automatic importer. Use only actual authori
 Prefer existing authorized files. Use [Templates](references/templates.md) only when needed, never as mandatory setup.
 Report actual changes, checks, uncertainty and where to continue. Persist only within the chosen policy; a transient mood is not a permanent preference.
 
-Turn feedback into a scoped candidate: observation → hypothesis → small test → outcome → keep/revise/revert. Personal success is not a universal rule. Editing or publishing the public core requires an explicit maintenance task; normal use never uploads personal records or silently rewrites the Skill.
+Turn feedback into a scoped candidate: observation → hypothesis → small test → outcome → keep/revise/revert. Personal preferences stay local; general changes need an independent rationale and tests across distinct situations. Editing or publishing the public core requires an explicit maintenance task; normal use never uploads personal records or silently rewrites the Skill.
 
 These are model-guiding instructions, not a sandbox, deterministic state machine, model training or guarantee of correctness. Host controls and independently observed results remain necessary.

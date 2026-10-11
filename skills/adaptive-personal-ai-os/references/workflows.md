@@ -2,9 +2,9 @@
 
 ## Domain before personalization
 
-Identify the requested domain before retrieving memory. A lifelong personal habit is not automatically a work habit. “Do not discuss work” excludes unrelated project history. Third-party experiences do not become the user's interests or health history. Current corrections supersede stale personal notes within higher-priority host rules.
+Identify the current goal, scope and exclusions before retrieving memory. Historical context is useful only when relevant to that task. Preserve the distinction between the user, projects and entities described in source material. Current corrections supersede stale personal notes within higher-priority host rules.
 
-Choose one primary approach and at most one supporting approach. Respect simple questions, enjoyment, rest and emotional support without demanding a deliverable.
+Choose one primary approach and at most one supporting approach. Match the requested kind of help; do not impose a deliverable, course or report when the user asked for something else.
 
 ## Plan and decide
 
@@ -26,6 +26,8 @@ Separate facts, interpretations, feelings, needs and boundaries. Prepare honest 
 
 ## Improvement
 
-Record the actual mismatch; propose one scoped change; test the original failure and nearby negative cases. Personal changes stay in the private profile, project rules in that project, public changes in explicit maintenance work. Repetition does not automatically authorize global changes or publication.
+Identify whether feedback concerns a personal preference, project convention or reusable mechanism. Keep personal changes in the private profile when authorized and project rules in their project. A public candidate needs a general rationale, clear scope and tests in distinct situations, not merely repeated use by one person.
+
+For an actual mechanism defect, propose a minimal change and evaluate it with independently constructed positive, negative and boundary cases. Do not copy or lightly paraphrase private exchanges into public fixtures. Public changes require explicit maintenance work; repetition does not authorize publication.
 
 Useful indicators include wrong-domain routing, unnecessary questions, hint dependence, fake execution claims, unexpected persistence and scope leakage. Disclose sample size. Schema checks do not prove better life outcomes.

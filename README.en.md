@@ -6,29 +6,28 @@
 
 Adaptive Personal AI OS · **v0.3.0 Preview**
 
-[Get started](#get-started) · [Private memory](skills/adaptive-personal-ai-os/references/memory.md) · [Validation](docs/VALIDATION.md) · [中文](README.md)
+[Get started](#get-started) · [Examples](docs/EXAMPLES.md) · [Private memory](skills/adaptive-personal-ai-os/references/memory.md) · [Validation](docs/VALIDATION.md) · [中文](README.md)
 
 </div>
 
 ---
 
-**Say what you want to do, not how to write a perfect prompt.**
+**Describe your goal in ordinary language; let the agent select a suitable workflow.**
 
-ZhiXu is an installable Agent Skill for contextual decisions, project continuity, personal planning and learning through practice. It distinguishes getting a result from building a skill, reuses only relevant authorized context, and keeps personal facts separate from public instructions.
+ZhiXu is an installable Agent Skill for learning, decisions, task continuity and personal context reuse. The shared core provides methods, individual configuration supplies collaboration preferences, and private files retain authorized context and progress.
 
 It is not a new model, standalone app or always-on life manager.
 
-## What it is designed to do
+## Ways to use it
 
-| Say this | Intended behavior |
-|---|---|
-| “I want to learn photography.” | Clarify the use, ground a suitable path, start a small exercise. |
-| “Continue yesterday's project.” | Read verified state rather than invent progress. |
-| “One lifelong personal habit, not a work habit.” | Respect the life/work boundary. |
-| “Remember that I prefer concise answers.” | Save within consent, not in the public Skill. |
-| “That was my friend's experience.” | Correct attribution instead of treating it as your history. |
+| Goal | Example request | Intended contribution |
+|---|---|---|
+| Learning | “I want to learn data analysis systematically.” | Adapt practice and feedback to the goal and starting level. |
+| Decisions | “Help me compare these options.” | Organize constraints, evidence and tradeoffs. |
+| Task continuity | “Read the current status and continue.” | Resume from verified state with less repetition. |
+| Personal collaboration | “Use my saved collaboration preferences.” | Reuse relevant configuration and context within permission. |
 
-These are testable design requirements, not guaranteed results on every model.
+These are workflow design goals, not guaranteed results on every model. [Examples →](docs/EXAMPLES.md)
 
 ## Get started
 
@@ -56,7 +55,7 @@ This delegates installation to a host with suitable tools and permissions; it is
 
 A plausible answer is not proof of activation. Inspect the actual Skill catalog, installed path or loader trace.
 
-## Personalization without a private fork
+## Shared methods, individual configuration
 
 ```text
 Public Skill: shared methods
@@ -68,17 +67,17 @@ Host: its actual model, tools and permissions
 
 Start without memory. When useful, choose no persistence, confirmation before saving, or explicitly authorized low-risk accumulation. Reuse relevant existing context; do not scrape native histories or require a long questionnaire.
 
-Private files stay in a user-selected directory outside the public package. Another agent may use selected files with permission. A new model service/account does not automatically gain access. Updating public instructions should not overwrite private context.
+Private files stay in a user-selected directory outside the public package. Individual preferences do not become everyone else's defaults. Another agent may use selected files with permission. A new model service/account does not automatically gain access. Updating public instructions should not overwrite private context.
 
 **This version uses host file tools and Markdown records.** It does not include a memory database, automatic synchronization, native-history importer or code-enforced access controls. [Consent and memory protocol →](skills/adaptive-personal-ai-os/references/memory.md)
 
 Local storage is not local inference: loaded records may be sent to a cloud model provider. Host history and native-memory settings remain separate.
 
-## Learning with evidence
+## Learning process and limits
 
 Goal → grounded curriculum → baseline → practice and feedback → independent new task → delayed check → adjustment.
 
-Research-informed practices do not establish product efficacy. No guaranteed optimal paths or claims that assisted completion equals learning. [Protocol and primary research →](skills/adaptive-personal-ai-os/references/learning.md)
+Research-informed practices do not establish product efficacy. No guaranteed optimal paths or claims that assisted completion equals independent mastery. [Protocol and primary research →](skills/adaptive-personal-ai-os/references/learning.md)
 
 ## Maintainable by design
 
