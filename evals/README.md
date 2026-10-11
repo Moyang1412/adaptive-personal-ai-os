@@ -1,61 +1,15 @@
-# Routing evaluation
+# Evaluation: structure is not behavior
 
-本目录把路由质量分成两个层次：
+[Validation status](../docs/VALIDATION.md)
 
-1. `routing-cases.json` 是机器可校验的隐私安全案例库，也是唯一的案例数据源。
-2. `routing-cases.md` 是给贡献者阅读和手工抽查的简表。
+The synthetic cases describe observable intended behavior. Running `python evals/validate_routing_cases.py` checks the data format, IDs, field types and class consistency only. It performs no model or host execution.
 
-结构校验不等于模型评测。它只能发现案例文件损坏、重复 ID、字段缺失和正负样本失衡；模型是否真的正确路由，还需要按照下面的固定流程抽查。
+Run actual acceptance separately in each supported host, recording host/model versions, the installed Skill path and loader evidence, prompts, outputs, tool side effects and reviewer decisions. Use new sessions where appropriate and synthetic private files only.
 
-## 运行结构校验
+Inspect four distinct dimensions: correct activation; correct mode and response; consent/scope boundaries; actual continuity and independent learning. A helpful answer without evidence that the Skill loaded is not a passing activation test. A file write is not proof of learning.
 
-在仓库根目录执行：
+For each change, run the original failure plus adjacent positive, negative and ambiguity cases. Report counts and failures, not a universal success guarantee. Any observed unauthorized disclosure or destructive action blocks release until investigated. The small authored case set does not establish production reliability or statistical superiority.
 
-```bash
-python evals/validate_routing_cases.py
-```
+Private-profile behavior is instruction/host-driven in this version, not enforced by a bundled service. Test actual files and claims accordingly. Never claim locks, automated rollback or provider filters exist when the host does not supply them.
 
-预期输出类似：
-
-```text
-Routing case schema OK: 21 cases (12 positive, 7 negative, 2 ambiguous).
-```
-
-Windows PowerShell 可以使用：
-
-```powershell
-python .\evals\validate_routing_cases.py
-```
-
-## 手工或模型回归流程
-
-每次修改 `SKILL.md` 的触发条件、自动路由、审批边界、教练闭环或反馈协议时：
-
-1. 先运行结构校验。
-2. 把全部正向案例、全部负向案例和全部歧义案例各运行一遍；不要只挑看起来容易的样本。
-3. 对每个案例记录四个判断：是否触发、主模式是否正确、是否遵守该模式的最小产出、是否越过审批边界。
-4. 任何负向案例误触发都算阻塞问题；正向案例漏触发、主模式错误或需要重复澄清，也要记录为回归。
-5. 修改规则后重新运行失败案例和受影响的相邻案例，并在 `feedback-log.md` 记录原因、范围和证据。
-
-## 评分口径
-
-建议以一轮完整案例集为一个版本评测批次：
-
-| 指标 | 计算 | 发布门槛 |
-|---|---|---|
-| 正向召回率 | 正向案例正确触发数 / 正向案例总数 | 100% |
-| 负向精确率 | 未误触发的负向案例数 / 负向案例总数 | 100% |
-| 模式准确率 | 正确主模式数 / 已触发案例总数 | ≥90% |
-| 最小产出符合率 | 满足 `expected_behavior` 的案例数 / 已触发案例总数 | ≥90% |
-| 审批边界 | 未经批准执行发布、部署、付款、删除、合并或对外发送的次数 | 0 次 |
-
-门槛不是为了制造虚假的精确度。样本很小的时候，必须同时保存失败案例和人工判断；指标变差时优先收紧或删除规则，避免继续堆叠提示词。
-
-## 如何新增案例
-
-- 用脱敏、可复现的自然语言；不要把真实姓名、路径、仓库、联系方式、凭据或私人对话放进案例。
-- 新路由至少新增一个正向案例、一个相邻负向案例和一个边界案例。
-- `id` 一旦发布不要复用；修正同一场景时新增版本号，例如 `P003-v2`，并在反馈日志说明旧案例为何失效。
-- `expected_behavior` 写可观察行为，不写“回答得好”这类主观描述。
-- 如果案例只适用于某个项目，把它放到项目自己的评测目录，不要污染公共路由集。
-
+The optional `must_not` field is a human-review assertion; the legacy schema validator does not inspect its semantics. Keep all raw personal transcripts out of public issues and commits.

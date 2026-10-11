@@ -1,14 +1,27 @@
 # Changelog
 
+## 0.3.0-preview — 2026-10-11
+
+### Published
+
+- Shared Agent Skills core and documented Codex, Claude Code and DSH entry points.
+- Compact core with self-contained, on-demand learning, memory, workflow and platform references.
+- User-language responses, natural learning requests, life/work separation and third-party attribution corrections.
+- Private-context protocol: optional onboarding, consent choices, targeted reuse, correction, forgetting and explicit cross-provider sharing.
+- Evidence-grounded learning: curriculum provenance, prerequisites, independent/new-task and delayed checks; no efficacy guarantees.
+- Chinese/English homepages, scenario-led navigation, manual installation, migration and honest validation notes.
+- Expanded synthetic behavior specifications with negative and boundary cases; schema checks remain distinct from model evaluation.
+
+### Not included
+
+- Automated installer, memory engine, native-history importer, code-enforced audience control, concurrent-write locks or automatic rollback.
+- Live host acceptance, user-computer installation or scientific validation of learning outcomes.
+
 ## 0.2.0
 
-- 增加稳定内核、用户配置、个人上下文、项目适配器、状态和实验的分层协议。
-- 增加 `AI_OS_ADAPTER.md` 项目适配器模板、架构说明和升级兼容说明。
-- 明确升级时只替换 Skill 目录，保护用户工作区与隐私边界。
-- 增加机器可校验的正向、负向和歧义路由案例，以及人工回归评分口径和反馈记录模板。
+- User configuration, project adapter and improvement templates.
+- Architecture and upgrade notes; 21 routing schema cases.
 
 ## 0.1.0
 
-- 发布通用个人 AI 工作流 Skill。
-- 增加自然语言路由、项目接入、教练模式、理论与证据层、反馈驱动优化和人工审批边界。
-- 提供项目状态模板、安装说明和公开仓库安全规范。
+- Initial public workflow Skill, templates and MIT license.

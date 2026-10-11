@@ -1,29 +1,27 @@
 # Contributing
 
-感谢贡献。这个项目优先维护通用的个人 AI 工作流，不把任何一个人的私人习惯、项目或工具配置写死进公共 Skill。
+[Home](README.md) · [Validation](docs/VALIDATION.md)
 
-## 提交前检查
+Keep the shared core concise, portable and grounded in the actual goal. Personal facts stay in private files; examples, tests, issues and commits must be synthetic or sanitized.
 
-- 不要提交真实姓名、私人对话、健康/关系/财务细节、私有仓库地址、凭据、Token、Cookie、本地路径或生产日志。
-- 新增路由或模式时，同时加入一个正向触发例、一个相邻负向触发例和一个边界例；案例放在 `evals/routing-cases.json`，不要只写在 PR 描述里。
-- 单一任务的特殊规则放在示例或项目模板中，不要直接加入全局内核。
-- 修改审批、记忆、写回或安全规则时，说明兼容性影响和失败时的降级行为。
-- 运行 `python evals/validate_routing_cases.py`，并检查 `rg` 搜索出的敏感信息。若本地环境提供额外的 `quick_validate.py`，再一并运行；公共仓库不要求第三方依赖。
-- 完成一轮人工或模型回归，记录触发、主模式、最小产出和审批边界；具体评分口径见 [`evals/README.md`](evals/README.md)。
+## Before changing behavior
 
-## 设计要求
+Read the affected reference and existing cases. Distinguish individual preferences from project rules and general improvements. Add a positive case, a neighboring negative case and an ambiguity/authority boundary. Do not convert two anecdotal failures into automatic global rules.
 
-- 保持 `skills/adaptive-personal-ai-os/SKILL.md` 简洁，详细变体放到 `references/` 或仓库级文档。
-- 不把某一个模型、厂商、外部代理框架或第三方服务设为唯一正确方案。
-- 默认不自动执行发布、部署、付款、删除、合并或对外发送。
-- 事实、推断、意见和未知要分开；当前变化信息要查证。
+## Checks
 
-## Pull Request
+The existing validator is still available:
 
-Pull Request 请说明：问题、改变的行为、适用范围、负向触发风险、验证方式和是否需要用户批准。不要在示例中使用真实用户数据。
+```text
+python evals/validate_routing_cases.py
+```
 
-## 版本和反馈
+It validates case schema only. It does not call a model, run a host or prove memory/teaching behavior. Inspect frontmatter, relative links, source references, package completeness and private information separately. Record exact commands and actual results.
 
-- 文档、模板和评测修订使用补丁版本；新增或调整路由行为使用次版本；改变默认安全边界或破坏安装方式时使用主版本。
-- 每次行为变化都要更新 `CHANGELOG.md`，并在 `evals/feedback-log.md` 记录观察事实、候选规则、适用范围、可能副作用和验证证据。
-- 贡献者不得因为一个人的一次纠正就把个人偏好写成全局规则；先留在实验或项目适配器中，待重复或跨项目证据出现后再升级。
+For host acceptance, record version, model/provider, loaded Skill path/trace, prompt, output, tool effects and reviewer judgment. Do not publish real memories, credentials, personal screenshots or raw private conversations.
+
+## Pull requests
+
+Explain the user friction, changed behavior, scope, risks, evidence and rollback. Update CHANGELOG.md and migration notes for changes to defaults. No unsupported claims of scientific efficacy, automatic persistence or universal host compatibility.
+
+Ordinary Skill use must not rewrite or publish this repository. Public maintenance is an explicit task. Local prototype tests cannot be reported as validation of unpublished or different release files.

@@ -1,0 +1,12 @@
+# Local/private working data — not a substitute for review
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+.zhixu/
+ZhiXu-Private/
+private/
+local-backups/
+.venv/
+.DS_Store

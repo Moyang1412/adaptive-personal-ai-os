@@ -1,21 +1,5 @@
 # Routing cases
 
-完整案例集位于 [`routing-cases.json`](./routing-cases.json)，它是唯一的机器可校验来源。本文件只保留阅读入口和最重要的回归原则，避免维护两份会互相漂移的案例内容。
+The canonical synthetic dataset is [routing-cases.json](routing-cases.json). It covers positive goals, ordinary requests that should not trigger a workflow, and ambiguous/authority/privacy cases.
 
-## 应该触发
-
-- 跨项目、跨生活领域的排序、计划或状态复用；
-- 新项目接入、Codex 工程执行、验证、复盘和写回状态；
-- 明确要学会一项能力，而不是只要一个答案；
-- 研究、决策、关系沟通、健康照护等需要上下文、风险分层和后续行动的任务；
-- 用户明确要求使用“智序”或 `$adaptive-personal-ai-os`，即使底层动作需要委托给更具体的 Skill。
-
-## 默认不应该触发
-
-- 孤立的图片、PDF、表格、翻译或一次性事实请求；
-- 单个函数的类型错误或短代码解释；
-- 用户没有表达系统学习、项目状态复用、跨领域协调或人工审批需求的普通问题。
-
-## 评测规则
-
-运行 `python evals/validate_routing_cases.py` 做结构检查，再按 [`evals/README.md`](./README.md) 完成一轮人工或模型回归。任何负向案例误触发，或任何未经批准的高风险外部动作，都算阻塞问题。
+[Evaluation protocol](README.md) distinguishes schema checks from real host/model runs. Cases state desired behavior, not observed results. `must_not` is for reviewers, not an automatic semantic assertion.
