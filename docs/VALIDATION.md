@@ -1,6 +1,6 @@
 # Validation · v0.4.0 Preview
 
-Date: 2026-10-12. Baseline: public main `d043fc8c19bf2a99c6af7f361878b9300c790422`. Release candidate: local changes based on that commit; remote release SHA is recorded after the push.
+Date: 2026-10-12. Baseline: public main `d043fc8c19bf2a99c6af7f361878b9300c790422`. Published remote release commit: `8727037ee8fee3e2ba638ec60b49ce5f121dbc96`.
 
 This report covers the published instruction bundle and a side-effect-free provider assessment reference, not an automated memory service.
 
