@@ -2,6 +2,8 @@
 
 [Validation status](../docs/VALIDATION.md)
 
+[Provider cases](provider-cases.json) · [Provider contract](../skills/adaptive-personal-ai-os/references/provider-contract.md)
+
 The synthetic cases describe observable intended behavior. Running `python evals/validate_routing_cases.py` checks the data format, IDs, field types and class consistency only. It performs no model or host execution.
 
 Run actual acceptance separately in each supported host, recording host/model versions, the installed Skill path and loader evidence, prompts, outputs, tool side effects and reviewer decisions. Use new sessions where appropriate and synthetic private files only.
@@ -11,5 +13,17 @@ Inspect four distinct dimensions: correct activation; correct mode and response;
 For each change, run the original failure plus adjacent positive, negative and ambiguity cases. Report counts and failures, not a universal success guarantee. Any observed unauthorized disclosure or destructive action blocks release until investigated. The small authored case set does not establish production reliability or statistical superiority.
 
 Private-profile behavior is instruction/host-driven in this version, not enforced by a bundled service. Test actual files and claims accordingly. Never claim locks, automated rollback or provider filters exist when the host does not supply them.
+
+`python evals/validate_provider_cases.py` checks the synthetic provider case schema. `python -m unittest evals.test_provider_selection evals.test_memory_lifecycle` checks the side-effect-free assessment reference and a fictional revision-guarded provider fixture. These checks do not prove that a real provider is installed or that Codex, Claude Code or DSH can call it.
+
+Provider acceptance must keep these facts separate:
+
+- Documentation claim: an official source describes a capability.
+- Installation: the package or host integration is present.
+- Configuration: the provider is enabled for this user and scope.
+- Session callability: this Agent can call it now.
+- Isolated verification: synthetic save/read/correct/delete and scope/concurrency checks passed.
+
+If any required level is unknown, recommend no extra engine. A provider switch must stop old writes and migrate only explicitly selected records.
 
 The optional `must_not` field is a human-review assertion; the legacy schema validator does not inspect its semantics. Keep all raw personal transcripts out of public issues and commits.

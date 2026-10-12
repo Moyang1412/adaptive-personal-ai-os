@@ -4,9 +4,9 @@
 
 **同一套方法，你自己的记忆，不同的 Agent。**
 
-Adaptive Personal AI OS · **v0.3.0 Preview**
+Adaptive Personal AI OS · **v0.4.0 Preview**
 
-[开始使用](#开始使用) · [使用示例](docs/EXAMPLES.md) · [私人记忆](docs/MEMORY.md) · [验证状态](docs/VALIDATION.md) · [English](README.en.md)
+[开始使用](#开始使用) · [使用示例](docs/EXAMPLES.md) · [记忆方案](docs/PROVIDERS.md) · [私人记忆](docs/MEMORY.md) · [验证状态](docs/VALIDATION.md) · [English](README.en.md)
 
 </div>
 
@@ -14,7 +14,7 @@ Adaptive Personal AI OS · **v0.3.0 Preview**
 
 **用自然语言提出目标，让 Agent 选择合适的工作方式。**
 
-智序是一份可安装的 Agent Skill，用于学习、决策、任务续接与个人上下文复用。公共核心提供工作方法，使用者自己的配置决定协作偏好，私人文件保存经过授权的背景与进度。
+智序是一份可安装的 Agent Skill，用于学习、决策、任务续接、个人上下文复用和记忆方案选择。公共核心提供工作方法，使用者自己的配置决定协作偏好，私人文件或已选 provider 保存经过授权的背景与进度。
 
 不是新模型，不是独立 App，也不是全自动人生管家。
 
@@ -26,12 +26,13 @@ Adaptive Personal AI OS · **v0.3.0 Preview**
 | 决策 | “帮我比较这几种方案。” | 梳理约束、证据和取舍，提出建议。 |
 | 任务续接 | “读取当前进度，继续下一步。” | 从真实状态继续，减少重复解释。 |
 | 个性化协作 | “按我保存的协作偏好来处理。” | 在授权范围内复用相关配置与背景。 |
+| 记忆方案 | “我需要跨会话记忆，先检查现有能力。” | 先用原生记忆；有明确缺口时再评估已安装 provider。 |
 
 这些是工作流的设计目标，不是所有模型都能稳定做到的保证。[查看使用示例 →](docs/EXAMPLES.md)
 
 ## 开始使用
 
-已有 **Codex、Claude Code 或 DSH** 即可尝试；核心不需要额外服务器、API 密钥或 Python。
+已有 **Codex、Claude Code 或 DSH** 即可尝试；核心不需要额外服务器、API 密钥或 Python，也不会自动建立记忆数据库。
 
 **把下面这段交给你自己的 Agent：**
 
@@ -67,11 +68,18 @@ https://github.com/Moyang1412/adaptive-personal-ai-os/tree/main/skills/adaptive-
 当前 Agent：它实际拥有的模型、工具和权限
 ```
 
-**无需配置也能先用。** 需要长期连续性时，再选择“不保存”“确认后保存”或“授权低敏日常积累”。已有背景优先复用，不扫描全部历史，不强迫重新介绍自己。
+**无需配置也能先用。** 需要长期连续性时，Agent 只在首次需要时检查已有原生记忆和用户已经安装、授权的 provider，再给出四个选择：
+
+- **A 原生记忆**：原生能力覆盖需求时继续使用。
+- **B 原生记忆 + 私人档案**：明确需要跨 Agent，且有范围和版本/锁保护时使用。
+- **C 已安装的成熟 provider**：发现明确缺口，且安装、启用、可调用、许可证、维护状态和隔离测试都通过时使用。
+- **D 暂不使用额外记忆**：没有缺口、没有权限、尚未验证或用户不想保存时使用。
+
+安装 Skill 不等于安装 provider。没有合适 provider 时，优先选择 D；手工 Markdown 只是最小文件型备用记录，不是完整记忆引擎。已有背景优先复用，不扫描全部历史，不强迫重新介绍自己。
 
 私人资料留在使用者指定的独立目录。个人偏好只影响本人，不会成为其他人的默认规则。换 Agent 时可以授权它读取同一份档案；换模型服务或账号时，需要重新明确共享范围。公共 Skill 升级不应覆盖个人资料。
 
-**当前使用宿主的读写能力和 Markdown 档案，没有独立记忆数据库、自动同步、原生历史导入器或代码级权限控制。** [如何保存、纠错、遗忘 →](docs/MEMORY.md)
+**公共 Skill 只负责判断、路由、授权和边界；具体保存、读取、纠错、删除和导出交给已选 provider。** 不包含独立记忆数据库、向量检索、自动同步、原生历史导入器或代码级权限控制。[记忆方案与迁移 →](docs/PROVIDERS.md) · [如何保存、纠错、遗忘 →](docs/MEMORY.md)
 
 ## 学习流程与效果边界
 
@@ -86,6 +94,7 @@ https://github.com/Moyang1412/adaptive-personal-ai-os/tree/main/skills/adaptive-
 | [安装与排错](docs/INSTALL.md) | 装在哪里、怎么确认、如何升级 |
 | [使用示例](docs/EXAMPLES.md) | 不同目标怎样采用不同工作方式 |
 | [私人记忆](docs/MEMORY.md) | 谁能读、记什么、怎么改和删除 |
+| [记忆方案接入](docs/PROVIDERS.md) | 如何检测、推荐、授权 provider，怎样迁移和停用 |
 | [架构](ARCHITECTURE.md) / [升级](UPGRADING.md) | 公共规则与个人资料怎样分开 |
 | [验证报告](docs/VALIDATION.md) / [评测](evals/README.md) | 实际检查过什么，哪些仍然待验 |
 | [安全](SECURITY.md) / [贡献](CONTRIBUTING.md) | 风险边界与参与方式 |

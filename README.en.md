@@ -4,9 +4,9 @@
 
 **One shared method. Your own context. Multiple agents.**
 
-Adaptive Personal AI OS · **v0.3.0 Preview**
+Adaptive Personal AI OS · **v0.4.0 Preview**
 
-[Get started](#get-started) · [Examples](docs/EXAMPLES.md) · [Private memory](skills/adaptive-personal-ai-os/references/memory.md) · [Validation](docs/VALIDATION.md) · [中文](README.md)
+[Get started](#get-started) · [Examples](docs/EXAMPLES.md) · [Memory choices](docs/PROVIDERS.en.md) · [Private memory](skills/adaptive-personal-ai-os/references/memory.md) · [Validation](docs/VALIDATION.md) · [中文](README.md)
 
 </div>
 
@@ -14,7 +14,7 @@ Adaptive Personal AI OS · **v0.3.0 Preview**
 
 **Describe your goal in ordinary language; let the agent select a suitable workflow.**
 
-ZhiXu is an installable Agent Skill for learning, decisions, task continuity and personal context reuse. The shared core provides methods, individual configuration supplies collaboration preferences, and private files retain authorized context and progress.
+ZhiXu is an installable Agent Skill for learning, decisions, task continuity, personal context reuse and memory-provider choice. The shared core provides methods, individual configuration supplies collaboration preferences, and private files or a selected provider retain authorized context and progress.
 
 It is not a new model, standalone app or always-on life manager.
 
@@ -26,12 +26,13 @@ It is not a new model, standalone app or always-on life manager.
 | Decisions | “Help me compare these options.” | Organize constraints, evidence and tradeoffs. |
 | Task continuity | “Read the current status and continue.” | Resume from verified state with less repetition. |
 | Personal collaboration | “Use my saved collaboration preferences.” | Reuse relevant configuration and context within permission. |
+| Memory choice | “I need continuity; check what already exists first.” | Use native memory first; assess an installed provider only for a clear gap. |
 
 These are workflow design goals, not guaranteed results on every model. [Examples →](docs/EXAMPLES.md)
 
 ## Get started
 
-Use your existing **Codex, Claude Code or DSH**. The instruction core needs no extra server, API key or Python runtime.
+Use your existing **Codex, Claude Code or DSH**. The instruction core needs no extra server, API key or Python runtime and does not create a memory database.
 
 Give your agent this request:
 
@@ -65,11 +66,18 @@ Private files: your preferences, goals and progress
 Host: its actual model, tools and permissions
 ```
 
-Start without memory. When useful, choose no persistence, confirmation before saving, or explicitly authorized low-risk accumulation. Reuse relevant existing context; do not scrape native histories or require a long questionnaire.
+Start without memory. When long-term continuity is first needed, inspect the host's native memory and the user's installed, authorized providers once for that scope. Then choose:
+
+- **A Native memory** when the host already covers the need.
+- **B Native memory plus a private profile** for an explicit cross-agent need with scope and version/lock protection.
+- **C An installed mature provider** only when it fills a clear gap and its installation, enablement, callability, license, maintenance and isolated test are verified.
+- **D No extra long-term memory** when there is no gap, permission or verification, or when the user declines persistence.
+
+Installing this Skill does not install a provider. If no suitable provider exists, choose D; a hand-maintained Markdown file is a minimal record fallback, not a full memory engine. Reuse relevant existing context; do not scrape native histories or require a long questionnaire.
 
 Private files stay in a user-selected directory outside the public package. Individual preferences do not become everyone else's defaults. Another agent may use selected files with permission. A new model service/account does not automatically gain access. Updating public instructions should not overwrite private context.
 
-**This version uses host file tools and Markdown records.** It does not include a memory database, automatic synchronization, native-history importer or code-enforced access controls. [Consent and memory protocol →](skills/adaptive-personal-ai-os/references/memory.md)
+**The public Skill handles assessment, routing, authorization and boundaries.** The selected provider handles saving, reading, correction, deletion and export. This release includes no memory database, vector search, automatic synchronization, native-history importer or code-enforced access controls. [Memory choices and migration →](docs/PROVIDERS.en.md) · [Consent and memory protocol →](skills/adaptive-personal-ai-os/references/memory.md)
 
 Local storage is not local inference: loaded records may be sent to a cloud model provider. Host history and native-memory settings remain separate.
 
@@ -83,6 +91,6 @@ Research-informed practices do not establish product efficacy. No guaranteed opt
 
 A compact core loads references on demand. Personal experience stays personal; project rules stay scoped. Public changes need an explicit maintenance task and regression checks.
 
-[Architecture](ARCHITECTURE.md) · [Upgrading](UPGRADING.md) · [Validation](docs/VALIDATION.md) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
+[Architecture](ARCHITECTURE.md) · [Memory providers](docs/PROVIDERS.en.md) · [Upgrading](UPGRADING.md) · [Validation](docs/VALIDATION.md) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
 
 **MIT licensed. No daemon or built-in telemetry. Not an official OpenAI, Anthropic or DeepSeek product.**

@@ -1,24 +1,27 @@
-# Validation · v0.3.0 Preview
+# Validation · v0.4.0 Preview
 
-Date: 2026-10-11. Baseline: public main `23f4af2bdc4d1afef7aa18964402f828a54ae697`.
+Date: 2026-10-12. Baseline: public main `d043fc8c19bf2a99c6af7f361878b9300c790422`. Release candidate: local changes based on that commit; remote release SHA is recorded after the push.
 
-This report covers the published instruction bundle, not an automated memory service.
+This report covers the published instruction bundle and a side-effect-free provider assessment reference, not an automated memory service.
 
 ## Checks performed
 
-- The 66-line core and Codex metadata parsed as YAML; names and version inspected. The standalone bundle contains 9 files.
+- The core and Codex metadata parsed as YAML; names and version inspected. The standalone bundle includes the provider contract and remains instruction-first.
 - The existing public `evals/validate_routing_cases.py` ran against 40 synthetic cases: 15 positive, 7 negative, 18 ambiguous. Its source is unchanged from v0.2. This is schema validation, not model evaluation.
-- All 54 relative Markdown links resolve locally; no missing targets were found. Self-contained package file presence was checked.
-- Chinese/English Markdown parsed and local HTML previews generated. Browser screenshot navigation was blocked by the environment, so no visual GitHub/mobile rendering pass is claimed.
+- `python -m unittest evals.test_provider_selection evals.test_memory_lifecycle` passed 17 synthetic checks for first-use triggering, native-first routing, provider evidence, A/B/C/D selection, consent, scope, provider switching, export routing and revision-guarded writes. The fixture is not a shipped memory engine.
+- `python evals/validate_provider_cases.py` passed 8 synthetic provider cases covering native-first, cross-Agent scope, unverified installation, consent, provider switching and concurrency.
+- All 82 relative Markdown links resolve locally; no missing targets were found. Self-contained package file presence was checked.
+- 36 Markdown files parsed to HTML locally. Browser screenshot navigation was blocked by the environment, so no visual GitHub/mobile rendering pass is claimed.
 - A configured private-identifier and credential-pattern scan was applied to release files. No findings is not a comprehensive security audit or anonymization of historical Git metadata.
 
 ## Not established
 
-- Real Codex, Claude Code or DSH activation, implicit routing or multi-turn behavior.
+- Real Codex, Claude Code or DSH activation, implicit routing, multi-turn behavior or provider callability; this turn only validates the local reference module and synthetic fixtures.
 - Installation on the maintainer's personal computer, cross-device synchronization, or private Skill updates.
 - Learning efficacy, optimal curricula or guaranteed safety/privacy across models.
-- Code-enforced memory permissions, concurrent writes, automatic installer or rollback: these modules are not shipped.
+- A production provider's license, maintenance, storage, deletion, concurrency or cloud data behavior; adapters must report and re-test those values in the user's environment.
+- Code-enforced memory permissions, a database, vector retrieval, automatic importer/synchronization, automatic installer or rollback: these modules are not shipped.
 
 A separate local automation prototype passed 69 tests, but its source upload was blocked by platform safety review and is not part of this public release. Those tests do not validate the published instruction-only memory workflow. The blocked upload was not retried through an alternate transport.
 
-Live host acceptance should use synthetic private files, record actual host/model versions and loader evidence, and preserve both failures and limitations. See [evaluation protocol](../evals/README.md).
+Live host acceptance should use synthetic private files, record actual host/model versions and loader evidence, and preserve both failures and limitations. Codex, Claude Code and DSH are currently **documentation or adapter layer complete; live acceptance unverified**. See [evaluation protocol](../evals/README.md) and [provider integration](PROVIDERS.md).

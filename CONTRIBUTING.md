@@ -26,6 +26,12 @@ python evals/validate_routing_cases.py
 
 It validates case schema only. It does not call a model, run a host or prove memory/teaching behavior. Inspect frontmatter, relative links, source references, package completeness and private information separately. Record exact commands and actual results.
 
+Provider changes must keep documentation claims, installation, enablement,
+callability and isolated verification separate. Add a synthetic positive,
+negative and authority-boundary case for provider selection, consent, scope,
+switching or concurrency. Do not add a database, vector search or automatic
+migration to the public Skill.
+
 For host acceptance, record version, model/provider, loaded Skill path/trace, prompt, output, tool effects and reviewer judgment. Do not publish real memories, credentials, personal screenshots or raw private conversations.
 
 ## Pull requests

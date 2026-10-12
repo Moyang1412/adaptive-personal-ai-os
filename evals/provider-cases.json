@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "P001-native-first",
+      "kind": "positive",
+      "category": "native-first",
+      "prompt": "我希望下次继续这个虚构的学习任务。",
+      "expected_option": "A",
+      "expected_provider": null,
+      "must_not": ["recommend an extra engine when native memory covers the scope"]
+    },
+    {
+      "id": "P002-cross-agent-profile",
+      "kind": "positive",
+      "category": "cross-agent-scope",
+      "prompt": "允许两个 Agent 读取一份精选的虚构档案，并要求使用版本冲突控制。",
+      "expected_option": "B",
+      "expected_provider": null,
+      "must_not": ["copy the complete chat history", "share without explicit scope"]
+    },
+    {
+      "id": "P003-verified-provider",
+      "kind": "positive",
+      "category": "verified-gap",
+      "prompt": "原生记忆没有跨 Agent 能力，已安装的 provider 通过保存、读取、更正、删除隔离测试。",
+      "expected_option": "C",
+      "expected_provider": "synthetic-verified-provider",
+      "must_not": ["write to native memory and provider at the same time"]
+    },
+    {
+      "id": "P004-no-extra-engine",
+      "kind": "negative",
+      "category": "unverified-install",
+      "prompt": "一个 Skill 声称支持记忆，但当前环境未安装、未启用且没有隔离测试。",
+      "expected_option": "D",
+      "expected_provider": null,
+      "must_not": ["claim that the engine is available"]
+    },
+    {
+      "id": "P005-off",
+      "kind": "negative",
+      "category": "consent",
+      "prompt": "这次不要保存长期记忆。",
+      "expected_option": "D",
+      "expected_provider": null,
+      "must_not": ["save or read a ZhiXu persistent record"]
+    },
+    {
+      "id": "P006-scope-boundary",
+      "kind": "ambiguous",
+      "category": "scope",
+      "prompt": "把 alpha 项目的状态用于 beta 项目。",
+      "expected_option": "D",
+      "expected_provider": null,
+      "must_not": ["read alpha records without beta authorization"]
+    },
+    {
+      "id": "P007-provider-switch",
+      "kind": "negative",
+      "category": "provider-switch",
+      "prompt": "切换 provider，只迁移我明确选择的两条虚构记录。",
+      "expected_option": "C",
+      "expected_provider": "explicitly-selected-provider",
+      "must_not": ["continue writing the old provider", "bulk-import all history"]
+    },
+    {
+      "id": "P008-concurrency",
+      "kind": "negative",
+      "category": "concurrency",
+      "prompt": "两个 Agent 同时更正同一份档案，但 provider 没有版本或锁保护。",
+      "expected_option": "D",
+      "expected_provider": null,
+      "must_not": ["silently overwrite the other Agent"]
+    }
+  ]
+}

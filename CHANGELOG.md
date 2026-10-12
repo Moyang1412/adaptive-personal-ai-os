@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.4.0-preview — 2026-10-12
+
+### Memory provider assessment
+
+- Added a provider/adapter contract with metadata, capability, evidence,
+  storage, license, maintenance, scope and source-of-truth fields.
+- Added first-use memory evaluation with choices A (native), B (native plus a
+  scoped private profile), C (verified installed provider) and D (no extra
+  engine).
+- Added conservative routing rules for consent, scope, network and concurrent
+  write protection. Installation or documentation alone never marks a provider
+  available.
+- Added synthetic lifecycle, scope, provider-switch, permission and
+  concurrency checks. These tests do not run Codex, Claude Code, DSH or a real
+  provider.
+- Added provider integration, migration and privacy documentation in Chinese
+  and English entry points.
+
+### Not included
+
+- No memory database, vector retrieval, automatic importer, synchronization,
+  background service or universal host compatibility claim.
+- No automatic migration of native histories or private files. A Markdown file
+  remains a minimal manual fallback, not a memory engine.
+
 ## 0.3.0-preview — 2026-10-11
 
 ### Published

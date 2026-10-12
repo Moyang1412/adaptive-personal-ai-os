@@ -1,6 +1,6 @@
 # 安装与排错 · Install
 
-[中文首页](../README.md) · [English](../README.en.md)
+[中文首页](../README.md) · [记忆方案接入](PROVIDERS.md) · [English](../README.en.md)
 
 ## 最短路径
 
@@ -18,6 +18,8 @@
 
 本版是无额外运行依赖的指令包。**没有 `install.py`、自动记忆脚本、安装诊断器或自动回滚工具。** 不要运行旧预览里提到但仓库不存在的命令。
 
+安装 Skill 不会安装记忆 provider。首次需要长期记忆时，先检查宿主原生记忆和用户已经安装、授权的工具，再按 [记忆方案接入](PROVIDERS.md) 记录证据和选择 A/B/C/D。没有明确缺口或隔离验证时，选择 D，不要临时建立数据库。
+
 ## 先保护已有配置
 
 已有同名文件夹时，先检查它是否被用户修改，不直接覆盖。把旧副本备份到宿主不扫描的目录，再人工比较和替换公共文件。不要把备份留在 Skills 扫描目录造成重复发现。
@@ -28,7 +30,7 @@
 
 **文件层：**确认最终路径是 `<skills-root>/adaptive-personal-ai-os/SKILL.md`，frontmatter 的 name 正确，references 相对链接完整。
 
-**宿主层：**在技能列表或加载记录里找到同名 Skill，检查真实路径，显式调用，再测试自然语言请求和一条不应触发的简单翻译。没有宿主层证据，只能说文件安装完成。
+**宿主层：**在技能列表或加载记录里找到同名 Skill，检查真实路径，显式调用，再测试自然语言请求和一条不应触发的简单翻译。没有宿主层证据，只能说文件安装完成。记忆 provider 还必须单独核对安装、启用、可调用和隔离测试状态，不能把 Skill 加载当成 provider 验证。
 
 Codex 显式调用 `$adaptive-personal-ai-os`；Claude Code 使用 `/adaptive-personal-ai-os`；DSH 在其当前 Skill 入口选择。版本差异详见[平台适配](../skills/adaptive-personal-ai-os/references/platforms.md)。
 
@@ -42,9 +44,11 @@ Codex 显式调用 `$adaptive-personal-ai-os`；Claude Code 使用 `/adaptive-pe
 | 新对话失去进度 | 是否实际写入了状态，新的 Agent 是否被明确允许读取 |
 | 不停输出长报告 | 用“简短一点”反馈；检查是否加载了旧核心或冲突规则 |
 | 回答正确但不见加载记录 | 不宣布激活成功，继续核对宿主证据 |
+| provider 看似已安装 | 检查 enabled、callable、许可证、维护状态和隔离测试；未知就标记未知 |
+| 更换 provider 后仍有旧写入 | 先停旧 provider，核对唯一 source of truth 和实际写入日志 |
 
 ## English quick reference
 
 Download the repository or delegate installation to your agent. Copy the entire Skill folder to the host's verified skills root. No Python or additional service is required. Review existing copies before replacing them, keep backups outside discovery roots, and never overwrite private context or host settings.
 
-Verify both the files and the host catalog/loader trace. Explicit invocation differs by host. There is no installer, automatic memory engine or runtime doctor in this release.
+Verify both the files and the host catalog/loader trace. Explicit invocation differs by host. There is no installer, automatic memory engine or runtime doctor in this release. Provider selection is an evidence and authorization step; it does not create a database.

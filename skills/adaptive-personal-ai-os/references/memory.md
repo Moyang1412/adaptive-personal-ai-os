@@ -2,9 +2,26 @@
 
 ## Scope
 
-This release uses relevant native context and user-approved Markdown files through actual host tools. It does not ship an automatic memory engine, importer, synchronizer or permission-enforcement service. Instructions guide cooperation; they are not an OS security boundary.
+This release starts with relevant native context and user-approved sources. It adds a provider/adapter assessment boundary, but it does not ship a memory database, vector search, automatic importer, synchronizer or permission-enforcement service. Instructions guide cooperation; they are not an OS security boundary. See [Provider contract](provider-contract.md) for the descriptor and adapter operations.
 
-Start without configuration. Reuse relevant context already supplied. Only when continuity is useful, offer the user a persistence choice and exact private location. Do not browse all existing histories to construct a profile.
+Start without configuration. Reuse relevant context already supplied. Only when continuity is useful, offer the user a persistence choice and exact private location. Do not browse all existing histories to construct a profile. At the first long-term-memory need, inspect native memory and already installed, authorized providers once for that scope; do not repeat the question every chat.
+
+## Provider evaluation and choice
+
+1. Inspect the native memory already available in the host.
+2. Inspect only installed and authorized memory tools; do not scan all history,
+   credentials or home directories.
+3. Separate official documentation claims, installed state, enabled state,
+   current-session callability and isolated-test results.
+4. Prefer A (native). Use B (native plus a selected private profile) only for a
+   clear cross-Agent need with explicit scope and version/lock protection. Use C
+   only for a licensed, maintained, installed, callable provider that fills a
+   verified gap. Otherwise use D (no extra engine).
+
+Never recommend a provider because a Skill is installed. A provider must expose
+its storage location, source of truth and supported operations. Each record has
+one writer. A shared provider without a verified revision or lock guard is not
+safe for cross-Agent writes.
 
 ## Consent
 
@@ -49,6 +66,16 @@ The same user can authorize multiple agents to read one private workspace. Host 
 Before sharing, confirm the destination and selected records. Prefer a curated summary rather than the whole profile. Do not promise automatic cross-device sync. A local file read by a cloud-backed agent may enter that provider's context; local storage is not local inference or encryption.
 
 For shared files, use one writer at a time or verified host conflict/version controls. Re-read after another agent changes a file and reconcile before editing. This release does not implement transactional locks or automatic merges. If the host cannot protect competing writes, stop parallel writes rather than pretending they are safe.
+
+## Switching and migration
+
+Stop writes to the old provider before a switch. Show the user the selected
+record IDs, subject, scope, destination, storage location and target account.
+Migrate only those records after explicit authorization, then read them from the
+new provider and confirm that the old provider's write count is unchanged. Do
+not bulk-copy history or silently import private files. Revoking cross-Agent
+sharing stops future reads and writes; it cannot erase content already present
+in old conversations, backups or a model context.
 
 ## Evolution boundary
 

@@ -30,6 +30,25 @@ Review or expiry date:
 
 Do not save secrets. Default to no sensitive persistence. Tentative observations are not confirmed personality traits. The user's current corrections must be reflected before reuse.
 
+## Provider decision
+
+```text
+Evaluation trigger and date:
+Current native memory and verified capabilities:
+Installed provider descriptors and evidence:
+Choice: A / B / C / D:
+Selected provider and version:
+Storage location and source of truth:
+Allowed subjects and scopes:
+Approved model services/accounts and network condition:
+Migration record IDs (if any):
+Conflict/version protection:
+Unverified capabilities:
+Review date or change trigger:
+```
+
+This is a decision record, not a database. Do not copy complete histories into it.
+
 ## Project state
 
 ```text
