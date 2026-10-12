@@ -8,8 +8,8 @@ This report covers the published instruction bundle and a side-effect-free provi
 
 - The core and Codex metadata parsed as YAML; names and version inspected. The standalone bundle includes the provider contract and remains instruction-first.
 - The existing public `evals/validate_routing_cases.py` ran against 40 synthetic cases: 15 positive, 7 negative, 18 ambiguous. Its source is unchanged from v0.2. This is schema validation, not model evaluation.
-- `python -m unittest evals.test_provider_selection evals.test_memory_lifecycle` passed 17 synthetic checks for first-use triggering, native-first routing, provider evidence, A/B/C/D selection, consent, scope, provider switching, export routing and revision-guarded writes. The fixture is not a shipped memory engine.
-- `python evals/validate_provider_cases.py` passed 8 synthetic provider cases covering native-first, cross-Agent scope, unverified installation, consent, provider switching and concurrency.
+- `python -m unittest evals.test_provider_selection evals.test_memory_lifecycle` ran synthetic checks for first-use triggering, native-first routing, provider evidence, A/B/C/D selection, consent, scope, selected-provider switching, export routing and revision-guarded writes. The in-memory fixture is not a shipped memory engine, a new-session test, a real provider test or a true parallel-agent test.
+- `python evals/validate_provider_cases.py` checked the provider-case JSON schema and category balance only. It did not execute a provider, route a request or prove native-first, cross-Agent scope, consent, switching or concurrency behavior.
 - All 82 relative Markdown links resolve locally; no missing targets were found. Self-contained package file presence was checked.
 - 36 Markdown files parsed to HTML locally. Browser screenshot navigation was blocked by the environment, so no visual GitHub/mobile rendering pass is claimed.
 - A configured private-identifier and credential-pattern scan was applied to release files. No findings is not a comprehensive security audit or anonymization of historical Git metadata.
@@ -21,7 +21,6 @@ This report covers the published instruction bundle and a side-effect-free provi
 - Learning efficacy, optimal curricula or guaranteed safety/privacy across models.
 - A production provider's license, maintenance, storage, deletion, concurrency or cloud data behavior; adapters must report and re-test those values in the user's environment.
 - Code-enforced memory permissions, a database, vector retrieval, automatic importer/synchronization, automatic installer or rollback: these modules are not shipped.
-
-A separate local automation prototype passed 69 tests, but its source upload was blocked by platform safety review and is not part of this public release. Those tests do not validate the published instruction-only memory workflow. The blocked upload was not retried through an alternate transport.
+- Stopping an extra provider and falling back to a host's native memory remains a documented host workflow; the side-effect-free reference module does not execute that fallback.
 
 Live host acceptance should use synthetic private files, record actual host/model versions and loader evidence, and preserve both failures and limitations. Codex, Claude Code and DSH are currently **documentation or adapter layer complete; live acceptance unverified**. See [evaluation protocol](../evals/README.md) and [provider integration](PROVIDERS.md).

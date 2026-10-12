@@ -14,7 +14,7 @@ For each change, run the original failure plus adjacent positive, negative and a
 
 Private-profile behavior is instruction/host-driven in this version, not enforced by a bundled service. Test actual files and claims accordingly. Never claim locks, automated rollback or provider filters exist when the host does not supply them.
 
-`python evals/validate_provider_cases.py` checks the synthetic provider case schema. `python -m unittest evals.test_provider_selection evals.test_memory_lifecycle` checks the side-effect-free assessment reference and a fictional revision-guarded provider fixture. These checks do not prove that a real provider is installed or that Codex, Claude Code or DSH can call it.
+`python evals/validate_provider_cases.py` checks the synthetic provider case schema. `python -m unittest evals.test_provider_selection evals.test_memory_lifecycle` checks the side-effect-free assessment reference and a fictional revision-guarded provider fixture. The fixture is an in-memory, same-process simulation: its “new session” and provider-switch cases do not start another process, exercise a real provider, prove persistence across sessions, or establish true parallel-agent locking. These checks do not prove that a real provider is installed or that Codex, Claude Code or DSH can call it.
 
 Provider acceptance must keep these facts separate:
 

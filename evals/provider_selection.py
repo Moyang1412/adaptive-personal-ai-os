@@ -27,6 +27,7 @@ CAPABILITIES: FrozenSet[str] = frozenset(
     }
 )
 ACTIVE_MAINTENANCE = frozenset({"active", "maintained"})
+UNKNOWN_METADATA = frozenset({"", "unknown", "unverified", "not verified", "n/a"})
 WRITE_OPERATIONS = frozenset(
     {"save", "correct", "delete", "import", "export"}
 )
@@ -151,6 +152,11 @@ class RouteRequest:
     user_consent: str
     authorized_scopes: FrozenSet[str]
     network_allowed: bool
+    active_provider_id: str | None = None
+    relevant: bool = True
+    cross_agent: bool = False
+    sharing_authorized: bool = False
+    single_writer: bool = False
 
 
 @dataclass(frozen=True)
@@ -188,6 +194,8 @@ def assess_provider(
     """Return conservative readiness without touching the provider's data."""
 
     required = set(requirements.required_capabilities)
+    if requirements.cross_agent:
+        required.add("concurrent_write_guard")
     ready = (
         provider.evidence.installed
         and provider.evidence.enabled
@@ -195,7 +203,12 @@ def assess_provider(
     )
     available = required.intersection(provider.capabilities)
     unsupported = required - set(provider.capabilities)
-    verified = available if ready and provider.evidence.isolated_test else set()
+    declared_verified = set(provider.verified_capabilities)
+    verified = (
+        available.intersection(declared_verified)
+        if ready and provider.evidence.isolated_test
+        else set()
+    )
     unverified = available - verified
     reasons: list[str] = []
 
@@ -211,20 +224,24 @@ def assess_provider(
         reasons.append("隔离测试尚未验证")
     if unsupported:
         reasons.append(f"缺少能力: {', '.join(sorted(unsupported))}")
-    if not provider.license.strip():
+    if provider.license.strip().lower() in UNKNOWN_METADATA:
         reasons.append("许可证未知")
     if provider.maintenance_status not in ACTIVE_MAINTENANCE:
         reasons.append("维护状态不明确或已停止")
-    if not provider.interface.strip():
+    if provider.interface.strip().lower() in UNKNOWN_METADATA:
         reasons.append("接口标识未知")
+    if unverified:
+        reasons.append(f"能力未通过隔离验证: {', '.join(sorted(unverified))}")
 
     eligible = bool(
         ready
         and provider.evidence.isolated_test
+        and provider.evidence.documented
         and not unsupported
-        and provider.license.strip()
+        and required.issubset(verified)
+        and provider.license.strip().lower() not in UNKNOWN_METADATA
         and provider.maintenance_status in ACTIVE_MAINTENANCE
-        and provider.interface.strip()
+        and provider.interface.strip().lower() not in UNKNOWN_METADATA
     )
     if eligible:
         reasons.append("安装、启用、调用和隔离能力均已验证")
@@ -308,17 +325,38 @@ def recommend_plan(
 def route_operation(request: RouteRequest, provider: ProviderDescriptor) -> RouteResult:
     """Authorize one operation; no success is returned for a blocked write."""
 
-    if request.user_consent == "off":
-        return RouteResult("blocked", provider.id, "用户未授权长期记忆")
+    if not isinstance(request.operation, ProviderOperation):
+        return RouteResult("blocked", provider.id, "未知的 provider 操作")
+    if request.user_consent != "authorized":
+        return RouteResult("blocked", provider.id, "本次操作尚未获得明确授权")
+    if request.active_provider_id != provider.id:
+        return RouteResult("blocked", provider.id, "provider 不是当前选中的写入来源")
+    if not request.relevant:
+        return RouteResult("blocked", provider.id, "当前请求与长期记忆无关")
     if not request.scope.strip() or request.scope not in request.authorized_scopes:
         return RouteResult("blocked", provider.id, "当前范围未获授权")
+    if request.cross_agent:
+        if not request.sharing_authorized:
+            return RouteResult("blocked", provider.id, "跨 Agent 共享尚未授权")
+        if "cross_agent" not in provider.verified_capabilities:
+            return RouteResult("blocked", provider.id, "provider 的跨 Agent 能力尚未验证")
+        if (
+            request.operation.value in WRITE_OPERATIONS
+            and "concurrent_write_guard" not in provider.verified_capabilities
+            and not request.single_writer
+        ):
+            return RouteResult("blocked", provider.id, "共享写入没有版本/锁保护或单写入者")
     capability = (
         "import_export"
         if request.operation in {ProviderOperation.IMPORT, ProviderOperation.EXPORT}
         else request.operation.value
     )
-    if capability not in provider.capabilities:
-        return RouteResult("blocked", provider.id, "provider 不支持该操作")
+    if not provider.evidence.isolated_test:
+        return RouteResult("blocked", provider.id, "provider 尚未通过隔离测试")
+    if "scope" not in provider.verified_capabilities:
+        return RouteResult("blocked", provider.id, "provider 的范围控制尚未验证")
+    if capability not in provider.verified_capabilities:
+        return RouteResult("blocked", provider.id, "provider 的该操作尚未验证")
     if not (
         provider.evidence.installed
         and provider.evidence.enabled
@@ -326,9 +364,9 @@ def route_operation(request: RouteRequest, provider: ProviderDescriptor) -> Rout
     ):
         return RouteResult("blocked", provider.id, "provider 当前不可调用")
     if (
-        not provider.license.strip()
+        provider.license.strip().lower() in UNKNOWN_METADATA
         or provider.maintenance_status not in ACTIVE_MAINTENANCE
-        or not provider.interface.strip()
+        or provider.interface.strip().lower() in UNKNOWN_METADATA
     ):
         return RouteResult("blocked", provider.id, "provider 的许可证、维护状态或接口未确认")
     if provider.network_required and not request.network_allowed:

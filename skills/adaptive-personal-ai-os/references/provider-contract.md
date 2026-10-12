@@ -17,7 +17,7 @@ The machine-readable shape is [provider-descriptor.schema.json](provider-descrip
   "id": "provider-id",
   "name": "Provider name",
   "version": "1.2.3",
-  "kind": "native|installed-tool|external-engine|file-fallback",
+  "kind": "installed-tool",
   "location": "local path or service endpoint description",
   "local": true,
   "network_required": false,
@@ -27,7 +27,7 @@ The machine-readable shape is [provider-descriptor.schema.json](provider-descrip
   ],
   "storage_location": "user-described path or service",
   "license": "SPDX identifier or unknown",
-  "maintenance_status": "active|maintained|unknown|abandoned",
+  "maintenance_status": "active",
   "interface": "memory-provider-v1",
   "source_of_truth": "one stable writer identity",
   "evidence": {
@@ -37,16 +37,20 @@ The machine-readable shape is [provider-descriptor.schema.json](provider-descrip
     "callable": true,
     "isolated_test": true
   },
-  "verified_capabilities": ["save", "read", "correct", "delete"],
-  "unverified_capabilities": ["cross_agent"]
+  "verified_capabilities": ["save", "read", "correct", "delete", "scope", "cross_session"],
+  "unverified_capabilities": ["cross_agent", "concurrent_write_guard", "import_export"]
 }
 ```
 
 `documented` means an official description was found. `installed`, `enabled`
 and `callable` describe this host and session. `isolated_test` requires a
 synthetic save → new-session read → correction → read → deletion → absence
-check for the capabilities being claimed. Keep verified and unverified
-capabilities separate.
+check for the capabilities being claimed. In the example, the six entries in
+`verified_capabilities` are the only capabilities treated as tested; the three
+entries in `unverified_capabilities` must not be used for routing. Every entry
+must also appear in `capabilities`, and an entry cannot appear in both lists.
+The JSON Schema checks the allowed names and uniqueness; the adapter must check
+these cross-field rules before producing a descriptor.
 
 The adapter should expose operations equivalent to:
 

@@ -8,7 +8,7 @@
     "schema_version", "id", "name", "version", "kind", "location",
     "local", "network_required", "capabilities", "storage_location",
     "license", "maintenance_status", "interface", "source_of_truth",
-    "evidence"
+    "evidence", "verified_capabilities", "unverified_capabilities"
   ],
   "properties": {
     "schema_version": {"const": 1},
@@ -49,12 +49,22 @@
     "verified_capabilities": {
       "type": "array",
       "uniqueItems": true,
-      "items": {"type": "string"}
+      "items": {
+        "enum": [
+          "save", "read", "correct", "delete", "scope", "cross_session",
+          "cross_agent", "concurrent_write_guard", "import_export"
+        ]
+      }
     },
     "unverified_capabilities": {
       "type": "array",
       "uniqueItems": true,
-      "items": {"type": "string"}
+      "items": {
+        "enum": [
+          "save", "read", "correct", "delete", "scope", "cross_session",
+          "cross_agent", "concurrent_write_guard", "import_export"
+        ]
+      }
     }
   }
 }

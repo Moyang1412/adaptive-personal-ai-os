@@ -46,6 +46,23 @@ def descriptor(
     license_name: str = "Apache-2.0",
     maintenance: str = "active",
 ) -> ProviderDescriptor:
+    base_capabilities = capabilities or {
+        "save",
+        "read",
+        "correct",
+        "delete",
+        "scope",
+        "cross_session",
+        "import_export",
+        *({"cross_agent", "concurrent_write_guard"} if cross_agent else set()),
+    }
+    actual_evidence = evidence or ProviderEvidence(
+        documented=True,
+        installed=True,
+        enabled=True,
+        callable=True,
+        isolated_test=True,
+    )
     return ProviderDescriptor(
         id=provider_id,
         name=provider_id,
@@ -54,33 +71,15 @@ def descriptor(
         location="isolated-test",
         local=local,
         network_required=network_required,
-        capabilities=capabilities
-        or {
-            "save",
-            "read",
-            "correct",
-            "delete",
-            "scope",
-            "cross_session",
-            "import_export",
-            *(
-                {"cross_agent", "concurrent_write_guard"}
-                if cross_agent
-                else set()
-            ),
-        },
+        capabilities=base_capabilities,
         storage_location="synthetic-only",
         license=license_name,
         maintenance_status=maintenance,
         interface="memory-provider-v1",
         source_of_truth=source_of_truth,
-        evidence=evidence
-        or ProviderEvidence(
-            documented=True,
-            installed=True,
-            enabled=True,
-            callable=True,
-            isolated_test=True,
+        evidence=actual_evidence,
+        verified_capabilities=frozenset(
+            base_capabilities if actual_evidence.isolated_test else set()
         ),
     )
 
@@ -141,6 +140,29 @@ class ProviderSelectionTests(unittest.TestCase):
         self.assertEqual(plan.option, "D")
         self.assertTrue(any("provider" in reason for reason in plan.reasons))
 
+    def test_unknown_metadata_or_missing_documentation_is_not_eligible(self) -> None:
+        for candidate in (
+            descriptor("unknown-license", license_name="unknown"),
+            descriptor(
+                "undocumented",
+                evidence=ProviderEvidence(
+                    documented=False,
+                    installed=True,
+                    enabled=True,
+                    callable=True,
+                    isolated_test=True,
+                ),
+            ),
+        ):
+            requirements = MemoryRequirements(
+                persistent=True,
+                required_capabilities={"save", "read"},
+                cross_agent=False,
+                explicit_gap=True,
+                user_consent="confirm",
+            )
+            self.assertFalse(assess_provider(candidate, requirements).eligible)
+
     def test_provider_with_verified_capabilities_can_fill_an_explicit_gap(self) -> None:
         candidate = descriptor("verified-engine", cross_agent=True)
         requirements = MemoryRequirements(
@@ -162,19 +184,21 @@ class ProviderSelectionTests(unittest.TestCase):
             user_consent="off",
             authorized_scopes=set(),
             network_allowed=False,
+            active_provider_id="verified-engine",
         )
         result = route_operation(request, candidate)
         self.assertEqual(result.status, "blocked")
-        self.assertIn("未授权", result.reason)
+        self.assertIn("明确授权", result.reason)
 
     def test_no_permission_never_claims_success(self) -> None:
         candidate = descriptor("verified-engine", network_required=True, local=False)
         request = RouteRequest(
             operation=ProviderOperation.SAVE,
             scope="personal",
-            user_consent="confirm",
+            user_consent="authorized",
             authorized_scopes={"personal"},
             network_allowed=False,
+            active_provider_id="verified-engine",
         )
         result = route_operation(request, candidate)
         self.assertEqual(result.status, "blocked")
@@ -185,9 +209,10 @@ class ProviderSelectionTests(unittest.TestCase):
         request = RouteRequest(
             operation=ProviderOperation.EXPORT,
             scope="personal",
-            user_consent="confirm",
+            user_consent="authorized",
             authorized_scopes={"personal"},
             network_allowed=False,
+            active_provider_id="verified-engine",
         )
         result = route_operation(request, candidate)
         self.assertEqual(result.status, "provider")
@@ -241,6 +266,108 @@ class ProviderSelectionTests(unittest.TestCase):
         )
         self.assertNotIn("save", assessment.verified_capabilities)
         self.assertIn("save", assessment.unverified_capabilities)
+
+    def test_declared_unverified_capability_is_not_promoted(self) -> None:
+        candidate = descriptor("partial-declared")
+        candidate = ProviderDescriptor(
+            **{
+                **candidate.__dict__,
+                "verified_capabilities": frozenset({"read", "scope"}),
+                "unverified_capabilities": frozenset({"save"}),
+            }
+        )
+        requirements = MemoryRequirements(
+            persistent=True,
+            required_capabilities={"save", "read"},
+            cross_agent=False,
+            explicit_gap=True,
+            user_consent="confirm",
+        )
+        assessment = assess_provider(candidate, requirements)
+        self.assertFalse(assessment.eligible)
+        self.assertNotIn("save", assessment.verified_capabilities)
+        self.assertIn("save", assessment.unverified_capabilities)
+
+    def test_route_requires_explicit_authorization_and_current_provider(self) -> None:
+        candidate = descriptor("selected")
+        request = RouteRequest(
+            operation=ProviderOperation.READ,
+            scope="personal",
+            user_consent="confirm",
+            authorized_scopes={"personal"},
+            network_allowed=False,
+            active_provider_id="old",
+        )
+        result = route_operation(request, candidate)
+        self.assertEqual(result.status, "blocked")
+        self.assertIn("明确授权", result.reason)
+
+    def test_route_requires_verified_scope_and_relevance(self) -> None:
+        candidate = descriptor("selected", capabilities={"save", "read"})
+        request = RouteRequest(
+            operation=ProviderOperation.READ,
+            scope="personal",
+            user_consent="authorized",
+            authorized_scopes={"personal"},
+            network_allowed=False,
+            active_provider_id="selected",
+        )
+        result = route_operation(request, candidate)
+        self.assertEqual(result.status, "blocked")
+        self.assertIn("范围", result.reason)
+
+        relevant_request = RouteRequest(
+            operation=ProviderOperation.READ,
+            scope="personal",
+            user_consent="authorized",
+            authorized_scopes={"personal"},
+            network_allowed=False,
+            active_provider_id="selected",
+            relevant=False,
+        )
+        self.assertEqual(route_operation(relevant_request, descriptor("selected")).status, "blocked")
+
+    def test_cross_agent_route_requires_sharing_and_write_protection(self) -> None:
+        candidate = descriptor("shared", cross_agent=True)
+        request = RouteRequest(
+            operation=ProviderOperation.SAVE,
+            scope="personal",
+            user_consent="authorized",
+            authorized_scopes={"personal"},
+            network_allowed=False,
+            active_provider_id="shared",
+            cross_agent=True,
+            sharing_authorized=True,
+        )
+        self.assertEqual(route_operation(request, candidate).status, "provider")
+
+        unguarded = descriptor(
+            "unguarded",
+            capabilities={"save", "read", "scope", "cross_agent"},
+        )
+        unguarded_request = RouteRequest(
+            operation=ProviderOperation.SAVE,
+            scope="personal",
+            user_consent="authorized",
+            authorized_scopes={"personal"},
+            network_allowed=False,
+            active_provider_id="unguarded",
+            cross_agent=True,
+            sharing_authorized=True,
+        )
+        self.assertEqual(route_operation(unguarded_request, unguarded).status, "blocked")
+
+    def test_unknown_operation_is_blocked(self) -> None:
+        candidate = descriptor("verified-engine")
+        request = RouteRequest(
+            operation="save",  # type: ignore[arg-type]
+            scope="personal",
+            user_consent="authorized",
+            authorized_scopes={"personal"},
+            network_allowed=False,
+            active_provider_id="verified-engine",
+        )
+        self.assertEqual(route_operation(request, candidate).status, "blocked")
 
 
 if __name__ == "__main__":

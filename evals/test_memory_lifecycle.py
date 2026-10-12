@@ -96,10 +96,10 @@ class MemoryLifecycleTests(unittest.TestCase):
         provider.delete(key, scope="project:alpha", expected_revision=2)
         self.assertIsNone(provider.read(key, scope="project:alpha"))
 
-    def test_new_session_and_project_scope_do_not_leak(self) -> None:
+    def test_scope_filter_does_not_leak_between_projects(self) -> None:
         provider = SyntheticProvider()
         key = provider.save("project:alpha", {"fact": "synthetic"})
-        # A separate session can read only when it presents the same authorized scope.
+        # This is an in-memory same-process scope check, not a real new-session test.
         self.assertEqual(provider.read(key, scope="project:alpha"), {"fact": "synthetic"})
         self.assertIsNone(provider.read(key, scope="project:beta"))
 
@@ -113,8 +113,36 @@ class MemoryLifecycleTests(unittest.TestCase):
     def test_unrelated_request_does_not_call_provider(self) -> None:
         provider = SyntheticProvider()
         before = list(provider.calls)
-        # The caller keeps ordinary translation outside the memory route.
-        self.assertEqual("hola"[::-1], "aloh")
+        descriptor = ProviderDescriptor(
+            id="synthetic",
+            name="synthetic",
+            version="1.0.0",
+            kind="installed-tool",
+            location="test",
+            local=True,
+            network_required=False,
+            capabilities=frozenset({"read", "scope"}),
+            storage_location="test-only",
+            license="MIT",
+            maintenance_status="active",
+            interface="memory-provider-v1",
+            source_of_truth="synthetic",
+            evidence=ProviderEvidence(installed=True, enabled=True, callable=True, isolated_test=True),
+            verified_capabilities=frozenset({"read", "scope"}),
+        )
+        result = route_operation(
+            RouteRequest(
+                operation=ProviderOperation.READ,
+                scope="personal",
+                user_consent="authorized",
+                authorized_scopes={"personal"},
+                network_allowed=False,
+                active_provider_id="synthetic",
+                relevant=False,
+            ),
+            descriptor,
+        )
+        self.assertEqual(result.status, "blocked")
         self.assertEqual(provider.calls, before)
 
     def test_switching_provider_stops_old_writes(self) -> None:
@@ -122,7 +150,65 @@ class MemoryLifecycleTests(unittest.TestCase):
         new = SyntheticProvider()
         old_key = old.save("personal", {"fact": "old"})
         old_calls = len(old.calls)
+        descriptor = ProviderDescriptor(
+            id="new",
+            name="new",
+            version="1.0.0",
+            kind="installed-tool",
+            location="test",
+            local=True,
+            network_required=False,
+            capabilities=frozenset({"save", "read", "scope"}),
+            storage_location="test-only",
+            license="MIT",
+            maintenance_status="active",
+            interface="memory-provider-v1",
+            source_of_truth="new",
+            evidence=ProviderEvidence(installed=True, enabled=True, callable=True, isolated_test=True),
+            verified_capabilities=frozenset({"save", "read", "scope"}),
+        )
+        switched = route_operation(
+            RouteRequest(
+                operation=ProviderOperation.SAVE,
+                scope="personal",
+                user_consent="authorized",
+                authorized_scopes={"personal"},
+                network_allowed=False,
+                active_provider_id="new",
+            ),
+            descriptor,
+        )
+        self.assertEqual(switched.status, "provider")
         new_key = new.save("personal", {"fact": "new"})
+        old_descriptor = ProviderDescriptor(
+            id="old",
+            name="old",
+            version="1.0.0",
+            kind="installed-tool",
+            location="test",
+            local=True,
+            network_required=False,
+            capabilities=frozenset({"save", "read", "scope"}),
+            storage_location="test-only",
+            license="MIT",
+            maintenance_status="active",
+            interface="memory-provider-v1",
+            source_of_truth="old",
+            evidence=ProviderEvidence(installed=True, enabled=True, callable=True, isolated_test=True),
+            verified_capabilities=frozenset({"save", "read", "scope"}),
+        )
+        stale_write = route_operation(
+            RouteRequest(
+                operation=ProviderOperation.SAVE,
+                scope="personal",
+                user_consent="authorized",
+                authorized_scopes={"personal"},
+                network_allowed=False,
+                active_provider_id="new",
+            ),
+            old_descriptor,
+        )
+        self.assertEqual(stale_write.status, "blocked")
         self.assertEqual(len(old.calls), old_calls)
         self.assertEqual(new.read(new_key, scope="personal"), {"fact": "new"})
         self.assertEqual(old.read(old_key, scope="personal"), {"fact": "old"})
