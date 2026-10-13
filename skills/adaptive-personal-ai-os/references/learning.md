@@ -2,32 +2,68 @@
 
 This is a teaching protocol, not a validated curriculum for every subject or a deterministic teaching engine. Do not guarantee optimal paths, learning outcomes or superiority to ordinary AI. Recording progress does not itself validate learning or control progression through a lesson.
 
-## Five gates
+## Two ways to begin
 
-1. **Goal:** clarify intended use (curiosity, practical skill, exam, career) and exclusions. Hobbies need not become businesses. One meaningful question or diagnostic is enough to start.
-2. **Sources:** choose an appropriate established course, textbook or official guide. Verify coverage, level and prerequisite order. Explain why each stage supports the goal. Mark AI-added adaptations as proposals. A prestigious source does not validate an altered syllabus.
-3. **Baseline:** use a small task, not confidence or demographic labels. Observe strengths and misconceptions. Save only under the chosen memory policy.
-4. **Practice:** needed explanation/example → learner attempt → graduated hints → specific feedback → new attempt. Missing foundations justify a worked example; do not endlessly ask questions. “Just tell me” switches to direct help without falsely marking mastery.
-5. **Independent check:** use verified new tasks/rubrics without hints, delayed checks and transfer. Keep answer keys away until the attempt. Independent tests or an external reviewer can calibrate; two models agreeing is not ground truth.
+Use one learning process and one set of capability evidence, with two ways to gather it. Honor an explicit existing preference. Do not require a mode-selection screen or repeat that choice every session.
 
-## First learning card
+| Route | Starting behavior | When to adjust |
+|---|---|---|
+| Learn through a useful task (default) | Start explaining, demonstrating or working on the learner's actual goal. Reuse relevant work they supply; observe their own attempts when these naturally occur. | Ask for a small optional action only when its result could change the next explanation, support or task. |
+| Brief diagnostic (user-selected) | Clarify only missing information that changes the starting point. Offer one relevant task at a time, reusing existing evidence. | Stop when there is enough evidence for the next teaching decision, or when the learner skips or switches. Do not map an entire subject before helping. |
 
-Goal; observed baseline; source and prerequisites; next small practice; independent success criterion; next checkpoint; confidence (source-checked / exploratory / personal effect not yet established).
+Switch routes whenever requested without discarding useful evidence or restarting assessment. Explain briefly, when relevant, that teaching adapts to observed work and the learner can correct the difficulty. Avoid covert profiling or claiming to know an unseen ability.
 
-Without research access, disclose that sources were not verified and keep the path provisional. Never fabricate citations or expert approval. High-risk medical/physical/safety instruction needs appropriate professional safeguards rather than risky self-experiments.
+Silence, skipping a task or asking for direct help does not lower the ability estimate. Continue with an appropriate explanation or example and leave unobserved capabilities unknown. If the learner produces no independent work, independent mastery remains unverified. A request to explain one concept still usually needs only an explanation.
 
-## Adjust, do not blame
+## Shared teaching standard
 
-Immediate success but delayed failure suggests reviewing retention practice; example success but new-task failure suggests checking transfer and prerequisites. These are hypotheses, not diagnoses. Repeated difficulty also warrants inspecting explanations, task size, available time and motivation. Change a meaningful component and observe again.
+1. **Aim and source:** use the stated purpose (curiosity, practical skill, exam, career) and exclusions. Hobbies need not become businesses. For a learning path, choose an appropriate established course, textbook or official guide; verify its coverage, level and prerequisite order. Mark AI-added adaptations as proposals. Source prestige does not validate an altered syllabus. Do not make a first useful explanation depend on completing an intake form.
+2. **Support that fits current evidence:** unfamiliar material can start with a worked example. Progress to completing a step and then an independent attempt as performance supports it. Offer graduated hints and specific feedback; restore support when needed. Skip redundant explanation when the learner has demonstrated the relevant ability. Do not turn each teaching turn into a mandatory question. “Just tell me” switches to direct help without falsely marking mastery.
+3. **Feedback and correction:** identify the concrete successful step or misconception using a checked answer, rubric or observable result. Give an actionable correction and an opportunity to use it. Keep task difficulty, assistance and scoring uncertainty visible to the agent; do not infer a stable learner deficit from one mistake.
+4. **Retention and application:** when compatible with the learner's participation, include brief recall or application in later learning and new contexts. Select timing and task difficulty for the actual goal and observed errors. Repeating an exposed answer is not an independent check; reusing an identical task is not transfer. A planned later check is not a completed check or an automatic reminder.
+5. **Independent evidence:** make mastery claims only as far as verified unassisted performance supports them. Use fresh tasks and a checked rubric, with answers withheld until the attempt. Report immediate performance, delayed retention and transfer separately. A learner may decline a check and still receive help; leave the corresponding claim unverified.
 
-No universal pass percentage, lesson duration or seven-day schedule is guaranteed. Choose checkpoints as operational choices. Track hint dependence, independent performance, delayed retention and application to new tasks. Reusing identical questions is not transfer. Before/after gains alone do not establish causality.
+Use answer keys, domain tests or qualified review where appropriate. A test passing can validate an artifact, but cannot establish who produced it or how much help they used. Two models agreeing is not ground truth. If the rubric or answer is uncertain, keep the assessment provisional.
 
-With permission, save only the current goal, sources, stage, attempt/hint level, misconceptions, checks and next step in a separate learning scope. Reminders require an available scheduler and an actual user request; a planned date is not a scheduled notification.
+Without research access, disclose which sources were not verified and keep the path provisional. Never fabricate citations or expert approval. High-risk medical/physical/safety instruction needs appropriate professional safeguards rather than risky self-experiments.
+
+## Capability evidence shared by both routes
+
+Reason about specific capabilities, not a single global beginner/intermediate label. Each useful observation identifies the task and conditions, the learner's actual contribution, assistance received, result, recency when known, and what remains uncertain. Keep this in session unless persistence is authorized.
+
+| Observation | Supported interpretation |
+|---|---|
+| Read, watched, said “understood”, or chose to skip | Exposure or participation preference; independent performance unknown. |
+| Copied a solution, followed an example, or succeeded after a hint | Success under that level of support; no independent mastery claim. |
+| Completed a fresh relevant task without help | Evidence for that capability under those task conditions. |
+| Succeeded later or in a meaningfully changed context | Additional evidence for retention or transfer respectively; do not infer the untested dimension. |
+
+A submitted finished work with unknown authorship or assistance is a clue, not proof of independent ability. Self-reports can guide the initial level provisionally. Reading time, response speed, fluency, terminology, disengagement and demographic labels do not by themselves establish ability. Judge only the skill actually elicited; written conversation, for example, does not establish listening proficiency.
+
+Keep observation separate from inference. Use tentative, evidence-linked judgments rather than invented precise probabilities. One success does not establish stable mastery. Conflicting or stale evidence warrants a smaller claim or a relevant later check, not an unexplained score change. A learner's correction can immediately adjust teaching while an unsupported mastery claim remains provisional.
+
+## Efficiency and adjustment
+
+Efficiency means reducing unnecessary time, repetition and interruption while pursuing the same learning goal and evidence standard. Track useful independent performance together with support dependence, later retention/transfer, learner effort and burden when observable. Fewer questions, faster assisted completion or higher satisfaction alone do not establish better learning. Do not impose time tracking as another intake requirement.
+
+Before asking, consider which next teaching decision the answer could change. If none, omit it. Use already available evidence, and stop diagnostics once they can guide the next step. Avoid testing every prerequisite or repeatedly proving an established capability. Neither route has a guaranteed question count, pass percentage, lesson duration or universal review schedule.
+
+Immediate success followed by delayed failure suggests checking retention; success with an example followed by new-task failure suggests checking transfer, support dependence and prerequisites. These are hypotheses, not diagnoses. Repeated difficulty also warrants inspecting the explanation, task size, available time and motivation. Change a meaningful component and observe again. A weak signal or skipped response alone does not justify permanently easier tasks.
+
+When evaluating this protocol, compare predictions with later independent performance, including overconfident judgments. Assess learning outcomes and time/burden at comparable starting levels, goals and task difficulty. Before/after gains or differences between self-selected modes do not by themselves establish causality. Real learner studies are needed to claim ZhiXu improves learning; synthetic model exercises check instruction-following only.
+
+## Optional continuity
+
+Use a short learning card only when it helps continuity; do not require users to fill one in or display a full report on every turn. It may contain the goal, chosen route, capability evidence and help level, sources, next useful step, independent check and unresolved uncertainty. Keep route preference separate from ability.
+
+With permission, save only relevant evidence, sources, misconceptions, checks and next steps in a separate learning scope under the chosen memory policy. Do not silently create a profile or scan history. Reminders require an available scheduler and an actual user request; a planned date is not a scheduled notification.
 
 ## Primary rationale, not product certification
 
-- Roediger & Karpicke (2006), Test-Enhanced Learning: [doi:10.1111/j.1467-9280.2006.01693.x](https://doi.org/10.1111/j.1467-9280.2006.01693.x).
-- Kestin et al. (2025), purpose-built AI tutoring in specific Harvard physics lessons: [doi:10.1038/s41598-025-97652-6](https://doi.org/10.1038/s41598-025-97652-6).
-- Bastani et al. (2025), assisted performance versus independent mathematics learning: [doi:10.1073/pnas.2422633122](https://doi.org/10.1073/pnas.2422633122).
+- Roediger & Karpicke (2006), Test-Enhanced Learning: [doi:10.1111/j.1467-9280.2006.01693.x](https://doi.org/10.1111/j.1467-9280.2006.01693.x). Retrieval improved delayed retention in passage-learning experiments; this is not evidence for constant quizzes in every skill.
+- Renkl et al. (2002), From Example Study to Problem Solving: [doi:10.1080/00220970209599510](https://doi.org/10.1080/00220970209599510). Gradually removing worked solution steps supported learning in structured tasks, particularly near transfer; broad far-transfer benefits were not established.
+- Shute, Ventura & Kim (2013), Assessment and Learning of Qualitative Physics in Newton's Playground: [doi:10.1080/00220671.2013.832970](https://doi.org/10.1080/00220671.2013.832970). Designed game activities supplied task-specific assessment evidence; arbitrary chat or engagement signals are not validated ability measures.
+- Kestin et al. (2025), purpose-built AI tutoring in specific Harvard physics lessons: [doi:10.1038/s41598-025-97652-6](https://doi.org/10.1038/s41598-025-97652-6). Results for a designed tutor and curriculum do not validate an arbitrary AI teaching protocol.
+- Bastani et al. (2025), assisted performance versus independent mathematics learning: [doi:10.1073/pnas.2422633122](https://doi.org/10.1073/pnas.2422633122). In the studied school setting, better assisted practice did not guarantee better independent performance; the guarded tutor did not significantly outperform the control on unaided exams.
 
 These support aspects of the rationale; they are not endorsements or trials of ZhiXu.

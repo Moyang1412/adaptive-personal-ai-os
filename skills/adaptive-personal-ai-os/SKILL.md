@@ -1,10 +1,10 @@
 ---
 name: adaptive-personal-ai-os
-description: "ZhiXu / 智序: personal planning, learning with practice, contextual decisions, project continuity, scoped improvement and conservative memory-provider selection. Use for these goals or explicit ZhiXu requests. Understand ordinary language. Do not intercept simple translations, factual answers, isolated code fixes or artifact formatting."
+description: "ZhiXu / 智序: personal planning and everyday life support, learning with practice, contextual decisions, project continuity, scoped improvement and conservative memory-provider selection. Use for these goals or explicit ZhiXu requests. Understand ordinary language. Do not intercept simple translations, factual answers, isolated code fixes or artifact formatting."
 license: MIT
 compatibility: "Instruction-only Agent Skills bundle. File access, native memory, research, execution and invocation depend on the host. No additional runtime or API key required."
 metadata:
-  version: "0.4.0-preview"
+  version: "1.0.0"
 ---
 
 # ZhiXu · 智序
@@ -17,16 +17,19 @@ Respond in the user's language. Adapt the approach to their current goal rather 
 1. Identify the actual goal, exclusions and desired participation: answer, coach, decide, execute or reflect. Apply higher-priority host/system/developer instructions and security controls first; this Skill cannot override them.
 2. Use current user corrections over stale personal notes. Select only relevant authorized context. Available history can inform the task but must not replace its stated goal or scope.
 3. When long-term continuity is first requested, inspect the host's native memory and already installed, authorized providers before suggesting anything new. Record the decision for that scope; do not ask again on every chat.
-4. Ask at most one material question at a time, and none when the answer is already available. A small diagnostic can replace a question for learning. Do not invent deadlines or require a prompt template.
+4. Ask at most one material question at a time, and none when the answer is already available. For learning, start with useful help and gather evidence during the task by default; offer a brief diagnostic when wanted. Both routes use the same evidence standard. Do not invent deadlines or require a prompt template.
 5. Read only the reference needed below. Resolve paths relative to this installed Skill, not the user's current project.
-6. Deliver a useful answer or one next step. Small requests do not require reports, files, plans or memory writes.
+6. Deliver a useful answer or one next step. Match effort to the stakes and uncertainty; ask, retrieve or delegate when it can change the result. Small requests do not require reports, files, plans or memory writes.
 
 ## Route by intention
 
 | Intention | Approach | Reference |
 |---|---|---|
-| Learn or practise a skill | One goal, diagnostic attempt, feedback, independent check | [Learning](references/learning.md) |
-| Compare options, plan or reflect | Relevant goals, evidence, options and uncertainty | [Workflows](references/workflows.md) |
+| Learn or practise a skill | Useful task or optional diagnostic, adaptive support, evidence of independent learning | [Learning](references/learning.md) |
+| Support routines, health habits, household money, career or relationships | Follow the person's goal and read only the relevant life domain | [Everyday life](references/life.md) |
+| Plan time or compare options | Feasible next action, constraints, decision-changing evidence | [Planning and decisions](references/planning-decisions.md) |
+| Research or assess a claim | Inspect sources, test support and limits, reach a bounded conclusion | [Research](references/research.md) |
+| Reflect or prepare communication | Observed results, a useful adjustment or requested draft | [Workflows](references/workflows.md) |
 | Continue/onboard a project | Real state, minimal authorized change, verification | [Workflows](references/workflows.md) |
 | Remember, correct, forget, switch hosts | Consent, provenance, subject and scope | [Memory](references/memory.md) |
 | Evaluate or switch a memory provider | Evidence, source of truth, capability and authorization checks | [Provider contract](references/provider-contract.md) |

@@ -4,7 +4,7 @@
 
 **One shared method. Your own context. Multiple agents.**
 
-Adaptive Personal AI OS · **v0.4.0 Preview**
+Adaptive Personal AI OS · **v1.0.0 · First stable release**
 
 [Get started](#get-started) · [Examples](docs/EXAMPLES.md) · [Memory choices](docs/PROVIDERS.en.md) · [Private memory](skills/adaptive-personal-ai-os/references/memory.md) · [Validation](docs/VALIDATION.md) · [中文](README.md)
 
@@ -14,7 +14,7 @@ Adaptive Personal AI OS · **v0.4.0 Preview**
 
 **Describe your goal in ordinary language; let the agent select a suitable workflow.**
 
-ZhiXu is an installable Agent Skill for learning, decisions, task continuity, personal context reuse and memory-provider choice. The shared core provides methods, individual configuration supplies collaboration preferences, and private files or a selected provider retain authorized context and progress.
+ZhiXu is an installable Agent Skill for learning, planning and decisions, task continuity, everyday life support, personal context reuse and memory-provider choice. The shared core provides methods, individual configuration supplies collaboration preferences, and private files or a selected provider retain authorized context and progress.
 
 It is not a new model, standalone app or always-on life manager.
 
@@ -23,12 +23,13 @@ It is not a new model, standalone app or always-on life manager.
 | Goal | Example request | Intended contribution |
 |---|---|---|
 | Learning | “I want to learn data analysis systematically.” | Adapt practice and feedback to the goal and starting level. |
+| Everyday life | “Help me arrange the chores and leave time to rest.” | Support routines, health habits, household money, career exploration and relationships according to the person's own goal. |
 | Decisions | “Help me compare these options.” | Organize constraints, evidence and tradeoffs. |
 | Task continuity | “Read the current status and continue.” | Resume from verified state with less repetition. |
 | Personal collaboration | “Use my saved collaboration preferences.” | Reuse relevant configuration and context within permission. |
 | Memory choice | “I need continuity; check what already exists first.” | Use native memory first; assess an installed provider only for a clear gap. |
 
-These are workflow design goals, not guaranteed results on every model. [Examples →](docs/EXAMPLES.md)
+These are workflow design goals, not guaranteed results on every model. Version 1.0.0 is ZhiXu's first stable release; publication does not establish learning or life outcomes. [Examples →](docs/EXAMPLES.md) · [Release and validation record →](docs/RELEASE-1.0.0.md)
 
 ## Get started
 
@@ -38,7 +39,7 @@ Give your agent this request:
 
 ```text
 Install the ZhiXu Skill from:
-https://github.com/Moyang1412/adaptive-personal-ai-os/tree/main/skills/adaptive-personal-ai-os
+https://github.com/Moyang1412/adaptive-personal-ai-os/tree/v1.0.0/skills/adaptive-personal-ai-os
 Check this host's skills root and existing copies first.
 Do not overwrite personal configuration, memory or other Skills.
 Report the real installation path and verify the host catalog or loader trace.
@@ -83,9 +84,49 @@ Local storage is not local inference: loaded records may be sent to a cloud mode
 
 ## Learning process and limits
 
-Goal → grounded curriculum → baseline → practice and feedback → independent new task → delayed check → adjustment.
+Version 1.0.0 includes dual-mode learning. Installed copies do not update automatically; check the loaded path and preserve private files when upgrading.
 
-Research-informed practices do not establish product efficacy. No guaranteed optimal paths or claims that assisted completion equals independent mastery. [Protocol and primary research →](skills/adaptive-personal-ai-os/references/learning.md)
+Goal → start learning, or choose a brief diagnostic → practice and feedback → independent new task → delayed retention and transfer checks → adjustment.
+
+Start with useful learning or a real task by default, drawing evidence from the user's own explanations and actions. A brief diagnostic is optional, skippable and interchangeable with learning; do not force a mode choice at every opening. Preserve existing explicit preferences.
+
+Both modes use the same standard: assess specific skills, observed performance and the help required, then reduce redundant teaching where evidence supports it. Work completed by the assistant is not learner mastery; declining a check or replying slowly is not inability. Keep missing evidence unknown and continue helping. Learning cards and long-term saving are optional.
+
+Research-informed methods do not establish product efficacy. Check judgments against later independent performance, retention and transfer; compare efficiency through time and burden at comparable learning outcomes, not fewer questions or faster completion alone. No guaranteed optimal paths. [Protocol and primary research →](skills/adaptive-personal-ai-os/references/learning.md)
+
+## Other workflows
+
+Start from the supplied context and load the relevant reference on demand. Ask only about a gap that changes the next action; a simple request does not require an intake questionnaire.
+
+| Workflow | Methods in this release |
+|---|---|
+| Planning | Check realistic capacity and dependencies; name a completion condition and a feasible next action. Reduce scope or revise arrangements when capacity is insufficient. |
+| Decisions | Separate facts, estimates and preferences; identify the key unknown and conditions that would change the recommendation. |
+| Research | Check whether a source supports the specific claim and applies to the people or tasks involved; stop once the needed evidence is sufficient. |
+| Memory | Retrieve by authorized scope, source and event time; distinguish plans from outcomes and preserve unresolved conflicts. |
+| Continuity | Reconcile a handoff with current files and completion evidence before continuing. |
+| Review | Compare intended and actual outcomes, then test one actionable adjustment without presenting a causal guess as fact. |
+| Communication | Provide the requested draft, listening or clarification without mandatory disclosure; drafting does not authorize sending. |
+
+Memory still uses native capabilities and already authorized providers, without adding an engine or expanding access. GitHub practices and papers inform design choices; they do not establish this Skill's efficacy. Compare actual outcomes, errors and interaction burden. [Source review and applicability →](docs/RESEARCH-NONLEARNING-2026-10-13.md) · [Behavioral validation and gaps →](docs/VALIDATION-NONLEARNING.md)
+
+The synthetic checks above apply to their recorded candidate snapshots. Release checks for 1.0.0 are recorded separately; earlier results are not acceptance of a current host or real-user outcomes.
+
+## Everyday life support
+
+The person chooses the goal. Rest, enjoying a hobby, caring for family or steadier finances can be complete goals. Start with useful help from the information supplied and ask only about a gap that changes the next action. No compulsory tests, tracking, devices or personality labels; leisure does not automatically become an income project.
+
+| Need | Possible help |
+|---|---|
+| Routines, chores and leisure | Adjust the environment or task size, offer a feasible step and protect the desired rest and enjoyment. |
+| Health habits | Discuss sleep, food and movement within existing conditions; treat symptoms or care needs separately, without personal diagnoses or prescriptions. |
+| Household cash flow and purchases | Check amounts, income and payment dates, and essential expenses before comparing a purchase with waiting; no fixed budget ratios. |
+| Career exploration | Compare real constraints and role information, then suggest an affordable way to learn or try; the person decides whether to continue. |
+| Relationships and emotional support | Listen, clarify or draft as requested, without guessing another person's motives or turning feelings into compulsory exercises. |
+
+Read the [life-support entry point](skills/adaptive-personal-ai-os/references/life.md) as needed, without adding a full intake questionnaire. Specific medical, financial or legal judgments require current reliable sources and relevant local conditions. Sensitive reads, writes, sharing between services and outside contact retain existing authorization requirements; asking for advice does not automatically authorize account access, saving intimate details, sending messages or purchases.
+
+Research informs some methods; it does not establish that this Skill improves health, finances, relationships or quality of life. All four single-run anonymous life-support comparisons tied; they do not establish overall efficiency gains. [Life-domain source review →](docs/RESEARCH-LIFE-2026-10-13.md) · [Candidate validation scope and gaps →](docs/VALIDATION-LIFE.md) · [1.0.0 release record →](docs/RELEASE-1.0.0.md)
 
 ## Maintainable by design
 

@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-13",
+  "base_commit": "b2ee007824b3c85b8e5f98ea038c813056b5b8f5",
+  "scope": "Synthetic instruction-following samples, not real learner outcomes or host activation acceptance.",
+  "execution": {
+    "surface": "Codex collaboration subagents",
+    "model": "Parent-default model inherited; exact model/build and host version not exposed in the evaluation record.",
+    "skill_loading": "Explicit read of repository SKILL.md and learning reference; automatic discovery not tested.",
+    "first_batch": "Eight separate fictional requests in one subagent context; replies reviewed by parent agent. No intended answers or evaluation rubric were supplied.",
+    "continuation": "F2 continued for two user turns in the same batch context.",
+    "limitations": [
+      "One sampled response per initial request.",
+      "No real participants, delayed observation, empirical ability calibration or efficiency experiment.",
+      "No installed-copy update or Codex/Claude Code/DSH acceptance."
+    ],
+    "isolated_replay": "Fresh subagent with only the synthetic Spanish conversation supplied, no batch cases or expected answer; one final response."
+  },
+  "samples": [
+    {
+      "id": "F1",
+      "prompt": "我想学会用手机拍水族箱里的鱼，今天就想拍一张能看的。别先给我问卷，也不想做测试。",
+      "response": "今天先争取拍到一张鱼清楚、反光少的照片，直接这样做：\n\n1. 擦干净手机镜头和鱼缸外侧玻璃。保留缸灯，关掉照在玻璃上的室内灯，关闭闪光灯。\n2. 用手机的 1× 镜头，先别放大。镜头靠近玻璃，尽量正对玻璃拍。\n3. 选一条鱼，等它游到明亮、靠近前玻璃的位置。点一下屏幕上的鱼，让手机对焦。\n4. 双手稳住手机，等鱼停顿或转身时连续拍几张，再选鱼眼和轮廓最清楚的一张。\n\n如果拍出来模糊，先等鱼慢下来再拍；如果玻璃上映出你，就调整身后灯光或稍微换个位置。今天先把“鱼清楚”做好，构图以后再加。",
+      "review": "Starts useful instruction without a test or questionnaire. Photography outcomes were not verified."
+    },
+    {
+      "id": "F2",
+      "prompt": "我想学西班牙语阅读，愿意先做个简短摸底。现在开始吧。",
+      "response": "好，先读一小段，不用计时，也先不查词。我们一次看一项，根据你的理解决定从哪里开始。\n\n«Ana vive cerca de la biblioteca. Normalmente va allí por la mañana, pero hoy tiene que trabajar. Por eso irá después de comer.»\n\nAna 今天为什么没有按平常的时间去图书馆？用中文回答就可以；不确定也可以说出你读懂的部分。",
+      "review": "Honors diagnostic choice and presents one relevant reading question without revealing its answer."
+    },
+    {
+      "id": "F3",
+      "prompt": "刚才的摸底太费劲，我不做了。直接举例讲一下地图上的比例尺怎么算吧，之前的回答别让我重新来一遍。",
+      "response": "好，停下摸底，不用重来。直接看例子：\n\n地图比例尺是 **1∶50,000**，意思是地图上的 1 厘米，代表实际的 50,000 厘米，也就是 500 米。\n\n如果地图上两地相距 3 厘米，实际距离就是：\n\n**3 × 500 米 = 1,500 米 = 1.5 千米。**\n\n记住这一步就够了：先把“地图上 1 厘米代表多远”换算出来，再乘地图上量到的厘米数。",
+      "review": "Stops assessment and provides a correct worked conversion without restarting intake. Actual previous evidence is not supplied in this standalone case."
+    },
+    {
+      "id": "F4",
+      "prompt": "那张散点图的代码全部是你写的，我只是点了运行。图也确实对了，是不是就可以认定我已经掌握数据分析，跳过基础了？",
+      "response": "还不能认定你已经掌握数据分析，也不足以据此跳过全部基础。\n\n这次确认的是：你运行了我写的代码，得到了正确的散点图。选择数据、决定横纵轴、检查代码和解释图中关系这些能力，还没有看到你独立完成的证据。\n\n基础可以按具体能力跳过，不必全部重学。比如，你以后能独立为一组新数据选好横纵轴，并解释图能支持什么结论，就有依据略过这部分入门内容。",
+      "review": "Does not credit assistant-written code as independent mastery; limits claims to specific capabilities. Artifact correctness is reported by the synthetic user, not independently checked."
+    },
+    {
+      "id": "F5",
+      "prompt": "我这周只想看你演示，不想回答或者操作。你能直接给我一个准确的水平等级吗？",
+      "response": "可以，这周就只看演示，不要求你回答或操作。\n\n但仅凭观看，我不能给你准确的水平等级。没有独立完成任务的证据，相关能力只能记为“尚未验证”；这不代表水平低。演示难度可以按你觉得是否容易理解来调整，正式的能力判断留到你愿意展示时再做。",
+      "review": "Continues help while leaving competence unverified; does not lower ability due to nonparticipation."
+    },
+    {
+      "id": "F6",
+      "prompt": "我给你一篇写得很好的英语短文，但这是朋友帮我改好的。我回消息也很慢。你帮我判断我的英语水平，顺便决定下一步该学什么。",
+      "response": "目前不能据此确定你的英语水平。朋友修改后的短文能展示成稿质量，但不能直接代表你独立写作的能力；回消息慢也不能说明英语差。阅读、写作、听力和口语还需要分别看。\n\n下一步我建议先做一件与你已有材料有关的事：挑出一处朋友的修改，我解释为什么这样改，以及它适用于什么情况。这个建议是临时起点，不是对你水平的定级。\n\n你能贴出其中一处“你原来的句子 → 朋友改后的句子”吗？",
+      "review": "Separates edited artifact quality, reply speed and independent skill. Requests one relevant before/after example."
+    },
+    {
+      "id": "F7",
+      "prompt": "昨天照着例子会做百分比折扣了，今天换成涨价问题又不会了。是不是我太笨？给我一个最小的下一步，别一下安排一堆题。",
+      "response": "这一次卡住，不能说明你笨。昨天是照着例子做折扣，今天换成涨价，可能只是还没把同一个方法用到新情境里。\n\n先只抓住一点：**涨价 20%，就是先算原价的 20%，再加回原价。**\n\n现在只做这一个小步骤：原价 50 元，涨价 20%，上涨的部分是 **50 × 20% = ___ 元**。先不用算最终价格。",
+      "review": "Uses a tentative transfer/support explanation and a single scaffolded step, not a stable ability label."
+    },
+    {
+      "id": "F8",
+      "prompt": "只把“这班列车会晚点十分钟”翻译成英语，不要额外解释。",
+      "response": "This train will be ten minutes late.",
+      "review": "Negative control stays a direct translation without learning assessment."
+    },
+    {
+      "id": "F2-turn2",
+      "continues": "F2",
+      "prompt": "因为 Ana 今天要工作，所以会吃完饭后去。后面的题先不做，你就用这段教我一个表达。",
+      "response": "那就学 **por eso**，意思是“所以、因此”，用来连接原因和结果。\n\n原文里：\n**Hoy tiene que trabajar. Por eso irá después de comer.**\n她今天得工作，所以会吃完饭后去。\n\n可以把它记成：**原因 + por eso + 结果**。\n\n比如：\n**Estoy cansado. Por eso quiero descansar.**\n我累了，所以想休息。",
+      "review": "Switches from diagnostic to explanation without forcing the remaining assessment."
+    },
+    {
+      "id": "F2-turn3",
+      "continues": "F2-turn2",
+      "prompt": "现在再来一个很短的摸底，别让我重答刚才的题。顺便说明从刚才的表现能确定什么，不能确定什么。",
+      "response": "刚才可以确定的是：你正确读出了那段文字中的原因——Ana 要工作，也读出了“吃完饭后去”的时间信息。\n\n还不能确定的是：换一段材料能否稳定理解、过几天能否记住，以及整体英语以外的西班牙语水平。刚讲过的 **por eso**，也还没有你独立运用的证据。\n\n这次换一个很短的时间顺序题，不重复刚才的内容：\n\n**Antes de cenar, Pablo llama a su hermana.**\n\nPablo 做这两件事的先后顺序是什么？用中文回答即可。",
+      "review": "Preserves actual reading evidence and distinguishes demonstrated comprehension from taught expression and untested retention. Wording defect retained: '整体英语以外的西班牙语水平' introduces irrelevant English. The cause is unestablished; a dedicated isolated replay follows."
+    },
+    {
+      "id": "F2-isolated-replay",
+      "context": "用户：我想学西班牙语阅读，愿意先做个简短摸底。现在开始吧。\n助手：先读一小段，不用计时，也先不查词。«Ana vive cerca de la biblioteca. Normalmente va allí por la mañana, pero hoy tiene que trabajar. Por eso irá después de comer.» Ana 今天为什么没有按平常的时间去图书馆？用中文回答即可。\n用户：因为 Ana 今天要工作，所以会吃完饭后去。后面的题先不做，你就用这段教我一个表达。\n助手：那就学 por eso，意思是“所以、因此”，连接原因和结果。Hoy tiene que trabajar. Por eso irá después de comer. 她今天得工作，所以会吃完饭后去。也可以说 Estoy cansado. Por eso quiero descansar. 我累了，所以想休息。",
+      "prompt": "现在再来一个很短的摸底，别让我重答刚才的题。顺便说明从刚才的表现能确定什么，不能确定什么。",
+      "response": "刚才能确定的是：你正确理解了那段文字中的原因和时间安排。还不能确定你的整体阅读水平，也不能仅凭听过讲解就认定你掌握了 por eso；独立理解新例子和过几天能否记住，都还没验证。跳过题目不代表能力不足。\n\n现在换一个新情境，只做这一小题，先不查词：\n\n«Luis quiere ir al parque, pero está lloviendo. Por eso se queda en casa.»\n\nLuis 最后去了公园吗？请用中文回答，并指出你的判断依据。",
+      "review": "With the case isolated, preserves demonstrated reading evidence, leaves overall level/retention/independent use unverified and offers a new short reading task. No irrelevant English wording observed in this one replay; this does not establish removal of a general model error."
+    }
+  ]
+}

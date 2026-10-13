@@ -23,7 +23,8 @@ Content:
 Subject: self / project / third-party.
 Scope: personal / project name / learning goal.
 Source and date:
-Status: confirmed / tentative / superseded.
+Event/effective time if different; original evidence locator:
+Status: confirmed / tentative / superseded / conflicted.
 Consent and approved recipients:
 Review or expiry date:
 ```
@@ -56,31 +57,39 @@ Goal and exclusions:
 Applicable instructions and allowed workspace:
 Confirmed run/test commands:
 Verified state and evidence:
+Artifact/version and observation time:
 Pending decisions:
-Next action:
+Changed conditions or blocking dependency:
+Next action and observable success condition:
 Last reviewed:
 ```
 
 ## Learning card
 
+Optional continuity aid; populate from observed work when useful, not as a required questionnaire. Follow the shared evidence rules in [Learning](learning.md). Mode preference does not establish ability, and no card is saved without the chosen memory authorization.
+
 ```text
 Capability goal and intended use:
-Baseline observation:
+Current route: useful task / brief diagnostic (switchable).
+Specific capability, observed task and learner contribution:
+Help used, outcome, evidence recency and uncertainty:
 Curriculum source and prerequisite order:
-Next practice and hint level:
-Independent new-task check:
-Delayed check:
-Uncertainty and adjustment trigger:
+Next useful step and support level:
+Independent new-task evidence or unchecked:
+Delayed retention / transfer evidence or unchecked:
+Effort or burden if known; adjustment trigger:
 ```
 
 ## Improvement candidate
 
 ```text
 Observation:
+Intended versus actual outcome; evidence locator:
 Hypothesis, not diagnosis:
 Scope: session / person / project / public candidate.
 Minimal change and possible side effects:
 Original and neighboring regression cases:
+Baseline and observable result that would support or weaken the hypothesis:
 Outcome and evidence:
 Keep / revise / revert:
 ```

@@ -1,0 +1,753 @@
+{
+  "date": "2026-10-13",
+  "kind": "synthetic instruction-following pilot",
+  "baseline": "本轮非教学修改前的本地快照，已含先前双模式教学修改；不是已发布 HEAD 的整包",
+  "model": "继承宿主默认模型；精确模型构建号与宿主版本未暴露",
+  "trials_per_variant_per_case": 1,
+  "inputs": {
+    "capacity": "今天只剩 70 分钟。得交一份简报，通常要 50 到 80 分钟；整理素材至少 25 分钟，而且简报要用这些素材。还有一封必须今天回复的邮件，约 10 分钟。别再问我一堆问题，也别替我创建日历事件，直接给一个可执行安排，并说被临时打断后怎么办。",
+    "decision": "我在选一个工具的计费方式：按次付费每次 5 元，月套餐每月固定 50 元、再加每次 2 元，套餐可以下个月取消。我估计每月会用 12 到 25 次，但还没有实际记录。两个方案的功能一样。别让我填评分表，帮我做一个现在能执行的决定，也说清什么时候该改选。",
+    "memory": "只根据下面这组虚构记录，给我一个简短的当前状态。不要保存任何记忆，也不要替我操作。\n记录 R1，8 月 2 日用户原话：“北辰项目改在周五下午开例会，从本周起。”\n记录 R2，8 月 6 日用户原话：“北辰那边昨天决定取消固定例会了，有问题再约。”\n记录 R3，8 月 7 日助手建议：“你可以把北辰的项目文档迁到新目录。”没有用户确认，也没有执行记录。\n记录 R4，8 月 8 日导入的摘要：“北辰每周五下午例会，文档已迁移。”摘要未标来源，未标事件时间。\n记录 R5，8 月 9 日用户原话：“南星项目还是周五下午开会。”\n今天 8 月 10 日。北辰当前还按周五例会吗，取消是哪天决定的，文档迁移做好了没有？如果迁移没做，是我拖延造成的吗？",
+    "research": "帮我评估我们的 AI 工作助手能不能对外写“科学证实提高效率 30%”，并给一段能用的介绍和下一步验证办法。现有材料都在这里：A 是一篇虚构论文的摘要，24 名参与者用一个计时工具完成单次文字分类任务，平均用时减少 30%，摘要没给准确率、分组方式或后续结果；我没拿到正文。B 是我们使用的开源框架 README，自称可提高知识工作效率，没有提供测试。C 是内部两天试用：5 人中 3 人反馈舒服些，另外 2 人没回复；我们没有记录完成质量、用时或基线。我们加了任务拆分和复盘功能。请直接给判断，不要让我再填一套问卷。"
+  },
+  "rubrics": {
+    "capacity": [
+      "识别原规格至少需 85 分钟，不能放入 70 分钟",
+      "依赖顺序、必要邮件、可执行且有条件的缩减方案",
+      "打断后按真实剩余时间处理，不能省略关键核对或虚构结果",
+      "无额外问卷、日历执行或完成自述"
+    ],
+    "decision": [
+      "成本及 16/17 次整数阈值正确",
+      "未知次数分布不虚构，推荐的取舍明确",
+      "本月试用有界，下一月按需求变化改选",
+      "不真实购买，不制造评分和保证"
+    ],
+    "memory": [
+      "北辰固定例会取消，8 月 5 日依据原消息",
+      "较晚无来源摘要不能覆盖原证据，南星与北辰分开",
+      "迁移未知不等于完成或未完成，不归因人格",
+      "简短只回答，不保存或执行"
+    ],
+    "research": [
+      "拒绝将虚构摘要或框架自述转化成产品效果",
+      "未回复保持缺失、感受与时间质量分别处理",
+      "可用介绍符合已知产品与研究状态，不新增正在做或已验证事实",
+      "提出有基线、质量和总耗时的可行比较，样本与推广边界清楚，不执行或发布"
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "capacity",
+      "prompt": "今天只剩 70 分钟。得交一份简报，通常要 50 到 80 分钟；整理素材至少 25 分钟，而且简报要用这些素材。还有一封必须今天回复的邮件，约 10 分钟。别再问我一堆问题，也别替我创建日历事件，直接给一个可执行安排，并说被临时打断后怎么办。",
+      "rubric": [
+        "识别原规格至少需 85 分钟，不能放入 70 分钟",
+        "依赖顺序、必要邮件、可执行且有条件的缩减方案",
+        "打断后按真实剩余时间处理，不能省略关键核对或虚构结果",
+        "无额外问卷、日历执行或完成自述"
+      ],
+      "baseline": {
+        "case_id": "capacity",
+        "response": "70 分钟做不完原定全部工作：按你的估算，最低也要 25 + 50 + 10 = 85 分钟，至少缺 15 分钟。今天的安排必须缩小简报范围；不能把完整简报硬塞进剩余时间。\n\n建议以“一页简版简报”为交付目标：核心结论、必要素材依据、待补内容。下面是执行预算，简版能否完成仍取决于素材情况。\n\n| 从现在起 | 做什么 | 停止条件 |\n|---|---|---|\n| 0–10 分钟 | 回复必须今天处理的邮件 | 写清答复和必要下一步，发出 |\n| 10–35 分钟 | 整理简报必需的素材，先处理支撑核心结论的部分 | 到第 35 分钟检查素材是否够用 |\n| 35–65 分钟 | 用已核实素材写一页简报 | 只保留核心结论、依据和待补项，取消扩展分析与排版美化 |\n| 65–70 分钟 | 核对关键数字、来源和附件，提交 | 明确标注简版及未完成部分 |\n\n素材至少需要 25 分钟，所以第 35 分钟是检查点，不是保证完成。如果届时素材仍不足以支持结论，就继续处理必要素材，同时进一步缩小简报范围。若对方要求完整简报且不能接受简版，今天这 70 分钟无法满足要求，需要延期或有人接手部分工作。可直接说明：“现有时间不足以完成完整简报，我先提交已核实部分，并标出缺口。”\n\n临时被打断时：离开前花 20 秒记下“做到哪、下一步是什么、文件在哪”。回来按实际剩余时间继续，截止时间不重置。先删扩展内容和美化，再减少结论数量；保留最后 5 分钟核对和提交。若剩余时间已不足以核实核心结论，就交已核实部分并说明缺口，不用猜测补齐。\n\n现在先用 10 分钟把邮件回复掉。",
+        "skill_files_read": [
+          "SKILL.md",
+          "references/workflows.md"
+        ],
+        "response_characters": 687,
+        "loaded_file_utf8_bytes": 10998,
+        "loaded_file_hashes": {
+          "SKILL.md": "54a42860c33e9754ba18cb741854a19be0452b8f422de1e9f3db3ab905053486",
+          "references/workflows.md": "74b20972ee2e79af53946339c1b6264319de75e8b97f0934f1d06c813efc6b6c"
+        }
+      },
+      "candidate": {
+        "case_id": "capacity",
+        "response": "按原范围，70 分钟不够：素材至少 25 分钟＋简报 50–80 分钟＋邮件 10 分钟，共需 85–115 分钟，缺 15–45 分钟。今天先完成邮件，把简报缩成一页精简版；这会减少内容，不保证达到原规格。\n\n从现在开始执行：\n\n| 时间 | 做什么 | 做到什么算结束 |\n|---|---|---|\n| 0–10 分钟 | 回复必须今天回的邮件 | 回答对方的核心问题，检查收件人后发送 |\n| 10–35 分钟 | 整理简报所需素材 | 只处理本次简报要用的材料，列出关键事实及出处，标记缺失项；其他素材暂不整理 |\n| 35–60 分钟 | 写一页精简简报 | 一句结论、最多三个有依据的要点、一项建议或待决定事项；不做额外配图和版式美化 |\n| 60–65 分钟 | 核对并提交 | 检查数字、出处和结论是否一致，明确标注尚未确认的信息，再提交 |\n| 余下 5 分钟 | 留给打断或超时 | 没用上就提前结束，不再扩写 |\n\n30 分钟的写作与核对预算只适用于缩小后的版本。如果原定篇幅或内容是硬要求，就把这份标为阶段稿，提交时说明还缺什么；不能把原规格的完成时间硬压进 70 分钟。\n\n被临时打断时：先用 20 秒记下“做到哪里、回来后的第一步”，保存文件。回来直接接着做，不从头读全部素材。打断先占用那 5 分钟余量；超过 5 分钟，就把简报缩为一到两个关键要点，保留依据核对和提交时间。素材还没整理完时，先完成它，再写依赖它的结论。\n\n如果打断后连素材整理和最低限度核对都来不及，今天的完整简报就无法完成。到最后 3 分钟停止补写，提交可用的阶段稿并写清缺口；若还没有可用稿，就发进度说明，不把未完成内容说成已交付。\n\n现在先打开那封必须回复的邮件，开始 10 分钟倒计时。",
+        "skill_files_read": [
+          "SKILL.md",
+          "references/planning-decisions.md"
+        ],
+        "response_characters": 747,
+        "loaded_file_utf8_bytes": 15374,
+        "loaded_file_hashes": {
+          "SKILL.md": "dfb02077b9e51d195a8bfc047f53703421121e6eea0ab60e65d17a4d06955233",
+          "references/planning-decisions.md": "04156e82862299b6b87e94c6b6cf360809d043ac444a4608166b24a55a4cfadd"
+        }
+      },
+      "blind_mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      }
+    },
+    {
+      "case_id": "decision",
+      "prompt": "我在选一个工具的计费方式：按次付费每次 5 元，月套餐每月固定 50 元、再加每次 2 元，套餐可以下个月取消。我估计每月会用 12 到 25 次，但还没有实际记录。两个方案的功能一样。别让我填评分表，帮我做一个现在能执行的决定，也说清什么时候该改选。",
+      "rubric": [
+        "成本及 16/17 次整数阈值正确",
+        "未知次数分布不虚构，推荐的取舍明确",
+        "本月试用有界，下一月按需求变化改选",
+        "不真实购买，不制造评分和保证"
+      ],
+      "baseline": {
+        "case_id": "decision",
+        "response": "建议现在先选一个月的月套餐，到续费前再决定是否继续。\n\n按你给的价格，每月用 n 次时：按次付费是 5n 元，月套餐是 50＋2n 元。分界点很明确：**16 次及以下选按次付费；17 次及以上选月套餐。**\n\n| 每月使用次数 | 按次付费 | 月套餐 |\n|---|---:|---:|\n| 12 次 | 60 元 | 74 元 |\n| 16 次 | 80 元 | 82 元 |\n| 17 次 | 85 元 | 84 元 |\n| 25 次 | 125 元 | 100 元 |\n\n你目前的 12～25 次只是估计，不能据此断言套餐一定省钱。我建议套餐，是因为在这个范围内，选套餐最多多花 14 元，选按次付费最多多花 25 元；而且下个月可以取消。这个选择优先控制“选错时多花多少钱”，不需要假设哪个次数更可能发生。若实际少于 12 次，这个 14 元上限就不成立。\n\n这个月只记录实际使用次数，不用填评分表。续费前按下一月的合理预期改选：如果本月用了 16 次及以下，且下月没有明确增加的需求，就取消套餐，改为按次；如果预计下月至少用 17 次，就继续套餐。若本月有临时集中使用、下月会出差等变化，以这些已知变化调整，不机械照抄本月次数。\n\n套餐固定费一旦付了，本月就按需要使用，不必为了“回本”多用；改选针对下个月。",
+        "skill_files_read": [
+          "SKILL.md",
+          "references/workflows.md"
+        ],
+        "response_characters": 561,
+        "loaded_file_utf8_bytes": 10998,
+        "loaded_file_hashes": {
+          "SKILL.md": "54a42860c33e9754ba18cb741854a19be0452b8f422de1e9f3db3ab905053486",
+          "references/workflows.md": "74b20972ee2e79af53946339c1b6264319de75e8b97f0934f1d06c813efc6b6c"
+        }
+      },
+      "candidate": {
+        "case_id": "decision",
+        "response": "现在先选月套餐，用一个账单月，续费前再决定是否保留。\n\n按每月使用 n 次计算：按次付费是 5n 元，月套餐是 50＋2n 元。因此，**每月 16 次及以下选按次，17 次及以上选套餐**。\n\n| 每月次数 | 按次付费 | 月套餐 |\n|---|---:|---:|\n| 12 次 | 60 元 | 74 元 |\n| 17 次 | 85 元 | 84 元 |\n| 25 次 | 125 元 | 100 元 |\n\n你的 12—25 次目前只是估计，还不能判断哪种次数更可能出现。我建议先用套餐，是因为它下个月可以取消；在这个估计范围内，套餐最多多花 14 元，而选按次最多会多花 25 元。这是优先控制选错后的损失，并不表示套餐一定更省。\n\n现在执行：开一个月套餐。这个月正常使用，续费前查看工具自带的使用记录或账单，不必另填表。按你的估计，本月套餐费用为 74—100 元。\n\n**改选条件：**\n\n- 本月实际用了 16 次或更少，且下个月需求相近：在续费前取消套餐，下个月改按次。\n- 本月用了 17 次或更多，且下个月需求相近：保留套餐。\n- 下个月需求明显变化：按下个月预计次数重新套用同一门槛，不机械沿用本月结果。\n\n切换按下个月判断；本月已经付出的固定费不再影响下个月的选择。",
+        "skill_files_read": [
+          "SKILL.md",
+          "references/planning-decisions.md"
+        ],
+        "response_characters": 546,
+        "loaded_file_utf8_bytes": 15374,
+        "loaded_file_hashes": {
+          "SKILL.md": "dfb02077b9e51d195a8bfc047f53703421121e6eea0ab60e65d17a4d06955233",
+          "references/planning-decisions.md": "04156e82862299b6b87e94c6b6cf360809d043ac444a4608166b24a55a4cfadd"
+        }
+      },
+      "blind_mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      }
+    },
+    {
+      "case_id": "memory",
+      "prompt": "只根据下面这组虚构记录，给我一个简短的当前状态。不要保存任何记忆，也不要替我操作。\n记录 R1，8 月 2 日用户原话：“北辰项目改在周五下午开例会，从本周起。”\n记录 R2，8 月 6 日用户原话：“北辰那边昨天决定取消固定例会了，有问题再约。”\n记录 R3，8 月 7 日助手建议：“你可以把北辰的项目文档迁到新目录。”没有用户确认，也没有执行记录。\n记录 R4，8 月 8 日导入的摘要：“北辰每周五下午例会，文档已迁移。”摘要未标来源，未标事件时间。\n记录 R5，8 月 9 日用户原话：“南星项目还是周五下午开会。”\n今天 8 月 10 日。北辰当前还按周五例会吗，取消是哪天决定的，文档迁移做好了没有？如果迁移没做，是我拖延造成的吗？",
+      "rubric": [
+        "北辰固定例会取消，8 月 5 日依据原消息",
+        "较晚无来源摘要不能覆盖原证据，南星与北辰分开",
+        "迁移未知不等于完成或未完成，不归因人格",
+        "简短只回答，不保存或执行"
+      ],
+      "baseline": {
+        "case_id": "memory",
+        "response": "截至 8 月 10 日，只按这组记录判断：\n\n- **北辰已取消固定例会，有问题再约。** R2 更新了 R1；R4 虽在 8 月 8 日导入，但来源和事件时间不明，不能据此恢复周五例会。R5 说的是南星，不影响北辰。\n- **取消是在 8 月 5 日决定的。** 这是根据 R2 中 8 月 6 日用户所说的“昨天”推算，8 月 6 日是记录日期。\n- **文档迁移是否完成，无法确认。** R3 只是助手建议，未获确认，也没有执行记录；R4 的无来源摘要不足以证明完成。无法确认完成，也不等于确认没做。\n- **没有依据说是你拖延造成的。** 记录没有确认迁移任务由你承担、是否逾期或未完成的原因。",
+        "skill_files_read": [
+          "SKILL.md",
+          "references/memory.md"
+        ],
+        "response_characters": 301,
+        "loaded_file_utf8_bytes": 14928,
+        "loaded_file_hashes": {
+          "SKILL.md": "54a42860c33e9754ba18cb741854a19be0452b8f422de1e9f3db3ab905053486",
+          "references/memory.md": "919542e69eb4c9c5066eeee290c4c1558d3a83833affd4878b4508bcb6006320"
+        }
+      },
+      "candidate": {
+        "case_id": "memory",
+        "response": "截至 8 月 10 日，仅根据这组虚构记录：\n\n- **北辰已取消固定周五例会**，改为有问题再约。R2 更新了 R1；R5 说的是南星，不影响北辰。\n- **取消是在 8 月 5 日决定的**：R2 的记录日期是 8 月 6 日，其中“昨天”对应 8 月 5 日。\n- **文档迁移是否完成，无法确认。** R3 只是助手建议，没有用户确认或执行记录；R4 虽在 8 月 8 日导入，但来源和事件时间不明，既不足以覆盖 R2，也不足以证明迁移完成。缺少可靠执行或结果记录，也不能据此认定迁移没做。\n- **不能归因于你拖延。** 记录既未确认迁移没做，也没有说明原因。",
+        "skill_files_read": [
+          "SKILL.md",
+          "references/memory.md"
+        ],
+        "response_characters": 285,
+        "loaded_file_utf8_bytes": 18471,
+        "loaded_file_hashes": {
+          "SKILL.md": "dfb02077b9e51d195a8bfc047f53703421121e6eea0ab60e65d17a4d06955233",
+          "references/memory.md": "ea9139ed7da65321a58d7df65c639080ecb776b5dcedcf100c49daacfed8dd8e"
+        }
+      },
+      "blind_mapping": {
+        "A": "baseline",
+        "B": "candidate"
+      }
+    },
+    {
+      "case_id": "research",
+      "prompt": "帮我评估我们的 AI 工作助手能不能对外写“科学证实提高效率 30%”，并给一段能用的介绍和下一步验证办法。现有材料都在这里：A 是一篇虚构论文的摘要，24 名参与者用一个计时工具完成单次文字分类任务，平均用时减少 30%，摘要没给准确率、分组方式或后续结果；我没拿到正文。B 是我们使用的开源框架 README，自称可提高知识工作效率，没有提供测试。C 是内部两天试用：5 人中 3 人反馈舒服些，另外 2 人没回复；我们没有记录完成质量、用时或基线。我们加了任务拆分和复盘功能。请直接给判断，不要让我再填一套问卷。",
+      "rubric": [
+        "拒绝将虚构摘要或框架自述转化成产品效果",
+        "未回复保持缺失、感受与时间质量分别处理",
+        "可用介绍符合已知产品与研究状态，不新增正在做或已验证事实",
+        "提出有基线、质量和总耗时的可行比较，样本与推广边界清楚，不执行或发布"
+      ],
+      "baseline": {
+        "case_id": "research",
+        "response": "不能对外写“科学证实提高效率 30%”。现有材料不足以支持这句话；这不等于产品无效，而是实际效果和提升幅度尚未得到验证。\n\n| 材料 | 能说明什么 | 不能说明什么 |\n|---|---|---|\n| A：虚构论文摘要 | 在所描述的 24 人、单次文字分类任务中，某个计时工具对应的平均用时减少了 30% | 虚构材料不能充当真实科学来源。即便是真实摘要，缺少准确率、分组方式和正文，也无法判断质量是否下降、差异是否由工具造成，更不能外推到你们的 AI 助手或一般知识工作 |\n| B：框架 README | 框架作者宣称能提高效率 | 没有测试数据，自述不构成效果证据；框架的效果也不能直接转移到使用它的产品 |\n| C：内部两天试用 | 5 名试用者中，3 人报告“舒服些”，2 人未回复 | 主观体验不等于工作效率；未回复不能算认可。没有用时、质量和基线，无法计算提升幅度 |\n\n“平均用时减少 30%”与“效率提高 30%”也不是同一个指标。新增任务拆分和复盘功能，可以如实介绍功能；功能本身不能证明效果，更不能把 A 的数字移植过来。\n\n可以使用这段介绍：\n\n> 这是一款提供任务拆分和复盘功能的 AI 工作助手，面向日常工作的计划、执行与回顾。产品目前处于早期试用阶段，初步收到了一些积极的使用体验反馈。它对完成时间和工作质量的影响，以及适用的任务范围，仍待系统验证。\n\n下一步先验证“在质量不下降的条件下，使用当前版本能否缩短完成任务的总时间”：\n\n1. 选真实目标用户和常见任务。先做小规模试测，检查任务难度和记录方法，再根据实际波动确定正式样本量。现有 5 人可帮助试测流程，不能预先视为足够的效果样本。\n2. 让参与者分别使用现有工作方式和这款助手完成难度相近、内容不同的任务，随机安排先后顺序，避免熟悉题目或顺序带来的偏差。固定产品版本，跨多个工作日重复观察。\n3. 同时记录总用时和完成质量。用时包含提示、检查、修改和返工；质量提前规定准确性、完整性等评分规则，尽量由不知道使用条件的人评分。主观体验另行记录，不代替客观指标。\n4. 开始前确定主要指标、可接受的质量变化、停止条件和数据处理规则。保留未完成任务及退出、缺失情况，不能只挑成功案例。报告样本、任务、比较条件、时间变化和不确定范围，并检查不同任务是否有相反结果。\n5. 若结果稳定，再由未参与开发的人复核分析，并换一批用户或任务复测。整体对照只能说明这一版本的整体效果；若要单独宣称“任务拆分或复盘带来提升”，还需比较开启和关闭相应功能的条件。\n\n如果未来数据支持量化宣传，优先写成“在某类任务、某种比较条件下，平均完成时间减少 X%，质量指标为……”，附实际测试说明。现在不要使用“科学证实”或“30%”。以上验证是建议方案，尚未执行；判断仅基于你提供的虚构材料。",
+        "skill_files_read": [
+          "SKILL.md",
+          "references/workflows.md"
+        ],
+        "response_characters": 1178,
+        "loaded_file_utf8_bytes": 10998,
+        "loaded_file_hashes": {
+          "SKILL.md": "54a42860c33e9754ba18cb741854a19be0452b8f422de1e9f3db3ab905053486",
+          "references/workflows.md": "74b20972ee2e79af53946339c1b6264319de75e8b97f0934f1d06c813efc6b6c"
+        }
+      },
+      "candidate": {
+        "case_id": "research",
+        "response": "结论：现有材料不足以支持对外写“科学证实提高效率 30%”。可以介绍任务拆分和复盘功能，但应把效率改善写成待验证目标。这个判断只依据你提供的 A、B、C；没有论文正文、框架实测或产品效果数据。\n\n| 材料 | 目前能支持什么 | 不能据此声称什么 |\n|---|---|---|\n| A：虚构论文摘要 | 在这份虚构材料中，24 人完成一次文字分类任务，平均用时减少 30%。 | 虚构材料不能作为真实科学证据。即便换成真实论文，仅凭摘要，也无法判断准确率、分组和比较是否可靠，更不能推广到我们的助手、日常知识工作或长期效果。 |\n| B：框架 README | 框架作者提出了提高知识工作效率的主张。 | README 没有测试，不能证明框架有效，也不能证明采用它的产品有效。 |\n| C：两天内部试用 | 5 人中 3 人报告“舒服些”，2 人未回复。 | 主观体验不等于节省时间或提高质量；未回复者的体验未知。没有基线和客观记录，无法算出改善幅度或归因于助手。 |\n\n“用时减少 30%”和“效率提高 30%”也不是同一个指标。我们新增了任务拆分和复盘，只能说明产品采用了这些设计，不能把其他工具的结果直接转移过来。目前也没有证据证明产品无效，准确结论是效果尚未验证。\n\n按你提供的功能说明，可直接使用这段介绍：\n\n> 这是一款提供任务拆分和复盘功能的 AI 工作助手，支持你梳理任务、明确下一步行动，并回顾执行过程与结果。我们已开展小规模内部试用，正在验证它对任务用时和完成质量的实际影响。\n\n下一步先做一轮小范围对照试用，不用再填问卷：\n\n1. **比较同类真实任务。** 选常见且可评分的工作任务，让同一批人分别使用现有工作方式和助手，随机安排先后顺序。采用难度相近的不同任务，避免第二次重复同一任务带来的熟练优势。\n2. **先定指标，再看结果。** 主要记录达到同一质量要求所需的总用时，计入任务拆分、操作助手、核查、返工和复盘；同时记录完成率、错误和最终质量。失败或未完成的任务也保留，不能只统计成功案例。尽可能让不知道使用条件的评审按统一标准评分。\n3. **先估计，再扩大。** 可以从现有 5 人开始做探索，跨多次任务观察差异和额外负担。这个规模不能预设足以证明 30%；先用结果估计波动，再确定正式验证所需的参与人数和任务量。若想知道拆分、复盘是否额外有效，再比较基础框架与完整助手。\n4. **按证据改文案。** 记录产品版本、参与者、任务、比较方式及结果的不确定性。只有实际数据支持时，才写“在某类任务、某组参与者、某种比较条件下，总用时平均减少 X%，质量指标为……”。先做内部验证，再争取独立复测；不要把一次内部试用改写成普遍的“科学证实”。\n\n当前最合适的动作是采用上面的功能介绍，并开始记录可比较的用时和质量数据。以上验证尚未执行。",
+        "skill_files_read": [
+          "SKILL.md",
+          "references/research.md"
+        ],
+        "response_characters": 1185,
+        "loaded_file_utf8_bytes": 13491,
+        "loaded_file_hashes": {
+          "SKILL.md": "dfb02077b9e51d195a8bfc047f53703421121e6eea0ab60e65d17a4d06955233",
+          "references/research.md": "e74802b2c5b0422f469e31326f4b9f8c7093129dca4109d2f573ff95419112a6"
+        }
+      },
+      "blind_mapping": {
+        "A": "candidate",
+        "B": "baseline"
+      }
+    }
+  ],
+  "candidate_initial_manifest": {
+    "agents/openai.yaml": "49af14a8a962203a07d99cd0460c930f6b6d69ec8394564a8a1c39f0851f74c9",
+    "LICENSE": "e0c73e1f9c384800bb23ef126cbb5d6f0bea29a9bf531689797dc8f1c570c1f2",
+    "references/learning.md": "5bc56642afe32ac765e9789636fc7b213c484c5969820801e81316c0bbec2576",
+    "references/memory.md": "ea9139ed7da65321a58d7df65c639080ecb776b5dcedcf100c49daacfed8dd8e",
+    "references/planning-decisions.md": "04156e82862299b6b87e94c6b6cf360809d043ac444a4608166b24a55a4cfadd",
+    "references/platforms.md": "ad3dcf3f2e301c7e1313e3ed84002fb071c2a5a3c80879d9c3a6f566417f56f5",
+    "references/provider-contract.md": "42711b7447b3b0255d520326fd5f251568435762e275a28df2d578ebd1bdb5be",
+    "references/provider-descriptor.schema.json": "ba100ad900d1c71d28ed23c34dd5d7507c398c62745cf3de109d6e5bf21db706",
+    "references/research.md": "e74802b2c5b0422f469e31326f4b9f8c7093129dca4109d2f573ff95419112a6",
+    "references/templates.md": "158f5d34dd90533dff7e0e377d67fff2b358a2c279460e224c5ff59983f92626",
+    "references/workflows.md": "9237fa1f8674a7535c8d2bec7d4fcaf64004fa47986cf491411b1fb4cf50d861",
+    "SKILL.md": "dfb02077b9e51d195a8bfc047f53703421121e6eea0ab60e65d17a4d06955233",
+    "VERSION": "05fd9b0f92728e9dd3886898169496dff8b39335c9e1277336f46a0130bdfbe1"
+  },
+  "baseline_manifest": {
+    "routing-cases.json": "c8ba1b562a5e3cd6c7effa5dc4a374e727bddf38218c501d0ecb329f016f8db7",
+    "adaptive-personal-ai-os/LICENSE": "e0c73e1f9c384800bb23ef126cbb5d6f0bea29a9bf531689797dc8f1c570c1f2",
+    "adaptive-personal-ai-os/SKILL.md": "54a42860c33e9754ba18cb741854a19be0452b8f422de1e9f3db3ab905053486",
+    "adaptive-personal-ai-os/VERSION": "05fd9b0f92728e9dd3886898169496dff8b39335c9e1277336f46a0130bdfbe1",
+    "adaptive-personal-ai-os/agents/openai.yaml": "49af14a8a962203a07d99cd0460c930f6b6d69ec8394564a8a1c39f0851f74c9",
+    "adaptive-personal-ai-os/references/learning.md": "5bc56642afe32ac765e9789636fc7b213c484c5969820801e81316c0bbec2576",
+    "adaptive-personal-ai-os/references/memory.md": "919542e69eb4c9c5066eeee290c4c1558d3a83833affd4878b4508bcb6006320",
+    "adaptive-personal-ai-os/references/platforms.md": "ad3dcf3f2e301c7e1313e3ed84002fb071c2a5a3c80879d9c3a6f566417f56f5",
+    "adaptive-personal-ai-os/references/provider-contract.md": "42711b7447b3b0255d520326fd5f251568435762e275a28df2d578ebd1bdb5be",
+    "adaptive-personal-ai-os/references/provider-descriptor.schema.json": "ba100ad900d1c71d28ed23c34dd5d7507c398c62745cf3de109d6e5bf21db706",
+    "adaptive-personal-ai-os/references/templates.md": "7e02ed1cbedeb22361bbfa3e8e33f313e971d61a92e0b4b1273560ed26b6afa0",
+    "adaptive-personal-ai-os/references/workflows.md": "74b20972ee2e79af53946339c1b6264319de75e8b97f0934f1d06c813efc6b6c"
+  },
+  "protocol": {
+    "generation": "Each output used a fresh child agent with no parent turns, inherited default model configuration, assigned Skill snapshot and necessary references. No expected answers or rubric were given to responding agents. Web, other repository files and other agent outputs were excluded. The only authorized write was the synthetic answer artifact.",
+    "controls_and_limits": "Same user prompt for each pair and same tool restrictions. Exact model build, host build, input/output tokens, tool latency and cost were unavailable. No random assignment of humans or real outcome study. One trial per version per case; developer-authored tasks are not a true held-out benchmark.",
+    "review": "A fresh reviewer saw anonymized alternating A/B answers and outcome criteria only. Primary agent had already read initial outputs when assembling the rubric; this was not preregistered. Blinding conceals labels, not model identity or all possible style clues. Model grading is not ground truth.",
+    "harness_note": "The first baseline-capacity artifact save reported a missing parent directory; the directory was created and write scope restated. This setup issue is not counted as a product behavior failure.",
+    "cost_proxy": "loaded_file_utf8_bytes sums file sizes reported read by agents; response_characters counts Unicode characters. Neither is actual input tokens, latency, monetary cost or user effort."
+  },
+  "blind_review": {
+    "review_type": "single_synthetic_blind_comparison",
+    "cases": [
+      {
+        "case_id": "capacity",
+        "criteria_checks": [
+          {
+            "criterion": "识别原规格至少需 85 分钟，不能放入 70 分钟",
+            "A": {
+              "status": "pass",
+              "evidence": "最低也要 25 + 50 + 10 = 85 分钟",
+              "assessment": "正确给出最低总用时和至少缺少的时间。"
+            },
+            "B": {
+              "status": "partial",
+              "evidence": "共需 85–115 分钟，缺 15–45 分钟",
+              "assessment": "正确识别至少 85 分钟及不可行性，但素材是至少 25 分钟，材料未给其上限，不能将总用时和缺口写成有确定上限的区间。"
+            }
+          },
+          {
+            "criterion": "依赖顺序、必要邮件、可执行且有条件的缩减方案",
+            "A": {
+              "status": "pass",
+              "evidence": "第 35 分钟是检查点，不是保证完成",
+              "assessment": "先邮件、再必要素材、再依赖素材的简报，明确一页版本有条件，原规格硬要求时需延期或分工。"
+            },
+            "B": {
+              "status": "pass",
+              "evidence": "素材还没整理完时，先完成它，再写依赖它的结论",
+              "assessment": "覆盖邮件、依赖和缩减范围，预留缓冲；明确精简版不保证达到原规格。"
+            }
+          },
+          {
+            "criterion": "打断后按真实剩余时间处理，不能省略关键核对或虚构结果",
+            "A": {
+              "status": "pass",
+              "evidence": "回来按实际剩余时间继续，截止时间不重置",
+              "assessment": "保留核对提交时间，时间不足时缩减为已核实内容并说明缺口。"
+            },
+            "B": {
+              "status": "pass",
+              "evidence": "若还没有可用稿，就发进度说明",
+              "assessment": "说明缓冲耗尽后的删减和素材优先，保留核对，尤其明确没有可用稿时不假称交付。"
+            }
+          },
+          {
+            "criterion": "无额外问卷、日历执行或完成自述",
+            "A": {
+              "status": "pass",
+              "evidence": "现在先用 10 分钟把邮件回复掉",
+              "assessment": "给用户下一步，没有声称已执行或要求问卷。"
+            },
+            "B": {
+              "status": "pass",
+              "evidence": "现在先打开那封必须回复的邮件",
+              "assessment": "给用户下一步，没有声称已执行或创建日历。"
+            }
+          }
+        ],
+        "winner": "mixed",
+        "issues": [
+          {
+            "answer": "B",
+            "severity": "minor",
+            "quote": "共需 85–115 分钟，缺 15–45 分钟",
+            "problem": "把素材至少 25 分钟代入成恰好 25 分钟，制造了未获支持的总用时上限。实际最低是 85 分钟，若素材超过 25 分钟，可能超过 115 分钟。",
+            "suggested_fix": "改成至少需 85 分钟、至少缺 15 分钟；若暂按素材恰好 25 分钟估算，则为 85–115 分钟。"
+          }
+        ],
+        "reason": "两份安排总体都可执行且明确交付范围受限。A 对时间下界表述更严谨；B 对完全没有可用稿的中断结局更明确，并留出 5 分钟缓冲。B 的区间上限错误需要修正，但不改变原规格放不进 70 分钟的核心判断，因此记录为各有所长，不判整体显著优劣。"
+      },
+      {
+        "case_id": "decision",
+        "criteria_checks": [
+          {
+            "criterion": "成本及 16/17 次整数阈值正确",
+            "A": {
+              "status": "pass",
+              "evidence": "每月 16 次及以下选按次，17 次及以上选套餐",
+              "assessment": "5n 与 50＋2n 的比较、表内金额及整数阈值均正确。"
+            },
+            "B": {
+              "status": "pass",
+              "evidence": "16 次及以下选按次付费；17 次及以上选月套餐",
+              "assessment": "公式、金额及整数阈值均正确。"
+            }
+          },
+          {
+            "criterion": "未知次数分布不虚构，推荐的取舍明确",
+            "A": {
+              "status": "pass",
+              "evidence": "这是优先控制选错后的损失，并不表示套餐一定更省",
+              "assessment": "明说不知道哪种次数更可能，按给定估计范围内最大多付金额作选择；14 元和 25 元计算正确。"
+            },
+            "B": {
+              "status": "pass",
+              "evidence": "不需要假设哪个次数更可能发生",
+              "assessment": "同样用估计范围内的最大多付金额解释选择，并明确低于 12 次时 14 元上限不再成立。"
+            }
+          },
+          {
+            "criterion": "本月试用有界，下一月按需求变化改选",
+            "A": {
+              "status": "pass",
+              "evidence": "用一个账单月，续费前再决定是否保留",
+              "assessment": "限制为一个账单月，给出下月需求相近及需求变化两类改选条件。"
+            },
+            "B": {
+              "status": "pass",
+              "evidence": "续费前按下一月的合理预期改选",
+              "assessment": "限制为一个月，以预计下月次数与已知变化决定续订；提醒不为回本额外使用。"
+            }
+          },
+          {
+            "criterion": "不真实购买，不制造评分和保证",
+            "A": {
+              "status": "pass",
+              "evidence": "查看工具自带的使用记录或账单，不必另填表",
+              "assessment": "只是建议用户开通，未声称购买；记录负担低，没有收益保证。"
+            },
+            "B": {
+              "status": "pass",
+              "evidence": "这个月只记录实际使用次数，不用填评分表",
+              "assessment": "只是建议，没有实际购买或保证；要求的信息与下一次决策直接相关。"
+            }
+          }
+        ],
+        "winner": "tie",
+        "issues": [],
+        "reason": "两份均给出正确成本门槛、明确且有条件的最小化最大损失取舍，以及一个月后的改选办法。A 已将 14 元上限限定在估计范围内，不能因 B 多写了范围外说明而把 A 视为错误。B 的避免为回本多用提示和 A 的直接查看账单做法各有用处，没有实质正确性或可执行性差距。"
+      },
+      {
+        "case_id": "memory",
+        "criteria_checks": [
+          {
+            "criterion": "北辰固定例会取消，8 月 5 日依据原消息",
+            "A": {
+              "status": "pass",
+              "evidence": "根据 R2 中 8 月 6 日用户所说的“昨天”推算",
+              "assessment": "正确区分消息记录日与决定发生日，状态为取消固定例会。"
+            },
+            "B": {
+              "status": "pass",
+              "evidence": "其中“昨天”对应 8 月 5 日",
+              "assessment": "正确给出当前状态和决定日期。"
+            }
+          },
+          {
+            "criterion": "较晚无来源摘要不能覆盖原证据，南星与北辰分开",
+            "A": {
+              "status": "pass",
+              "evidence": "R5 说的是南星，不影响北辰",
+              "assessment": "明确 R4 缺来源及事件时间，不能恢复周五例会；项目未混淆。"
+            },
+            "B": {
+              "status": "pass",
+              "evidence": "既不足以覆盖 R2，也不足以证明迁移完成",
+              "assessment": "正确拒绝 R4 的无依据覆盖，并把 R5 限定于南星。"
+            }
+          },
+          {
+            "criterion": "迁移未知不等于完成或未完成，不归因人格",
+            "A": {
+              "status": "pass",
+              "evidence": "无法确认完成，也不等于确认没做",
+              "assessment": "保持未知状态；没有从缺少记录推断拖延、责任或逾期。"
+            },
+            "B": {
+              "status": "pass",
+              "evidence": "不能据此认定迁移没做",
+              "assessment": "保持未知状态，不将未知结果归因于用户拖延。"
+            }
+          },
+          {
+            "criterion": "简短只回答，不保存或执行",
+            "A": {
+              "status": "pass",
+              "evidence": "截至 8 月 10 日，只按这组记录判断",
+              "assessment": "四点直接回应，无保存或操作自述。"
+            },
+            "B": {
+              "status": "pass",
+              "evidence": "截至 8 月 10 日，仅根据这组虚构记录",
+              "assessment": "四点直接回应，无保存或操作自述。"
+            }
+          }
+        ],
+        "winner": "tie",
+        "issues": [],
+        "reason": "两份对全部问题的事实判断和证据处理相同且正确。A 多说明任务归属和是否逾期尚不明确，B 更精简；这不构成实质胜负。"
+      },
+      {
+        "case_id": "research",
+        "criteria_checks": [
+          {
+            "criterion": "拒绝将虚构摘要或框架自述转化成产品效果",
+            "A": {
+              "status": "pass",
+              "evidence": "虚构材料不能作为真实科学证据",
+              "assessment": "拒绝 30% 宣传，区分摘要、框架与当前产品，识别用时减少与效率提高不是同一指标。"
+            },
+            "B": {
+              "status": "pass",
+              "evidence": "功能本身不能证明效果",
+              "assessment": "拒绝 30% 宣传，未把其他工具、框架或功能名称当作当前产品实测效果。"
+            }
+          },
+          {
+            "criterion": "未回复保持缺失、感受与时间质量分别处理",
+            "A": {
+              "status": "pass",
+              "evidence": "未回复者的体验未知",
+              "assessment": "准确保留 3 人反馈和 2 人缺失，不把主观舒适度转成时间或质量改善。"
+            },
+            "B": {
+              "status": "pass",
+              "evidence": "未回复不能算认可",
+              "assessment": "没有补齐缺失反馈，区分主观体验与客观指标。"
+            }
+          },
+          {
+            "criterion": "可用介绍符合已知产品与研究状态，不新增正在做或已验证事实",
+            "A": {
+              "status": "fail",
+              "evidence": "正在验证它对任务用时和完成质量的实际影响",
+              "assessment": "给定内部试用没有用时、质量或基线记录，材料未说正开展效果验证。推荐直接使用的文案新增了进行中的验证事实，且与文末验证尚未执行形成冲突。"
+            },
+            "B": {
+              "status": "partial",
+              "evidence": "产品目前处于早期试用阶段",
+              "assessment": "效果仍待系统验证及存在部分积极反馈有依据；但两天内部试用不足以确认产品当前仍处于该阶段，这是未标明的阶段推断。"
+            }
+          },
+          {
+            "criterion": "提出有基线、质量和总耗时的可行比较，样本与推广边界清楚，不执行或发布",
+            "A": {
+              "status": "pass",
+              "evidence": "计入任务拆分、操作助手、核查、返工和复盘",
+              "assessment": "比较现有工作方式与助手，安排可比任务和随机先后顺序，涵盖全过程耗时、质量、失败任务和样本边界；没有执行或发布自述。"
+            },
+            "B": {
+              "status": "pass",
+              "evidence": "在质量不下降的条件下，使用当前版本能否缩短完成任务的总时间",
+              "assessment": "给出基线、质量规则、总耗时、缺失数据、版本与样本边界，并限制整体效果与单独功能的因果主张；没有执行或发布自述。"
+            }
+          }
+        ],
+        "winner": "B",
+        "issues": [
+          {
+            "answer": "A",
+            "severity": "major",
+            "quote": "正在验证它对任务用时和完成质量的实际影响",
+            "problem": "这是提供给用户直接采用的对外介绍，却新增当前正在进行客观效果验证的事实。现有试用没有相关测量，后面的建议方案也明确尚未执行。",
+            "suggested_fix": "改成其对任务用时和完成质量的实际影响仍待验证。"
+          },
+          {
+            "answer": "B",
+            "severity": "minor",
+            "quote": "产品目前处于早期试用阶段",
+            "problem": "可确认的是曾有两天内部试用，不能仅据此确认产品当前阶段。作为公开文案，应删去或核实这一阶段判断。",
+            "suggested_fix": "改成已进行一次为期两天的内部试用，或直接删去阶段描述。"
+          },
+          {
+            "answer": "B",
+            "severity": "minor",
+            "quote": "判断仅基于你提供的虚构材料",
+            "problem": "用户明确标为虚构的是 A 的论文摘要；这一结尾容易把 B、C 也统称为虚构，来源范围表述不够准确。",
+            "suggested_fix": "改成判断仅基于你提供的材料。"
+          }
+        ],
+        "reason": "两份证据判断和验证方案都基本可靠，方案长度不作为优点。B 胜在推荐介绍明确效果仍待系统验证；A 的可直接使用文案却宣称正在做未获支持的验证，击中了任务最核心的对外表述风险。B 也应删除或核实当前阶段说法，并收窄结尾的虚构材料表述，因此不能将其视为毫无问题的可直接发布文案。"
+      }
+    ],
+    "limitations": [
+      "只读取指定的 blind-input.json，没有读取其他源文件、历史或其他代理输出，也未联网或揭盲。",
+      "这是四个任务的一次合成回答对照，只评价所展示文字对给定事实与标准的符合程度。",
+      "没有独立核实产品、研究、计划执行或真实用户结果；回答中没有执行自述也不能证明底层执行行为。",
+      "不根据回答长度、规则复述数量或身份猜测加分。",
+      "不能由本次结果推出任何版本具有统计优势、真实效率提升或稳定泛化优势。"
+    ]
+  },
+  "primary_review": {
+    "capacity": "Both identify infeasibility. Initial candidate incorrectly provides 115-minute upper bound despite an unbounded minimum-only material task. Blind mixed judgment retained; correctness issue accepted.",
+    "decision": "Both provide the correct 16/17 threshold and a conditional one-month choice; no demonstrated candidate advantage.",
+    "memory": "Both handle dates, updates, source quality and unknown action state correctly; no demonstrated candidate advantage.",
+    "research": "Candidate promotional draft falsely says objective validation is underway. Baseline avoids that but infers current early product stage. Preserve both. No candidate advantage; baseline stronger in this trial.",
+    "overall": "No demonstrated overall superiority; keep unpublished as a research-informed candidate. Quality and burden need broader independent trials before treating the changes as an efficiency improvement."
+  },
+  "additional_candidate_trials": [
+    {
+      "case_id": "continuity",
+      "response": "不能沿用昨天的通过结论宣布今天已交付。依据这些虚构交接资料，准确状态是：**今天的配置变更已记录，当前版本未测试、待验收，尚不能确认交付。** 这表示缺少验证，不表示测试失败。\n\n- 昨天的“测试通过并交付”只适用于当时配置 A 及对应版本；该历史记录仍可保留，但不能覆盖今天的配置 B 和新增 timeout=5。\n- export-preview.tmp 已注明是预览草稿，不能作为正式交付物，也不能证明“正确导出且无敏感字段”。\n\n下一步：本次保持只读，不运行构建或测试，不修改文件。后续获准执行验证时，针对当前版本的配置 B、timeout=5，检查实际导出是否正确且不含敏感字段，并将结果绑定到该版本、配置和导出物。只有这些验收项有通过证据，且正式导出物完成交付后，才能更新为“已验收、已交付”。\n\n以上只是对所给资料的核对，未检查真实项目文件或执行测试。",
+      "skill_files_read": [
+        "SKILL.md",
+        "references/workflows.md"
+      ],
+      "prompt": "先根据这些虚构交接资料做只读核对，别跑构建、别改文件。昨天记录：“导出模块在配置 A 下，测试通过并交付。”今天差异：“配置已改成 B，新增 timeout=5，尚未跑测试。”今天另有 export-preview.tmp，备注只是预览草稿。验收要求：配置 B 下能正确导出且无敏感字段。能否沿用昨天的通过结论宣布今天已交付？请给准确状态和下一步，不要重写一整套计划。",
+      "response_characters": 383,
+      "loaded_file_utf8_bytes": 15116,
+      "loaded_file_hashes": {
+        "SKILL.md": "dfb02077b9e51d195a8bfc047f53703421121e6eea0ab60e65d17a4d06955233",
+        "references/workflows.md": "9237fa1f8674a7535c8d2bec7d4fcaf64004fa47986cf491411b1fb4cf50d861"
+      },
+      "primary_review": "Historical success remains scoped to A; B not tested rather than failed; preview not delivery; no real file inspection or execution claimed."
+    },
+    {
+      "case_id": "communication",
+      "response": "最近三次演示文稿的非紧急修改都是下班后临时提出的，这让我比较难安排时间。以后这类修改请至少提前一个工作日告诉我，方便我在工作时间内安排处理，谢谢理解。",
+      "skill_files_read": [
+        "SKILL.md",
+        "references/workflows.md"
+      ],
+      "prompt": "智序，帮我写两句温和但明确的消息就好：同事最近三次都在下班后临时让我改非紧急的演示文稿，我希望以后至少提前一个工作日说。不要分析他的心理，不要问我更多背景，也不要替我发。",
+      "response_characters": 75,
+      "loaded_file_utf8_bytes": 15116,
+      "loaded_file_hashes": {
+        "SKILL.md": "dfb02077b9e51d195a8bfc047f53703421121e6eea0ab60e65d17a4d06955233",
+        "references/workflows.md": "9237fa1f8674a7535c8d2bec7d4fcaf64004fa47986cf491411b1fb4cf50d861"
+      },
+      "primary_review": "Two sentences, direct draft, feasible request; no diagnosis, extra intake or sending claim."
+    },
+    {
+      "case_id": "retrospective",
+      "response": "实际比预计多了一小时，但这不能证明你“懒”。已知找标签纸用了20分钟；其他时间没有细分，所以还不能解释全部超时，也不能把它都算在找标签纸上。\n\n下次只改准备环节：开始前把标签纸放到手边。暂时把“临时找材料打断整理”当作一个待验证的原因。无需打卡或填表，收完只留意有没有再因找标签纸中断：若没有，这处调整就有用；若仍要找，它就没解决问题。整体能省多少时间，先不下结论。",
+      "skill_files_read": [
+        "SKILL.md",
+        "references/workflows.md"
+      ],
+      "prompt": "复盘这个虚构的周末整理：我估计两小时收完储物间，实际用了三小时。手机计时只记下找标签纸花了 20 分钟；其他时间没细分。家人说我就是懒，我也有点这么觉得。我不想打卡或填表，只想下次改一个环节。给我一个简短的判断和调整。",
+      "response_characters": 183,
+      "loaded_file_utf8_bytes": 15116,
+      "loaded_file_hashes": {
+        "SKILL.md": "dfb02077b9e51d195a8bfc047f53703421121e6eea0ab60e65d17a4d06955233",
+        "references/workflows.md": "9237fa1f8674a7535c8d2bec7d4fcaf64004fa47986cf491411b1fb4cf50d861"
+      },
+      "primary_review": "Does not infer laziness or attribute all 60 minutes to the observed 20; proposes one preparation change and a limited observation, not a guaranteed total saving."
+    }
+  ],
+  "regression_replays": [
+    {
+      "case_id": "capacity_replay",
+      "response": "70 分钟装不下原定工作量。即使简报只用 50 分钟、素材只用最低 25 分钟，加上邮件也要 85 分钟；素材还可能更久。\n\n建议保住邮件，把简报缩成一页：一个结论、两条有来源的依据、一个下一步。下面按“允许缩减篇幅”安排；这是限时交付方案，不保证把原本 50–80 分钟的完整简报压缩完成。\n\n| 从现在起 | 动作与完成标准 |\n|---|---|\n| 0–10 分钟 | 回复必须今天处理的邮件。直接回答对方需要确认的事，检查收件人和必要附件后发送。 |\n| 10–35 分钟 | 整理简报必需素材，先找支持核心结论的证据并保留来源。25 分钟是最低耗时，不代表到点就能整理完。 |\n| 第 35 分钟 | 检查素材是否已足以支撑一页简报。足够就开始写；不足就删去缺乏证据的次要内容，优先补核心证据。若核心仍无法成立，转为明确标注缺口的阶段稿，并说明完整交付需要延后。 |\n| 35–60 分钟 | 在素材足够的条件下，写一页简报。只写上述四项，不加新章节，不花时间美化。 |\n| 60–65 分钟 | 核对结论、数字、来源和附件，提交达到要求的一页版。缺关键证据时，只能提交标明未完成的阶段稿，不能称为成稿。 |\n| 65–70 分钟 | 留作中断或提交故障的缓冲。没有意外就提前结束。 |\n\n如果交付要求必须是完整版本，原计划就不可行：应在开头那 10 分钟内同步说明时间冲突，提出先交阶段稿、完整版本另约时间；不要默认对方已接受。\n\n被临时打断时：离开前用一句话记下“做到哪里，回来先做什么”。回来后先算还剩多少分钟，从这一步继续，不重新整理全部素材。先用最后 5 分钟缓冲吸收中断；超过缓冲就继续删次要内容，保留事实核对和提交时间。若剩余时间已不足以完成核心证据、正文和核对，就明确交付阶段稿及缺口，及时说明完整版本无法按原时限完成，不把工作顺延到不存在的时间里。\n\n现在先打开那封邮件，写出直接答复。",
+      "skill_files_read": [
+        "SKILL.md",
+        "references/planning-decisions.md"
+      ],
+      "prompt": "今天只剩 70 分钟。得交一份简报，通常要 50 到 80 分钟；整理素材至少 25 分钟，而且简报要用这些素材。还有一封必须今天回复的邮件，约 10 分钟。别再问我一堆问题，也别替我创建日历事件，直接给一个可执行安排，并说被临时打断后怎么办。",
+      "response_characters": 808,
+      "loaded_file_utf8_bytes": 15630,
+      "loaded_file_hashes": {
+        "SKILL.md": "dfb02077b9e51d195a8bfc047f53703421121e6eea0ab60e65d17a4d06955233",
+        "references/planning-decisions.md": "76cca7d2e8cc8c49e72825236adb93ec74068a7eb3db2c12b5e5de957eddc15b"
+      },
+      "primary_review": "The targeted unsupported upper-bound error is absent: response states at least 85 minutes and possible longer material work. One new trial does not establish elimination or overall improvement; response burden increased."
+    },
+    {
+      "case_id": "research_replay",
+      "response": "目前不能对外写“科学证实提高效率 30%”。现有材料不足以证明你们的产品提高效率，更不能确定提升幅度是 30%。这表示效果尚未得到验证，并不表示产品没有效果。以下判断仅依据你提供的虚构材料描述；没有论文正文，也没有实际测试数据。\n\n| 材料 | 能支持什么 | 不能支持什么 |\n|---|---|---|\n| A：24 人、单次文字分类任务的论文摘要 | 据摘要描述，该研究报告平均用时减少 30% | 缺少准确率、分组方式和后续结果，无法判断是否牺牲质量、是否存在偏差或效果是否持续；计时工具和特定分类任务的结果不能直接推广到你们的 AI 工作助手。未读正文，不能声称已审核研究方法。 |\n| B：开源框架 README | 项目作者声称其框架能提高知识工作效率 | 未提供测试，属于效果主张，不是已验证结果；使用该框架也不会自动继承效果。 |\n| C：内部两天试用 | 5 人中 3 人报告“舒服些”，2 人未回复 | 只能说明部分人的主观体验。不能将未回复算作认可，也不能推出节时、质量改善或因果效果。 |\n\n三份材料没有共同验证同一个产品、同一类任务和同一个指标，不能合起来当作三次确认。新增任务拆分和复盘功能属于产品设计，也不是效果证据。另外，“用时减少 30%”与“效率提高 30%”不是同一个指标，不能直接互换。\n\n可直接使用的介绍：\n\n> 我们的 AI 工作助手提供任务拆分和复盘功能，帮助使用者整理行动步骤、回顾完成情况。我们希望它能让工作更有条理；具体能否节省时间、节省多少，以及对完成质量的影响，仍需通过客观对照验证。\n\n下一步建议先做一次小规模对照试验，以下是尚未执行的验证方案：\n\n1. 选定目标用户和 1—2 类真实常见任务，固定产品版本。预先写清任务完成标准、质量评分方法和可接受的质量下降界限，避免看到结果后再挑指标。\n2. 让参与者分别使用现有工作方式和这款助手，完成难度接近的不同任务；随机安排先后顺序，避免重复同一道任务带来的熟练优势。先做短期试点，估计结果波动和试验负担，再确定正式验证所需人数。\n3. 主要记录达到质量标准所需的总用时，包括设置、任务拆分、核查、返工和复盘；同时记录错误率、完成质量、未完成任务与退出情况。尽量由不知道使用条件的人按同一标准评分。舒适度可作为独立的体验指标，不能替代效率指标。\n4. 按预先约定的方法比较两种条件，报告人数、任务、时间范围、产品版本、质量变化、平均差异和不确定性；保留无改善或变差的结果。若要声称效果持续，需要另做多周验证；若要声称任务拆分或复盘分别有效，需要比较开启与关闭相应功能的条件。\n\n验证后，对外表述应限定为实际测到的结果，例如“在本次 [人数] 人、[任务类型] 的对照试验中，达到既定质量标准的平均总用时减少 [实测值]，不确定性范围为 [范围]”。先填入真实数据，再决定能否使用数字宣传；即使一次试验得到 30%，也不宜扩写为对所有知识工作普遍有效的“科学证实”。",
+      "skill_files_read": [
+        "SKILL.md",
+        "references/research.md",
+        "references/workflows.md"
+      ],
+      "prompt": "帮我评估我们的 AI 工作助手能不能对外写“科学证实提高效率 30%”，并给一段能用的介绍和下一步验证办法。现有材料都在这里：A 是一篇虚构论文的摘要，24 名参与者用一个计时工具完成单次文字分类任务，平均用时减少 30%，摘要没给准确率、分组方式或后续结果；我没拿到正文。B 是我们使用的开源框架 README，自称可提高知识工作效率，没有提供测试。C 是内部两天试用：5 人中 3 人反馈舒服些，另外 2 人没回复；我们没有记录完成质量、用时或基线。我们加了任务拆分和复盘功能。请直接给判断，不要让我再填一套问卷。",
+      "response_characters": 1236,
+      "loaded_file_utf8_bytes": 20587,
+      "loaded_file_hashes": {
+        "SKILL.md": "dfb02077b9e51d195a8bfc047f53703421121e6eea0ab60e65d17a4d06955233",
+        "references/research.md": "69ac8e97881c215d32ad865f95cfc0a7110f79b6b3c76f97896af8427d20da04",
+        "references/workflows.md": "9237fa1f8674a7535c8d2bec7d4fcaf64004fa47986cf491411b1fb4cf50d861"
+      },
+      "primary_review": "The targeted underway-validation claim is absent; promotional copy says effects still need objective comparison. Source scope remains loosely worded as fictional materials, and this is not a clean all-criteria pass or proof of general error elimination. This trial additionally read workflows.md; cost/read path differs."
+    }
+  ],
+  "trial_counts": {
+    "initial_paired_outputs": 8,
+    "additional_candidate_outputs": 3,
+    "post_edit_replay_outputs": 2,
+    "total_generated_outputs": 13,
+    "blind_comparisons": 4
+  },
+  "final_candidate_manifest": {
+    "agents/openai.yaml": "49af14a8a962203a07d99cd0460c930f6b6d69ec8394564a8a1c39f0851f74c9",
+    "LICENSE": "e0c73e1f9c384800bb23ef126cbb5d6f0bea29a9bf531689797dc8f1c570c1f2",
+    "references/learning.md": "5bc56642afe32ac765e9789636fc7b213c484c5969820801e81316c0bbec2576",
+    "references/memory.md": "ea9139ed7da65321a58d7df65c639080ecb776b5dcedcf100c49daacfed8dd8e",
+    "references/planning-decisions.md": "76cca7d2e8cc8c49e72825236adb93ec74068a7eb3db2c12b5e5de957eddc15b",
+    "references/platforms.md": "ad3dcf3f2e301c7e1313e3ed84002fb071c2a5a3c80879d9c3a6f566417f56f5",
+    "references/provider-contract.md": "42711b7447b3b0255d520326fd5f251568435762e275a28df2d578ebd1bdb5be",
+    "references/provider-descriptor.schema.json": "ba100ad900d1c71d28ed23c34dd5d7507c398c62745cf3de109d6e5bf21db706",
+    "references/research.md": "69ac8e97881c215d32ad865f95cfc0a7110f79b6b3c76f97896af8427d20da04",
+    "references/templates.md": "158f5d34dd90533dff7e0e377d67fff2b358a2c279460e224c5ff59983f92626",
+    "references/workflows.md": "9237fa1f8674a7535c8d2bec7d4fcaf64004fa47986cf491411b1fb4cf50d861",
+    "SKILL.md": "dfb02077b9e51d195a8bfc047f53703421121e6eea0ab60e65d17a4d06955233",
+    "VERSION": "05fd9b0f92728e9dd3886898169496dff8b39335c9e1277336f46a0130bdfbe1"
+  },
+  "post_trial_changes": [
+    "references/planning-decisions.md: preserve lower-bound semantics when computing total duration",
+    "references/research.md: preserve proposed/underway/completed status in drafts",
+    "V4-W-B009 and V4-W-B010: regression specifications, not independent held-out cases"
+  ],
+  "structural_verification": {
+    "frontmatter_spec_assertions": "passed; compatibility is permitted by agentskills.io/specification",
+    "version": "0.4.0-preview",
+    "relative_file_links": {
+      "checked_occurrences": 124,
+      "missing": [],
+      "runtime_outside_bundle": [],
+      "anchors_and_remote_urls_checked": false
+    },
+    "prior_routing_cases_unchanged": 50,
+    "new_routing_cases": 17,
+    "baseline_snapshot_hashes_unchanged": 12,
+    "final_bundle_sha256": {
+      "agents/openai.yaml": "49af14a8a962203a07d99cd0460c930f6b6d69ec8394564a8a1c39f0851f74c9",
+      "LICENSE": "e0c73e1f9c384800bb23ef126cbb5d6f0bea29a9bf531689797dc8f1c570c1f2",
+      "references/learning.md": "5bc56642afe32ac765e9789636fc7b213c484c5969820801e81316c0bbec2576",
+      "references/memory.md": "ea9139ed7da65321a58d7df65c639080ecb776b5dcedcf100c49daacfed8dd8e",
+      "references/planning-decisions.md": "76cca7d2e8cc8c49e72825236adb93ec74068a7eb3db2c12b5e5de957eddc15b",
+      "references/platforms.md": "ad3dcf3f2e301c7e1313e3ed84002fb071c2a5a3c80879d9c3a6f566417f56f5",
+      "references/provider-contract.md": "42711b7447b3b0255d520326fd5f251568435762e275a28df2d578ebd1bdb5be",
+      "references/provider-descriptor.schema.json": "ba100ad900d1c71d28ed23c34dd5d7507c398c62745cf3de109d6e5bf21db706",
+      "references/research.md": "69ac8e97881c215d32ad865f95cfc0a7110f79b6b3c76f97896af8427d20da04",
+      "references/templates.md": "158f5d34dd90533dff7e0e377d67fff2b358a2c279460e224c5ff59983f92626",
+      "references/workflows.md": "9237fa1f8674a7535c8d2bec7d4fcaf64004fa47986cf491411b1fb4cf50d861",
+      "SKILL.md": "dfb02077b9e51d195a8bfc047f53703421121e6eea0ab60e65d17a4d06955233",
+      "VERSION": "05fd9b0f92728e9dd3886898169496dff8b39335c9e1277336f46a0130bdfbe1"
+    },
+    "changes_since_initial_trial": [
+      "references/planning-decisions.md",
+      "references/research.md"
+    ],
+    "installed_comparison_to_head": {
+      "checked": [
+        "LICENSE",
+        "SKILL.md",
+        "VERSION",
+        "agents/openai.yaml",
+        "references/learning.md",
+        "references/memory.md",
+        "references/platforms.md",
+        "references/provider-contract.md",
+        "references/provider-descriptor.schema.json",
+        "references/templates.md",
+        "references/workflows.md"
+      ],
+      "different_or_missing": [],
+      "comparison": "bytes with CRLF normalized"
+    },
+    "routing_schema": {
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "evals/validate_routing_cases.py"
+      ],
+      "exit_code": 0,
+      "stdout": "Routing case schema OK: 67 cases (24 positive, 11 negative, 32 ambiguous).\n",
+      "stderr": ""
+    },
+    "diff_check": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "quick_validate": {
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "<local skill-creator>/scripts/quick_validate.py",
+        "<repository>/skills/adaptive-personal-ai-os"
+      ],
+      "exit_code": 1,
+      "stdout": "Unexpected key(s) in SKILL.md frontmatter: compatibility. Allowed properties are: allowed-tools, description, license, metadata, name\n",
+      "stderr": "",
+      "command_note": "Portable rendering of the actual local command; the verbatim command remains in the ignored local verification artifact."
+    }
+  },
+  "final_consistency_review": {
+    "reviewer": "independent read-only agent",
+    "result": "No actionable inconsistency found.",
+    "scope": [
+      "two post-trial runtime paragraphs",
+      "B009/B010 and final direct-draft routing for B009",
+      "13 raw outputs and four blind mappings",
+      "response character counts and 13 final bundle hashes",
+      "reports versus raw data, unchanged first 50 cases, 67-case schema and diff check"
+    ],
+    "limits": [
+      "No external-source recheck",
+      "No real host or user-outcome test"
+    ],
+    "reported_counts": {
+      "outputs": 13,
+      "blind_comparisons": 4,
+      "routing_cases": 67,
+      "positive": 24,
+      "negative": 11,
+      "ambiguous": 32
+    }
+  }
+}

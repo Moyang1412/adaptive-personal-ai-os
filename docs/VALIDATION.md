@@ -1,4 +1,33 @@
-# Validation · v0.4.0 Preview
+# Validation · v1.0.0
+
+Date: 2026-10-13. Version 1.0.0 is ZhiXu's first stable release, incorporating
+dual-mode learning, adaptive workflows and everyday life support. Publication
+does not establish scientific efficacy or completed live host acceptance. See
+the [1.0.0 release record](RELEASE-1.0.0.md) for the actual release-file checks,
+version identity and known validator limitations.
+
+The three earlier rounds evaluated local candidates marked `0.4.0-preview`:
+
+| Candidate round | Recorded evidence and limits |
+|---|---|
+| [Dual-mode learning](VALIDATION-DUAL-LEARNING.md) | Synthetic instruction-following and a short continuation; no real learner outcomes or host acceptance. |
+| [Other adaptive workflows](VALIDATION-NONLEARNING.md) | Four single-run pairs, three additional outputs and two repair checks; initial errors and limits are retained. No overall improvement established. |
+| [Everyday life](VALIDATION-LIFE.md) | Four single-run anonymous pairs tied, plus three candidate-only scenes; 11 outputs total. No overall efficiency or real-life benefit established. |
+
+Each report and raw result retains its original snapshot hashes and historical
+publication status. The final transition to 1.0.0 changes release metadata,
+without another behavior change. Earlier outputs do not automatically become
+behavioral validation of the 1.0.0 artifact. File checks, schema checks, model
+answers, actual host activation and user outcomes remain separate evidence.
+
+Research papers, official guides and GitHub projects inform methods; they are
+not trials of ZhiXu. Real Codex, Claude Code and DSH activation, multi-turn
+behavior, installed-provider effects and learning or life outcomes remain
+unverified. Installed copies do not update automatically.
+
+---
+
+## Historical report · v0.4.0 Preview
 
 Date: 2026-10-12. Baseline: public main `d043fc8c19bf2a99c6af7f361878b9300c790422`. Published remote release commit: `8727037ee8fee3e2ba638ec60b49ce5f121dbc96`.
 

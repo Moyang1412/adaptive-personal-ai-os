@@ -1,0 +1,130 @@
+{
+  "date": "2026-10-13",
+  "version": "1.0.0",
+  "tag": "v1.0.0",
+  "starting_commit": "b2ee007824b3c85b8e5f98ea038c813056b5b8f5",
+  "scope": "Local checks of the exact 1.0.0 release bundle and repository files; not host activation or real-user efficacy.",
+  "recorded_test_runs": [
+    {
+      "command": "python -X utf8 evals/validate_routing_cases.py",
+      "exit_code": 0,
+      "result": "85 cases (30 positive, 15 negative, 40 ambiguous). Schema only."
+    },
+    {
+      "command": "python -X utf8 evals/validate_provider_cases.py",
+      "exit_code": 0,
+      "result": "8 cases (3 positive, 4 negative, 1 ambiguous). Schema only."
+    },
+    {
+      "command": "python -X utf8 -m unittest evals.test_provider_selection evals.test_memory_lifecycle",
+      "exit_code": 0,
+      "result": "23 tests passed; offline reference and in-memory fictional fixture only."
+    }
+  ],
+  "test_record_note": "Commands above ran before this helper; actual tool output is retained by the release task. No model responses or host tests were rerun.",
+  "version_and_official_frontmatter_assertions": "passed",
+  "runtime_change_from_last_candidate": {
+    "changed_files": [
+      "SKILL.md",
+      "VERSION"
+    ],
+    "unchanged_files": 16,
+    "only_version_metadata_changed": true,
+    "line_endings_normalized_for_entrypoint_comparison": true,
+    "snapshot_hashes_match_prior_trial": true,
+    "behavioral_replay_for_1_0_0": "not executed"
+  },
+  "package_source": "Git staged blob bytes, with core.autocrlf normalization; compare to working snapshot with CRLF normalized. Published tag must be verified against this manifest after push.",
+  "working_bundle_sha256": {
+    "agents/openai.yaml": "49af14a8a962203a07d99cd0460c930f6b6d69ec8394564a8a1c39f0851f74c9",
+    "LICENSE": "e0c73e1f9c384800bb23ef126cbb5d6f0bea29a9bf531689797dc8f1c570c1f2",
+    "references/daily-life.md": "150868df03d964b90562abf38ab55853da812dbb5ac76d041102a5d4a4cde3fc",
+    "references/health-habits.md": "2798fa31a4c6e70a0b2afb90c1be1b192931e2fb07dc2fd06255c25edd1c4393",
+    "references/learning.md": "5bc56642afe32ac765e9789636fc7b213c484c5969820801e81316c0bbec2576",
+    "references/life.md": "2ecf031fc9fb95e72ab92f9057da95684ab2c4d78b091ef66a43ae3df79fca40",
+    "references/memory.md": "ea9139ed7da65321a58d7df65c639080ecb776b5dcedcf100c49daacfed8dd8e",
+    "references/money-career.md": "43fc5103a7a45c74978f7dffe26c0cd8a948e5e316027b9a817ef6a4d5945ee4",
+    "references/planning-decisions.md": "76cca7d2e8cc8c49e72825236adb93ec74068a7eb3db2c12b5e5de957eddc15b",
+    "references/platforms.md": "ad3dcf3f2e301c7e1313e3ed84002fb071c2a5a3c80879d9c3a6f566417f56f5",
+    "references/provider-contract.md": "42711b7447b3b0255d520326fd5f251568435762e275a28df2d578ebd1bdb5be",
+    "references/provider-descriptor.schema.json": "ba100ad900d1c71d28ed23c34dd5d7507c398c62745cf3de109d6e5bf21db706",
+    "references/relationships-rest.md": "fc76d9f24ad7df9cd633fe2f936d11e4afaa30ff7d23e3371e68d06822813c14",
+    "references/research.md": "69ac8e97881c215d32ad865f95cfc0a7110f79b6b3c76f97896af8427d20da04",
+    "references/templates.md": "158f5d34dd90533dff7e0e377d67fff2b358a2c279460e224c5ff59983f92626",
+    "references/workflows.md": "9237fa1f8674a7535c8d2bec7d4fcaf64004fa47986cf491411b1fb4cf50d861",
+    "SKILL.md": "54aa074f47849b552f79802f567c56206232d16cdd550fd4d37954e06690263a",
+    "VERSION": "4ca8bbd3c595ee306226c6996b32b8d47a900217c55a7ed0cfc868ee444f34f1"
+  },
+  "relative_file_links": {
+    "checked_occurrences": 186,
+    "missing": [],
+    "runtime_outside_bundle": [],
+    "remote_urls_and_anchors": "not checked"
+  },
+  "configured_privacy_scan": {
+    "text_files_checked": 67,
+    "patterns": [
+      "maintainer_home_or_username",
+      "maintainer_private_email",
+      "common_credential_prefixes",
+      "private_key_header"
+    ],
+    "findings": [],
+    "limits": "Configured text patterns only; not a comprehensive audit, proof of anonymization or historical Git metadata scan."
+  },
+  "diff_check": {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "quick_validate": {
+    "command": [
+      "python",
+      "-X",
+      "utf8",
+      "<installed skill-creator>/scripts/quick_validate.py",
+      "skills/adaptive-personal-ai-os"
+    ],
+    "exit_code": 1,
+    "stdout": "Unexpected key(s) in SKILL.md frontmatter: compatibility. Allowed properties are: allowed-tools, description, license, metadata, name\n",
+    "stderr": "",
+    "interpretation": "Known validator/spec mismatch retained as failure; unchanged HEAD had the same failure in the earlier learning round. Official-spec assertions passed separately."
+  },
+  "bundle_sha256": {
+    "agents/openai.yaml": "94928fc605279c8d095ab87306802e8598ab34ec077162e631d6f2b6565b13bf",
+    "LICENSE": "87f26398e811be77bafa37389d19109b407bb4c574b27bf68dd2d3e4963a0fde",
+    "references/daily-life.md": "150868df03d964b90562abf38ab55853da812dbb5ac76d041102a5d4a4cde3fc",
+    "references/health-habits.md": "2798fa31a4c6e70a0b2afb90c1be1b192931e2fb07dc2fd06255c25edd1c4393",
+    "references/learning.md": "abdb2f06c577b378cd2e08c66030c9eb772079ead951c4d53e451221a6b74957",
+    "references/life.md": "2ecf031fc9fb95e72ab92f9057da95684ab2c4d78b091ef66a43ae3df79fca40",
+    "references/memory.md": "2ac561697cbc380d0d77262be7377cb94202a32e3178ef460f660ee165281bd0",
+    "references/money-career.md": "43fc5103a7a45c74978f7dffe26c0cd8a948e5e316027b9a817ef6a4d5945ee4",
+    "references/planning-decisions.md": "76cca7d2e8cc8c49e72825236adb93ec74068a7eb3db2c12b5e5de957eddc15b",
+    "references/platforms.md": "4b672e622350ab5cde4b4951728a8df225f954ee228ef3c8673e7f12022360df",
+    "references/provider-contract.md": "426918b35fe8e7f173662596acc9c3fbf79641404dd8329e6dbf1b0d23f92341",
+    "references/provider-descriptor.schema.json": "c77fc86098463297692351f774a752b4b19209193df830c9699b6c5e553e3078",
+    "references/relationships-rest.md": "fc76d9f24ad7df9cd633fe2f936d11e4afaa30ff7d23e3371e68d06822813c14",
+    "references/research.md": "69ac8e97881c215d32ad865f95cfc0a7110f79b6b3c76f97896af8427d20da04",
+    "references/templates.md": "a92e53072d88d502901a5631c1266bb7c84035c92e14d5700376258a7a3055f6",
+    "references/workflows.md": "4ebe3ee02f1803d9ef805643cde4dafab20681caccf7905d3058ab5c25050fb0",
+    "SKILL.md": "12e6c8a41e2d2da88e96fc81bd77f5a6a12b3f2cd2f58c36b9318a5e5d307062",
+    "VERSION": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03"
+  },
+  "package_verification": {
+    "zip_name": "zhixu-1.0.0-skill.zip",
+    "file_count": 18,
+    "testzip": "passed",
+    "entry_names": "matched",
+    "file_bytes": "matched",
+    "zip_sha256": "17e894355c6b14c06a2fc28bec02d67ce2d28ac8cd7fd88794bcfb793af61756",
+    "manifest_name": "zhixu-1.0.0-manifest.json",
+    "manifest_sha256": "d74874d9bf63e874d909947576ad78a576a722dbc0c680e7487e7a2c009e42ae",
+    "checksum_file": "SHA256SUMS",
+    "online_upload_and_download": "not yet executed at local check time"
+  }
+}

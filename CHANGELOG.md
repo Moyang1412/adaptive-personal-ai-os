@@ -1,5 +1,78 @@
 # Changelog
 
+## 1.0.0 — 2026-10-13
+
+### First stable release
+
+- Publish the complete learning, adaptive-workflow, life-support and memory
+  provider instruction bundle as ZhiXu's first stable release.
+- Stable release status identifies the public version, not proven scientific
+  efficacy or completed live host acceptance. Research informs methods; it does
+  not establish ZhiXu's learning, efficiency or life outcomes.
+- Preserve prior candidate reports and raw outputs with their original version
+  hashes. The final release changes version metadata, without another behavior
+  change. See the [1.0.0 release record](docs/RELEASE-1.0.0.md) for release checks;
+  earlier model results do not automatically validate the 1.0.0 artifact.
+
+### Everyday life support
+
+- Route substantive requests to daily routines, chores and leisure, health
+  habits, household cash flow and purchases, career exploration, or relationships
+  and emotional support. Load only the relevant life reference.
+- Let the person define the goal and provide useful help from supplied context.
+  Ask only about gaps that change the next action. No compulsory tests, tracking,
+  devices or personality labels; do not turn leisure into income by default.
+- Keep health habits distinct from symptoms and treatment. Use payment timing
+  and actual household constraints instead of fixed budget ratios; leave career
+  choices to the person. Offer listening or drafts without inferring motives.
+- Preserve authorization for sensitive records and outside actions. Advice does
+  not grant access to accounts or permission to save, send, buy or book.
+- Add independently constructed fictional examples and links to the
+  [life-domain source review](docs/RESEARCH-LIFE-2026-10-13.md) and
+  [validation scope](docs/VALIDATION-LIFE.md). Research does not establish this
+  Skill's efficacy. Four single-run anonymous life-support comparisons tied;
+  they do not establish overall efficiency gains or real-life benefits.
+
+### Other adaptive workflows
+
+- Load planning and research references only when needed. Start from supplied
+  context and ask only about gaps that can change the next action.
+- Ground plans in realistic capacity, dependencies, observable completion
+  conditions and a feasible next action. Expose decision-changing unknowns and
+  conditions instead of inventing scores or certainty.
+- Check support for individual research claims and the source's applicability;
+  distinguish papers, repository claims and observed implementation behavior.
+- Preserve numerical lower bounds when estimating total time, and preserve
+  proposed/underway/completed evidence status in product drafts. Both safeguards
+  address issues observed in synthetic trials; raw failures remain in the report.
+- Retrieve authorized memory by scope, source and event time. Preserve unresolved
+  conflicts and distinguish proposals, reported outcomes and observed execution.
+- Reconcile handoffs with current state; test one retrospective adjustment
+  against actual outcomes. Provide requested communication help directly without
+  a mandatory questionnaire or implied permission to send a draft.
+- Reuse native memory and authorized providers; no new memory engine or access
+  grant. Research and engineering references inform design, not proven efficacy.
+- See the [source review](docs/RESEARCH-NONLEARNING-2026-10-13.md) and
+  [candidate behavioral validation](docs/VALIDATION-NONLEARNING.md) for recorded
+  evidence, including failures, repairs and limits. Installed copies do not
+  update automatically.
+
+### Learning assessment
+
+- Start with useful learning or a real task by default; offer an optional brief
+  diagnostic that users can skip or switch out of without losing prior evidence.
+  Preserve explicit preferences and avoid mandatory mode selection at each opening.
+- Apply the same skill-specific evidence standard to both modes: observed
+  performance, assistance required, independent new tasks, delayed retention and
+  transfer. Use evidence to reduce redundant teaching.
+- Keep missing evidence unknown. Declining a check, slow replies and
+  assistant-completed work do not establish learner inability or mastery;
+  uncertainty does not block continued help.
+- Keep learning cards and persistence optional. No new database or background
+  service, and no automatic update of installed copies.
+- Define efficiency by time and burden at comparable learning outcomes.
+  Research supports methods; it does not establish ZhiXu's learning efficacy.
+
 ## 0.4.0-preview — 2026-10-12
 
 ### Memory provider assessment
