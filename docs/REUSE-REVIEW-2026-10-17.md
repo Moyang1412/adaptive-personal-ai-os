@@ -75,3 +75,10 @@ Keep this record updated with actual later checks, not intended results.
 
 - Reproduced that Python type hints alone admitted the text "false" as truthy evidence or a network/sharing permission in the side-effect-free reference module. Evidence, requirements, provider network flags and operation flags now require actual booleans; native availability does too. A scope string cannot silently become a set of individually authorized characters.
 - Five additional unit tests cover these malformed descriptors/requests. Current suite:42 passed; routing/provider schema92/8 unchanged. This hardens the reference implementation only; it is not a sandbox or enforcement layer for an actual host/provider.
+
+## Seventh checkpoint: carry useful work through
+
+- The workflow reference now explicitly continues authorized execution toward its completion condition, advances independent parts when one dependency is blocked, and avoids repetitive unchanged checks or unrelated feature additions. No background scheduling ability or additional authority is implied.
+- Added three synthetic positive/boundary/negative cases: scoped implementation, a blocked check with independent work, and a status-only request. Routing schema:95 cases. No live model benchmark is claimed.
+- Corrected the usage-examples page's stale claim that the current release was v0.4.0 Preview and removed obsolete unpublished labels. Historical evaluation reports retain their dates and snapshot identities. Candidate changes remain distinct from the unchanged v1.0.1 release.
+- Candidate packaging completed after the runtime wording change;42 unit tests and8 provider-case schema checks remain the current offline evidence.

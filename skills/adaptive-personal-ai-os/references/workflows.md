@@ -24,6 +24,14 @@ Resume from the existing state entrypoint, then check changes that matter to the
 
 When authorized: scope/acceptance → inspect/reproduce → minimal change → relevant tests → diff review → real evidence and remaining risks. Preserve uncommitted user changes and existing instructions. Add only useful notes to the approved location. Self-review is not independent verification; missing verifier tools are a reported limitation.
 
+When execution is requested, continue authorized work toward the stated completion
+condition instead of returning only a plan or repeatedly seeking the same approval.
+Choose the next useful step from the actual remaining gap. If one check or dependency
+is blocked, advance independent authorized parts and preserve the blocked status.
+Do not fill time with unrelated features or repeated unchanged tests. Pause only
+for a material decision, missing authority or a genuine dependency; report actual
+progress without implying work continued during an idle or unavailable period.
+
 For a failing system, distinguish a product defect from missing fixtures, stale
 expectations or an unavailable environment. Trace the smallest reproducible
 failure across the relevant boundary, compare a working path, and change one
