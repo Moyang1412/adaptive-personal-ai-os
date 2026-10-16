@@ -160,6 +160,13 @@ class ProviderSelectionTests(unittest.TestCase):
         self.assertFalse(evaluate_trigger(first_long_term_need=True, already_evaluated=True))
         self.assertFalse(evaluate_trigger(first_long_term_need=False, already_evaluated=False))
 
+    def test_changed_context_rechecks_only_a_relevant_continuity_need(self) -> None:
+        self.assertTrue(evaluate_trigger(first_long_term_need=True, already_evaluated=True, context_changed=True))
+        self.assertFalse(evaluate_trigger(first_long_term_need=False, already_evaluated=True, context_changed=True))
+        self.assertFalse(evaluate_trigger(first_long_term_need=True, already_evaluated=True, context_changed=False))
+        with self.assertRaises(ValueError):
+            evaluate_trigger(first_long_term_need=True, already_evaluated=True, context_changed='false')
+
     def test_native_memory_wins_when_no_gap_is_present(self) -> None:
         requirements = MemoryRequirements(
             persistent=True,

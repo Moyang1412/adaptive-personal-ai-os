@@ -82,3 +82,9 @@ Keep this record updated with actual later checks, not intended results.
 - Added three synthetic positive/boundary/negative cases: scoped implementation, a blocked check with independent work, and a status-only request. Routing schema:95 cases. No live model benchmark is claimed.
 - Corrected the usage-examples page's stale claim that the current release was v0.4.0 Preview and removed obsolete unpublished labels. Historical evaluation reports retain their dates and snapshot identities. Candidate changes remain distinct from the unchanged v1.0.1 release.
 - Candidate packaging completed after the runtime wording change;42 unit tests and8 provider-case schema checks remain the current offline evidence.
+
+## Eighth checkpoint: continuity without blocking the task
+
+- A previous memory choice is reused until a material host/account, scope or capability change affects a real continuity need. Only affected evidence/permission is revisited; ordinary new chats and unrelated requests do not trigger provider probing.
+- Provider outages no longer need to halt work that can continue from authorized session material. Pending writes remain incomplete, no second writer is silently selected, and old records are preserved. This is guidance for host behavior, not an implemented outage detector or background retry service.
+- The side-effect-free trigger reference accepts an explicit context-change flag, with strict boolean inputs and a relevant-need guard. Unit suite43; routing schema98; provider schema8. Added outage, new-service and no-memory-needed cases.

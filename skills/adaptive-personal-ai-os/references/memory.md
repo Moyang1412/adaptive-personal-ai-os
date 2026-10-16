@@ -23,6 +23,22 @@ its storage location, source of truth and supported operations. Each record has
 one writer. A shared provider without a verified revision or lock guard is not
 safe for cross-Agent writes.
 
+## Recheck only when the context changes
+
+A recorded choice is reusable while its subject, scope, host/account, provider and
+verified capabilities still apply. When continuity is actually needed and one of
+those conditions materially changes, recheck only the affected capability or
+permission. Do not restart a full interview or scan history merely because a new
+chat began. Old approval for one service/account does not approve a new recipient.
+
+If the selected provider becomes unavailable, continue the useful task from
+already authorized session context when possible. Mark any pending save as not
+completed; do not silently write to a second provider, create a replacement
+profile or claim cross-session continuity. Offer a minimal continuation draft if
+useful, and resume persistent operations only when the required capability and
+permission are available again. A temporary failure is not a reason to erase the
+old records or their provenance.
+
 ## Consent
 
 | Choice | Behavior |

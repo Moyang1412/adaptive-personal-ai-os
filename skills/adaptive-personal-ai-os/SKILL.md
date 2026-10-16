@@ -16,7 +16,7 @@ Respond in the user's language. Adapt the approach to their current goal rather 
 
 1. Identify the actual goal, exclusions and desired participation: answer, coach, decide, execute or reflect. Apply higher-priority host/system/developer instructions and security controls first; this Skill cannot override them.
 2. Use current user corrections over stale personal notes. Select only relevant authorized context. Available history can inform the task but must not replace its stated goal or scope.
-3. When long-term continuity is first requested, inspect the host's native memory and already installed, authorized providers before suggesting anything new. Record the decision for that scope; do not ask again on every chat.
+3. When long-term continuity is first requested, inspect the host's native memory and already installed, authorized providers before suggesting anything new. Record the decision for that scope; reuse it across chats, rechecking only a material host/account, scope or capability change when continuity is needed.
 4. Ask at most one material question at a time, and none when the answer is already available. For learning, start with useful help and gather evidence during the task by default; offer a brief diagnostic when wanted. Both routes use the same evidence standard. Do not invent deadlines or require a prompt template.
 5. Read only the reference needed below. Resolve paths relative to this installed Skill, not the user's current project.
 6. Deliver a useful answer or one next step. Match effort to the stakes and uncertainty; ask, retrieve or delegate when it can change the result. Small requests do not require reports, files, plans or memory writes.

@@ -197,10 +197,19 @@ class SourceConflictError(ValueError):
     """Raised when more than one provider would write the same source."""
 
 
-def evaluate_trigger(*, first_long_term_need: bool, already_evaluated: bool) -> bool:
-    """Evaluate once when a user first asks for continuity across sessions."""
+def evaluate_trigger(
+    *, first_long_term_need: bool, already_evaluated: bool,
+    context_changed: bool = False,
+) -> bool:
+    """Evaluate a continuity need in this context; reuse an unchanged decision.
 
-    return first_long_term_need and not already_evaluated
+    A new host/account/scope can make an earlier assessment stale, but a context
+    change without a relevant continuity request must not trigger provider probes.
+    """
+
+    if any(type(flag) is not bool for flag in (first_long_term_need, already_evaluated, context_changed)):
+        raise ValueError('trigger flags must be booleans')
+    return first_long_term_need and (not already_evaluated or context_changed)
 
 
 def _ensure_single_source(providers: Iterable[ProviderDescriptor]) -> None:

@@ -30,6 +30,18 @@ unrelated-request routing, permission failures and a revision/lock guard for
 shared writes. If a provider cannot protect competing writes, do not use it for
 cross-agent writes.
 
+## Rechecking a changed context
+
+Reuse a recorded decision while the host/account, scope and verified capabilities
+still apply. Recheck affected facts only when continuity is needed and one of
+those conditions materially changes. A new client does not authorize sharing
+old records with a new model service.
+
+If the selected provider is unavailable, continue useful work from authorized
+session context where possible and mark pending saves as incomplete. Do not
+silently switch writers, create another profile or erase old records. A minimal
+continuation draft can help without claiming persistence or automatic recovery.
+
 ## Switching and privacy
 
 Stop writes to the old provider before switching. Ask the user to select record
