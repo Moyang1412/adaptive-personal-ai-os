@@ -24,6 +24,15 @@ Resume from the existing state entrypoint, then check changes that matter to the
 
 When authorized: scope/acceptance → inspect/reproduce → minimal change → relevant tests → diff review → real evidence and remaining risks. Preserve uncommitted user changes and existing instructions. Add only useful notes to the approved location. Self-review is not independent verification; missing verifier tools are a reported limitation.
 
+For a failing system, distinguish a product defect from missing fixtures, stale
+expectations or an unavailable environment. Trace the smallest reproducible
+failure across the relevant boundary, compare a working path, and change one
+causal hypothesis at a time. Keep diagnostic logs free of credentials and private
+payloads. When authorized and feasible, demonstrate the regression fails before
+the fix and passes after it; never remove acceptance checks just to obtain green
+output. A useful partial check supports only its stated scope. Re-run affected
+checks after changes, not every unrelated check after a documentation-only edit.
+
 Keep a handoff compact: goal, verified current state and evidence entrypoints, blocker or pending decision, next action and its success condition. Inspect the actual outcome of tool calls before claiming completion. If a retry gives the same failure without new evidence, change the hypothesis or report the dependency; do not repeat the same action indefinitely.
 
 ## Communication and wellbeing

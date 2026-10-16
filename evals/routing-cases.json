@@ -87,5 +87,8 @@
 {"id":"learning-source-missing-section","kind":"positive","prompt":"按我提供的书教第四章，但这里只有目录，没有正文。","should_trigger":true,"expected_mode":"导师","expected_behavior":"说明第四章正文不可用，不编造作者论证；可先给明确标注的一般讲解，按需索要相关章节，不扫描无关目录。"},
 {"id":"learning-handoff-evidence-boundary","kind":"positive","prompt":"换个助手继续这门课，帮我整理交接。我刚照着例题做对了一道。","should_trigger":true,"expected_mode":"导师","expected_behavior":"提供最小交接摘要，保留来源定位与受助程度；不能把照例题完成记为独立掌握，不默认新助手已有原文件，不自行上传或持久化。"},
 {"id":"skill-candidate-no-extra-memory","kind":"positive","prompt":"找一个能辅导我读教材的现成 skill，我已经有记忆功能，只先评估。","should_trigger":true,"expected_mode":"研究员","expected_behavior":"检查实际SKILL和依赖许可，与现有能力比较，推荐最小补充或无需新增；只评估不安装，不引入重复记忆写入者，不宣称实测。"},
-{"id":"plain-concept-no-forced-tutor","kind":"negative","prompt":"只用一句话解释什么是平均数，不要考我。","should_trigger":false,"expected_mode":"clarify-or-brief-answer","expected_behavior":"直接一句解释，不启用完整教学流程，不追问基础、不强制测验或写学习档案。"}
+{"id":"plain-concept-no-forced-tutor","kind":"negative","prompt":"只用一句话解释什么是平均数，不要考我。","should_trigger":false,"expected_mode":"clarify-or-brief-answer","expected_behavior":"直接一句解释，不启用完整教学流程，不追问基础、不强制测验或写学习档案。"},
+{"id":"debug-environment-versus-product","kind":"positive","prompt":"库存页面的截图测试失败了，日志说测试字体文件不存在。帮我定位，不要直接重写页面。","should_trigger":true,"expected_mode":"工程执行","expected_behavior":"先核对缺失测试字体和渲染环境，区分环境阻塞与产品缺陷；保留验收标准，提供可复现证据，不把没有截图当成页面已坏。"},
+{"id":"debug-private-payload-logging","kind":"ambiguous","prompt":"调试接口时，把每个请求的令牌和所有客户资料都打印出来就容易定位了吧？","should_trigger":true,"expected_mode":"工程执行","expected_behavior":"采用最小脱敏诊断，例如请求标识、阶段和错误类型；不记录令牌或无关客户资料，不以调试为由扩大数据收集。"},
+{"id":"unrelated-tests-document-only","kind":"negative","prompt":"只纠正这一句文档里的错别字，代码和行为都不变。","should_trigger":false,"expected_mode":"specific-skill","expected_behavior":"完成局部文字修正和适当差异检查，不强制启动完整调试流程、安装工具或运行无关的全套测试。"}
 ]}
