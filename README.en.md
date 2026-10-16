@@ -31,6 +31,10 @@ It is not a new model, standalone app or always-on life manager.
 
 These are workflow design goals, not guaranteed results on every model. Version 1.0.0 is ZhiXu's first stable release; publication does not establish learning or life outcomes. [Examples →](docs/EXAMPLES.md) · [1.0.0 release and validation record →](docs/RELEASE-1.0.0.md)
 
+## Maintenance candidate
+
+The 2026-10-17 candidate lives on `dot/overnight-improvements-20261017`; it does not replace the v1.0.1 release. See the [reuse and verification record](docs/REUSE-REVIEW-2026-10-17.md) for selected ideas, rejected dependencies and limits. The 37 offline unit checks and 92-case routing schema pass are not evidence of live host activation or improved user outcomes.
+
 ## Get started
 
 **For Claude Desktop / Cowork, start with the plugin marketplace:** open `Customize → Plugins → Add marketplace → Add from a repository`, enter `Moyang1412/adaptive-personal-ai-os`, then install `zhixu` from the `zhixu-skills` marketplace. Menu labels, availability and organization policies may differ.

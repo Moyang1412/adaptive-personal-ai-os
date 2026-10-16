@@ -31,6 +31,10 @@ Adaptive Personal AI OS · **v1.0.1 · Claude 插件适配**
 
 这些是工作流的设计目标，不是所有模型都能稳定做到的保证。1.0.0 是智序的首个正式版；正式发布不表示学习或生活效果已经得到科学验证。[查看使用示例 →](docs/EXAMPLES.md) · [1.0.0 发布与验证记录 →](docs/RELEASE-1.0.0.md)
 
+## 开发中候选
+
+2026-10-17 的优化保存在 `dot/overnight-improvements-20261017`，尚未替换正式 v1.0.1 Release。重点是教材来源与续接、额外Skill选择、原生记忆优先、包校验与精简调试流程；具体借鉴、拒绝引入的依赖及测试边界见 [维护记录](docs/REUSE-REVIEW-2026-10-17.md)。37项离线单元测试与92条路由用例的结构检查通过，不代表真实宿主激活或效果提升已经验证。
+
 ## 开始使用
 
 **Claude Desktop / Cowork 首选插件市场安装：**进入 `Customize → Plugins → Add marketplace → Add from a repository`，填写 `Moyang1412/adaptive-personal-ai-os`，再安装 `zhixu`。市场名为 `zhixu-skills`。实际菜单与可用性以客户端和组织策略为准。
