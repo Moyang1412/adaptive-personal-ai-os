@@ -117,3 +117,7 @@ Read pinned Python-library paths at `0724291bd864cf807e88ee8981c8226644e8fb42`: 
 ## Align the entrypoint with the existing consent modes
 
 The top-level first-write wording could be read as requiring another full preview on every save, despite the memory reference allowing authorized low-risk accumulation. Clarified first write/material-change setup, per-save preview in confirm mode, and reuse of unchanged valid standing scope under host policy. No new recipient, sensitive content or broadened scope inherits approval. Added three independently constructed routing specifications for routine course-progress saving, changed recipient and a one-off no-save formatting request. Schema now contains 104 cases (38 positive / 21 negative / 45 ambiguous); no model execution is claimed.
+
+## Keep concise advice distinct from end-to-end execution
+
+Aligned the entrypoint's “one next step” wording with the existing workflow: a concise next action can satisfy advice, while an authorized execution request should continue toward its requested outcome or a concrete blocker. Delegation still depends on permission. Existing continue-execution, partial-blocker and read-only-status specifications cover the intended distinctions; this wording review does not claim an observed model improvement.
