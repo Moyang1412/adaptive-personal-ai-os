@@ -110,3 +110,19 @@ nodes. Do not read an entire mixed-scope store and call later filtering isolatio
 If the provider lacks a verified boundary, use an explicitly authorized separate
 store/adapter or no extra engine. Do not silently configure either. File locks
 coordinate writes; they do not resolve conflicting factual corrections by themselves.
+
+
+## Assess the whole processing path and actual effects
+
+“Local” describes a storage component, not necessarily the complete data path.
+Check extraction models, embeddings, rerankers, vector services and telemetry
+against the authorized services, accounts, network condition and budget. Turning
+off inference does not establish that embeddings or other network calls stop.
+Do not probe with private text to discover where an unknown provider sends it.
+
+Authorize actual effects, not operation labels: an inferred “add” may update or
+delete earlier records. If those effects cannot be bounded to approved records
+and operations, do not call it a simple authorized append. Check get/update/delete
+by ID separately from scoped search; passing a project filter to one operation
+does not prove all others enforce the same boundary. Use a verified adapter or
+choose no extra engine rather than inventing unsupported dry-run or rollback modes.
