@@ -66,3 +66,24 @@ For Claude Desktop / Cowork, add the repository marketplace and install `zhixu`,
 Download the repository or delegate installation to your agent. Copy the entire Skill folder to the host's verified skills root. No Python or additional service is required. Review existing copies before replacing them, keep backups outside discovery roots, and never overwrite private context or host settings.
 
 Verify both the files and the host catalog/loader trace. Explicit invocation differs by host. There is no installer, automatic memory engine or runtime doctor in this release. Provider selection is an evidence and authorization step; it does not create a database.
+
+## 候选维护工具：升级前只读比较
+
+优化分支新增 `scripts/compare_skill_bundle.py`，不属于已发布 v1.0.1 的运行时包，也不是宿主诊断器。需要本机 Python，仅在主动执行时读取你指定的一个 Skill 目录与可信版本清单。它不会搜索主目录、读取清单外的私人文件、安装、覆盖或删除文件。
+
+从已经核对来源的同一版本下载独立 Skill 清单（`kind: skill`），在仓库根目录运行：
+
+```sh
+python scripts/compare_skill_bundle.py --bundle "/明确指定的/adaptive-personal-ai-os" --manifest "/下载目录/zhixu-1.0.1-manifest.json"
+```
+
+- `matching`：列出的公共文件与该清单一致。
+- `different`：内容不同，可能是旧版、个人修改或其他原因；不自动判断应覆盖。
+- `missing` / `unreadable`：缺失，或符号链接、非普通文件、过大文件等未读取情况。
+- 返回码 0 表示清单内文件全部相同，1 表示存在差异，2 表示输入或清单不合法。
+
+哈希一致不能验证清单来源、额外文件、宿主实际加载路径或模型行为；清单需自行来自可信发行来源。此工具不适合作为对抗并发恶意文件替换的安全边界。比较期间保持目标目录不变。
+
+升级时先对照当前版本清单识别个人修改，再对照目标版本看变更范围。备份放到宿主扫描目录之外，只替换已核对的公共文件；有修改的文件应先比较合并。私人记忆、宿主配置和未列出的文件保持独立。最后重新加载技能并报告实际加载证据，不把文件相同说成已激活。
+
+English: this candidate read-only helper compares only manifest-listed public files in one explicitly selected bundle. It does not install, scan extra files, authenticate the manifest, detect the active host path, or prove activation. Preserve local edits and private context before any separate authorized upgrade.

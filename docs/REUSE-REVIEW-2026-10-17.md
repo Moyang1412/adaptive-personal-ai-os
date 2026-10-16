@@ -99,3 +99,7 @@ Keep this record updated with actual later checks, not intended results.
 - Reproduced an arbitrary choice when two installed, verified providers qualified: the reference selected the alphabetically first ID. It now leaves extra persistence off (D), returns the qualified candidate IDs for comparison and requires an explicit scoped choice. Candidate ordering is presentation only.
 - Runtime guidance compares task fit, existing selection, storage/network conditions and actual cost evidence instead of inventing weights or equating popularity with suitability. Independent useful work can continue while a material choice remains unresolved.
 - Unit suite44 passed, including candidate-order reversal; routing/provider schema remain101/8. No real provider was installed, selected or written by these tests.
+
+## Read-only upgrade comparison (candidate maintainer utility)
+
+Added a standard-library-only comparator for a user-selected standalone bundle and the existing release manifest format. It reports matching/different/missing/unreadable public files, does not scan extra files or host roots, refuses manifest traversal and symlinks, and does not perform upgrades. Five synthetic tests cover unchanged bytes, local edits, missing/non-file entries, unsafe manifests, links and size limits. Authenticity, concurrent hostile mutation and host activation are explicitly outside its claim. This is an original utility, not a copied installer or added runtime dependency.
