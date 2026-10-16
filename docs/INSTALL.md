@@ -124,3 +124,15 @@ python scripts/compare_skill_bundle.py --bundle "/明确指定的/adaptive-perso
 计划模式只读取两个清单覆盖的路径，每个路径一次；不枚举其他文件。比较期间保持目录不变，不宣称原子快照或并发防护。返回码0表示没有待处理差异，1表示报告里仍有差异/待核对项，2表示输入错误；所有模式均不执行替换、删除、合并或安装。需要先核对清单来源，比较结果也不能证明宿主已经加载。
 
 English: add --baseline-manifest for a read-only three-way classification of upstream changes, local edits, conflicts and newly occupied paths. Exit 1 means the report contains changes needing review, not that any update was applied. No files are replaced or removed.
+
+## 维护者：明确标记未发布候选包
+
+在优化分支构建供核对的候选包时，先记录已核对的源提交，再使用：
+
+```sh
+python scripts/package_release.py --candidate --output-dir /新的候选输出目录 --source-ref 已核对的提交SHA
+```
+
+文件名带 `-candidate`，清单的 `build_channel` 为 `candidate`、`tag` 为 null。已有输出目录不会被覆盖。省略该参数保留原有发行构建命名，但两种模式都只生成本地文件，不创建 Git 标签、不发布 Release、不安装、不证明宿主已加载。`source_ref` 是调用者提供的溯源标签，脚本不会自动验证工作区与该提交一致；构建前需检查提交与工作区。
+
+English: --candidate marks local artifacts and manifests as a candidate without changing VERSION. It does not publish, install or verify the caller-supplied source reference. Verify the intended commit and clean worktree before building.

@@ -19,13 +19,16 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--output-dir', type=Path, required=True)
     parser.add_argument('--source-ref', required=True)
+    parser.add_argument('--candidate', action='store_true', help='Label local artifacts as an unreleased candidate; does not publish')
     args = parser.parse_args()
     output = args.output_dir.resolve()
     if output.exists():
         raise ValueError('release directory already exists; keep existing assets')
     output.mkdir(parents=True)
     version = (ROOT / 'VERSION').read_text(encoding='utf-8').strip()
-    plugin_zip = output / ('zhixu-' + version + '-plugin.zip')
+    stem = 'zhixu-' + version + ('-candidate' if args.candidate else '')
+    channel = 'candidate' if args.candidate else 'release-build'
+    plugin_zip = output / (stem + '-plugin.zip')
     subprocess.run([sys.executable, '-X', 'utf8', str(ROOT / 'scripts/package_claude_plugin.py'), '--output', str(plugin_zip)], check=True)
     local_report = plugin_zip.with_suffix('.verification.json')
     local = json.loads(local_report.read_text(encoding='utf-8'))
@@ -38,7 +41,7 @@ def main():
     skill_files = {name[len(prefix):]: raw for name, raw in plugin_files.items() if name.startswith(prefix)}
     if not (len(skill_files) == 18):
         raise ValueError('package validation failed: len(skill_files) == 18')
-    skill_zip = output / ('zhixu-' + version + '-skill.zip')
+    skill_zip = output / (stem + '-skill.zip')
     with zipfile.ZipFile(skill_zip, 'x', compression=zipfile.ZIP_DEFLATED) as archive:
         for name, raw in sorted(skill_files.items()):
             info = zipfile.ZipInfo('adaptive-personal-ai-os/' + name, date_time=(2020, 1, 1, 0, 0, 0))
@@ -55,16 +58,17 @@ def main():
             raise ValueError("package validation failed: all(archive.read('adaptive-personal-ai-os/' + name) == raw for name, raw in skill_files.items())")
     manifests = []
     for kind, package, files in [('plugin', plugin_zip, plugin_files), ('skill', skill_zip, skill_files)]:
-        name = 'zhixu-' + version + ('-plugin-manifest.json' if kind == 'plugin' else '-manifest.json')
+        name = stem + ('-plugin-manifest.json' if kind == 'plugin' else '-manifest.json')
         path = output / name
-        write_json(path, {'version': version, 'tag': 'v' + version, 'source_ref': args.source_ref,
+        write_json(path, {'version': version, 'tag': None if args.candidate else 'v' + version, 'source_ref': args.source_ref,
+                         'build_channel': channel, 'publication': 'not assessed by this build command',
                          'kind': kind, 'skill_name': 'adaptive-personal-ai-os', 'license': 'MIT',
                          'archive': package.name, 'archive_sha256': sha(package.read_bytes()),
                          'file_count': len(files), 'files': {key: sha(raw) for key, raw in sorted(files.items())},
                          'scope': 'Public instruction bundle; no personal profile or chat history.'})
         manifests.append(path)
-    verification = output / 'release-verification.json'
-    write_json(verification, {'version': version, 'source_ref': args.source_ref,
+    verification = output / ('candidate-verification.json' if args.candidate else 'release-verification.json')
+    write_json(verification, {'version': version, 'source_ref': args.source_ref, 'build_channel': channel,
                              'plugin_files': len(plugin_files), 'skill_files': len(skill_files),
                              'package_crc_and_per_file_readback': 'passed',
                              'relative_runtime_references_closed': local['relative_runtime_references_closed'],
@@ -75,7 +79,7 @@ def main():
     assets = [plugin_zip, skill_zip, *manifests, verification]
     sums = output / 'SHA256SUMS'
     sums.write_text(''.join(sha(path.read_bytes()) + '  ' + path.name + '\n' for path in assets), encoding='utf-8')
-    print(json.dumps({'version': version, 'assets': [path.name for path in assets] + [sums.name],
+    print(json.dumps({'version': version, 'build_channel': channel, 'assets': [path.name for path in assets] + [sums.name],
                       'plugin_sha256': sha(plugin_zip.read_bytes()), 'skill_sha256': sha(skill_zip.read_bytes())}, indent=2))
 
 if __name__ == '__main__':

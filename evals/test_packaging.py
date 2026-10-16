@@ -127,6 +127,27 @@ class PackagingTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertEqual(list(output.iterdir()), [marker])
 
+    def test_candidate_artifacts_are_distinct_without_claiming_publication(self):
+        version=(self.root/'VERSION').read_text().strip()
+        for candidate in [False,True]:
+            with self.subTest(candidate=candidate):
+                output=Path(self.temp.name)/('candidate' if candidate else 'release-build')
+                run=subprocess.run([sys.executable,str(self.root/'scripts/package_release.py'),'--output-dir',str(output),'--source-ref','synthetic-source',*(['--candidate'] if candidate else [])],capture_output=True,text=True)
+                self.assertEqual(run.returncode,0,run.stderr)
+                stem='zhixu-'+version+('-candidate' if candidate else '')
+                for kind in ['skill','plugin']:
+                    archive=output/(stem+'-'+kind+'.zip');self.assertTrue(archive.is_file())
+                    manifest=json.loads((output/(stem+('-plugin-manifest.json' if kind=='plugin' else '-manifest.json'))).read_text())
+                    self.assertEqual(manifest['tag'],None if candidate else 'v'+version)
+                    self.assertEqual(manifest['build_channel'],'candidate' if candidate else 'release-build')
+                    self.assertEqual(manifest['source_ref'],'synthetic-source')
+                    self.assertIn('not assessed',manifest['publication'])
+                    self.assertEqual(manifest['archive'],archive.name)
+                    with zipfile.ZipFile(archive) as bundle:self.assertIsNone(bundle.testzip())
+                report=output/('candidate-verification.json' if candidate else 'release-verification.json')
+                self.assertTrue(report.is_file());self.assertIn(report.name,(output/'SHA256SUMS').read_text())
+                self.assertEqual((self.root/'VERSION').read_text().strip(),version)
+
 
 if __name__ == '__main__':
     unittest.main()

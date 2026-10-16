@@ -33,7 +33,7 @@ Adaptive Personal AI OS · **v1.0.1 · Claude 插件适配**
 
 ## 开发中候选
 
-2026-10-17 的优化保存在 `dot/overnight-improvements-20261017`，尚未替换正式 v1.0.1 Release。重点是教材来源与续接、额外Skill选择、原生记忆优先、包校验与精简调试流程；具体借鉴、拒绝引入的依赖及测试边界见 [维护记录](docs/REUSE-REVIEW-2026-10-17.md)。53项离线单元测试与106条路由用例的结构检查通过，不代表真实宿主激活或效果提升已经验证。
+2026-10-17 的优化保存在 `dot/overnight-improvements-20261017`，尚未替换正式 v1.0.1 Release。重点是教材来源与续接、额外Skill选择、原生记忆优先、包校验与精简调试流程；具体借鉴、拒绝引入的依赖及测试边界见 [维护记录](docs/REUSE-REVIEW-2026-10-17.md)。54项离线单元测试与106条路由用例的结构检查通过，不代表真实宿主激活或效果提升已经验证。
 
 候选版还提供[升级前只读对比](docs/INSTALL.md)，区分上游更新、个人改动和冲突；现成记忆方案的实际源码审查见[MCP Memory](docs/MCP-MEMORY-REVIEW.md)和[Mem0](docs/MEM0-REVIEW.md)。没有自动安装或启用这些服务。
 
