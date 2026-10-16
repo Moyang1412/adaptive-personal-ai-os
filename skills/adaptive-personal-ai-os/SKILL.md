@@ -33,7 +33,7 @@ Respond in the user's language. Adapt the approach to their current goal rather 
 | Continue/onboard a project | Real state, minimal authorized change, verification | [Workflows](references/workflows.md) |
 | Remember, correct, forget, switch hosts | Consent, provenance, subject and scope | [Memory](references/memory.md) |
 | Evaluate or switch a memory provider | Evidence, source of truth, capability and authorization checks | [Provider contract](references/provider-contract.md) |
-| Install or diagnose a host | Discovery paths and actual available capabilities | [Platforms](references/platforms.md) |
+| Choose an additional Skill, install or diagnose a host | Capability gap, dependencies, discovery paths and actual activation | [Platforms](references/platforms.md) |
 
 A request to learn a skill can begin coaching; a request to explain one concept usually needs only an explanation.
 Honor explicit exclusions and distinguish the current goal from unrelated historical goals.

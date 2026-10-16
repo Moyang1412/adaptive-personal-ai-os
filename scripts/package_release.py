@@ -21,7 +21,8 @@ def main():
     parser.add_argument('--source-ref', required=True)
     args = parser.parse_args()
     output = args.output_dir.resolve()
-    assert not output.exists(), 'release directory already exists; keep existing assets'
+    if output.exists():
+        raise ValueError('release directory already exists; keep existing assets')
     output.mkdir(parents=True)
     version = (ROOT / 'VERSION').read_text(encoding='utf-8').strip()
     plugin_zip = output / ('zhixu-' + version + '-plugin.zip')
@@ -35,7 +36,8 @@ def main():
         plugin_files = {name: archive.read(name) for name in archive.namelist()}
     prefix = 'skills/adaptive-personal-ai-os/'
     skill_files = {name[len(prefix):]: raw for name, raw in plugin_files.items() if name.startswith(prefix)}
-    assert len(skill_files) == 18
+    if not (len(skill_files) == 18):
+        raise ValueError('package validation failed: len(skill_files) == 18')
     skill_zip = output / ('zhixu-' + version + '-skill.zip')
     with zipfile.ZipFile(skill_zip, 'x', compression=zipfile.ZIP_DEFLATED) as archive:
         for name, raw in sorted(skill_files.items()):
@@ -45,9 +47,12 @@ def main():
             info.external_attr = 0o100644 << 16
             archive.writestr(info, raw)
     with zipfile.ZipFile(skill_zip) as archive:
-        assert archive.testzip() is None
-        assert set(archive.namelist()) == {'adaptive-personal-ai-os/' + name for name in skill_files}
-        assert all(archive.read('adaptive-personal-ai-os/' + name) == raw for name, raw in skill_files.items())
+        if not (archive.testzip() is None):
+            raise ValueError('package validation failed: archive.testzip() is None')
+        if not (set(archive.namelist()) == {'adaptive-personal-ai-os/' + name for name in skill_files}):
+            raise ValueError("package validation failed: set(archive.namelist()) == {'adaptive-personal-ai-os/' + name for name in skill_files}")
+        if not (all(archive.read('adaptive-personal-ai-os/' + name) == raw for name, raw in skill_files.items())):
+            raise ValueError("package validation failed: all(archive.read('adaptive-personal-ai-os/' + name) == raw for name, raw in skill_files.items())")
     manifests = []
     for kind, package, files in [('plugin', plugin_zip, plugin_files), ('skill', skill_zip, skill_files)]:
         name = 'zhixu-' + version + ('-plugin-manifest.json' if kind == 'plugin' else '-manifest.json')

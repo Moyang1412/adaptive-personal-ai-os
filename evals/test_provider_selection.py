@@ -85,6 +85,38 @@ def descriptor(
 
 
 class ProviderSelectionTests(unittest.TestCase):
+    def test_caller_mutation_does_not_expand_verified_capabilities_or_scopes(self) -> None:
+        capabilities = {'read', 'scope'}
+        verified = {'read', 'scope'}
+        base = descriptor('snapshot')
+        candidate = ProviderDescriptor(**{**base.__dict__, 'capabilities': capabilities,
+            'verified_capabilities': verified, 'unverified_capabilities': frozenset()})
+        scopes = {'project-one'}
+        request = RouteRequest(ProviderOperation.READ, 'project-two', 'authorized', scopes,
+                               False, active_provider_id='snapshot')
+        capabilities.add('save'); verified.add('save'); scopes.add('project-two')
+        self.assertNotIn('save', candidate.verified_capabilities)
+        self.assertNotIn('project-two', request.authorized_scopes)
+        self.assertEqual(route_operation(request, candidate).status, 'blocked')
+
+    def test_duplicate_provider_identity_is_rejected(self) -> None:
+        requirements = MemoryRequirements(True, frozenset({'save', 'read'}), False, True, 'confirm')
+        with self.assertRaises(SourceConflictError):
+            recommend_plan(requirements, native_available=False, native_capabilities=set(), providers=[
+                descriptor('duplicate', source_of_truth='scope-one'),
+                descriptor('duplicate', source_of_truth='scope-two'),
+            ])
+
+    def test_disabled_or_session_only_memory_does_not_enumerate_providers(self) -> None:
+        def providers():
+            raise AssertionError('unneeded provider enumeration')
+            yield
+        for persistent, consent in [(True, 'off'), (False, 'confirm')]:
+            requirements = MemoryRequirements(persistent, frozenset({'read'}), False, False, consent)
+            plan = recommend_plan(requirements, native_available=False,
+                                  native_capabilities=set(), providers=providers())
+            self.assertEqual(plan.option, 'D')
+
     def test_trigger_runs_only_on_first_long_term_need(self) -> None:
         self.assertTrue(evaluate_trigger(first_long_term_need=True, already_evaluated=False))
         self.assertFalse(evaluate_trigger(first_long_term_need=True, already_evaluated=True))

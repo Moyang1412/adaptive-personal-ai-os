@@ -22,8 +22,16 @@ def sha(raw):
     return hashlib.sha256(raw).hexdigest()
 
 def public_bytes(path):
-    assert not path.is_symlink(), 'do not follow symlinks: ' + str(path)
-    assert path.resolve().is_relative_to(ROOT.resolve()), str(path)
+    # A regular file below a symlinked directory is still an indirect read.
+    # Reject the whole path, including links to private directories in ROOT.
+    relative = path.relative_to(ROOT)
+    current = ROOT
+    for part in relative.parts:
+        current = current / part
+        if current.is_symlink():
+            raise ValueError('do not follow symlinks: ' + str(current))
+    if not (path.resolve().is_relative_to(ROOT.resolve())):
+        raise ValueError(str(path))
     return path.read_bytes().replace(b'\r\n', b'\n')
 
 def main():
@@ -31,23 +39,36 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     output = args.output.resolve()
-    assert not output.exists(), 'output exists; choose a new file name'
+    if output.exists():
+        raise ValueError('output exists; choose a new file name')
     report_path = output.with_suffix('.verification.json')
-    assert not report_path.exists(), 'verification report exists; choose a new file name'
-    version = (SKILL / 'VERSION').read_text(encoding='utf-8').strip()
-    plugin = json.loads((ROOT / '.claude-plugin' / 'plugin.json').read_text(encoding='utf-8'))
-    assert plugin['name'] == 'zhixu' and plugin['version'] == version
-    assert (ROOT / 'VERSION').read_text(encoding='utf-8').strip() == version
-    text = (SKILL / 'SKILL.md').read_text(encoding='utf-8')
-    assert re.search(r'(?m)^name: adaptive-personal-ai-os$', text)
-    description = json.loads(re.search(r'(?m)^description:\s*(.+)$', text).group(1))
-    assert len(description) <= 200
-    assert re.search(r'(?m)^  version: "' + re.escape(version) + r'"$', text)
+    if report_path.exists():
+        raise ValueError('verification report exists; choose a new file name')
+    version = public_bytes(SKILL / 'VERSION').decode('utf-8').strip()
+    if not re.fullmatch(r'\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?', version):
+        raise ValueError('version must be a portable semantic version')
+    plugin = json.loads(public_bytes(ROOT / '.claude-plugin' / 'plugin.json'))
+    if not (plugin['name'] == 'zhixu' and plugin['version'] == version):
+        raise ValueError("package validation failed: plugin['name'] == 'zhixu' and plugin['version'] == version")
+    if not (public_bytes(ROOT / 'VERSION').decode('utf-8').strip() == version):
+        raise ValueError("package validation failed: (ROOT / 'VERSION').read_text(encoding='utf-8').strip() == version")
+    text = public_bytes(SKILL / 'SKILL.md').decode('utf-8')
+    if not (re.search(r'(?m)^name: adaptive-personal-ai-os$', text)):
+        raise ValueError("package validation failed: re.search(r'(?m)^name: adaptive-personal-ai-os$', text)")
+    description_line = re.search(r'(?m)^description:[ \t]*(.+)$', text)
+    if not description_line:
+        raise ValueError('SKILL.md needs a JSON-quoted description')
+    description = json.loads(description_line.group(1))
+    if not isinstance(description, str) or not description.strip() or len(description) > 200:
+        raise ValueError('description must be non-empty text of at most 200 characters')
+    if not (re.search(r'(?m)^  version: "' + re.escape(version) + r'"$', text)):
+        raise ValueError('package validation failed: re.search(r\'(?m)^  version: "\' + re.escape(version) + r\'"$\', text)')
     paths = [Path('skills/adaptive-personal-ai-os') / name for name in PUBLIC_RUNTIME_FILES]
     files = {}
     for relative in paths:
         name = relative.as_posix()
-        assert not {'private', '.private', '.zhixu', '.git', '__pycache__'} & set(PurePosixPath(name).parts)
+        if not (not {'private', '.private', '.zhixu', '.git', '__pycache__'} & set(PurePosixPath(name).parts)):
+            raise ValueError("package validation failed: not {'private', '.private', '.zhixu', '.git', '__pycache__'} & set(PurePosixPath(name).parts)")
         files[name] = public_bytes(ROOT / relative)
     files['.claude-plugin/plugin.json'] = public_bytes(ROOT / '.claude-plugin' / 'plugin.json')
     files['LICENSE'] = public_bytes(ROOT / 'LICENSE')
@@ -65,6 +86,8 @@ def main():
     ).encode('utf-8')
     # Stage only the exact public files; do not copy the repository or local data.
     stage_base = ROOT / '.zhixu' / ('claude-plugin-' + version)
+    if (ROOT / '.zhixu').is_symlink():
+        raise ValueError('staging directory must not be a symlink')
     stage = stage_base
     suffix = 2
     while stage.exists():
@@ -84,7 +107,8 @@ def main():
             if not target or '://' in target or target.startswith('mailto:'):
                 continue
             resolved = (stage / name).parent.joinpath(target).resolve()
-            assert resolved.is_relative_to(stage / 'skills' / 'adaptive-personal-ai-os') and resolved.is_file(), (name, target)
+            if not (resolved.is_relative_to(stage / 'skills' / 'adaptive-personal-ai-os') and resolved.is_file()):
+                raise ValueError((name, target))
     output.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(output, 'x', compression=zipfile.ZIP_DEFLATED) as archive:
         for name, raw in sorted(files.items()):
@@ -94,8 +118,10 @@ def main():
             info.external_attr = 0o100644 << 16
             archive.writestr(info, raw)
     with zipfile.ZipFile(output) as archive:
-        assert archive.testzip() is None and set(archive.namelist()) == set(files)
-        assert all(archive.read(name) == raw for name, raw in files.items())
+        if not (archive.testzip() is None and set(archive.namelist()) == set(files)):
+            raise ValueError('package validation failed: archive.testzip() is None and set(archive.namelist()) == set(files)')
+        if not (all(archive.read(name) == raw for name, raw in files.items())):
+            raise ValueError('package validation failed: all(archive.read(name) == raw for name, raw in files.items())')
     report = {'version': version, 'plugin': 'zhixu', 'skill': 'adaptive-personal-ai-os',
               'output': str(output), 'stage': str(stage), 'files': len(files), 'runtime_files': 18,
               'description_characters': len(description), 'zip_sha256': sha(output.read_bytes()),

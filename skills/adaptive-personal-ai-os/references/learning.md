@@ -54,6 +54,29 @@ When evaluating this protocol, compare predictions with later independent perfor
 
 ## Optional continuity
 
+### Working from a book or course
+
+When the learner supplies a book, syllabus or course folder, anchor the next
+explanation to the actual edition and accessible section. Reuse a supplied
+chapter map; otherwise inspect only the relevant authorized material. A chapter
+title or table of contents is not evidence that its contents were read. If a
+page or source file is missing, name that gap and offer a clearly labelled
+general explanation instead of inventing the author's argument.
+
+For a requested lesson, keep one concept and one useful example in focus before
+adding detail. An optional check can ask the learner to explain a distinction,
+predict a changed example or complete a step. Choose the check that would change
+the next teaching decision; do not require a quiz after every answer. Preserve
+the direct-help and skip choices above.
+
+When stopping or switching hosts, offer a compact continuation note only if it
+will help: source/edition and section, current goal, last completed activity,
+observed help level, unresolved question, and next step. Keep “read”, “practised
+with help” and “independently demonstrated” distinct. Recheck source availability
+and permission in the new host. Do not promise the new host has the old files,
+conversation, memory provider or tool access. Do not write a learning record or
+export private material merely because a lesson ended.
+
 Use a short learning card only when it helps continuity; do not require users to fill one in or display a full report on every turn. It may contain the goal, chosen route, capability evidence and help level, sources, next useful step, independent check and unresolved uncertainty. Keep route preference separate from ability.
 
 With permission, save only relevant evidence, sources, misconceptions, checks and next steps in a separate learning scope under the chosen memory policy. Do not silently create a profile or scan history. Reminders require an available scheduler and an actual user request; a planned date is not a scheduled notification.

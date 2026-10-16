@@ -66,6 +66,10 @@ class ProviderDescriptor:
     unverified_capabilities: FrozenSet[str] = frozenset()
 
     def __post_init__(self) -> None:
+        # Snapshot caller-owned sets: later mutation must not silently change
+        # which capabilities this validated descriptor claims or has verified.
+        for name in ('capabilities', 'verified_capabilities', 'unverified_capabilities'):
+            object.__setattr__(self, name, frozenset(getattr(self, name)))
         if not self.id.strip():
             raise ValueError("provider id must not be empty")
         if not self.name.strip():
@@ -108,6 +112,7 @@ class MemoryRequirements:
     private_profile_conflict_control: bool = False
 
     def __post_init__(self) -> None:
+        object.__setattr__(self, 'required_capabilities', frozenset(self.required_capabilities))
         unknown = set(self.required_capabilities) - CAPABILITIES
         if unknown:
             raise ValueError(f"unknown required capabilities: {sorted(unknown)}")
@@ -158,6 +163,9 @@ class RouteRequest:
     sharing_authorized: bool = False
     single_writer: bool = False
 
+    def __post_init__(self) -> None:
+        object.__setattr__(self, 'authorized_scopes', frozenset(self.authorized_scopes))
+
 
 @dataclass(frozen=True)
 class RouteResult:
@@ -178,7 +186,11 @@ def evaluate_trigger(*, first_long_term_need: bool, already_evaluated: bool) -> 
 
 def _ensure_single_source(providers: Iterable[ProviderDescriptor]) -> None:
     sources: dict[str, str] = {}
+    identities: set[str] = set()
     for provider in providers:
+        if provider.id in identities:
+            raise SourceConflictError(f"provider id {provider.id!r} is ambiguous")
+        identities.add(provider.id)
         previous = sources.get(provider.source_of_truth)
         if previous and previous != provider.id:
             raise SourceConflictError(
@@ -268,13 +280,13 @@ def recommend_plan(
 ) -> RecommendationPlan:
     """Select A/B/C/D without inventing an installed or tested engine."""
 
-    provider_list = tuple(providers)
-    _ensure_single_source(provider_list)
-
     if requirements.user_consent == "off":
         return RecommendationPlan("D", None, ("用户选择暂不使用长期记忆",))
     if not requirements.persistent:
         return RecommendationPlan("D", None, ("当前请求不需要跨会话保存",))
+
+    provider_list = tuple(providers)
+    _ensure_single_source(provider_list)
 
     native_covers = requirements.required_capabilities.issubset(native_capabilities)
     if native_available and native_covers and not requirements.cross_agent:
