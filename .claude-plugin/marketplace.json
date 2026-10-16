@@ -1,0 +1,20 @@
+{
+  "name": "zhixu-skills",
+  "owner": {
+    "name": "Moyang1412"
+  },
+  "metadata": {
+    "description": "智序 · ZhiXu 插件市场",
+    "version": "1.0.1"
+  },
+  "plugins": [
+    {
+      "name": "zhixu",
+      "source": "./",
+      "description": "智序完整指令包：学习、生活规划、决策、研究与任务续接。",
+      "version": "1.0.1",
+      "strict": true,
+      "category": "productivity"
+    }
+  ]
+}

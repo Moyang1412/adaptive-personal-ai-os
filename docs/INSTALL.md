@@ -2,6 +2,14 @@
 
 [中文首页](../README.md) · [记忆方案接入](PROVIDERS.md) · [English](../README.en.md)
 
+## Claude 插件方式
+
+Claude Desktop / Cowork 首选在 `Customize → Plugins → Add marketplace → Add from a repository` 添加 `Moyang1412/adaptive-personal-ai-os`，再从 `zhixu-skills` 市场安装 `zhixu`。实际菜单名称和可用性以客户端及组织策略为准。
+
+也可上传 [v1.0.1 Release](https://github.com/Moyang1412/adaptive-personal-ai-os/releases/tag/v1.0.1) 中的 `zhixu-1.0.1-plugin.zip`。Claude Code 也支持插件安装；完整命令、切换与验证见[Claude 插件指南](CLAUDE-PLUGIN.md)。
+
+插件与直接 Skill 复用同一核心。**同一宿主只启用一种入口**；已有裸 Skill 时，先备份到扫描目录外，再切换。文件或清单检查不表示真实桌面端已经激活。
+
 ## 最短路径
 
 已有 Agent 的用户，可以把首页的安装请求与 Skill 文件夹地址交给它，让它先核对自己的加载目录，再安装并报告证据。也可以通过 GitHub 的 Code → Download ZIP 下载仓库，打开 `skills/adaptive-personal-ai-os/`。
@@ -48,6 +56,8 @@ Codex 显式调用 `$adaptive-personal-ai-os`；Claude Code 使用 `/adaptive-pe
 | 更换 provider 后仍有旧写入 | 先停旧 provider，核对唯一 source of truth 和实际写入日志 |
 
 ## English quick reference
+
+For Claude Desktop / Cowork, add the repository marketplace and install `zhixu`, or upload the plugin ZIP. Use only one active plugin or standalone Skill entry per host; desktop activation still needs live verification.
 
 Download the repository or delegate installation to your agent. Copy the entire Skill folder to the host's verified skills root. No Python or additional service is required. Review existing copies before replacing them, keep backups outside discovery roots, and never overwrite private context or host settings.
 

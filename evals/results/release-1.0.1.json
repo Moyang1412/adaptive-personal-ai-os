@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-16",
+  "version": "1.0.1",
+  "tag": "v1.0.1",
+  "scope": "File, package and isolated Claude Code installer checks; not Claude Desktop activation or model efficacy.",
+  "recorded_checks": [
+    {"command": "python -X utf8 evals/validate_routing_cases.py", "exit_code": 0, "result": "85 synthetic case schemas; not model executions"},
+    {"command": "python -X utf8 evals/validate_provider_cases.py", "exit_code": 0, "result": "8 provider case schemas; not live providers"},
+    {"command": "python -X utf8 -m unittest evals.test_provider_selection evals.test_memory_lifecycle", "exit_code": 0, "result": "23 offline reference and fixture tests"},
+    {"command": "claude plugin validate .claude-plugin/plugin.json --strict --json", "exit_code": 0, "result": "No errors or warnings; Claude Code 2.1.280"},
+    {"command": "claude plugin validate .claude-plugin/marketplace.json --strict --json", "exit_code": 0, "result": "No errors or warnings; Claude Code 2.1.280"},
+    {"command": "git diff --check", "exit_code": 0, "result": "No whitespace errors"}
+  ],
+  "local_isolated_install": {
+    "source": "local working-tree marketplace",
+    "configuration": "separate CLAUDE_CONFIG_DIR; default user configuration unchanged",
+    "marketplace_add_exit_code": 0,
+    "plugin_install_exit_code": 0,
+    "listed_plugin": "zhixu@zhixu-skills",
+    "listed_version": "1.0.1",
+    "listed_enabled": true,
+    "model_session_executed": false
+  },
+  "package_checks": {
+    "plugin_files": 21,
+    "skill_files": 18,
+    "shared_runtime_files_identical": 18,
+    "crc_and_file_manifest": "passed",
+    "relative_runtime_references_closed": true,
+    "description_characters": 195,
+    "independent_no_git_build": "passed on git archive baseline plus reviewed working-tree changes",
+    "independent_repeated_build": "all six public assets byte-identical",
+    "plugin_sha256": "09c229b61953126b8cb78d817456ca882ef9a51e8d9ab976c0381ed7c0f88a3c",
+    "skill_sha256": "5cc8125524e64e407f1824fb48198912f67c3ca7b7cb6e66ece52e43d11320ee",
+    "configured_public_asset_path_scan": "No local absolute paths or maintainer username found; not a comprehensive security audit"
+  },
+  "runtime_changes": ["Shortened trigger description", "Version metadata updated to 1.0.1"],
+  "entrypoint_body": "unchanged from v1.0.0",
+  "installed_skill_or_private_memory_modified": false,
+  "limitations": [
+    "Final commit archive must be re-built and checked before uploading assets",
+    "Remote publication and download checks are separate from this pre-publication record",
+    "Claude Desktop/Cowork discovery, enablement and live session loading not tested",
+    "No new model-behavior, learning-outcome or real-user-efficacy evaluation"
+  ]
+}

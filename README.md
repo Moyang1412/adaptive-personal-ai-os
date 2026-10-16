@@ -4,7 +4,7 @@
 
 **同一套方法，你自己的记忆，不同的 Agent。**
 
-Adaptive Personal AI OS · **v1.0.0 · 首个正式版**
+Adaptive Personal AI OS · **v1.0.1 · Claude 插件适配**
 
 [开始使用](#开始使用) · [使用示例](docs/EXAMPLES.md) · [记忆方案](docs/PROVIDERS.md) · [私人记忆](docs/MEMORY.md) · [验证状态](docs/VALIDATION.md) · [English](README.en.md)
 
@@ -29,9 +29,15 @@ Adaptive Personal AI OS · **v1.0.0 · 首个正式版**
 | 个性化协作 | “按我保存的协作偏好来处理。” | 在授权范围内复用相关配置与背景。 |
 | 记忆方案 | “我需要跨会话记忆，先检查现有能力。” | 先用原生记忆；有明确缺口时再评估已安装 provider。 |
 
-这些是工作流的设计目标，不是所有模型都能稳定做到的保证。1.0.0 是智序的首个正式版；正式发布不表示学习或生活效果已经得到科学验证。[查看使用示例 →](docs/EXAMPLES.md) · [本版发布与验证记录 →](docs/RELEASE-1.0.0.md)
+这些是工作流的设计目标，不是所有模型都能稳定做到的保证。1.0.0 是智序的首个正式版；正式发布不表示学习或生活效果已经得到科学验证。[查看使用示例 →](docs/EXAMPLES.md) · [1.0.0 发布与验证记录 →](docs/RELEASE-1.0.0.md)
 
 ## 开始使用
+
+**Claude Desktop / Cowork 首选插件市场安装：**进入 `Customize → Plugins → Add marketplace → Add from a repository`，填写 `Moyang1412/adaptive-personal-ai-os`，再安装 `zhixu`。市场名为 `zhixu-skills`。实际菜单与可用性以客户端和组织策略为准。
+
+也可从 [v1.0.1 Release](https://github.com/Moyang1412/adaptive-personal-ai-os/releases/tag/v1.0.1) 下载 `zhixu-1.0.1-plugin.zip` 上传。桌面端实际识别、启用和加载仍待实机验证。[插件安装与验证 →](docs/CLAUDE-PLUGIN.md) · [1.0.1 变更与边界 →](docs/RELEASE-1.0.1.md)
+
+**同一宿主只保留一个活动入口：插件或直接 Skill。** Codex、DSH 和直接使用 Skill 的用户采用下面的方式。
 
 已有 **Codex、Claude Code 或 DSH** 即可尝试；核心不需要额外服务器、API 密钥或 Python，也不会自动建立记忆数据库。
 
@@ -39,7 +45,7 @@ Adaptive Personal AI OS · **v1.0.0 · 首个正式版**
 
 ```text
 请安装智序 Skill：
-https://github.com/Moyang1412/adaptive-personal-ai-os/tree/v1.0.0/skills/adaptive-personal-ai-os
+https://github.com/Moyang1412/adaptive-personal-ai-os/tree/v1.0.1/skills/adaptive-personal-ai-os
 先检查当前 Agent 的技能目录和已有同名版本。
 不要覆盖个人配置、记忆或其他 Skill。
 安装后报告实际路径，并用技能列表或加载记录核对是否生效。

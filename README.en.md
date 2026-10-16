@@ -4,7 +4,7 @@
 
 **One shared method. Your own context. Multiple agents.**
 
-Adaptive Personal AI OS · **v1.0.0 · First stable release**
+Adaptive Personal AI OS · **v1.0.1 · Claude plugin support**
 
 [Get started](#get-started) · [Examples](docs/EXAMPLES.md) · [Memory choices](docs/PROVIDERS.en.md) · [Private memory](skills/adaptive-personal-ai-os/references/memory.md) · [Validation](docs/VALIDATION.md) · [中文](README.md)
 
@@ -29,9 +29,15 @@ It is not a new model, standalone app or always-on life manager.
 | Personal collaboration | “Use my saved collaboration preferences.” | Reuse relevant configuration and context within permission. |
 | Memory choice | “I need continuity; check what already exists first.” | Use native memory first; assess an installed provider only for a clear gap. |
 
-These are workflow design goals, not guaranteed results on every model. Version 1.0.0 is ZhiXu's first stable release; publication does not establish learning or life outcomes. [Examples →](docs/EXAMPLES.md) · [Release and validation record →](docs/RELEASE-1.0.0.md)
+These are workflow design goals, not guaranteed results on every model. Version 1.0.0 is ZhiXu's first stable release; publication does not establish learning or life outcomes. [Examples →](docs/EXAMPLES.md) · [1.0.0 release and validation record →](docs/RELEASE-1.0.0.md)
 
 ## Get started
+
+**For Claude Desktop / Cowork, start with the plugin marketplace:** open `Customize → Plugins → Add marketplace → Add from a repository`, enter `Moyang1412/adaptive-personal-ai-os`, then install `zhixu` from the `zhixu-skills` marketplace. Menu labels, availability and organization policies may differ.
+
+Alternatively, upload `zhixu-1.0.1-plugin.zip` from the [v1.0.1 Release](https://github.com/Moyang1412/adaptive-personal-ai-os/releases/tag/v1.0.1). Actual desktop discovery, enablement and loading still require live verification. [Plugin guide →](docs/CLAUDE-PLUGIN.md) · [1.0.1 changes and limits →](docs/RELEASE-1.0.1.md)
+
+**Use one active entry per host: the plugin or the standalone Skill.** For Codex, DSH or a standalone installation, follow the steps below.
 
 Use your existing **Codex, Claude Code or DSH**. The instruction core needs no extra server, API key or Python runtime and does not create a memory database.
 
@@ -39,7 +45,7 @@ Give your agent this request:
 
 ```text
 Install the ZhiXu Skill from:
-https://github.com/Moyang1412/adaptive-personal-ai-os/tree/v1.0.0/skills/adaptive-personal-ai-os
+https://github.com/Moyang1412/adaptive-personal-ai-os/tree/v1.0.1/skills/adaptive-personal-ai-os
 Check this host's skills root and existing copies first.
 Do not overwrite personal configuration, memory or other Skills.
 Report the real installation path and verify the host catalog or loader trace.

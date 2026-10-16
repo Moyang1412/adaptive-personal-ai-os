@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.1 — 2026-10-16
+
+### Claude plugin distribution
+
+- Add the `zhixu` Claude plugin and `zhixu-skills` repository marketplace, both using the existing `adaptive-personal-ai-os` Skill core.
+- Provide separate plugin and standalone Skill ZIPs, file manifests and SHA-256 checksums. Preserve the v1.0.0 release and its validation record.
+- Shorten the Skill frontmatter description for Claude custom Skill limits. Keep the stable Skill name, MIT license and existing workflow methods.
+- Document desktop marketplace installation, plugin ZIP upload, Claude Code commands and switching without duplicate active entries.
+- This is distribution and metadata adaptation. It adds no hooks, MCP services, memory engine or permission grants. Live Claude Desktop / Cowork activation and host behavior remain unverified; see the [1.0.1 release record](docs/RELEASE-1.0.1.md).
+
 ## 1.0.0 — 2026-10-13
 
 ### First stable release

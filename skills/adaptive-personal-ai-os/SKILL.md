@@ -1,10 +1,10 @@
 ---
 name: adaptive-personal-ai-os
-description: "ZhiXu / 智序: personal planning and everyday life support, learning with practice, contextual decisions, project continuity, scoped improvement and conservative memory-provider selection. Use for these goals or explicit ZhiXu requests. Understand ordinary language. Do not intercept simple translations, factual answers, isolated code fixes or artifact formatting."
+description: "ZhiXu / 智序: planning, learning, life, decisions, research, projects, reflection and memory choices. Use when relevant or requested; skip simple translations, facts, isolated fixes and formatting."
 license: MIT
 compatibility: "Instruction-only Agent Skills bundle. File access, native memory, research, execution and invocation depend on the host. No additional runtime or API key required."
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
 ---
 
 # ZhiXu · 智序
