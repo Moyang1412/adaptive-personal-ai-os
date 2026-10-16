@@ -88,3 +88,13 @@ Recommend an installed provider only when a concrete gap exists and the
 provider is installed, enabled, callable, licensed, maintained and isolated
 tested. Otherwise offer no extra engine. A minimal Markdown file can be an
 explicitly chosen fallback, but it is a record format, not a memory engine.
+
+## When several providers qualify
+
+Capability eligibility is not a quality ranking. Compare the actual task gap,
+existing selected provider, storage/network conditions and relevant cost evidence.
+Use the user's stated priorities; do not invent scores or treat alphabetical
+order, repository popularity or installation order as superiority. If the choice
+remains materially unresolved, keep extra persistence off and present the small
+qualified set with the decision-changing difference. Continue independent useful
+work rather than writing to every candidate.

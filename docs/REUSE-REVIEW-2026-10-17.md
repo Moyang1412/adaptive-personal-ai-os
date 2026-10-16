@@ -93,3 +93,9 @@ Keep this record updated with actual later checks, not intended results.
 
 - Re-read the actual [DSH filesystem provider README](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/skill/skill-filesystem/README.md): direct bundle depth, project/user priority, catalog/body lifecycle and warning behavior. Added targeted discovery/update guidance rather than another installer or duplicated Skill copy.
 - Updated files do not replace retained old conversation instructions; reference edits do not imply a refreshed catalog. No DSH live activation has been claimed. Added three synthetic diagnosis/read-only/negative cases; routing schema101, unit suite43, provider schema8.
+
+## Tenth checkpoint: qualification is not ranking
+
+- Reproduced an arbitrary choice when two installed, verified providers qualified: the reference selected the alphabetically first ID. It now leaves extra persistence off (D), returns the qualified candidate IDs for comparison and requires an explicit scoped choice. Candidate ordering is presentation only.
+- Runtime guidance compares task fit, existing selection, storage/network conditions and actual cost evidence instead of inventing weights or equating popularity with suitability. Independent useful work can continue while a material choice remains unresolved.
+- Unit suite44 passed, including candidate-order reversal; routing/provider schema remain101/8. No real provider was installed, selected or written by these tests.

@@ -16,6 +16,11 @@ Skill is present.
 | C Installed mature provider | A clear gap exists and installation, enablement, callability, license, maintenance and isolated tests are verified | Route authorized operations to that provider |
 | D No extra memory | There is no gap, permission or verification, or the user declines persistence | Do not create or call an extra engine |
 
+Several eligible providers still need a task-fit comparison, including existing
+selection, storage/network conditions and known costs. The reference module
+returns D plus candidate IDs when it cannot justify a choice; alphabetical
+presentation is not a quality ranking or permission to enable all candidates.
+
 ## Adapter checklist
 
 Report the provider name, version, location, local/network status, capabilities,

@@ -155,6 +155,7 @@ class RecommendationPlan:
     provider_id: str | None
     reasons: tuple[str, ...]
     requires_explicit_scope: bool = False
+    candidate_provider_ids: tuple[str, ...] = ()
 
 
 class ProviderOperation(str, Enum):
@@ -334,7 +335,14 @@ def recommend_plan(
         if assessment.eligible and provider.kind in {"installed-tool", "external-engine"}
     ]
     if requirements.explicit_gap and eligible:
-        selected = sorted(eligible, key=lambda item: item.provider_id)[0]
+        if len(eligible) > 1:
+            return RecommendationPlan(
+                "D", None,
+                ("多个 provider 满足能力条件，但尚无依据按实际成本、存储或已有选择排序；不按名称擅自决定",),
+                requires_explicit_scope=True,
+                candidate_provider_ids=tuple(sorted(item.provider_id for item in eligible)),
+            )
+        selected = eligible[0]
         return RecommendationPlan(
             "C",
             selected.provider_id,

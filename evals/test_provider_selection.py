@@ -240,6 +240,17 @@ class ProviderSelectionTests(unittest.TestCase):
             )
             self.assertFalse(assess_provider(candidate, requirements).eligible)
 
+    def test_equally_eligible_providers_are_not_ranked_by_their_names(self) -> None:
+        requirements = MemoryRequirements(True, frozenset({'save', 'read'}), False, True, 'confirm')
+        first = descriptor('aaa-provider', source_of_truth='source-one')
+        second = descriptor('zzz-provider', source_of_truth='source-two')
+        for providers in ([first, second], [second, first]):
+            plan = recommend_plan(requirements, native_available=False, native_capabilities=set(), providers=providers)
+            self.assertIsNone(plan.provider_id)
+            self.assertEqual(plan.option, 'D')
+            self.assertEqual(plan.candidate_provider_ids, ('aaa-provider', 'zzz-provider'))
+            self.assertTrue(plan.requires_explicit_scope)
+
     def test_provider_with_verified_capabilities_can_fill_an_explicit_gap(self) -> None:
         candidate = descriptor("verified-engine", cross_agent=True)
         requirements = MemoryRequirements(
