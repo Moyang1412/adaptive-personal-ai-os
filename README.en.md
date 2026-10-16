@@ -33,6 +33,8 @@ These are workflow design goals, not guaranteed results on every model. Version 
 
 ## Maintenance candidate
 
+[Candidate changes, evidence and upgrade boundaries (Chinese) →](docs/CANDIDATE-2026-10-17.md)
+
 The 2026-10-17 candidate lives on `dot/overnight-improvements-20261017`; it does not replace the v1.0.1 release. See the [reuse and verification record](docs/REUSE-REVIEW-2026-10-17.md) for selected ideas, rejected dependencies and limits. The 54 offline unit checks and 108-case routing schema pass are not evidence of live host activation or improved user outcomes.
 
 The candidate also includes a [read-only upgrade comparison](docs/INSTALL.md), plus pinned [MCP Memory](docs/MCP-MEMORY-REVIEW.md) and [Mem0](docs/MEM0-REVIEW.md) source reviews. It does not install or activate either provider.
