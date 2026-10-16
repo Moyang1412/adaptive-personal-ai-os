@@ -142,3 +142,7 @@ Added optional --candidate to the maintainer packaging command: candidate filena
 ## Cross-platform text checkouts
 
 Added explicit LF checkout rules for public text/metadata, with binary ZIP/PNG exclusions. Extended the reproducibility regression to rewrite the fixture's public text to CRLF before the optimized-mode build; both ZIPs remain byte-identical and all54 unit tests pass. A temporary Git index with core.autocrlf=true checked out Markdown as LF and retained binary bytes. This simulates Git configuration in the current environment, not a Windows host test. The read-only comparator remains byte-exact; existing local CRLF copies may still differ and must not be blindly overwritten.
+
+## Requested questionnaires are deliverables, not forced interviews
+
+Relaxed the blanket one-question-at-a-time default when the user explicitly requests a batch, form or questionnaire. The general material-question rule remains. Added an independently written adult-workshop example requiring a complete five-item instructor draft, a separate key and no learner records; older direct-help and optional-diagnostic boundaries remain unchanged. Routing schema107 passes (40positive/21negative/46ambiguous); this records intended behavior, not an executed model trial. Historical85-case wording is now explicitly dated rather than presented as the current total.
