@@ -30,6 +30,11 @@ class PackagingTests(unittest.TestCase):
         original = self.output.read_bytes()
         self.output.unlink()
         self.output.with_suffix('.verification.json').unlink()
+        # Existing Windows copies may contain CRLF even after checkout policy
+        # improves. Packaging must keep the same public bytes in that case.
+        for path in self.root.rglob('*'):
+            if path.is_file() and (path.suffix in {'.md', '.json', '.yaml'} or path.name in {'VERSION', 'LICENSE'}) and '.zhixu' not in path.parts:
+                path.write_bytes(path.read_bytes().replace(b'\r\n', b'\n').replace(b'\n', b'\r\n'))
         second = self.package(optimized=True)
         self.assertEqual(second.returncode, 0, second.stderr)
         self.assertEqual(original, self.output.read_bytes())

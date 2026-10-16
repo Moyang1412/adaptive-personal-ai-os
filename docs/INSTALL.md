@@ -136,3 +136,7 @@ python scripts/package_release.py --candidate --output-dir /新的候选输出�
 文件名带 `-candidate`，清单的 `build_channel` 为 `candidate`、`tag` 为 null。已有输出目录不会被覆盖。省略该参数保留原有发行构建命名，但两种模式都只生成本地文件，不创建 Git 标签、不发布 Release、不安装、不证明宿主已加载。`source_ref` 是调用者提供的溯源标签，脚本不会自动验证工作区与该提交一致；构建前需检查提交与工作区。
 
 English: --candidate marks local artifacts and manifests as a candidate without changing VERSION. It does not publish, install or verify the caller-supplied source reference. Verify the intended commit and clean worktree before building.
+
+### Windows与换行差异
+
+候选仓库的公共说明、版本及清单采用LF检出规则，减少不同电脑的无意义换行差异。已有副本可能仍保留CRLF；打包器会把公共文本统一为LF，升级比较工具则严格比较文件字节。若比较报告提示不同，先检查是否仅换行不同，不把它直接当作内容修改或授权覆盖。仓库规则不会迁移或重写已安装的私人目录。

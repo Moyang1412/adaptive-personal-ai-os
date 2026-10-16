@@ -138,3 +138,7 @@ Searched targeted GitHub teaching/tutor queries and inspected two pinned instruc
 ## Explicit candidate artifact labeling
 
 Added optional --candidate to the maintainer packaging command: candidate filenames, null tag, explicit build channel and candidate verification report. Default filenames remain compatible. Both modes state that publication is not assessed, and neither publishes or installs. A fixture-based regression checks both modes, ZIP CRC, manifest references and unchanged VERSION; all 54 offline unit tests pass. Caller-provided source_ref remains a label rather than an automatic Git/worktree verification.
+
+## Cross-platform text checkouts
+
+Added explicit LF checkout rules for public text/metadata, with binary ZIP/PNG exclusions. Extended the reproducibility regression to rewrite the fixture's public text to CRLF before the optimized-mode build; both ZIPs remain byte-identical and all54 unit tests pass. A temporary Git index with core.autocrlf=true checked out Markdown as LF and retained binary bytes. This simulates Git configuration in the current environment, not a Windows host test. The read-only comparator remains byte-exact; existing local CRLF copies may still differ and must not be blindly overwritten.
