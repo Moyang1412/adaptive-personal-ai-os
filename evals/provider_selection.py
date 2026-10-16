@@ -33,6 +33,14 @@ WRITE_OPERATIONS = frozenset(
 )
 
 
+def _require_boolean_fields(value: object, *names: str) -> None:
+    # Type annotations alone do not prevent a truthy JSON/config string such as
+    # "false" from being treated as verification or authorization.
+    for name in names:
+        if type(getattr(value, name)) is not bool:
+            raise ValueError(f"{name} must be a boolean")
+
+
 @dataclass(frozen=True)
 class ProviderEvidence:
     """Separate documentation claims from observations in the current host."""
@@ -42,6 +50,9 @@ class ProviderEvidence:
     enabled: bool = False
     callable: bool = False
     isolated_test: bool = False
+
+    def __post_init__(self) -> None:
+        _require_boolean_fields(self, 'documented', 'installed', 'enabled', 'callable', 'isolated_test')
 
 
 @dataclass(frozen=True)
@@ -66,6 +77,9 @@ class ProviderDescriptor:
     unverified_capabilities: FrozenSet[str] = frozenset()
 
     def __post_init__(self) -> None:
+        _require_boolean_fields(self, 'local', 'network_required')
+        if not isinstance(self.evidence, ProviderEvidence):
+            raise ValueError('evidence must be a ProviderEvidence value')
         # Snapshot caller-owned sets: later mutation must not silently change
         # which capabilities this validated descriptor claims or has verified.
         for name in ('capabilities', 'verified_capabilities', 'unverified_capabilities'):
@@ -112,6 +126,8 @@ class MemoryRequirements:
     private_profile_conflict_control: bool = False
 
     def __post_init__(self) -> None:
+        _require_boolean_fields(self, 'persistent', 'cross_agent', 'explicit_gap',
+                                'private_profile_authorized', 'private_profile_conflict_control')
         object.__setattr__(self, 'required_capabilities', frozenset(self.required_capabilities))
         unknown = set(self.required_capabilities) - CAPABILITIES
         if unknown:
@@ -164,6 +180,9 @@ class RouteRequest:
     single_writer: bool = False
 
     def __post_init__(self) -> None:
+        _require_boolean_fields(self, 'network_allowed', 'relevant', 'cross_agent', 'sharing_authorized', 'single_writer')
+        if isinstance(self.authorized_scopes, (str, bytes)):
+            raise ValueError('authorized_scopes must be a collection of scopes, not text')
         object.__setattr__(self, 'authorized_scopes', frozenset(self.authorized_scopes))
 
 
@@ -279,6 +298,9 @@ def recommend_plan(
     providers: Iterable[ProviderDescriptor],
 ) -> RecommendationPlan:
     """Select A/B/C/D without inventing an installed or tested engine."""
+
+    if type(native_available) is not bool:
+        raise ValueError('native_available must be a boolean')
 
     if requirements.user_consent == "off":
         return RecommendationPlan("D", None, ("用户选择暂不使用长期记忆",))

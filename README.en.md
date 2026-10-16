@@ -33,7 +33,7 @@ These are workflow design goals, not guaranteed results on every model. Version 
 
 ## Maintenance candidate
 
-The 2026-10-17 candidate lives on `dot/overnight-improvements-20261017`; it does not replace the v1.0.1 release. See the [reuse and verification record](docs/REUSE-REVIEW-2026-10-17.md) for selected ideas, rejected dependencies and limits. The 37 offline unit checks and 92-case routing schema pass are not evidence of live host activation or improved user outcomes.
+The 2026-10-17 candidate lives on `dot/overnight-improvements-20261017`; it does not replace the v1.0.1 release. See the [reuse and verification record](docs/REUSE-REVIEW-2026-10-17.md) for selected ideas, rejected dependencies and limits. The 42 offline unit checks and 92-case routing schema pass are not evidence of live host activation or improved user outcomes.
 
 ## Get started
 

@@ -126,6 +126,35 @@ class ProviderSelectionTests(unittest.TestCase):
                               native_capabilities={'save', 'read'}, providers=providers())
         self.assertEqual(plan.option, 'A')
 
+    def test_text_boolean_cannot_claim_verified_evidence(self) -> None:
+        with self.assertRaises(ValueError):
+            ProviderEvidence(documented="false", installed="false", enabled="false",
+                             callable="false", isolated_test="false")
+
+    def test_text_boolean_cannot_authorize_network_or_sharing(self) -> None:
+        for field in ['network_allowed', 'relevant', 'cross_agent', 'sharing_authorized', 'single_writer']:
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                values = dict(operation=ProviderOperation.READ, scope='project', user_consent='authorized',
+                              authorized_scopes={'project'}, network_allowed=False)
+                values[field] = 'false'
+                RouteRequest(**values)
+
+    def test_text_boolean_cannot_change_persistence_requirements(self) -> None:
+        with self.assertRaises(ValueError):
+            MemoryRequirements('false', frozenset({'read'}), False, False, 'confirm')
+        base = descriptor('strict')
+        with self.assertRaises(ValueError):
+            ProviderDescriptor(**{**base.__dict__, 'network_required': 'false'})
+
+    def test_scope_text_is_not_split_into_individual_authorizations(self) -> None:
+        with self.assertRaises(ValueError):
+            RouteRequest(ProviderOperation.READ, 'p', 'authorized', 'project', False)
+
+    def test_native_availability_must_be_a_boolean(self) -> None:
+        requirements = MemoryRequirements(True, frozenset({'read'}), False, False, 'confirm')
+        with self.assertRaises(ValueError):
+            recommend_plan(requirements, native_available='false', native_capabilities={'read'}, providers=[])
+
     def test_trigger_runs_only_on_first_long_term_need(self) -> None:
         self.assertTrue(evaluate_trigger(first_long_term_need=True, already_evaluated=False))
         self.assertFalse(evaluate_trigger(first_long_term_need=True, already_evaluated=True))
