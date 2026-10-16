@@ -2,7 +2,11 @@ import hashlib
 import tempfile
 import unittest
 from pathlib import Path
-from scripts.compare_skill_bundle import compare
+from scripts.compare_skill_bundle import compare, plan_upgrade
+from unittest.mock import patch
+import json
+import subprocess
+import sys
 
 class BundleComparisonTests(unittest.TestCase):
     def setUp(self):
@@ -55,5 +59,51 @@ class BundleComparisonTests(unittest.TestCase):
     def test_large_file_not_hashed(self):
         (self.bundle / 'SKILL.md').write_bytes(b'x' * (2 * 1024 * 1024 + 1))
         self.assertEqual(compare(self.bundle, self.manifest)['unreadable'], ['SKILL.md'])
+
+class UpgradePlanTests(unittest.TestCase):
+    setUp = BundleComparisonTests.setUp
+    @staticmethod
+    def make_manifest(contents):
+        return {'kind':'skill','skill_name':'adaptive-personal-ai-os','file_count':len(contents),
+                'files':{name:hashlib.sha256(value.encode()).hexdigest() for name,value in contents.items()}}
+
+    def test_three_way_categories_preserve_local_work(self):
+        old={'same.md':'old','update.md':'old','done.md':'old','personal.md':'old','conflict.md':'old','retire.md':'old','retire-local.md':'old','gone.md':'old','missing.md':'old'}
+        new={k:'new' for k in ['update.md','done.md','conflict.md','missing.md','new.md','collision.md']}
+        new.update({'same.md':'old','personal.md':'old'})
+        installed={'same.md':'old','update.md':'old','done.md':'new','personal.md':'mine','conflict.md':'mine','retire.md':'old','retire-local.md':'mine','collision.md':'private collision','extra-private.md':'never inspect'}
+        for name,value in installed.items():(self.bundle/name).write_text(value)
+        from scripts import compare_skill_bundle as tool
+        with patch.object(tool,'file_digest',wraps=tool.file_digest) as reads:
+            report=plan_upgrade(self.bundle,self.make_manifest(old),self.make_manifest(new))
+        expected={'unchanged':['same.md'],'replacement_candidates':['update.md'],'already_target':['done.md'],'local_only_changes':['personal.md'],'conflicts':['conflict.md'],'new_files':['new.md'],'new_file_collisions':['collision.md'],'retired_unmodified':['retire.md'],'retired_local_changes':['retire-local.md'],'already_absent':['gone.md'],'missing':['missing.md'],'unreadable':[]}
+        for key,value in expected.items():self.assertEqual(report[key],value,key)
+        self.assertEqual(reads.call_count,len(old.keys()|new.keys()))
+        self.assertNotIn('extra-private.md',[call.args[1] for call in reads.call_args_list])
+        self.assertFalse(report['applied'])
+        for name,value in installed.items():self.assertEqual((self.bundle/name).read_text(),value)
+
+    def test_both_manifests_validated_before_any_file_read(self):
+        valid=self.make_manifest({'SKILL.md':'public core'})
+        unsafe=self.make_manifest({'../outside':'secret'})
+        with patch('scripts.compare_skill_bundle.file_digest') as reads:
+            for old,new in [(valid,unsafe),(unsafe,valid)]:
+                with self.assertRaises(ValueError):plan_upgrade(self.bundle,old,new)
+            reads.assert_not_called()
+
+    def test_plan_does_not_follow_symlinks(self):
+        target=self.bundle/'linked.md';target.symlink_to(self.root/'outside')
+        manifest=self.make_manifest({'SKILL.md':'public core','linked.md':'new'})
+        self.assertEqual(plan_upgrade(self.bundle,manifest,manifest)['unreadable'],['linked.md'])
+
+    def test_cli_plan_reports_without_applying(self):
+        old=self.root/'old.json';new=self.root/'new.json'
+        old.write_text(json.dumps(self.make_manifest({'SKILL.md':'public core'})))
+        new.write_text(json.dumps(self.make_manifest({'SKILL.md':'next core'})))
+        script=Path(__file__).resolve().parents[1]/'scripts/compare_skill_bundle.py'
+        result=subprocess.run([sys.executable,str(script),'--bundle',str(self.bundle),'--manifest',str(new),'--baseline-manifest',str(old)],capture_output=True,text=True)
+        self.assertEqual(result.returncode,1,result.stderr)
+        report=json.loads(result.stdout);self.assertEqual(report['replacement_candidates'],['SKILL.md']);self.assertFalse(report['applied'])
+        self.assertEqual((self.bundle/'SKILL.md').read_bytes(),b'public core')
 
 if __name__ == '__main__': unittest.main()

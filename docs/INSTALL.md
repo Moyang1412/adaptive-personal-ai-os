@@ -87,3 +87,23 @@ python scripts/compare_skill_bundle.py --bundle "/明确指定的/adaptive-perso
 升级时先对照当前版本清单识别个人修改，再对照目标版本看变更范围。备份放到宿主扫描目录之外，只替换已核对的公共文件；有修改的文件应先比较合并。私人记忆、宿主配置和未列出的文件保持独立。最后重新加载技能并报告实际加载证据，不把文件相同说成已激活。
 
 English: this candidate read-only helper compares only manifest-listed public files in one explicitly selected bundle. It does not install, scan extra files, authenticate the manifest, detect the active host path, or prove activation. Preserve local edits and private context before any separate authorized upgrade.
+
+### 区分上游更新与自己的修改
+
+如果还保存着当前安装版本的可信清单，可以同时提供旧、新两个清单，生成只读的三方比较报告：
+
+```sh
+python scripts/compare_skill_bundle.py --bundle "/明确指定的/adaptive-personal-ai-os" --baseline-manifest "/下载目录/旧版-manifest.json" --manifest "/下载目录/目标版-manifest.json"
+```
+
+- replacement_candidates：本地仍与旧版一致、上游已改变的公共文件，是待核对的替换候选。
+- already_target / unchanged：已与目标一致，或三方一致，不需要重复覆盖。
+- local_only_changes：上游没改、本地有改动；保留个人修改。
+- conflicts：本地和上游都改了；需逐项比较，不直接覆盖。
+- new_file_collisions：目标新增路径在本地已有不同内容；不能把它当成空位置。
+- retired_unmodified / retired_local_changes：目标清单不再列出该文件；只是提示，不授权删除。
+- missing / unreadable：文件缺失或无法安全读取，不能当作升级完成。
+
+计划模式只读取两个清单覆盖的路径，每个路径一次；不枚举其他文件。比较期间保持目录不变，不宣称原子快照或并发防护。返回码0表示没有待处理差异，1表示报告里仍有差异/待核对项，2表示输入错误；所有模式均不执行替换、删除、合并或安装。需要先核对清单来源，比较结果也不能证明宿主已经加载。
+
+English: add --baseline-manifest for a read-only three-way classification of upstream changes, local edits, conflicts and newly occupied paths. Exit 1 means the report contains changes needing review, not that any update was applied. No files are replaced or removed.

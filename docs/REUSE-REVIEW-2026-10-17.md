@@ -121,3 +121,7 @@ The top-level first-write wording could be read as requiring another full previe
 ## Keep concise advice distinct from end-to-end execution
 
 Aligned the entrypoint's “one next step” wording with the existing workflow: a concise next action can satisfy advice, while an authorized execution request should continue toward its requested outcome or a concrete blocker. Delegation still depends on permission. Existing continue-execution, partial-blocker and read-only-status specifications cover the intended distinctions; this wording review does not claim an observed model improvement.
+
+## Make upgrade comparisons preserve local edits
+
+Extended the optional read-only comparator with two-manifest, three-way classification: distinguish upstream-only replacements, already-current files, local-only edits, conflicts, new-path collisions and retired files. It reads only the selected manifest union, once per path, and never applies/deletes/merges. Both manifests are validated before content reads. Four additional tests cover all categories, no extra-file scans, unchanged local bytes, invalid paths/symlinks and real CLI report exit behavior; 53 unit tests now pass. An actual local candidate comparison identified 15 unchanged public files and 3 already at the target without writes. This is not an installer, atomic snapshot, authenticity check or host activation test.
