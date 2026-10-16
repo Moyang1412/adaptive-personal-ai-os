@@ -52,7 +52,10 @@ continuation draft can help without claiming persistence or automatic recovery.
 Stop writes to the old provider before switching. Ask the user to select record
 IDs, subject, scope, destination and target account. Migrate only those records,
 then verify reads from the new provider and that the old provider no longer
-writes. Never bulk-import history or silently copy native memory.
+writes. Migration permission alone does not authorize deleting source records;
+source deletion needs its own explicit scope and any host-required confirmation.
+A tool's cleanup suggestion is not that authorization. Never bulk-import history
+or silently copy native memory.
 
 Users can ask to view the current choice, provider version, storage location,
 saved records and sharing scope; correct or delete one or all records; disable

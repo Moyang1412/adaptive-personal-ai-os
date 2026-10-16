@@ -150,3 +150,7 @@ Relaxed the blanket one-question-at-a-time default when the user explicitly requ
 ## Review scheduler source inspection
 
 Extended the earlier ts-fsrs README-only screening with pinned source at c8ca282edc3fe1cdfa1c24912437938b63a25cb3: model types, defaults/conversion, abstract scheduler, relevant repeat/next/retrievability entrypoints and separate optimizer documentation. Added an original review of preview versus actual rating, due dates versus completed events, caller persistence/afterHandler effects and predicted recall versus mastery. The learning reference gains a short conditional boundary; no scheduler, optimizer, database, notification or third-party runtime was installed. Added a synthetic read-only preview/overdue case;108 routing schema cases pass (40positive/21negative/47ambiguous), not model execution or effectiveness evidence.
+
+## Align public migration guidance with the runtime consent rules
+
+Corrected ambiguous Chinese wording that could read as migration requiring deletion verification of source data. The public guides now distinguish verifying the target and stopping old writes from separately authorized source deletion; a tool's cleanup suggestion supplies no authority. Clarified first assessment versus material-context rechecks in the short introductions. This aligns documentation with the existing runtime forgetting/authorization rules and unchanged synthetic lifecycle fixture (which preserves the old record); no provider operation, runtime change, new engine or model-behavior claim.
