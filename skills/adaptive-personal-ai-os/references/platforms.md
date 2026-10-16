@@ -1,6 +1,6 @@
 # Host adapters
 
-Documentation checked: 2026-10-11. Shared Agent Skills format does not guarantee identical model behavior or tool availability. Provider availability is a separate host check.
+Documentation baseline: 2026-10-11; DSH filesystem behavior rechecked 2026-10-17. Shared Agent Skills format does not guarantee identical model behavior or tool availability. Provider availability is a separate host check.
 
 | Host | Documented user-level root | Invocation | Evidence status |
 |---|---|---|---|
@@ -27,6 +27,19 @@ Codex's `agents/openai.yaml` is optional UI/invocation metadata, not a universal
 Inspect the available Skill catalog, selected path or loader trace. Reopen the host if needed and explicitly invoke the installed name. Then try a natural learning request and a negative-control one-sentence translation. For provider acceptance, also run synthetic save/read/correct/delete and scope/concurrency checks. Record host/model versions, actual loading evidence, provider storage location and the exact operations verified.
 
 A helpful answer is not activation proof. File presence is not runtime validation. No installation doctor or automated host test is included in this release.
+
+## DSH discovery and updates
+
+The filesystem provider discovers direct `<root>/<name>/SKILL.md` bundles, not
+arbitrarily nested repository folders. If the Skill is absent, inspect the named
+root, bundle depth and provider warnings before suggesting another installation.
+Project roots can precede user roots, so verify the loaded path before replacing
+a supposedly outdated user copy.
+
+A later load reads the current body; changing files does not rewrite instructions
+already retained in a conversation. Reference-only edits do not refresh the
+catalog. Reinvoke through the host's supported loader when needed, and distinguish
+updated files from newly loaded instructions. Do not promise a global hot reload.
 
 ## Choose an additional Skill by the missing capability
 

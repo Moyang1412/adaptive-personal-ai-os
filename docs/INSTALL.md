@@ -42,6 +42,10 @@ Claude Desktop / Cowork 首选在 `Customize → Plugins → Add marketplace →
 
 Codex 显式调用 `$adaptive-personal-ai-os`；Claude Code 使用 `/adaptive-personal-ai-os`；DSH 在其当前 Skill 入口选择。版本差异详见[平台适配](../skills/adaptive-personal-ai-os/references/platforms.md)。
 
+## DSH：避免多套一层目录
+
+文件系统提供方只发现根目录下一层的技能包。正确形式是 `<实际根目录>/adaptive-personal-ai-os/SKILL.md`，不是把整个仓库再套进一层目录。列表缺失时先查给定目录和警告；项目级同名包可能优先于用户级包。改文件不等于旧对话已重新加载，必要时从当前宿主入口重新调用。此处是官方实现文档核对，不是实机安装结果。
+
 ## 常见问题
 
 | 现象 | 优先检查 |

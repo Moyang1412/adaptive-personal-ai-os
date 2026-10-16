@@ -88,3 +88,8 @@ Keep this record updated with actual later checks, not intended results.
 - A previous memory choice is reused until a material host/account, scope or capability change affects a real continuity need. Only affected evidence/permission is revisited; ordinary new chats and unrelated requests do not trigger provider probing.
 - Provider outages no longer need to halt work that can continue from authorized session material. Pending writes remain incomplete, no second writer is silently selected, and old records are preserved. This is guidance for host behavior, not an implemented outage detector or background retry service.
 - The side-effect-free trigger reference accepts an explicit context-change flag, with strict boolean inputs and a relevant-need guard. Unit suite43; routing schema98; provider schema8. Added outage, new-service and no-memory-needed cases.
+
+## Ninth checkpoint: DSH installation friction
+
+- Re-read the actual [DSH filesystem provider README](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/skill/skill-filesystem/README.md): direct bundle depth, project/user priority, catalog/body lifecycle and warning behavior. Added targeted discovery/update guidance rather than another installer or duplicated Skill copy.
+- Updated files do not replace retained old conversation instructions; reference edits do not imply a refreshed catalog. No DSH live activation has been claimed. Added three synthetic diagnosis/read-only/negative cases; routing schema101, unit suite43, provider schema8.
