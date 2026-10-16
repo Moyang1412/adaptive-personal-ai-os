@@ -146,3 +146,7 @@ Added explicit LF checkout rules for public text/metadata, with binary ZIP/PNG e
 ## Requested questionnaires are deliverables, not forced interviews
 
 Relaxed the blanket one-question-at-a-time default when the user explicitly requests a batch, form or questionnaire. The general material-question rule remains. Added an independently written adult-workshop example requiring a complete five-item instructor draft, a separate key and no learner records; older direct-help and optional-diagnostic boundaries remain unchanged. Routing schema107 passes (40positive/21negative/46ambiguous); this records intended behavior, not an executed model trial. Historical85-case wording is now explicitly dated rather than presented as the current total.
+
+## Review scheduler source inspection
+
+Extended the earlier ts-fsrs README-only screening with pinned source at c8ca282edc3fe1cdfa1c24912437938b63a25cb3: model types, defaults/conversion, abstract scheduler, relevant repeat/next/retrievability entrypoints and separate optimizer documentation. Added an original review of preview versus actual rating, due dates versus completed events, caller persistence/afterHandler effects and predicted recall versus mastery. The learning reference gains a short conditional boundary; no scheduler, optimizer, database, notification or third-party runtime was installed. Added a synthetic read-only preview/overdue case;108 routing schema cases pass (40positive/21negative/47ambiguous), not model execution or effectiveness evidence.

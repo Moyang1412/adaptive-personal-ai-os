@@ -95,6 +95,17 @@ Use a short learning card only when it helps continuity; do not require users to
 
 With permission, save only relevant evidence, sources, misconceptions, checks and next steps in a separate learning scope under the chosen memory policy. Do not silently create a profile or scan history. Reminders require an available scheduler and an actual user request; a planned date is not a scheduled notification.
 
+### If a review scheduler is already available
+
+Reuse an authorized existing review tool for an explicit flashcard/review task;
+do not add a second learning database or infer that a scheduling library is a
+memory provider. Keep possible rating/interval previews separate from the one
+actual review and its observed rating. A due date is not completion, and an
+overdue or skipped card is not evidence for an automatic failure rating. A
+computed next state is not a confirmed save or notification. Treat predicted
+recall as a model estimate for that card, not demonstrated course mastery or
+transfer; preserve the assistance and consent boundaries above.
+
 ## Primary rationale, not product certification
 
 - Roediger & Karpicke (2006), Test-Enhanced Learning: [doi:10.1111/j.1467-9280.2006.01693.x](https://doi.org/10.1111/j.1467-9280.2006.01693.x). Retrieval improved delayed retention in passage-learning experiments; this is not evidence for constant quizzes in every skill.
