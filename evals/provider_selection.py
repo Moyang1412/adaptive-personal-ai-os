@@ -285,9 +285,6 @@ def recommend_plan(
     if not requirements.persistent:
         return RecommendationPlan("D", None, ("当前请求不需要跨会话保存",))
 
-    provider_list = tuple(providers)
-    _ensure_single_source(provider_list)
-
     native_covers = requirements.required_capabilities.issubset(native_capabilities)
     if native_available and native_covers and not requirements.cross_agent:
         return RecommendationPlan(
@@ -295,6 +292,9 @@ def recommend_plan(
             None,
             ("当前 Agent 的原生记忆已经覆盖本次需求",),
         )
+
+    provider_list = tuple(providers)
+    _ensure_single_source(provider_list)
 
     assessments = [assess_provider(provider, requirements) for provider in provider_list]
     eligible = [

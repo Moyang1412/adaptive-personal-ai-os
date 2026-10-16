@@ -87,6 +87,20 @@ class PackagingTests(unittest.TestCase):
             self.assertIn('description must be', result.stderr)
             self.assertFalse(self.output.exists())
 
+    def test_body_text_cannot_supply_missing_frontmatter_metadata(self):
+        skill = self.root / 'skills/adaptive-personal-ai-os/SKILL.md'
+        original = skill.read_text()
+        import re
+        for index, pattern in enumerate([r'^name:.*$', r'^description:.*$', r'^  version:.*$']):
+            with self.subTest(pattern=pattern):
+                self.output = Path(self.temp.name) / f'metadata-{index}.zip'
+                line = re.search(pattern, original, re.MULTILINE).group(0)
+                skill.write_text(re.sub(pattern, '', original, count=1, flags=re.MULTILINE)
+                                 + '\n' + line + '\n')
+                result = self.package(optimized=True)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertFalse(self.output.exists())
+
     def test_nonportable_version_rejected_before_packaging(self):
         (self.root / 'skills/adaptive-personal-ai-os/VERSION').write_text('../outside')
         result = self.package(optimized=True)

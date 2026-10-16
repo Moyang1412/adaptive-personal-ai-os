@@ -55,3 +55,10 @@ Keep this record updated with actual later checks, not intended results.
 - Python unit suite now 35 passed, including blank/non-text descriptions and invalid version paths.
 - Entrypoint now routes explicit additional-Skill selection to the relevant platform reference; research links to the same guidance instead of duplicating it.
 - Candidate packaging and relative-link checks passed after routing changes. No live host/model benchmark or efficacy claim has been added.
+
+## Fourth checkpoint
+
+- Native memory that meets the requested scope now returns before enumerating external provider descriptors; a generator regression proves unnecessary provider probing is skipped.
+- Packaging reads name, description and version from the leading frontmatter only. A failing regression demonstrated that body text previously masked missing metadata; the corrected validator rejects those cases in optimized mode too.
+- Python suite: 37 passed; routing/provider schema remain 89/8. These are offline engineering checks, not host activation or model-behavior evidence.
+- The earlier candidate has since been published on an isolated maintenance branch; default branch and releases remain unchanged. No private records are included.

@@ -53,15 +53,19 @@ def main():
     if not (public_bytes(ROOT / 'VERSION').decode('utf-8').strip() == version):
         raise ValueError("package validation failed: (ROOT / 'VERSION').read_text(encoding='utf-8').strip() == version")
     text = public_bytes(SKILL / 'SKILL.md').decode('utf-8')
-    if not (re.search(r'(?m)^name: adaptive-personal-ai-os$', text)):
-        raise ValueError("package validation failed: re.search(r'(?m)^name: adaptive-personal-ai-os$', text)")
-    description_line = re.search(r'(?m)^description:[ \t]*(.+)$', text)
+    header = re.match(r'\A---\n(.*?)\n---(?:\n|$)', text, re.DOTALL)
+    if not header:
+        raise ValueError('SKILL.md needs a complete leading frontmatter block')
+    metadata_text = header.group(1)
+    if not (re.search(r'(?m)^name: adaptive-personal-ai-os$', metadata_text)):
+        raise ValueError("package validation failed: re.search(r'(?m)^name: adaptive-personal-ai-os$', metadata_text)")
+    description_line = re.search(r'(?m)^description:[ \t]*(.+)$', metadata_text)
     if not description_line:
         raise ValueError('SKILL.md needs a JSON-quoted description')
     description = json.loads(description_line.group(1))
     if not isinstance(description, str) or not description.strip() or len(description) > 200:
         raise ValueError('description must be non-empty text of at most 200 characters')
-    if not (re.search(r'(?m)^  version: "' + re.escape(version) + r'"$', text)):
+    if not (re.search(r'(?m)^  version: "' + re.escape(version) + r'"$', metadata_text)):
         raise ValueError('package validation failed: re.search(r\'(?m)^  version: "\' + re.escape(version) + r\'"$\', text)')
     paths = [Path('skills/adaptive-personal-ai-os') / name for name in PUBLIC_RUNTIME_FILES]
     files = {}

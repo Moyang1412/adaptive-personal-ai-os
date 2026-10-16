@@ -117,6 +117,15 @@ class ProviderSelectionTests(unittest.TestCase):
                                   native_capabilities=set(), providers=providers())
             self.assertEqual(plan.option, 'D')
 
+    def test_sufficient_native_memory_does_not_probe_unneeded_providers(self) -> None:
+        def providers():
+            raise AssertionError('native-first selection must not probe external registry')
+            yield
+        requirements = MemoryRequirements(True, frozenset({'save', 'read'}), False, False, 'confirm')
+        plan = recommend_plan(requirements, native_available=True,
+                              native_capabilities={'save', 'read'}, providers=providers())
+        self.assertEqual(plan.option, 'A')
+
     def test_trigger_runs_only_on_first_long_term_need(self) -> None:
         self.assertTrue(evaluate_trigger(first_long_term_need=True, already_evaluated=False))
         self.assertFalse(evaluate_trigger(first_long_term_need=True, already_evaluated=True))
