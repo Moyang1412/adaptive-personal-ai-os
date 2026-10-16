@@ -69,3 +69,8 @@ This repository provides assessment, routing, authorization and boundaries. It
 does not provide a database, vector search, automatic importer, synchronizer or
 background memory service. A Markdown file is a minimal manual fallback, not a
 complete memory engine.
+
+
+## 源码审查候选 / Source-reviewed candidate
+
+[MCP Memory review](MCP-MEMORY-REVIEW.md) records a pinned source inspection, concrete scope/concurrency limits and what remains untested. It is not an installation or recommendation of a currently available provider.

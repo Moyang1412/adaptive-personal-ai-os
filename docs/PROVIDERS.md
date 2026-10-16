@@ -43,3 +43,8 @@
 本地保存不代表内容永远不会离开设备。Agent 将记录加入云端模型上下文时，相关内容可能发送给模型服务商。不要保存密码、密钥、验证码；健康、关系和财务信息默认不长期保存。
 
 本仓库只提供判断、路由、授权和边界说明，以及一个无副作用的评估参考模块。它不包含数据库、向量检索、自动导入、自动同步或后台记忆服务。没有成熟 provider 时，优先选择 D；手工 Markdown 只是最小文件型备用记录，不是完整记忆引擎。
+
+
+## 源码审查候选 / Source-reviewed candidate
+
+[MCP Memory review](MCP-MEMORY-REVIEW.md) records a pinned source inspection, concrete scope/concurrency limits and what remains untested. It is not an installation or recommendation of a currently available provider.

@@ -98,3 +98,15 @@ order, repository popularity or installation order as superiority. If the choice
 remains materially unresolved, keep extra persistence off and present the small
 qualified set with the decision-changing difference. Continue independent useful
 work rather than writing to every candidate.
+
+
+## Retrieval boundaries include relationships
+
+A text search, entity-name prefix or project tag is not an authorization boundary.
+Verify that the actual read path is limited to the authorized scope before data
+enters the model context. Inspect related-edge endpoints, snippets and metadata
+as well as primary records: opening one allowed node may expose names of other
+nodes. Do not read an entire mixed-scope store and call later filtering isolation.
+If the provider lacks a verified boundary, use an explicitly authorized separate
+store/adapter or no extra engine. Do not silently configure either. File locks
+coordinate writes; they do not resolve conflicting factual corrections by themselves.

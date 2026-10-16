@@ -103,3 +103,9 @@ Keep this record updated with actual later checks, not intended results.
 ## Read-only upgrade comparison (candidate maintainer utility)
 
 Added a standard-library-only comparator for a user-selected standalone bundle and the existing release manifest format. It reports matching/different/missing/unreadable public files, does not scan extra files or host roots, refuses manifest traversal and symlinks, and does not perform upgrades. Five synthetic tests cover unchanged bytes, local edits, missing/non-file entries, unsafe manifests, links and size limits. Authenticity, concurrent hostile mutation and host activation are explicitly outside its claim. This is an original utility, not a copied installer or added runtime dependency.
+
+## MCP Memory: concrete source review instead of another engine
+
+Reviewed `modelcontextprotocol/servers` at `bbb701e7ac1e57f3edd1c2836b94c5457eaf7b9c`: memory source, README, package configuration and root license. The current code contains a cross-process file lock as well as an in-process queue, so an old blanket claim that it lacks cross-process coordination would be wrong. Text searches and node opens still expose incident relation endpoints and are not authorization filters. Added a source-linked adoption assessment and a runtime rule to inspect the complete retrieval boundary before calling scope verified. No upstream code or automatic-profile prompt copied, no package installed, no real memory read/written, and no runtime capability marked verified. License transition is recorded rather than assumed MIT-only.
+
+Proposed behavior checks (not executed model trials): (1) an allowed node returned with an out-of-scope relationship must not be called scoped isolation; (2) a verified separate authorized store remains a possible bounded solution, not an automatic installation; (3) a lock does not settle incompatible factual corrections. Existing unit/schema/package checks remain structural or fixture evidence only.
