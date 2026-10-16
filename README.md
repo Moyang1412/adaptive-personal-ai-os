@@ -33,7 +33,7 @@ Adaptive Personal AI OS · **v1.0.1 · Claude 插件适配**
 
 ## 开发中候选
 
-2026-10-17 的优化保存在 `dot/overnight-improvements-20261017`，尚未替换正式 v1.0.1 Release。重点是教材来源与续接、额外Skill选择、原生记忆优先、包校验与精简调试流程；具体借鉴、拒绝引入的依赖及测试边界见 [维护记录](docs/REUSE-REVIEW-2026-10-17.md)。53项离线单元测试与104条路由用例的结构检查通过，不代表真实宿主激活或效果提升已经验证。
+2026-10-17 的优化保存在 `dot/overnight-improvements-20261017`，尚未替换正式 v1.0.1 Release。重点是教材来源与续接、额外Skill选择、原生记忆优先、包校验与精简调试流程；具体借鉴、拒绝引入的依赖及测试边界见 [维护记录](docs/REUSE-REVIEW-2026-10-17.md)。53项离线单元测试与106条路由用例的结构检查通过，不代表真实宿主激活或效果提升已经验证。
 
 候选版还提供[升级前只读对比](docs/INSTALL.md)，区分上游更新、个人改动和冲突；现成记忆方案的实际源码审查见[MCP Memory](docs/MCP-MEMORY-REVIEW.md)和[Mem0](docs/MEM0-REVIEW.md)。没有自动安装或启用这些服务。
 
@@ -104,7 +104,7 @@ https://github.com/Moyang1412/adaptive-personal-ai-os/tree/v1.0.1/skills/adaptiv
 
 两种方式使用同一标准：按具体能力、表现和所需帮助判断；依据证据减少已掌握部分的重复教学。助手完成不算用户掌握，拒答或回复慢不表示不会；证据不足就保留未知，并继续提供帮助。学习卡与长期保存均可选。
 
-采用有研究依据的方法，不代表这份 Skill 已证明能提高学习成绩。科学性要用后续独立表现、保持与迁移核验；效率要比较同等学习效果下的时间和负担，不能只看问题少或完成快。不会保证最优路线。[学习协议与研究依据 →](skills/adaptive-personal-ai-os/references/learning.md)
+采用有研究依据的方法，不代表这份 Skill 已证明能提高学习成绩。科学性要用后续独立表现、保持与迁移核验；效率要比较同等学习效果下的时间和负担，不能只看问题少或完成快。不会保证最优路线。[学习协议与研究依据 →](skills/adaptive-personal-ai-os/references/learning.md) · [额外教学Skill的源码取舍 →](docs/TUTOR-SKILL-REVIEW.md)
 
 ## 其他工作方式
 

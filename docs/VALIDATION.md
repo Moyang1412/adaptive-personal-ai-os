@@ -2,7 +2,7 @@
 
 ## 2026-10-17 maintenance candidate
 
-Branch: `dot/overnight-improvements-20261017`, based on v1.0.1 main. This is not a new release. Current offline evidence: 53 unit tests, 104 routing-case schema checks and 8 provider-case schema checks; reproducible plugin/Skill packaging, CRC/per-file readback and local runtime references. The official specification permits compatibility; a local parsed-field check passes, but the official skills-ref CLI was not run. No live host activation, paired model behavior trial or learner study was performed in this pass. See the [maintenance record](REUSE-REVIEW-2026-10-17.md).
+Branch: `dot/overnight-improvements-20261017`, based on v1.0.1 main. This is not a new release. Current offline evidence: 53 unit tests, 106 routing-case schema checks and 8 provider-case schema checks; reproducible plugin/Skill packaging, CRC/per-file readback and local runtime references. The official specification permits compatibility; a local parsed-field check passes, but the official skills-ref CLI was not run. No live host activation, paired model behavior trial or learner study was performed in this pass. See the [maintenance record](REUSE-REVIEW-2026-10-17.md).
 
 The following reports remain historical evidence for their own snapshots.
 

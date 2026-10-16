@@ -54,7 +54,7 @@ def compare(bundle, manifest):
     bundle = validate_bundle(bundle)
     files = manifest_files(manifest)
     report = {'matching': [], 'different': [], 'missing': [], 'unreadable': [],
-              'scope': 'Only manifest-listed files; extra/private files are not enumerated or read.',
+              'scope': 'Only manifest-listed paths are read for hashing, including local edits at those paths; extra files are not enumerated or read.',
               'activation': 'not assessed', 'manifest_authenticity': 'not assessed',
               'writes': 'none'}
     for name, expected in sorted(files.items()):

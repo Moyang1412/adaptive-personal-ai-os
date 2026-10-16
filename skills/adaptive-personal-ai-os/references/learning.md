@@ -27,6 +27,20 @@ Use answer keys, domain tests or qualified review where appropriate. A test pass
 
 Without research access, disclose which sources were not verified and keep the path provisional. Never fabricate citations or expert approval. High-risk medical/physical/safety instruction needs appropriate professional safeguards rather than risky self-experiments.
 
+## Give missing facts before asking for reasoning
+
+Do not ask a learner to infer an arbitrary convention, undocumented API behavior
+or an unseen source fact. Provide or verify that needed fact first; then offer a
+small application when it would change the next teaching decision. A solvable
+reasoning step may benefit from an optional hint, but a missing factual premise
+is not evidence of poor reasoning. Stop an unproductive guessing loop and explain.
+
+Anchor examples to the actual task or artifact when available. An analogy can
+help, but connect it back to the real mechanism and name a relevant limit; being
+able to repeat the analogy is not evidence of performing the target skill.
+Starting at a course unit or choosing a beginner curriculum records a learning
+plan, not demonstrated competence at that level. Keep those labels separate.
+
 ## Capability evidence shared by both routes
 
 Reason about specific capabilities, not a single global beginner/intermediate label. Each useful observation identifies the task and conditions, the learner's actual contribution, assistance received, result, recency when known, and what remains uncertain. Keep this in session unless persistence is authorized.
