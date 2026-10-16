@@ -50,3 +50,14 @@
 [MCP Memory review](MCP-MEMORY-REVIEW.md) records a pinned source inspection, concrete scope/concurrency limits and what remains untested. It is not an installation or recommendation of a currently available provider.
 
 [Mem0 source review](MEM0-REVIEW.md) examines model/embedding calls, inference-driven mutations and operation-specific scope checks in a pinned Python-library version; it is not live acceptance.
+
+
+## 根据现有环境缩小候选，而不是按热度安装
+
+| 已核对对象 | 适合进一步评估的实际缺口 | 接入前仍需证明 |
+|---|---|---|
+| [MCP Memory](MCP-MEMORY-REVIEW.md) | 已有MCP宿主，需要小型本地图谱记录 | 明确文件/读取范围、关联端点、确切版本的并发行为 |
+| [Mem0](MEM0-REVIEW.md) | 确实需要事实提取与语义检索 | 完整模型/embedding成本与去向、推断的更新/删除、各操作授权 |
+| [LangMem](LANGMEM-REVIEW.md) | 已有LangGraph与store，希望复用记忆构件 | namespace身份绑定、具体允许动作、后端重启持久性和冲突控制 |
+
+这是源码审查后的条件清单，不是三者都值得安装，更不是当前已验证provider列表。原生能力覆盖需求时，继续用原生能力。

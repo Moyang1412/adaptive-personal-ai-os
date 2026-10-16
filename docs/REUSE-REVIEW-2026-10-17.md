@@ -125,3 +125,8 @@ Aligned the entrypoint's “one next step” wording with the existing workflow:
 ## Make upgrade comparisons preserve local edits
 
 Extended the optional read-only comparator with two-manifest, three-way classification: distinguish upstream-only replacements, already-current files, local-only edits, conflicts, new-path collisions and retired files. It reads only the selected manifest union, once per path, and never applies/deletes/merges. Both manifests are validated before content reads. Four additional tests cover all categories, no extra-file scans, unchanged local bytes, invalid paths/symlinks and real CLI report exit behavior; 53 unit tests now pass. An actual local candidate comparison identified 15 unchanged public files and 3 already at the target without writes. This is not an installer, atomic snapshot, authenticity check or host activation test.
+
+
+## LangMem: bind capabilities to configuration
+
+Inspected `langchain-ai/langmem` at `48e3c11f5bb527282c7d5339c6a87a0b35abccfc`: tool implementations, relevant extraction entrypoints, namespace templating, README, dependencies and MIT license. Added a concrete review and a three-option environment-fit table. Documented in-process versus restart persistence, differing action defaults and the need to verify namespace identity/actual backend rather than package-wide capability labels. No code copied, package installed, model called or private data read. The runtime gained a short configured-backend rule; documentation-only source review is not runtime acceptance. Installation guidance now distinguishes the stable default link from explicitly selected, commit-recorded development candidates without overwriting private/local modifications.

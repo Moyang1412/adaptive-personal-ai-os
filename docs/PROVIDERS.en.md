@@ -76,3 +76,14 @@ complete memory engine.
 [MCP Memory review](MCP-MEMORY-REVIEW.md) records a pinned source inspection, concrete scope/concurrency limits and what remains untested. It is not an installation or recommendation of a currently available provider.
 
 [Mem0 source review](MEM0-REVIEW.md) examines model/embedding calls, inference-driven mutations and operation-specific scope checks in a pinned Python-library version; it is not live acceptance.
+
+
+## Narrow candidates by the existing environment
+
+| Source-reviewed option | Concrete gap worth assessing | Evidence still required |
+|---|---|---|
+| [MCP Memory](MCP-MEMORY-REVIEW.md) | Small local graph in an existing MCP host | Authorized file/read scope, edge endpoints, installed-version concurrency |
+| [Mem0](MEM0-REVIEW.md) | Fact extraction and semantic retrieval | Model/embedding data path and cost, inferred mutation effects, per-operation authorization |
+| [LangMem](LANGMEM-REVIEW.md) | Reuse an existing LangGraph/store stack | Trusted namespace binding, permitted actions, backend restart persistence and conflict handling |
+
+These are conditional assessment paths, not a recommendation to install all three or a list of currently verified providers. Keep native memory when it already meets the need.

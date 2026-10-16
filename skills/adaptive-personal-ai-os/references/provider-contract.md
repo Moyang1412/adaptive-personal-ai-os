@@ -126,3 +126,11 @@ and operations, do not call it a simple authorized append. Check get/update/dele
 by ID separately from scoped search; passing a project filter to one operation
 does not prove all others enforce the same boundary. Use a verified adapter or
 choose no extra engine rather than inventing unsupported dry-run or rollback modes.
+
+
+Bind each capability to the actual entrypoint, enabled operation set, namespace
+and storage backend, not just a package name. An in-process example store does
+not prove restart persistence; a namespace template does not authenticate its
+caller; different tools in one package can permit different mutations. Reuse an
+already configured authorized stack before adding another framework, and keep
+unobserved persistence or conflict controls unverified.

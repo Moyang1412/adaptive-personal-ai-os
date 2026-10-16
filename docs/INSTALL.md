@@ -10,6 +10,23 @@ Claude Desktop / Cowork 首选在 `Customize → Plugins → Add marketplace →
 
 插件与直接 Skill 复用同一核心。**同一宿主只启用一种入口**；已有裸 Skill 时，先备份到扫描目录外，再切换。文件或清单检查不表示真实桌面端已经激活。
 
+## 正式版与开发候选不要混淆
+
+首页默认安装链接指向正式v1.0.1。若明确希望试用本轮优化，请选择[开发候选的完整Skill目录](https://github.com/Moyang1412/adaptive-personal-ai-os/tree/dot/overnight-improvements-20261017/skills/adaptive-personal-ai-os)，让Agent记录实际取到的提交SHA。该分支持续变化，不是新Release；不能只比较VERSION文件就认定内容相同。
+
+可交给有相应权限的Agent：
+
+```text
+我选择智序的开发候选 dot/overnight-improvements-20261017。
+请核对当前宿主实际加载路径，以及该分支当前提交。
+先比较已有公共文件与候选，保留我的私人资料、配置和本地改动。
+不要覆盖有冲突的文件，也不要自动启用记忆服务或安装额外依赖。
+在宿主允许的权限内更新无冲突的公共文件；需要确认的步骤按宿主流程处理。
+完成后报告实际更新的文件、来源提交和加载证据；没有加载证据就明确说明。
+```
+
+有本地改动时使用下方只读比较工具辅助判断。它不会替代授权、备份或实际宿主加载检查，也不会自动将候选提升为正式版。
+
 ## 最短路径
 
 已有 Agent 的用户，可以把首页的安装请求与 Skill 文件夹地址交给它，让它先核对自己的加载目录，再安装并报告证据。也可以通过 GitHub 的 Code → Download ZIP 下载仓库，打开 `skills/adaptive-personal-ai-os/`。
