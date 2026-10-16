@@ -49,6 +49,16 @@ old records or their provenance.
 
 A direct request to remember information can authorize that exact save when destination and scope are already established. Do not repeat identical approval unnecessarily. A temporary response-format request is not standing permission to persist a preference.
 
+Keep confirmation proportional to the selected policy. In confirm mode, show the
+specific record and destination before each save. With valid standing low-risk
+authorization, unchanged destination/account/scope and verified capability, do
+not ask the same setup questions or require a new preview for every routine
+progress entry unless host policy requires it. Report what actually changed in
+a concise task update. New sensitive content, a new recipient, broader scope or
+revoked authorization is not covered by the previous choice. If a write fails,
+report that it remains unsaved; authorization does not turn an attempted save
+into completed persistence.
+
 These choices do not disable the host's native auto-memory or chat history. Explain that those are separate settings. Never promise global forgetting.
 
 ## Private location and minimal files

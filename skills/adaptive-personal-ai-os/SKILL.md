@@ -58,7 +58,7 @@ At the first real need for long-term continuity:
 2. Inspect native memory, installed and authorized tools, and their actual session availability. Do not scan all history or credentials.
 3. Record documentation claims, installed state, enabled state, callable state and isolated-test state separately.
 4. Recommend one choice: **A** native memory; **B** native memory plus an explicitly scoped private profile for cross-Agent use; **C** an installed mature provider that fills a verified gap; or **D** no extra long-term memory.
-5. Before any write, show the provider, storage location, record, scope, account and network condition. Use one source of truth. Switching providers requires explicit record selection and stops old-provider writes first.
+5. Establish the provider, storage location, record scope, account and network condition before the first write or a material change. Apply the chosen consent policy: preview each save in confirm mode; reuse valid standing authorization for in-scope low-risk writes unless the host requires renewed approval. Report actual results, not another setup interview. Use one source of truth; switching providers requires explicit record selection and stops old-provider writes first.
 
 An installed Skill is not a provider. A provider that is documented but not callable or isolated-tested is not available for recommendation. If no mature provider meets the scope, choose D. A hand-maintained Markdown file is only a minimal record fallback, never an automatic memory engine.
 
