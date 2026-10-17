@@ -9,7 +9,7 @@ Read only the relevant section or reference:
 | Need | Reference |
 |---|---|
 | Routines, habits, chores, starting a task or protecting leisure | [Daily life](daily-life.md) |
-| Meals and supplies, housing/admin errands, travel logistics or digital upkeep | [Daily life: practical coordination](daily-life.md#practical-coordination) |
+| Meals and supplies, housing/admin errands, travel logistics or digital upkeep | [Practical coordination](practical-life.md) |
 | General sleep, movement or food habits; distinguish symptoms from routine support | [Health habits](health-habits.md) |
 | Household cash flow, a purchase, work options or a career exploration | [Money and career](money-career.md) |
 | Family cooperation, relationships, emotional support or boundaries | [Relationships and rest](relationships-rest.md) |

@@ -8,6 +8,8 @@ import tempfile
 import unittest
 import zipfile
 
+from scripts.package_claude_plugin import PUBLIC_RUNTIME_FILES
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -40,7 +42,14 @@ class PackagingTests(unittest.TestCase):
         self.assertEqual(original, self.output.read_bytes())
         with zipfile.ZipFile(self.output) as archive:
             self.assertIsNone(archive.testzip())
-            self.assertEqual(len(archive.namelist()), 21)
+            self.assertEqual(len(archive.namelist()), len(PUBLIC_RUNTIME_FILES) + 3)
+            self.assertIn("skills/adaptive-personal-ai-os/references/practical-life.md", archive.namelist())
+
+    def test_missing_conditionally_linked_runtime_file_is_rejected(self):
+        (self.root / 'skills/adaptive-personal-ai-os/references/practical-life.md').unlink()
+        result = self.package(optimized=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertFalse(self.output.exists())
 
     def test_version_mismatch_rejected_in_optimized_mode(self):
         (self.root / 'VERSION').write_text('999.0.0\n')

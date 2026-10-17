@@ -166,3 +166,7 @@ Added an original dependency-free summarize_eval_runs.py for reviewed records, n
 ## Small forward response check after the expansion
 
 Ran two isolated instruction-reading contexts, each receiving the same four fictional life scenarios under old d2afc547 and new79c6292 runtime snapshots. Eight actual model-generated user-facing outputs are retained in [the pilot](../evals/results/2026-10-17-life-expansion/REPORT.md). Author review found both versions met the basic criteria; no improvement claim is supported. Not blinded, not held out, not separate fresh sessions per case, no actual host installation or real-user outcomes. Model/settings/cost details were not captured. The accounting tool retains the reviews but flags all four pairs as activation-unverified rather than manufacturing an installed-Skill improvement. This commit only archives evidence/docs; runtime and packaged79c6292 remain unchanged.
+
+## Progressive disclosure for practical life detail
+
+Moved supplies, appointments, travel and digital upkeep into a conditionally linked practical-life.md rather than loading them for every habit request. Daily-life text decreases from7704 to5056characters; this is file-size evidence, not measured token/latency savings. Packaging now derives counts from its explicit public whitelist and verified plugin manifest; a missing practical-life file fails the optimized build. All73unit tests pass;118routing/8provider schemas remain unchanged. Four-pair response evidence remains tied to its earlier snapshot, with no invented new host/model result.

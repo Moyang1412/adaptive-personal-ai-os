@@ -13,7 +13,7 @@ PUBLIC_RUNTIME_FILES = (
     'references/daily-life.md', 'references/health-habits.md',
     'references/learning.md', 'references/life.md', 'references/memory.md',
     'references/money-career.md', 'references/planning-decisions.md',
-    'references/platforms.md', 'references/provider-contract.md',
+    'references/platforms.md', 'references/practical-life.md', 'references/provider-contract.md',
     'references/provider-descriptor.schema.json', 'references/relationships-rest.md',
     'references/research.md', 'references/templates.md', 'references/workflows.md',
 )
@@ -127,7 +127,7 @@ def main():
         if not (all(archive.read(name) == raw for name, raw in files.items())):
             raise ValueError('package validation failed: all(archive.read(name) == raw for name, raw in files.items())')
     report = {'version': version, 'plugin': 'zhixu', 'skill': 'adaptive-personal-ai-os',
-              'output': str(output), 'stage': str(stage), 'files': len(files), 'runtime_files': 18,
+              'output': str(output), 'stage': str(stage), 'files': len(files), 'runtime_files': len(PUBLIC_RUNTIME_FILES),
               'description_characters': len(description), 'zip_sha256': sha(output.read_bytes()),
               'zip_bytes': output.stat().st_size, 'crc_and_files_match': True,
               'relative_runtime_references_closed': True,

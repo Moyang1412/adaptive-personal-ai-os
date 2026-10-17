@@ -39,8 +39,9 @@ def main():
         plugin_files = {name: archive.read(name) for name in archive.namelist()}
     prefix = 'skills/adaptive-personal-ai-os/'
     skill_files = {name[len(prefix):]: raw for name, raw in plugin_files.items() if name.startswith(prefix)}
-    if not (len(skill_files) == 18):
-        raise ValueError('package validation failed: len(skill_files) == 18')
+    expected_skill_files = {name[len(prefix):] for name in local['file_sha256'] if name.startswith(prefix)}
+    if set(skill_files) != expected_skill_files or 'SKILL.md' not in expected_skill_files:
+        raise ValueError('package validation failed: standalone files differ from verified plugin manifest')
     skill_zip = output / (stem + '-skill.zip')
     with zipfile.ZipFile(skill_zip, 'x', compression=zipfile.ZIP_DEFLATED) as archive:
         for name, raw in sorted(skill_files.items()):

@@ -26,46 +26,12 @@ When sharing work is the problem, include noticing, planning, supplies, doing an
 
 Rest and enjoyable leisure can be the desired result. A break needs no productivity repayment, log or self-improvement task. If the person rejects tracking or exercises, continue helping with the requested practical option.
 
-## Practical coordination
-
-Use these only for the requested task, not as a requirement to maintain a household
-database. Reuse an existing list or system before suggesting another app.
-
-- **Meals and supplies:** distinguish what is actually on hand, reserved for a
-  plan, on a shopping list, ordered and received. Check meaningful quantities,
-  units, storage and preparation constraints before making a shopping list. A
-  recorded date or inventory entry does not establish food safety; use appropriate
-  current guidance for that question. Do not equate a missed inventory update
-  with zero stock or count the same ingredient for two incompatible plans.
-- **Housing, appointments and errands:** work backward from the actual deadline,
-  required documents and dependencies. Distinguish a draft, a submitted request,
-  a confirmed appointment and a completed outcome. Check the current local
-  provider or authority for eligibility, fees and required originals; a checklist
-  from another place is not local law. Preserve an existing booking until a
-  replacement and any cancellation consequences are verified and authorized.
-- **Travel and outings:** check dates, local time zones, door-to-door travel,
-  accessibility and relevant opening/booking constraints. Leave a practical
-  fallback for a fragile connection or weather-dependent activity; do not treat
-  a search result as confirmed availability. Match structure to the desired
-  relaxation or exploration, rather than fill all free time.
-- **Digital upkeep:** separate a local file, a synced copy and a tested backup.
-  Before cleanup or migration, identify the intended copy and a recovery path;
-  deleting a synced item may propagate. A backup job reporting success is not
-  evidence that a restore was tested. Do not collect credentials, broaden access
-  or delete personal data merely to simplify an organisation plan.
-
 For an easily forgotten or interrupted action, offer the least burdensome cue
 that will actually be encountered: a visible object, an existing checklist or an
 authorized reminder. Specify the next action and when it becomes relevant, not
 just a vague label. Keep suggested, scheduled, delivered and acted-on separate.
 If maintaining the aid costs more effort than it saves, simplify or drop it;
 external reminders are optional, not a universal cure for forgetting.
-
-When using a household tool, inspect coupled effects before recording an action:
-marking a chore may also consume stock, advance a schedule or assign someone.
-Consent to a record is not automatically consent to those additional effects.
-Represent skipped, undone and completed actions distinctly and verify the actual
-update before relying on the next calculated state.
 
 ## Evidence and limits
 
@@ -75,6 +41,5 @@ update before relying on the next calculated state.
 - [Albulescu et al. (2022)](https://doi.org/10.1371/journal.pone.0272460): micro-break wellbeing results do not establish a universal productivity gain or optimal timer.
 - [Aviv et al. (2024 online)](https://doi.org/10.1007/s00737-024-01490-w): household cognitive labour associations in a selected maternal sample; no causal prescription for every household.
 - [Gilbert (2015), author full text](https://samgilbert.net/pubs/Gilbert2015QJEP.pdf): four online experiments examined short delayed intentions and voluntary reminders; naturalistic prediction was weak. This motivates optional task-specific cues, not guaranteed real-life adherence or automated monitoring.
-- [Grocy chore implementation, pinned source](https://github.com/grocy/grocy/blob/41206cb90154e0d17d3e108cc1f182b94fdb465d/services/ChoresService.php): distinguishes tracked/skipped/undone states and exposes coupled stock/assignment effects. Borrow the state distinctions and inspect side effects; do not install its household system or claim its default assignments are fair for a family.
 
 These studies motivate testing the mechanisms under their conditions. They do not establish that this Skill forms habits, reduces procrastination or improves household fairness.
