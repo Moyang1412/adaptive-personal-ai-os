@@ -82,5 +82,17 @@
     "Agent operation accounts are self-reports, not exported complete traces",
     "No repeated runs or statistical failure rate",
     "No Windows device installation or real user outcomes"
-  ]
+  ],
+  "final_package_check": {
+    "source_commit": "313df91b41c7aaf910ab2abeeed4e89a6d929804",
+    "version": "1.1.0-preview.1",
+    "skill_files": 21,
+    "plugin_files": 24,
+    "skill_archive_sha256": "856e7199f7c0908788ce66ec2a2576772ccccf6840eaa8bea76d752444d6cd20",
+    "plugin_archive_sha256": "e38c0ee0f442bf0eadab3c57b7e46b8b1115884fabbf39f024c16b60afbb1f59",
+    "crc_and_file_readback": "passed",
+    "runtime_relative_references": "passed",
+    "frontend_metadata_validator": "passed after optional compatibility description moved to body",
+    "remote_publication": "separately verified after push, not established by packaging"
+  }
 }
