@@ -72,3 +72,23 @@ Follow the existing [paired evaluation protocol](README.md#comparing-non-learnin
 for actual execution, fixture isolation, independent review and held-out tasks.
 Do not present bookkeeping tests, synthetic demonstrations or non-comparable runs
 as improved memory, teaching or real-life outcomes.
+
+## Diagnose before rewriting a Skill
+
+Keep the task outcome separate from an attribution hypothesis. Inspect the exact
+loaded version, applicable instruction, observed action/artifact and verifier
+expectation before deciding whether the problem was selection, missing or wrong
+guidance, execution, unavailable tools, conflicting active instructions, or the
+verifier itself. Several causes can coexist; unsupported attribution stays unknown.
+A precise instruction alone does not prove the model saw or could execute it.
+
+Use the existing note/evidence fields for this rationale; no new scoring engine
+is implied. Do not erase an observed failure by assigning blame to the agent, or
+improve a success count by switching graders after seeing the result. If a valid
+alternative solution is rejected, retain the original verifier outcome and review
+the artifact against the original user requirement separately. Revise a defective
+rubric transparently and apply the revision to both variants. Do not weaken actual
+requirements merely to reward a different path. A rule can be followed faithfully
+and still be wrong, so instruction compliance is not outcome correctness.
+
+See [source distinctions and context audit](../docs/SKILL-REFINEMENT-REVIEW.md).
