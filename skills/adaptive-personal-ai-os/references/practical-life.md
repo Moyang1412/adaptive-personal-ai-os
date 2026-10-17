@@ -32,10 +32,27 @@ Consent to a record is not automatically consent to those additional effects.
 Represent skipped, undone and completed actions distinctly and verify the actual
 update before relying on the next calculated state.
 
+## Calendar details when they change the result
+
+For a real appointment, recurring reminder or imported event, preserve its date,
+zone and intended recurrence. A named zone can change offset; every local morning
+is not always every 24 elapsed hours. Resolve repeated/missing local times before
+an authorized write, using the actual service's semantics. Keep all-day dates as
+dates; iCalendar VEVENT DTEND is exclusive, not an extra occupied day. Do not
+silently convert a missing monthly date into month-end. Check exceptions and
+whether an edit affects one occurrence or a series. A free/busy lookup does not
+reserve the slot or establish another person's agreement.
+
+Use available calendar tools and current zone data rather than build a new engine.
+For an ordinary relative-time question with enough context, answer directly; do
+not demand calendar access or a recurrence questionnaire.
+
 ## Evidence boundary
 
 These are task-coordination safeguards, not a validated life intervention or local legal/medical advice. Verify actual providers, location, dates and permissions for the user's task.
 
 - [Grocy chore implementation, pinned source](https://github.com/grocy/grocy/blob/41206cb90154e0d17d3e108cc1f182b94fdb465d/services/ChoresService.php): the inspected code distinguishes tracked/skipped/undone states and exposes coupled stock/assignment effects. This informs side-effect checks, not a recommendation to install it or adopt its assignment algorithm.
+
+- [RFC 5545](https://www.rfc-editor.org/rfc/rfc5545), sections 3.3.5, 3.3.10 and 3.6.1; [Python zoneinfo](https://docs.python.org/3/library/zoneinfo.html): temporal distinctions, not proof of a particular calendar provider’s behavior.
 
 For capacity or conflicting priorities, use only the relevant part of [planning](planning-decisions.md); for actual health needs use [health](health-habits.md). A request for a simple shopping-list rewrite needs no full protocol.
