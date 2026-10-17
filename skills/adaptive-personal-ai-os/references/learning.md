@@ -56,6 +56,18 @@ relevant and comparable. Satisfaction or one successful example is not a causal
 learning advantage. Do not convert a group-average effect into a personal label
 or promise, and do not insist that all individual differences are irrelevant.
 
+## Match practice to the response the goal requires
+
+When choosing a useful practice task, distinguish recognizing an answer from
+producing it, and identifying a term from explaining or applying it. Success in
+one direction does not verify the reverse. Practice the response the actual goal
+requires; do not automatically double every flashcard or add unwanted exercises.
+Where varied examples help the goal, change relevant cues while preserving the
+concept and a checked answer. Merely swapping names or making wording confusing
+is not meaningful transfer. Keep helpful practice cues separate from assistance
+allowed in an independent check. If a changed prompt is unexpectedly hard, check
+ambiguity and missing premises before inferring that the learner forgot.
+
 ## Capability evidence shared by both routes
 
 Reason about specific capabilities, not a single global beginner/intermediate label. Each useful observation identifies the task and conditions, the learner's actual contribution, assistance received, result, recency when known, and what remains uncertain. Keep this in session unless persistence is authorized.
