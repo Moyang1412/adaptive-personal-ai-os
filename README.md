@@ -41,6 +41,8 @@ Adaptive Personal AI OS · **v1.0.1 · Claude 插件适配**
 
 候选版还提供[升级前只读对比](docs/INSTALL.md)，区分上游更新、个人改动和冲突；现成记忆方案的实际源码审查见[MCP Memory](docs/MCP-MEMORY-REVIEW.md)和[Mem0](docs/MEM0-REVIEW.md)。没有自动安装或启用这些服务。
 
+按问题查看[研究取舍总览](docs/RESEARCH-MAP.md)：哪些已落实、哪些只作候选、哪些没有引入。
+
 ## 开始使用
 
 **Claude Desktop / Cowork 首选插件市场安装：**进入 `Customize → Plugins → Add marketplace → Add from a repository`，填写 `Moyang1412/adaptive-personal-ai-os`，再安装 `zhixu`。市场名为 `zhixu-skills`。实际菜单与可用性以客户端和组织策略为准。

@@ -41,6 +41,8 @@ The candidate offers an optional [cash-flow arithmetic helper](skills/adaptive-p
 
 The candidate also includes a [read-only upgrade comparison](docs/INSTALL.md), plus pinned [MCP Memory](docs/MCP-MEMORY-REVIEW.md) and [Mem0](docs/MEM0-REVIEW.md) source reviews. It does not install or activate either provider.
 
+Browse the [research decision map (Chinese)](docs/RESEARCH-MAP.md) for implemented changes, conditional options and dependencies deliberately not introduced.
+
 ## Get started
 
 **For Claude Desktop / Cowork, start with the plugin marketplace:** open `Customize → Plugins → Add marketplace → Add from a repository`, enter `Moyang1412/adaptive-personal-ai-os`, then install `zhixu` from the `zhixu-skills` marketplace. Menu labels, availability and organization policies may differ.
