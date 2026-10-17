@@ -41,6 +41,24 @@ def _require_boolean_fields(value: object, *names: str) -> None:
             raise ValueError(f"{name} must be a boolean")
 
 
+def _text_collection(value: object, name: str, allowed: FrozenSet[str] | None = None) -> FrozenSet[str]:
+    # A config mapping such as {"read": False} is not a list of enabled names.
+    if not isinstance(value, (list, tuple, set, frozenset)):
+        raise ValueError(f'{name} must be a list, tuple, set or frozenset, not flags or text')
+    if any(not isinstance(item, str) or not item.strip() for item in value):
+        raise ValueError(f'{name} must contain nonempty text names')
+    frozen = frozenset(value)
+    if allowed is not None and not frozen.issubset(allowed):
+        raise ValueError(f'unknown {name}: {sorted(frozen - allowed)}')
+    return frozen
+
+
+def _require_text_fields(value: object, *names: str) -> None:
+    for name in names:
+        if not isinstance(getattr(value, name), str):
+            raise ValueError(f'{name} must be text')
+
+
 @dataclass(frozen=True)
 class ProviderEvidence:
     """Separate documentation claims from observations in the current host."""
@@ -78,12 +96,14 @@ class ProviderDescriptor:
 
     def __post_init__(self) -> None:
         _require_boolean_fields(self, 'local', 'network_required')
+        _require_text_fields(self, 'id', 'name', 'version', 'kind', 'location',
+                             'storage_location', 'license', 'maintenance_status', 'interface', 'source_of_truth')
         if not isinstance(self.evidence, ProviderEvidence):
             raise ValueError('evidence must be a ProviderEvidence value')
         # Snapshot caller-owned sets: later mutation must not silently change
         # which capabilities this validated descriptor claims or has verified.
         for name in ('capabilities', 'verified_capabilities', 'unverified_capabilities'):
-            object.__setattr__(self, name, frozenset(getattr(self, name)))
+            object.__setattr__(self, name, _text_collection(getattr(self, name), name, CAPABILITIES))
         if not self.id.strip():
             raise ValueError("provider id must not be empty")
         if not self.name.strip():
@@ -98,9 +118,6 @@ class ProviderDescriptor:
             raise ValueError("storage location must not be empty")
         if not self.source_of_truth.strip():
             raise ValueError("source of truth must not be empty")
-        unknown = set(self.capabilities) - CAPABILITIES
-        if unknown:
-            raise ValueError(f"unknown capabilities: {sorted(unknown)}")
         for label, values in (
             ("verified", self.verified_capabilities),
             ("unverified", self.unverified_capabilities),
@@ -130,17 +147,8 @@ class MemoryRequirements:
         _require_boolean_fields(self, 'persistent', 'cross_agent', 'explicit_gap',
                                 'private_profile_authorized', 'private_profile_conflict_control')
         for name in ('required_capabilities', 'private_profile_verified_capabilities'):
-            values = getattr(self, name)
-            if isinstance(values, (str, bytes)):
-                raise ValueError(f'{name} must be a capability collection, not text')
-            frozen = frozenset(values)
-            if any(not isinstance(item, str) for item in frozen):
-                raise ValueError(f'{name} contains a non-text capability')
-            unknown = set(frozen) - CAPABILITIES
-            if unknown:
-                raise ValueError(f"unknown {name}: {sorted(unknown)}")
-            object.__setattr__(self, name, frozen)
-        if self.user_consent not in {"off", "confirm", "authorized"}:
+            object.__setattr__(self, name, _text_collection(getattr(self, name), name, CAPABILITIES))
+        if not isinstance(self.user_consent, str) or self.user_consent not in {"off", "confirm", "authorized"}:
             raise ValueError("user_consent must be off, confirm or authorized")
         if self.cross_agent and "cross_agent" not in self.required_capabilities:
             raise ValueError("cross_agent requests must require cross_agent capability")
@@ -190,9 +198,10 @@ class RouteRequest:
 
     def __post_init__(self) -> None:
         _require_boolean_fields(self, 'network_allowed', 'relevant', 'cross_agent', 'sharing_authorized', 'single_writer')
-        if isinstance(self.authorized_scopes, (str, bytes)):
-            raise ValueError('authorized_scopes must be a collection of scopes, not text')
-        object.__setattr__(self, 'authorized_scopes', frozenset(self.authorized_scopes))
+        _require_text_fields(self, 'scope', 'user_consent')
+        if self.active_provider_id is not None and not isinstance(self.active_provider_id, str):
+            raise ValueError('active_provider_id must be text or None')
+        object.__setattr__(self, 'authorized_scopes', _text_collection(self.authorized_scopes, 'authorized_scopes'))
 
 
 @dataclass(frozen=True)
@@ -333,6 +342,7 @@ def recommend_plan(
         return RecommendationPlan("D", None, ("当前请求不需要跨会话保存",))
 
     required = _required_capabilities(requirements)
+    native_capabilities = _text_collection(native_capabilities, 'native_capabilities', CAPABILITIES)
     native_covers = required.issubset(native_capabilities)
     if native_available and native_covers and not requirements.cross_agent:
         return RecommendationPlan(

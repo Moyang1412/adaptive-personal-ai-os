@@ -94,3 +94,5 @@ complete memory engine.
 These are conditional assessment paths, not a recommendation to install all three or a list of currently verified providers. Keep native memory when it already meets the need.
 
 Persistent-memory needs require verified cross-session availability even if the caller lists only read or save. Current-session access alone is insufficient for native memory, a private profile or an external provider.
+
+The assessment reference accepts capability/scope names in lists, tuples, sets or frozensets, not flag mappings or text. A mapping containing read=false must not become a verified read capability merely through key iteration. Adapters must construct the name collection from real evidence. Invalid input shapes raise ValueError; this reference still performs no storage operation.

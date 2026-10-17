@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import unittest
+from dataclasses import replace
 
 try:
     from .provider_selection import (
@@ -87,6 +88,49 @@ def descriptor(
 
 
 class ProviderSelectionTests(unittest.TestCase):
+    def test_false_valued_maps_are_not_capability_or_scope_lists(self) -> None:
+        requirements = MemoryRequirements(True, {'read'}, False, True, 'confirm')
+        with self.assertRaises(ValueError):
+            recommend_plan(requirements, native_available=True,
+                           native_capabilities={'read': False, 'cross_session': False}, providers=[])
+        for field in ('capabilities', 'verified_capabilities', 'unverified_capabilities'):
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                replace(descriptor('map-rejected'), **{field: {'read': False}})
+        for field in ('required_capabilities', 'private_profile_verified_capabilities'):
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                replace(requirements, **{field: {'read': False}})
+        with self.assertRaises(ValueError):
+            RouteRequest(ProviderOperation.READ, 'personal', 'authorized', {'personal': False}, False)
+
+    def test_malformed_collection_members_fail_with_value_error(self) -> None:
+        for invalid in (None, 12, 'read', [None], ['read', 3], [{}]):
+            with self.subTest(value=invalid):
+                with self.assertRaises(ValueError):
+                    replace(descriptor('bad-collection'), capabilities=invalid)
+                with self.assertRaises(ValueError):
+                    MemoryRequirements(True, invalid, False, True, 'confirm')
+                with self.assertRaises(ValueError):
+                    RouteRequest(ProviderOperation.READ, 'p', 'authorized', invalid, False)
+
+    def test_nontext_descriptor_and_route_fields_fail_early(self) -> None:
+        for field in ('id', 'name', 'version', 'kind', 'location', 'storage_location',
+                      'license', 'maintenance_status', 'interface', 'source_of_truth'):
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                replace(descriptor('bad-text'), **{field: 123})
+        for field in ('scope', 'user_consent', 'active_provider_id'):
+            request = RouteRequest(ProviderOperation.READ, 'p', 'authorized', {'p'}, False)
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                replace(request, **{field: 123})
+        with self.assertRaises(ValueError):
+            MemoryRequirements(True, {'read'}, False, True, [])
+
+    def test_supported_collections_retain_verified_native_positive(self) -> None:
+        for collection in (list, tuple, set, frozenset):
+            requirements = MemoryRequirements(True, collection(['read']), False, True, 'confirm')
+            plan = recommend_plan(requirements, native_available=True,
+                                  native_capabilities=collection(['read', 'cross_session']), providers=[])
+            self.assertEqual(plan.option, 'A')
+
     def test_caller_mutation_does_not_expand_verified_capabilities_or_scopes(self) -> None:
         capabilities = {'read', 'scope'}
         verified = {'read', 'scope'}

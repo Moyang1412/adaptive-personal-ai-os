@@ -20,3 +20,9 @@ All 95 offline unit tests pass. The 129 routing cases (46 positive, 24 negative,
 The provider contract and memory selection guidance distinguish permission from verified capability and current-session access from persistence. A queued acknowledgment or job ID establishes submission only. Completion, indexing and cross-session availability can be separate stages; use documented result/readback semantics without inventing polling endpoints or duplicating uncertain writes. A past capability test does not prove a later write completed.
 
 No provider installed, no personal memory read or written, no account connected, and no host activation or production memory guarantee established in this pass.
+
+## Subsequent input-shape correction
+
+A further direct reproduction passed native_capabilities as a mapping with read=False and cross_session=False. Python set inclusion treated its keys as capabilities and returned A. Capability and scope inputs now require explicit name collections; flag mappings, text, non-text members and malformed metadata fail with ValueError before assessment/routing. This also prevents an authorized-scope mapping with false values from being interpreted as a granted-scope set. The module cannot authenticate caller evidence or enforce real host permissions.
+
+Four new test methods cover false-valued mappings at each boundary, malformed members, non-text descriptor/request fields and positive controls for all supported collection forms. The complete suite now passes 99 tests; current routing/provider schema counts remain 143/10. The earlier 95-test statement above belongs to the preceding capability correction.
