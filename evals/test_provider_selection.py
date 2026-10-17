@@ -46,7 +46,7 @@ def descriptor(
     license_name: str = "Apache-2.0",
     maintenance: str = "active",
 ) -> ProviderDescriptor:
-    base_capabilities = capabilities or {
+    base_capabilities = {
         "save",
         "read",
         "correct",
@@ -56,6 +56,8 @@ def descriptor(
         "import_export",
         *({"cross_agent", "concurrent_write_guard"} if cross_agent else set()),
     }
+    if capabilities is not None:
+        base_capabilities = capabilities
     actual_evidence = evidence or ProviderEvidence(
         documented=True,
         installed=True,
@@ -123,7 +125,7 @@ class ProviderSelectionTests(unittest.TestCase):
             yield
         requirements = MemoryRequirements(True, frozenset({'save', 'read'}), False, False, 'confirm')
         plan = recommend_plan(requirements, native_available=True,
-                              native_capabilities={'save', 'read'}, providers=providers())
+                              native_capabilities={'save', 'read', 'cross_session'}, providers=providers())
         self.assertEqual(plan.option, 'A')
 
     def test_text_boolean_cannot_claim_verified_evidence(self) -> None:
@@ -175,7 +177,7 @@ class ProviderSelectionTests(unittest.TestCase):
             explicit_gap=False,
             user_consent="confirm",
         )
-        plan = recommend_plan(requirements, native_available=True, native_capabilities=requirements.required_capabilities, providers=[])
+        plan = recommend_plan(requirements, native_available=True, native_capabilities=requirements.required_capabilities | {'cross_session'}, providers=[])
         self.assertEqual(plan.option, "A")
         self.assertIsNone(plan.provider_id)
 
@@ -188,10 +190,65 @@ class ProviderSelectionTests(unittest.TestCase):
             user_consent="confirm",
             private_profile_authorized=True,
             private_profile_conflict_control=True,
+            private_profile_verified_capabilities={"save", "read", "scope", "cross_agent", "cross_session", "concurrent_write_guard"},
         )
         plan = recommend_plan(requirements, native_available=True, native_capabilities={"save", "read"}, providers=[])
         self.assertEqual(plan.option, "B")
         self.assertTrue(plan.requires_explicit_scope)
+
+    def test_profile_permission_does_not_supply_missing_capability_evidence(self) -> None:
+        for capabilities in (set(), {'read', 'cross_agent'}, {'read', 'scope', 'cross_agent', 'cross_session', 'concurrent_write_guard'}):
+            requirements = MemoryRequirements(
+                True, {'read', 'delete', 'cross_agent'}, True, True, 'confirm',
+                private_profile_authorized=True, private_profile_conflict_control=True,
+                private_profile_verified_capabilities=capabilities,
+            )
+            plan = recommend_plan(requirements, native_available=True, native_capabilities={'read'}, providers=[])
+            self.assertEqual(plan.option, 'D')
+            self.assertTrue(any('授权不等于' in reason for reason in plan.reasons))
+
+    def test_persistent_need_requires_cross_session_evidence(self) -> None:
+        requirements = MemoryRequirements(True, {'read'}, False, True, 'confirm')
+        plan = recommend_plan(requirements, native_available=True, native_capabilities={'read'}, providers=[])
+        self.assertEqual(plan.option, 'D')
+        empty = descriptor('no-capabilities', capabilities=set())
+        self.assertEqual(empty.capabilities, frozenset())
+        self.assertFalse(assess_provider(empty, requirements).eligible)
+        candidate = descriptor('session-only-reader', capabilities={'read', 'scope'})
+        assessment = assess_provider(candidate, requirements)
+        self.assertFalse(assessment.eligible)
+        self.assertIn('cross_session', assessment.unsupported_capabilities)
+        self.assertEqual(recommend_plan(requirements, native_available=False, native_capabilities=set(), providers=[candidate]).option, 'D')
+        self.assertEqual(recommend_plan(requirements, native_available=True, native_capabilities={'read', 'cross_session'}, providers=[]).option, 'A')
+
+    def test_profile_requires_scoping_and_guard_in_addition_to_requested_operations(self) -> None:
+        for missing in ('scope', 'concurrent_write_guard'):
+            capabilities = {'read', 'cross_agent', 'cross_session', 'scope', 'concurrent_write_guard'} - {missing}
+            requirements = MemoryRequirements(
+                True, {'read', 'cross_agent'}, True, True, 'confirm',
+                private_profile_authorized=True, private_profile_conflict_control=True,
+                private_profile_verified_capabilities=capabilities,
+            )
+            self.assertEqual(recommend_plan(requirements, native_available=True, native_capabilities={'read'}, providers=[]).option, 'D')
+
+    def test_profile_capabilities_are_immutable_and_validated(self) -> None:
+        supplied = {'read', 'scope', 'cross_agent', 'cross_session', 'concurrent_write_guard'}
+        requirements = MemoryRequirements(True, {'read', 'cross_agent'}, True, True, 'confirm',
+                                          private_profile_verified_capabilities=supplied)
+        supplied.add('delete')
+        self.assertNotIn('delete', requirements.private_profile_verified_capabilities)
+        for invalid in ('read', {'invented'}, {123}):
+            with self.assertRaises(ValueError):
+                MemoryRequirements(True, {'read'}, False, False, 'confirm', private_profile_verified_capabilities=invalid)
+
+    def test_verified_profile_still_needs_authorization_and_active_guard(self) -> None:
+        for authorized, controlled in ((False, True), (True, False)):
+            requirements = MemoryRequirements(
+                True, {'read', 'cross_agent'}, True, True, 'confirm',
+                private_profile_authorized=authorized, private_profile_conflict_control=controlled,
+                private_profile_verified_capabilities={'read', 'scope', 'cross_agent', 'cross_session', 'concurrent_write_guard'},
+            )
+            self.assertEqual(recommend_plan(requirements, native_available=True, native_capabilities={'read'}, providers=[]).option, 'D')
 
     def test_installed_provider_is_not_recommended_from_installation_alone(self) -> None:
         candidate = descriptor(

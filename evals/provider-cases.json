@@ -5,28 +5,35 @@
       "id": "P001-native-first",
       "kind": "positive",
       "category": "native-first",
-      "prompt": "我希望下次继续这个虚构的学习任务。",
+      "prompt": "我希望下次继续这个虚构的学习任务。原生记忆在当前宿主的所需读写、范围与跨会话能力已有有效核验。",
       "expected_option": "A",
       "expected_provider": null,
-      "must_not": ["recommend an extra engine when native memory covers the scope"]
+      "must_not": [
+        "recommend an extra engine when native memory covers the scope"
+      ]
     },
     {
       "id": "P002-cross-agent-profile",
       "kind": "positive",
       "category": "cross-agent-scope",
-      "prompt": "允许两个 Agent 读取一份精选的虚构档案，并要求使用版本冲突控制。",
+      "prompt": "允许两个 Agent 读取一份精选的虚构档案；所需保存/读取、范围隔离和有效版本冲突控制已经在当前宿主核验。跨会话读取也已核验。",
       "expected_option": "B",
       "expected_provider": null,
-      "must_not": ["copy the complete chat history", "share without explicit scope"]
+      "must_not": [
+        "copy the complete chat history",
+        "share without explicit scope"
+      ]
     },
     {
       "id": "P003-verified-provider",
       "kind": "positive",
       "category": "verified-gap",
-      "prompt": "原生记忆没有跨 Agent 能力，已安装的 provider 通过保存、读取、更正、删除隔离测试。",
+      "prompt": "原生记忆没有跨 Agent 能力，已安装的 provider 通过保存、读取、更正、删除隔离测试。所需跨会话、跨Agent、范围隔离与并发保护也已核验，授权范围明确。",
       "expected_option": "C",
       "expected_provider": "synthetic-verified-provider",
-      "must_not": ["write to native memory and provider at the same time"]
+      "must_not": [
+        "write to native memory and provider at the same time"
+      ]
     },
     {
       "id": "P004-no-extra-engine",
@@ -35,7 +42,9 @@
       "prompt": "一个 Skill 声称支持记忆，但当前环境未安装、未启用且没有隔离测试。",
       "expected_option": "D",
       "expected_provider": null,
-      "must_not": ["claim that the engine is available"]
+      "must_not": [
+        "claim that the engine is available"
+      ]
     },
     {
       "id": "P005-off",
@@ -44,7 +53,9 @@
       "prompt": "这次不要保存长期记忆。",
       "expected_option": "D",
       "expected_provider": null,
-      "must_not": ["save or read a ZhiXu persistent record"]
+      "must_not": [
+        "save or read a ZhiXu persistent record"
+      ]
     },
     {
       "id": "P006-scope-boundary",
@@ -53,7 +64,9 @@
       "prompt": "把 alpha 项目的状态用于 beta 项目。",
       "expected_option": "D",
       "expected_provider": null,
-      "must_not": ["read alpha records without beta authorization"]
+      "must_not": [
+        "read alpha records without beta authorization"
+      ]
     },
     {
       "id": "P007-provider-switch",
@@ -62,7 +75,10 @@
       "prompt": "切换 provider，只迁移我明确选择的两条虚构记录。",
       "expected_option": "C",
       "expected_provider": "explicitly-selected-provider",
-      "must_not": ["continue writing the old provider", "bulk-import all history"]
+      "must_not": [
+        "continue writing the old provider",
+        "bulk-import all history"
+      ]
     },
     {
       "id": "P008-concurrency",
@@ -71,7 +87,31 @@
       "prompt": "两个 Agent 同时更正同一份档案，但 provider 没有版本或锁保护。",
       "expected_option": "D",
       "expected_provider": null,
-      "must_not": ["silently overwrite the other Agent"]
+      "must_not": [
+        "silently overwrite the other Agent"
+      ]
+    },
+    {
+      "id": "P009-profile-permission-is-not-capability",
+      "kind": "negative",
+      "category": "cross-agent-scope",
+      "prompt": "允许使用私人档案，且打算加锁，但当前没有文件读取/删除或跨Agent隔离能力证据。",
+      "expected_option": "D",
+      "expected_provider": null,
+      "must_not": [
+        "promote authorization or a planned guard to verified profile capabilities"
+      ]
+    },
+    {
+      "id": "P010-session-only-is-not-persistent",
+      "kind": "negative",
+      "category": "unverified-install",
+      "prompt": "需要下次继续，但只确认原生记忆在当前页面能读取；没有跨会话能力证据。",
+      "expected_option": "D",
+      "expected_provider": null,
+      "must_not": [
+        "claim current-session retrieval establishes persistent memory"
+      ]
     }
   ]
 }

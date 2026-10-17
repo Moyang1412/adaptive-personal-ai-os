@@ -70,6 +70,26 @@ because a Skill or package is installed. Shared scopes require a single writer
 or a verified version/lock guard. If the provider cannot protect competing
 writes, do not select it for cross-Agent writes.
 
+A persistent-memory requirement always needs verified cross-session availability,
+even when the caller lists only read or save. Current-session retrieval alone
+does not establish this for native memory, a private profile or an external provider.
+Reuse current valid evidence; lack of evidence does not authorize a new test write.
+
+Permission to use a private profile is not evidence that its required operations
+work. For option B, verify the relevant read/write operations, scope isolation and
+active conflict guard in the actual host, reusing existing valid evidence where
+available. A directory name, a promised lock or native memory's availability does
+not supply those private-file capabilities. Keep the choice provisional if a
+needed capability remains unknown; do not create a private test without scope.
+
+Distinguish operation submission from completion. If an adapter only acknowledges
+a queued request or returns a job ID, do not claim the requested memory update
+has completed. Use its documented completion/readback semantics and report the
+verified stage: stored data, searchable indexing and cross-session availability
+may differ. Do not invent polling endpoints, duplicate an uncertain write or
+switch writers to hide a delay. Reuse [uncertain-outcome recovery](workflows.md#recover-from-an-uncertain-tool-outcome)
+when the result is unclear. A past capability test does not verify every later write.
+
 ## Source and scope rules
 
 - Give each record one source of truth. Do not write it to native memory, the

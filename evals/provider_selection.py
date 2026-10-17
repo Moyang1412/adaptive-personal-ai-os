@@ -124,14 +124,22 @@ class MemoryRequirements:
     user_consent: str
     private_profile_authorized: bool = False
     private_profile_conflict_control: bool = False
+    private_profile_verified_capabilities: FrozenSet[str] = frozenset()
 
     def __post_init__(self) -> None:
         _require_boolean_fields(self, 'persistent', 'cross_agent', 'explicit_gap',
                                 'private_profile_authorized', 'private_profile_conflict_control')
-        object.__setattr__(self, 'required_capabilities', frozenset(self.required_capabilities))
-        unknown = set(self.required_capabilities) - CAPABILITIES
-        if unknown:
-            raise ValueError(f"unknown required capabilities: {sorted(unknown)}")
+        for name in ('required_capabilities', 'private_profile_verified_capabilities'):
+            values = getattr(self, name)
+            if isinstance(values, (str, bytes)):
+                raise ValueError(f'{name} must be a capability collection, not text')
+            frozen = frozenset(values)
+            if any(not isinstance(item, str) for item in frozen):
+                raise ValueError(f'{name} contains a non-text capability')
+            unknown = set(frozen) - CAPABILITIES
+            if unknown:
+                raise ValueError(f"unknown {name}: {sorted(unknown)}")
+            object.__setattr__(self, name, frozen)
         if self.user_consent not in {"off", "confirm", "authorized"}:
             raise ValueError("user_consent must be off, confirm or authorized")
         if self.cross_agent and "cross_agent" not in self.required_capabilities:
@@ -229,14 +237,21 @@ def _ensure_single_source(providers: Iterable[ProviderDescriptor]) -> None:
         sources[provider.source_of_truth] = provider.id
 
 
+def _required_capabilities(requirements: MemoryRequirements) -> set[str]:
+    required = set(requirements.required_capabilities)
+    if requirements.persistent:
+        required.add('cross_session')
+    if requirements.cross_agent:
+        required.update({'cross_agent', 'concurrent_write_guard', 'scope'})
+    return required
+
+
 def assess_provider(
     provider: ProviderDescriptor, requirements: MemoryRequirements
 ) -> ProviderAssessment:
     """Return conservative readiness without touching the provider's data."""
 
-    required = set(requirements.required_capabilities)
-    if requirements.cross_agent:
-        required.add("concurrent_write_guard")
+    required = _required_capabilities(requirements)
     ready = (
         provider.evidence.installed
         and provider.evidence.enabled
@@ -317,7 +332,8 @@ def recommend_plan(
     if not requirements.persistent:
         return RecommendationPlan("D", None, ("当前请求不需要跨会话保存",))
 
-    native_covers = requirements.required_capabilities.issubset(native_capabilities)
+    required = _required_capabilities(requirements)
+    native_covers = required.issubset(native_capabilities)
     if native_available and native_covers and not requirements.cross_agent:
         return RecommendationPlan(
             "A",
@@ -350,20 +366,25 @@ def recommend_plan(
             requires_explicit_scope=True,
         )
 
+    profile_required = required | {'scope', 'cross_agent', 'concurrent_write_guard'}
+    profile_covers = profile_required.issubset(requirements.private_profile_verified_capabilities)
     if (
         requirements.cross_agent
         and native_available
         and requirements.private_profile_authorized
         and requirements.private_profile_conflict_control
+        and profile_covers
     ):
         return RecommendationPlan(
             "B",
             None,
-            ("跨 Agent 共享是明确需求，使用精选私人档案并保留原生记忆",),
+            ("跨 Agent 共享是明确需求，私人档案所需操作、范围与冲突保护已验证；保留原生记忆",),
             requires_explicit_scope=True,
         )
 
     reasons = ["没有满足当前范围、许可证、维护和隔离验证要求的额外 provider"]
+    if requirements.cross_agent and requirements.private_profile_authorized and not profile_covers:
+        reasons.append("私人档案的所需操作、范围或冲突保护能力尚未验证；授权不等于可用能力")
     if assessments:
         reasons.append("已安装或文档声称支持不等于当前会话可调用")
         if any(assessment.unverified_capabilities for assessment in assessments):

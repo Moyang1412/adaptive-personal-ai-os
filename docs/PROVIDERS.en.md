@@ -12,9 +12,11 @@ Skill is present.
 | Choice | Use when | Behavior |
 |---|---|---|
 | A Native memory | Native memory covers the requested scope | Keep the host as the source of truth |
-| B Native + private profile | Cross-agent access is explicit and the profile has scope plus revision/lock protection | Share only selected records |
+| B Native + private profile | Cross-agent access is explicit and required profile operations, scope and active revision/lock protection are verified | Share only selected records |
 | C Installed mature provider | A clear gap exists and installation, enablement, callability, license, maintenance and isolated tests are verified | Route authorized operations to that provider |
 | D No extra memory | There is no gap, permission or verification, or the user declines persistence | Do not create or call an extra engine |
+
+The candidate reference adds private_profile_verified_capabilities, defaulting to empty. Authorization and a conflict-control flag alone no longer establish option B readiness; verified native-memory operations do not automatically apply to private files. Reuse valid evidence rather than requiring a new probe or approval each session.
 
 Several eligible providers still need a task-fit comparison, including existing
 selection, storage/network conditions and known costs. The reference module
@@ -90,3 +92,5 @@ complete memory engine.
 | [LangMem](LANGMEM-REVIEW.md) | Reuse an existing LangGraph/store stack | Trusted namespace binding, permitted actions, backend restart persistence and conflict handling |
 
 These are conditional assessment paths, not a recommendation to install all three or a list of currently verified providers. Keep native memory when it already meets the need.
+
+Persistent-memory needs require verified cross-session availability even if the caller lists only read or save. Current-session access alone is insufficient for native memory, a private profile or an external provider.

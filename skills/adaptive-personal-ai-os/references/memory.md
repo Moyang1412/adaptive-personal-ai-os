@@ -18,6 +18,12 @@ Start without configuration. Reuse relevant context already supplied. Only when 
    only for a licensed, maintained, installed, callable provider that fills a
    verified gap. Otherwise use D (no extra engine).
 
+For B, permission and a conflict-control plan alone do not establish working file
+operations. Reuse or verify evidence that the private profile supports the actual
+required capabilities, scope and active guard; do not borrow that evidence from
+the separate native memory. Follow the [provider contract](provider-contract.md)
+for staged acknowledgements as well as completed writes.
+
 Never recommend a provider because a Skill is installed. A provider must expose
 its storage location, source of truth and supported operations. Each record has
 one writer. A shared provider without a verified revision or lock guard is not
