@@ -10,7 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / 'skills' / 'adaptive-personal-ai-os'
 PUBLIC_RUNTIME_FILES = (
     'SKILL.md', 'VERSION', 'LICENSE', 'agents/openai.yaml',
-    'references/daily-life.md', 'references/health-habits.md',
+    'scripts/check_cashflow.py',
+    'references/cashflow-check.md', 'references/daily-life.md', 'references/health-habits.md',
     'references/learning.md', 'references/life.md', 'references/memory.md',
     'references/money-career.md', 'references/planning-decisions.md',
     'references/platforms.md', 'references/practical-life.md', 'references/provider-contract.md',
@@ -83,7 +84,7 @@ def main():
         'upload this ZIP and enable ZhiXu. Check the skill menu in a new conversation before claiming activation.\n\n'
         'Add marketplace Moyang1412/adaptive-personal-ai-os and install the zhixu plugin, '
         'or upload this ZIP through the custom plugin option. '
-        'The package contains public instructions only; personal memory, chat history, hooks and MCP services are not included. '
+        'The package contains public instructions and an optional read-only cash-flow helper requiring Python 3; personal memory, chat history, hooks and MCP services are not included. '
         'Use either the standalone Skill or this plugin in a given host to avoid duplicate entries.\n\n'
         'Source: https://github.com/Moyang1412/adaptive-personal-ai-os\n'
         'License: MIT.\n'

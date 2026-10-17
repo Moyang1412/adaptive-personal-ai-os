@@ -35,7 +35,9 @@ Adaptive Personal AI OS · **v1.0.1 · Claude 插件适配**
 
 [先看这一版的改动摘要与使用边界 →](docs/CANDIDATE-2026-10-17.md)
 
-2026-10-17 的优化保存在 `dot/overnight-improvements-20261017`，尚未替换正式 v1.0.1 Release。重点是教材来源与续接、额外Skill选择、原生记忆优先、包校验与精简调试流程；具体借鉴、拒绝引入的依赖及测试边界见 [维护记录](docs/REUSE-REVIEW-2026-10-17.md)。54项离线单元测试与108条路由用例的结构检查通过，不代表真实宿主激活或效果提升已经验证。
+2026-10-17 的优化保存在 `dot/overnight-improvements-20261017`，尚未替换正式 v1.0.1 Release。重点是教材来源与续接、额外Skill选择、原生记忆优先、包校验与精简调试流程；具体借鉴、拒绝引入的依赖及测试边界见 [维护记录](docs/REUSE-REVIEW-2026-10-17.md)。最新离线检查和合成试跑范围见[验证状态](docs/VALIDATION.md)，不能把工具/结构检查当成真实宿主激活或效果提升。
+
+候选版新增按需使用的[现金流算术核验](skills/adaptive-personal-ai-os/references/cashflow-check.md)：已有Python时可计算用户明确提供的日期/金额，不连接银行、不交易；不用该工具时，指令核心仍无需Python。
 
 候选版还提供[升级前只读对比](docs/INSTALL.md)，区分上游更新、个人改动和冲突；现成记忆方案的实际源码审查见[MCP Memory](docs/MCP-MEMORY-REVIEW.md)和[Mem0](docs/MEM0-REVIEW.md)。没有自动安装或启用这些服务。
 

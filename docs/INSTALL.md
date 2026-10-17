@@ -41,7 +41,7 @@ Claude Desktop / Cowork 首选在 `Customize → Plugins → Add marketplace →
 
 `~` 指当前用户目录；Windows 用户可从自己的主目录进入对应隐藏目录。自定义环境、云端环境和组织策略可能不同，必须查看宿主实际配置。安装在一台电脑上，不会安装到另一台电脑或云端。
 
-本版是无额外运行依赖的指令包。**没有 `install.py`、自动记忆脚本、安装诊断器或自动回滚工具。** 不要运行旧预览里提到但仓库不存在的命令。
+正式v1.0.1及候选的指令核心不需要额外运行环境。当前开发候选另含可选现金流算术工具，仅在已有Python 3且明确需要计算时使用；没有Python仍可用指令核心。**没有 `install.py`、自动记忆脚本、安装诊断器或自动回滚工具。** 不要运行旧预览里提到但仓库不存在的命令。
 
 安装 Skill 不会安装记忆 provider。首次需要长期记忆时，先检查宿主原生记忆和用户已经安装、授权的工具，再按 [记忆方案接入](PROVIDERS.md) 记录证据和选择 A/B/C/D。没有明确缺口或隔离验证时，选择 D，不要临时建立数据库。
 
@@ -80,7 +80,7 @@ Codex 显式调用 `$adaptive-personal-ai-os`；Claude Code 使用 `/adaptive-pe
 
 For Claude Desktop / Cowork, add the repository marketplace and install `zhixu`, or upload the plugin ZIP. Use only one active plugin or standalone Skill entry per host; desktop activation still needs live verification.
 
-Download the repository or delegate installation to your agent. Copy the entire Skill folder to the host's verified skills root. No Python or additional service is required. Review existing copies before replacing them, keep backups outside discovery roots, and never overwrite private context or host settings.
+Download the repository or delegate installation to your agent. Copy the entire Skill folder to the host's verified skills root. No Python or additional service is required for the instruction core. The current candidate additionally includes an optional cash-flow arithmetic helper that needs existing Python 3; skip it when unavailable. Review existing copies before replacing them, keep backups outside discovery roots, and never overwrite private context or host settings.
 
 Verify both the files and the host catalog/loader trace. Explicit invocation differs by host. There is no installer, automatic memory engine or runtime doctor in this release. Provider selection is an evidence and authorization step; it does not create a database.
 

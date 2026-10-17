@@ -35,7 +35,7 @@ class PackagingTests(unittest.TestCase):
         # Existing Windows copies may contain CRLF even after checkout policy
         # improves. Packaging must keep the same public bytes in that case.
         for path in self.root.rglob('*'):
-            if path.is_file() and (path.suffix in {'.md', '.json', '.yaml'} or path.name in {'VERSION', 'LICENSE'}) and '.zhixu' not in path.parts:
+            if path.is_file() and (path.suffix in {'.md', '.json', '.yaml', '.py'} or path.name in {'VERSION', 'LICENSE'}) and '.zhixu' not in path.parts:
                 path.write_bytes(path.read_bytes().replace(b'\r\n', b'\n').replace(b'\n', b'\r\n'))
         second = self.package(optimized=True)
         self.assertEqual(second.returncode, 0, second.stderr)
@@ -46,10 +46,18 @@ class PackagingTests(unittest.TestCase):
             self.assertIn("skills/adaptive-personal-ai-os/references/practical-life.md", archive.namelist())
 
     def test_missing_conditionally_linked_runtime_file_is_rejected(self):
-        (self.root / 'skills/adaptive-personal-ai-os/references/practical-life.md').unlink()
-        result = self.package(optimized=True)
-        self.assertNotEqual(result.returncode, 0)
-        self.assertFalse(self.output.exists())
+        for name in ('references/practical-life.md', 'references/cashflow-check.md', 'scripts/check_cashflow.py'):
+            target = self.root / 'skills/adaptive-personal-ai-os' / name
+            original = target.read_bytes()
+            with self.subTest(name=name):
+                target.unlink()
+                try:
+                    result = self.package(optimized=True)
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertIn(name, result.stderr)
+                    self.assertFalse(self.output.exists())
+                finally:
+                    target.write_bytes(original)
 
     def test_version_mismatch_rejected_in_optimized_mode(self):
         (self.root / 'VERSION').write_text('999.0.0\n')

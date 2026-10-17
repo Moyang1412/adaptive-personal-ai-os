@@ -2,7 +2,7 @@
 name: adaptive-personal-ai-os
 description: "ZhiXu / 智序: planning, learning, life, decisions, research, projects, reflection and memory choices. Use when relevant or requested; skip simple translations, facts, isolated fixes and formatting."
 license: MIT
-compatibility: "Instruction-only Agent Skills bundle. File access, native memory, research, execution and invocation depend on the host. No additional runtime or API key required."
+compatibility: "Instruction-first Agent Skills bundle. File access, memory and execution depend on the host. The optional cash-flow helper needs Python 3; the instruction core needs no additional runtime or API key."
 metadata:
   version: "1.0.1"
 ---

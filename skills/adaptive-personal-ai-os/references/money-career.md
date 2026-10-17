@@ -14,6 +14,12 @@ For an optional purchase, first protect the supplied essentials and agreed buffe
 
 Do not default to an investment allocation, debt restructuring or financial product recommendation. Those are consequential, locally dependent tasks requiring appropriate evidence and scope. A budget request does not authorize account access, transfers, automated saving, purchases or sharing a family member's finances.
 
+For a requested calculation from explicitly supplied dated figures, reuse an
+available calculator/budget tool. If needed and Python already exists, see the
+optional [read-only cash-flow helper](cashflow-check.md); it checks arithmetic,
+not bank balances, forecasts or affordability. Ordinary money/career discussion
+does not require that helper or a new financial file.
+
 ## Career direction
 
 Clarify the decision from existing context: explore, compare a role, develop a skill or prepare an application. Use the person's stated values, income needs, location, caring responsibilities and time/cost constraints. Do not assume resignation, paid training or maximising earnings is the goal.

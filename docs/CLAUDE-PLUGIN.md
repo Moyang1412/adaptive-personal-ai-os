@@ -1,6 +1,6 @@
 # 智序的 Claude 插件封装
 
-此封装复用 `skills/adaptive-personal-ai-os/` 中的完整公共核心，插件名为 `zhixu`，Skill 名称仍为 `adaptive-personal-ai-os`，保留 MIT 许可。没有新增 hooks、MCP 服务、额外运行时或权限设置。
+此封装复用 `skills/adaptive-personal-ai-os/` 中的完整公共核心，插件名为 `zhixu`，Skill 名称仍为 `adaptive-personal-ai-os`，保留 MIT 许可。没有新增 hooks、MCP 服务或权限设置；指令核心无额外运行时要求，当前候选中的可选现金流核算工具需要已有Python 3。
 
 ## v1.0.1 适配范围
 
@@ -32,7 +32,7 @@ v1.0.1 提供仓库插件市场和插件 ZIP。插件与裸 Skill 共用同一�
 python -X utf8 scripts/package_claude_plugin.py --output "$env:USERPROFILE\Downloads\zhixu-1.0.1-plugin.zip"
 ```
 
-Python 仅用于维护者生成 ZIP，使用者上传插件后不需要自行安装 Python。输出或同名校验报告已存在时脚本停止，不覆盖旧文件；同版本换一个输出名重建时会使用新的编号暂存目录。构建仅纳入显式选择的公共文件，不读取或打包个人资料与仓库评测数据。
+Python用于维护者生成ZIP；仅使用指令核心不需要安装Python。当前开发候选的可选现金流核算工具也使用Python 3，无此环境时跳过该工具即可，不自动安装。输出或同名校验报告已存在时脚本停止，不覆盖旧文件；同版本换一个输出名重建时会使用新的编号暂存目录。构建仅纳入显式选择的公共文件，不读取或打包个人资料与仓库评测数据。
 
 插件 ZIP 的根目录结构：
 

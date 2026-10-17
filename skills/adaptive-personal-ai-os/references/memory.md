@@ -150,4 +150,4 @@ Consult only when designing or evaluating memory behavior; these are not runtime
 - [LangMem extraction source](https://github.com/langchain-ai/langmem/blob/main/src/langmem/knowledge/extraction.py): structured comparison and separately controlled updates; source inspected on 2026-10-13, not a pinned dependency.
 - [LongMemEval-V2, 2026 preprint](https://arxiv.org/html/2605.12493v1): experimental evidence gathering with compact manifests; measure accuracy together with query latency.
 
-These studies and implementations inform design, not a verified benefit for this instruction-only Skill. Their tested models, tasks and storage systems differ; validate behavior with independent synthetic cases and keep real-user effectiveness unverified until measured.
+These studies and implementations inform design, not a verified benefit for this instruction-first Skill. Their tested models, tasks and storage systems differ; validate behavior with independent synthetic cases and keep real-user effectiveness unverified until measured.
