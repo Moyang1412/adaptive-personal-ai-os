@@ -43,3 +43,11 @@
 
 当前数字和快照只维护在[验证状态](VALIDATION.md)，避免在多个页面重复更新计数。
 较早的[非教学调研](RESEARCH-NONLEARNING-2026-10-13.md)与[生活领域调研](RESEARCH-LIFE-2026-10-13.md)保留当时日期和候选状态，不把它们改写成今天的新实验。
+
+## 补充核对：行动口诀与理解结果（2026-10-17）
+
+van Timmeren & de Wit（2023）的两项电脑任务实验比较“遇到线索就行动”和面向结果的计划。前者有早期训练优势，但随后测试较差；差异并非只在结果价值改变的题目中出现。作者倾向于用结果知识学习不足解释，而非证明“瞬间形成习惯”。没有无计划对照，真实生活推广仍待研究。
+
+读过[大学存档全文](https://pure.uva.nl/ws/files/229303084/van-timmeren-de-wit-2022-instant-habits-versus-flexible-tenacity-do-implementation-intentions-accelerate-habit-formation.pdf)的方法、结果与讨论；第二项实验有脚本故障及表现排除，最终30人。未运行其数据分析，也不据此否定一般行动计划。
+
+维护决定：现有[日常生活](../skills/adaptive-personal-ai-os/references/daily-life.md)已要求条件变化时调整线索/行动，[计划](../skills/adaptive-personal-ai-os/references/planning-decisions.md)已将行动绑定用户认可的目标及可改变结论的条件。本次保留这些边界，不添加一套强制口诀或额外运行规则；没有新增效果验证。
