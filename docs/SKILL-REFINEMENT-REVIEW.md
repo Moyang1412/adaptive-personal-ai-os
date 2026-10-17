@@ -48,3 +48,15 @@ and does not authenticate manifests or establish installed-host activation.
 ## Source refresh without new rules
 
 [SkillsBench v4, 2026-06-14](https://arxiv.org/html/2602.12670v4), inspected setup, limitations, self-generation audit and design-factor tables: later results distinguish loading failures, creator/solver filesystem carryover and changed effort settings. Size/module groups contain different tasks; they do not determine a universal maximum for ZhiXu. Existing isolation and activation requirements already cover these concerns, so we did not add another runtime protocol or portray an old model score as a new local result.
+
+## Build provenance is not inferred from a label
+
+The offline packager accepts a caller-supplied source_ref; previously even an
+empty label was accepted. It now rejects blank labels before creating outputs
+and explicitly marks source_ref_verification as not verified by the build in
+both manifests and the verification report. CRC and file readback do not prove
+that a named remote commit contains those bytes. Keep the separate remote-tree
+hash comparison and branch verification record; neither publication nor
+installed activation follows from the label. One additional blank-label test
+and expanded existing candidate/release assertions bring the full offline suite
+to 101 passing tests. These metadata/tool changes do not alter runtime ZIP bytes.

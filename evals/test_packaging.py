@@ -149,6 +149,14 @@ class PackagingTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertEqual(list(output.iterdir()), [marker])
 
+    def test_empty_source_label_rejected_before_output_creation(self):
+        for index, label in enumerate(('', '  ', '\t')):
+            output = Path(self.temp.name) / f'invalid-label-{index}'
+            result = subprocess.run([sys.executable, str(self.root / 'scripts/package_release.py'),
+                '--output-dir', str(output), '--source-ref', label, '--candidate'], capture_output=True, text=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertFalse(output.exists())
+
     def test_candidate_artifacts_are_distinct_without_claiming_publication(self):
         version=(self.root/'VERSION').read_text().strip()
         for candidate in [False,True]:
@@ -163,11 +171,13 @@ class PackagingTests(unittest.TestCase):
                     self.assertEqual(manifest['tag'],None if candidate else 'v'+version)
                     self.assertEqual(manifest['build_channel'],'candidate' if candidate else 'release-build')
                     self.assertEqual(manifest['source_ref'],'synthetic-source')
+                    self.assertEqual(manifest['source_ref_verification'], 'not verified by this build command')
                     self.assertIn('not assessed',manifest['publication'])
                     self.assertEqual(manifest['archive'],archive.name)
                     with zipfile.ZipFile(archive) as bundle:self.assertIsNone(bundle.testzip())
                 report=output/('candidate-verification.json' if candidate else 'release-verification.json')
                 self.assertTrue(report.is_file());self.assertIn(report.name,(output/'SHA256SUMS').read_text())
+                self.assertEqual(json.loads(report.read_text())['source_ref_verification'], 'not verified by this build command')
                 self.assertEqual((self.root/'VERSION').read_text().strip(),version)
 
 

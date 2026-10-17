@@ -18,9 +18,11 @@ def write_json(path, value):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--output-dir', type=Path, required=True)
-    parser.add_argument('--source-ref', required=True)
+    parser.add_argument('--source-ref', required=True, help='Nonempty caller-supplied source label; this offline build does not verify it against Git')
     parser.add_argument('--candidate', action='store_true', help='Label local artifacts as an unreleased candidate; does not publish')
     args = parser.parse_args()
+    if not args.source_ref.strip():
+        parser.error('--source-ref must be a nonempty source label')
     output = args.output_dir.resolve()
     if output.exists():
         raise ValueError('release directory already exists; keep existing assets')
@@ -61,7 +63,7 @@ def main():
     for kind, package, files in [('plugin', plugin_zip, plugin_files), ('skill', skill_zip, skill_files)]:
         name = stem + ('-plugin-manifest.json' if kind == 'plugin' else '-manifest.json')
         path = output / name
-        write_json(path, {'version': version, 'tag': None if args.candidate else 'v' + version, 'source_ref': args.source_ref,
+        write_json(path, {'version': version, 'tag': None if args.candidate else 'v' + version, 'source_ref': args.source_ref, 'source_ref_verification': 'not verified by this build command',
                          'build_channel': channel, 'publication': 'not assessed by this build command',
                          'kind': kind, 'skill_name': 'adaptive-personal-ai-os', 'license': 'MIT',
                          'archive': package.name, 'archive_sha256': sha(package.read_bytes()),
@@ -69,7 +71,7 @@ def main():
                          'scope': 'Public instruction bundle; no personal profile or chat history.'})
         manifests.append(path)
     verification = output / ('candidate-verification.json' if args.candidate else 'release-verification.json')
-    write_json(verification, {'version': version, 'source_ref': args.source_ref, 'build_channel': channel,
+    write_json(verification, {'version': version, 'source_ref': args.source_ref, 'source_ref_verification': 'not verified by this build command', 'build_channel': channel,
                              'plugin_files': len(plugin_files), 'skill_files': len(skill_files),
                              'package_crc_and_per_file_readback': 'passed',
                              'relative_runtime_references_closed': local['relative_runtime_references_closed'],
