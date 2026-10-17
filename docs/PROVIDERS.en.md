@@ -90,8 +90,9 @@ complete memory engine.
 | [MCP Memory](MCP-MEMORY-REVIEW.md) | Small local graph in an existing MCP host | Authorized file/read scope, edge endpoints, installed-version concurrency |
 | [Mem0](MEM0-REVIEW.md) | Fact extraction and semantic retrieval | Model/embedding data path and cost, inferred mutation effects, per-operation authorization |
 | [LangMem](LANGMEM-REVIEW.md) | Reuse an existing LangGraph/store stack | Trusted namespace binding, permitted actions, backend restart persistence and conflict handling |
+| [Letta / MemGPT](LETTA-REVIEW.md) | An existing or explicitly selected stateful Letta stack | Current MemFS versus retired V1, local/cloud data path, authorized sharing, synchronization and conflicts; not a drop-in memory database |
 
-These are conditional assessment paths, not a recommendation to install all three or a list of currently verified providers. Keep native memory when it already meets the need.
+These are conditional assessment paths, not a recommendation to install every option or a list of currently verified providers. Keep native memory when it already meets the need.
 
 Persistent-memory needs require verified cross-session availability even if the caller lists only read or save. Current-session access alone is insufficient for native memory, a private profile or an external provider.
 
