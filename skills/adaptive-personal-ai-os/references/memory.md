@@ -92,6 +92,12 @@ Read only files and sections relevant to the current goal and authorized scope. 
 - Use summaries as discovery aids. For an important disputed or changing claim,
   inspect its original authorized source when available; otherwise label the gap.
   Copies, repeated summaries and assistant echoes are not independent corroboration.
+- When recall fails, distinguish information never recorded, recorded but not
+  retrieved, and retrieved but misinterpreted before recommending another engine.
+  Inspect only the authorized evidence needed to locate that failure. A shorter
+  extracted fact can lose the condition or qualification needed for this answer;
+  retrieve its relevant source context rather than silently invent it. Retrieval
+  hit rate and correctness of the eventual answer are separate outcomes.
 - If evidence is absent, say "not found in the authorized sources checked" and
   identify the relevant gap. Do not infer that an event never happened or invent
   missing history. Ask only if the gap materially prevents a useful next step.

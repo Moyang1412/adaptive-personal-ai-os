@@ -1,5 +1,9 @@
 # Evaluation: structure is not behavior
 
+The optional [paired-run accounting tool](PAIRED-RUNS.md) summarizes supplied
+review records without executing or grading a model. Its demonstration fixture
+must not be counted as observed assistant behavior.
+
 [Validation status](../docs/VALIDATION.md)
 
 [Non-learning candidate pilot](../docs/VALIDATION-NONLEARNING.md) records paired

@@ -154,3 +154,11 @@ Extended the earlier ts-fsrs README-only screening with pinned source at c8ca282
 ## Align public migration guidance with the runtime consent rules
 
 Corrected ambiguous Chinese wording that could read as migration requiring deletion verification of source data. The public guides now distinguish verifying the target and stopping old writes from separately authorized source deletion; a tool's cleanup suggestion supplies no authority. Clarified first assessment versus material-context rechecks in the short introductions. This aligns documentation with the existing runtime forgetting/authorization rules and unchanged synthetic lifecycle fixture (which preserves the old record); no provider operation, runtime change, new engine or model-behavior claim.
+
+## Everyday-life expansion and honest paired-run accounting
+
+Reviewed specific sections of Gilbert's intention-offloading experiments, the Risko/Gilbert review, LongMemEval and AgentDojo; inspected pinned Grocy chore code and LongMemEval/Inspect evaluation definitions with licenses. Source scopes, exclusions and concrete decisions are in [the expansion review](RESEARCH-EXPANSION-2026-10-17.md). Some requested paper/guidance pages were inaccessible, not treated as newly read full text. No frameworks installed, model APIs called or private records imported.
+
+The existing life references now coordinate competing resources and transitions, and cover supplies, appointments, travel logistics and digital upkeep without requiring a whole-life profile. Ten independently authored specs add positive/negative/boundary coverage;118 routing schema cases pass (43positive/23negative/52ambiguous). Memory failure diagnosis separates missing storage, retrieval and reading; research comparisons check grading conditions and task-appropriate tolerances.
+
+Added an original dependency-free summarize_eval_runs.py for reviewed records, not model execution or automatic grading. Preserves all repeats, missing/blocked runs, demonstrations, activation gaps, matched conditions, separate costs and critical violations. Empty/demo input cannot become a claimed successful experiment. All72 offline unit tests pass, including18 bookkeeping checks;8provider structure cases pass. New life behavior and real-user outcomes remain unexecuted/unverified.

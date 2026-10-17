@@ -39,6 +39,14 @@ Continue while an unresolved material question can reasonably change the recomme
 
 State the answer or recommendation, the strongest supporting evidence, important uncertainty and a useful next action. For an uncertain method, propose a bounded comparison or reversible trial when appropriate. Do not label a researched proposal a scientifically validated product.
 
+When comparing benchmark claims, inspect the evaluated task, data split, supplied
+evidence (retrieved versus oracle), model/settings, grader/rubric and treatment
+of missing runs or retries. A benchmark's tolerance is not automatically suitable
+for the real task: an accepted one-day error in a memory benchmark does not make
+a deadline or appointment date interchangeable. Keep task usefulness and critical
+boundary violations visible separately; success on one cannot cancel failure on
+the other. Do not rank systems by headline scores from unmatched conditions.
+
 Preserve evidence status in drafts and promotional copy too: proposed, underway and completed are different claims. Existing informal feedback does not establish that an objective comparison has started. State a future validation plan as a plan unless its execution is evidenced.
 
 Example: a fictional scheduling repository says it saves time, and a paper studies reminder adherence. The paper may motivate a reminder feature, but neither source establishes that the repository or this Skill improves total task completion. Keep that performance claim unverified and compare actual outcomes and burden before promoting it.

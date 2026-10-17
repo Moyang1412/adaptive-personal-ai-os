@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "cases": [
+    "fictional-errand"
+  ],
+  "repeats": 2,
+  "variants": {
+    "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "candidate": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "runs": [
+    {
+      "case_id": "fictional-errand",
+      "variant": "baseline",
+      "attempt": 1,
+      "execution": "completed",
+      "verdict": "partial",
+      "source": "demonstration",
+      "conditions": {
+        "model": "fixture-model",
+        "host": "fixture-host",
+        "settings": "same-settings",
+        "fixture": "same-inputs",
+        "rubric": "rubric-v1"
+      },
+      "review": {
+        "kind": "self",
+        "reviewer": "fictional-example-author",
+        "blind": false
+      },
+      "activation": "unverified",
+      "evidence": [
+        "demonstration-only-no-model-output"
+      ],
+      "note": "Fabricated unit-test input, not an observed model run.",
+      "critical_violation": false,
+      "metrics": {
+        "elapsed_seconds": 10,
+        "tool_calls": 2
+      }
+    },
+    {
+      "case_id": "fictional-errand",
+      "variant": "candidate",
+      "attempt": 1,
+      "execution": "completed",
+      "verdict": "met",
+      "source": "demonstration",
+      "conditions": {
+        "model": "fixture-model",
+        "host": "fixture-host",
+        "settings": "same-settings",
+        "fixture": "same-inputs",
+        "rubric": "rubric-v1"
+      },
+      "review": {
+        "kind": "self",
+        "reviewer": "fictional-example-author",
+        "blind": false
+      },
+      "activation": "unverified",
+      "evidence": [
+        "demonstration-only-no-model-output"
+      ],
+      "note": "Fabricated unit-test input, not an observed model run.",
+      "critical_violation": false,
+      "metrics": {
+        "elapsed_seconds": 10,
+        "tool_calls": 2
+      }
+    }
+  ]
+}
