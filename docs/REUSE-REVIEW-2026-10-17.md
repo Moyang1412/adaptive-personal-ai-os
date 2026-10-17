@@ -170,3 +170,9 @@ Ran two isolated instruction-reading contexts, each receiving the same four fict
 ## Progressive disclosure for practical life detail
 
 Moved supplies, appointments, travel and digital upkeep into a conditionally linked practical-life.md rather than loading them for every habit request. Daily-life text decreases from7704 to5056characters; this is file-size evidence, not measured token/latency savings. Packaging now derives counts from its explicit public whitelist and verified plugin manifest; a missing practical-life file fails the optimized build. All73unit tests pass;118routing/8provider schemas remain unchanged. Four-pair response evidence remains tied to its earlier snapshot, with no invented new host/model result.
+
+## Uncertain mutation results and bounded recovery
+
+Read AWS idempotency/reconciliation guidance and pinned Powertools Python bf2e917 code under MIT-0: the full handler/config and selected persistence sections. Also compared self-correction paper methods and limitations. Added a conditional workflow section covering timeout reconciliation, pending versus failed outcomes, request identity/payload/account/deduplication windows and bounded safe-read retries. Existing feedback rules already cover the papers' relevant distinction, so no generic reflection loop was added. See the [review](EXECUTION-RECOVERY-REVIEW.md).
+
+Executed an original in-memory demonstration: naive repetition creates two effects; receipt lookup and supported replay create one; changed intent is rejected; receipt expiry allows duplication again. This is a scripted contract illustration, not observed old/new agent behavior or production retry logic. Four additional routing specifications bring the total to 122 (44 positive, 23 negative, 55 ambiguous), schema only. No third-party code execution, service access, external mutation or new delegated validation occurred.

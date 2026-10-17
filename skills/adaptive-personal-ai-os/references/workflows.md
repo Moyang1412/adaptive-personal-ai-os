@@ -41,6 +41,28 @@ the fix and passes after it; never remove acceptance checks just to obtain green
 output. A useful partial check supports only its stated scope. Re-run affected
 checks after changes, not every unrelated check after a documentation-only edit.
 
+### Recover from an uncertain tool outcome
+
+A timeout or interrupted response to a mutating request does not establish that
+the action failed. Before repeating it, use the provider's supported receipt or
+status lookup to reconcile the exact request, target and intended parameters.
+Pending is not completed; a delayed or eventually consistent lookup that finds
+nothing is not necessarily proof of no side effect. Preserve the uncertainty if
+the available evidence cannot resolve it, and continue independent safe work.
+
+Replay a mutation only within the existing authorization and the actual provider
+contract. A documented idempotency key must refer to the same intent, payload,
+account and valid deduplication window; changing the key creates a new request,
+and an expired key may no longer prevent duplicates. Do not invent an API field
+or assume two identical-looking requests are automatically deduplicated. An
+idempotency wrapper does not prove that every downstream side effect is atomic.
+
+For a safe retryable read or an explicitly supported replay, respect the tool's
+retry guidance and a task-appropriate bound. Distinguish an unfinished requested
+outcome from permission to poll forever. Do not repeat a denied operation through
+another route, retry a validation error unchanged, or make extra mutations merely
+to test whether the first one succeeded.
+
 Keep a handoff compact: goal, verified current state and evidence entrypoints, blocker or pending decision, next action and its success condition. Inspect the actual outcome of tool calls before claiming completion. If a retry gives the same failure without new evidence, change the hypothesis or report the dependency; do not repeat the same action indefinitely.
 
 ## Communication and wellbeing
@@ -72,3 +94,4 @@ Compare changes against the prior version on the same tasks and preserve negativ
 - Tannenbaum & Cerasoli (2013), [debriefing meta-analysis](https://doi.org/10.1177/0018720812448394): evidence concerns active, event-specific reviews with external information; it does not validate passive AI summaries or this Skill.
 - Huang et al. (ICLR 2024), [intrinsic self-correction study](https://arxiv.org/abs/2310.01798): tested reasoning setups show that repeated self-correction need not improve answers; the result is not a universal claim about every later model.
 - Anthropic, [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) and [agent evaluations](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents): engineering guidance for simple workflows, environment feedback and outcome checks, not controlled evidence of personal productivity.
+- AWS, [Making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/): request identity, reconciliation and bounded duplicate detection are service contracts, not evidence that the current host supplies them. Apply the uncertainty distinction; do not add an AWS dependency.
