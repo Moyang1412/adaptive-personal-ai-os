@@ -34,3 +34,17 @@ same. Packaging verifies local reference closure, not whether a particular model
 actually follows the new pointer. This structural candidate needs real-host
 comparison before any quality or token-cost claim; byte reduction alone is not
 an efficacy result. Keep the prior f7d1db8 snapshot available for comparison.
+
+## Maintenance parser check
+
+The read-only bundle comparator accepted JSON file_count values true and 1.0
+because Python equality treated them like integer 1. A regression demonstrated
+both acceptances; the parser now requires an actual integer before any listed
+file is hashed. Valid integer manifests and existing no-write behavior remain
+covered. The complete offline suite passes 100 tests, including this one added
+test. This correction is in the maintainer tool, not the installed Skill runtime,
+and does not authenticate manifests or establish installed-host activation.
+
+## Source refresh without new rules
+
+[SkillsBench v4, 2026-06-14](https://arxiv.org/html/2602.12670v4), inspected setup, limitations, self-generation audit and design-factor tables: later results distinguish loading failures, creator/solver filesystem carryover and changed effort settings. Size/module groups contain different tasks; they do not determine a universal maximum for ZhiXu. Existing isolation and activation requirements already cover these concerns, so we did not add another runtime protocol or portray an old model score as a new local result.

@@ -45,6 +45,14 @@ class BundleComparisonTests(unittest.TestCase):
         for patch in ({'kind':'plugin'}, {'file_count':2}, {'files':{'SKILL.md':'bad'}}):
             with self.assertRaises(ValueError): compare(self.bundle, {**self.manifest, **patch})
 
+    def test_manifest_count_requires_an_integer_before_reading_files(self):
+        for value in (True, False, 1.0, '1', None, -1, 0):
+            with self.subTest(value=value), patch('scripts.compare_skill_bundle.file_digest', return_value=('read', self.manifest['files']['SKILL.md'])) as reads:
+                with self.assertRaises(ValueError):
+                    compare(self.bundle, {**self.manifest, 'file_count': value})
+                reads.assert_not_called()
+        self.assertTrue(compare(self.bundle, self.manifest)['all_listed_files_match'])
+
     def test_symlink_not_followed(self):
         outside = self.root / 'outside'
         outside.write_bytes(b'public core')

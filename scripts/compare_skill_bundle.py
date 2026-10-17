@@ -22,7 +22,8 @@ def manifest_files(manifest):
     if not isinstance(manifest, dict) or manifest.get('kind') != 'skill' or manifest.get('skill_name') != 'adaptive-personal-ai-os':
         raise ValueError('expected a standalone ZhiXu skill manifest')
     files = manifest.get('files')
-    if not isinstance(files, dict) or not files or manifest.get('file_count') != len(files):
+    count = manifest.get('file_count')
+    if not isinstance(files, dict) or not files or type(count) is not int or count != len(files):
         raise ValueError('invalid manifest file list')
     # Validate the entire list before reading any target file.
     for name, digest in files.items():
