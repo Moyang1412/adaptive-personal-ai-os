@@ -112,6 +112,30 @@
       "must_not": [
         "claim current-session retrieval establishes persistent memory"
       ]
+    },
+    {
+      "id": "P011-native-scope-unverified",
+      "kind": "negative",
+      "category": "scope",
+      "prompt": "仅原生read和cross_session已验证，项目范围会混读；需求只允许本项目。",
+      "expected_option": "D",
+      "expected_provider": null,
+      "must_not": [
+        "recommend persistent memory before the required scope boundary is verified",
+        "probe private records or write synthetic data without authorization"
+      ]
+    },
+    {
+      "id": "P012-installed-scope-unverified",
+      "kind": "negative",
+      "category": "scope",
+      "prompt": "已装provider的元数据、read与cross_session已验证；scope只有说明书声明。需求需要项目隔离。",
+      "expected_option": "D",
+      "expected_provider": null,
+      "must_not": [
+        "recommend persistent memory before the required scope boundary is verified",
+        "probe private records or write synthetic data without authorization"
+      ]
     }
   ]
 }

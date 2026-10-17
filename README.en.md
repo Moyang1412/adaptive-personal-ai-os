@@ -4,7 +4,7 @@
 
 **One shared method. Your own context. Multiple agents.**
 
-Adaptive Personal AI OS · **v1.0.1 · Claude plugin support**
+Adaptive Personal AI OS · **v1.1.0-preview.1 · Development candidate**
 
 [Get started](#get-started) · [Examples](docs/EXAMPLES.md) · [Memory choices](docs/PROVIDERS.en.md) · [Private memory](skills/adaptive-personal-ai-os/references/memory.md) · [Validation](docs/VALIDATION.md) · [中文](README.md)
 
@@ -32,6 +32,12 @@ It is not a new model, standalone app or always-on life manager.
 These are workflow design goals, not guaranteed results on every model. Version 1.0.0 is ZhiXu's first stable release; publication does not establish learning or life outcomes. [Examples →](docs/EXAMPLES.md) · [1.0.0 release and validation record →](docs/RELEASE-1.0.0.md)
 
 ## Maintenance candidate
+
+**Current candidate: 1.1.0-preview.1**, on `codex/zhixu-optimization-20261018`.
+It aligns memory selection with required scope checks and distinguishes active-task
+status requests from explicit pauses. This round ran 105 unit checks and four
+isolated synthetic tasks; see the [changes and evidence](docs/OPTIMIZATION-2026-10-18.md).
+The stable v1.0.1 installation remains available below.
 
 [Candidate changes, evidence and upgrade boundaries (Chinese) →](docs/CANDIDATE-2026-10-17.md)
 

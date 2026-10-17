@@ -249,7 +249,10 @@ def _ensure_single_source(providers: Iterable[ProviderDescriptor]) -> None:
 def _required_capabilities(requirements: MemoryRequirements) -> set[str]:
     required = set(requirements.required_capabilities)
     if requirements.persistent:
-        required.add('cross_session')
+        # Routing always requires a verified scope boundary. Selection must not
+        # recommend an unscoped provider merely because the caller named only
+        # read/save and cross-session persistence.
+        required.update({'cross_session', 'scope'})
     if requirements.cross_agent:
         required.update({'cross_agent', 'concurrent_write_guard', 'scope'})
     return required

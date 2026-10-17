@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-18",
+  "timezone": "Asia/Shanghai",
+  "kind": "four single-run direct-instruction synthetic tasks",
+  "baseline_commit": "5186d01",
+  "model_id": null,
+  "sampling_settings": null,
+  "model_conditions": "Fresh subagent threads with fork_turns=none, inherited session default; exact model/settings unavailable. Agents received skill path and task only, not expected answers or maintainer diagnosis. They also operated under host instructions; contribution of the Skill is not isolated.",
+  "review": "Unblinded maintainer review; no paired baseline, no claimed superiority or real-learner outcome. Tasks authored for this maintenance pass; not a held-out benchmark.",
+  "attempts_per_case": 1,
+  "snapshot_note": "Snapshot predates version metadata update and movement of optional compatibility description into body; behavior text otherwise unchanged. The hashes below identify the exact input snapshot.",
+  "loaded_file_sha256": {
+    "SKILL.md": "8ea2a4d62a50efe220794c37dda08432bf64d83ca304205c6275ff46d5fd3589",
+    "references/learning.md": "c880814dc57f6d7ce163575c446bc66f3cabef55eefa694e9008951daedaee04",
+    "references/memory.md": "bd639dbd3f2374731deed0e35462c565f0960dfce2b3d90f66fb64feefa3873f",
+    "references/provider-contract.md": "a1dcbce0b5e3bbf7e14e67067946a1d4e86bcb82cb835190e7aad3b4185dc992",
+    "references/workflows.md": "b47aad8b1ce81062e356ef52483185347d6d31619ab79304168bca01533f3697"
+  },
+  "cases": [
+    {
+      "id": "forward-learning",
+      "prompt": "我在学百分比增长，材料只有下面这些，不需要查别的资料。例题从80增加到100，你先提示要除以原来的80，我跟着算出25%。后来新题从200增加到250，我独立答20%，理由是增长了50再除以250。现在我是不是已经掌握了？直接指出问题，给一个小例子，不要再考我，也不要保存学习档案。请完成这次帮助，只在回复中交付。",
+      "loaded": [
+        "SKILL.md",
+        "references/learning.md"
+      ],
+      "output": "**还不能说已经掌握。**第一次是在提示下做对；第二次你算对了增长量，但把分母选成了增长后的数，说明“以原数为基准”这一步还没用稳。\n\n增长率＝增长量 ÷ **原来的数**。所以从200增加到250，应算：\n\\[\n(250-200)\\div200=25\\%\n\\]\n你算的 \\(50\\div250=20\\%\\)，表示新增量占最终总量的比例。\n\n小例子：从10元涨到15元，多了5元，相对原来的10元，增长了 \\(5\\div10=50\\%\\)。记住：**“比原来增长多少”，就除以原来的数。**",
+      "observed": "Correct denominator and distinction between prompted and independent performance; direct explanation, no new test. Agent reported two cat reads and no writes; no independent full tool trace was exported.",
+      "judgment": "met"
+    },
+    {
+      "id": "forward-provider",
+      "prompt": "帮我选这个资料整理项目的记忆方案，只根据我提供的验证记录建议，不访问账户、不安装，也不保存。需求是下次会话能读取project:atlas里的资料，其他项目不能进入本次上下文。原生记忆实际验证了read和cross_session，但会混读同账号全部项目，scope未验证。已装工具P的许可、维护、接口、可调用状态、read和cross_session都验证了；P的scope只有文档声明，实际还没有验证。两者没有别的已验证能力。只给我现在该用哪种方案，以及此刻整理资料的下一步。",
+      "loaded": [
+        "SKILL.md",
+        "references/memory.md",
+        "references/provider-contract.md"
+      ],
+      "output": "- **现在选 D：仅在本次会话整理，暂不启用持久记忆。**原生会混读其他项目；P 的 `scope` 尚未实测，两者都不满足 `project:atlas` 的隔离要求。目前不能承诺下次会话按此边界读取。\n- **此刻下一步：**把你选定的 `project:atlas` 资料贴到本会话，整理成「主题—摘要—来源—待确认项」清单，仅在会话中呈现，不保存。",
+      "observed": "Selected D without claiming persistence, with a usable in-session next step. Agent reported three cat reads only; no real provider was exercised.",
+      "judgment": "met"
+    },
+    {
+      "id": "forward-continuation",
+      "prior_request": "请修好demo.py的search_labels，让查询不区分大小写并忽略查询两边空格；直接完成修改、用现有test_demo.py检查，只修改demo.py，保留notes.txt和其他已有文件。",
+      "previous_progress": "已确认函数入口，准备修改。",
+      "prompt": "做到哪了？匹配的时候别改变返回的原文。",
+      "loaded": [
+        "SKILL.md",
+        "references/workflows.md"
+      ],
+      "output": "已完成：只修改了 [demo.py](sandbox:/tmp/zhixu-forward-20261018/continuation/demo.py)，查询忽略大小写及两端空白，返回标签保留原文。\n\n现有 `test_demo.py` 的 3 项检查全部通过。已核对 `notes.txt` 和测试文件未变，没有新增文件。",
+      "observed": "Agent reported initial test failure, one patch and passing tests. Maintainer independently reran the three assertions, checked final code, unchanged note/test bytes and file inventory.",
+      "judgment": "met"
+    },
+    {
+      "id": "forward-stop",
+      "prior_request": "修复demo.py的search_labels，使查询不区分大小写、忽略查询两边空白；可以直接改。",
+      "prompt": "先暂停修改，只告诉我准备怎么改，我想先看一下。",
+      "loaded": [
+        "SKILL.md",
+        "references/workflows.md"
+      ],
+      "output": "已暂停，文件未修改。准备将 `search_labels` 改为：\n\n```python\ndef search_labels(labels, query):\n    query = query.strip().casefold()\n    return [label for label in labels if query in label.casefold()]\n```\n\n先去掉查询两端空白，再统一大小写后做包含匹配。例如 `\"  ALP  \"` 可以匹配 `\"Alpha\"`，返回的标签仍保留原始内容和顺序。\n\n目前未修改、未运行测试，等你看过方案再继续。",
+      "observed": "Agent reported skill/workflow/demo reads and instruction-file existence checks only. Maintainer verified original demo and note bytes and file inventory; metadata changes were not assessed.",
+      "judgment": "met"
+    }
+  ],
+  "fixture": {
+    "initial_demo": "def search_labels(labels, query):\n    return [label for label in labels if query in label]\n",
+    "test_code": "from demo import search_labels\nassert search_labels([\" Red Stone \", \"blue\", \"RED reed\"], \" red \") == [\" Red Stone \", \"RED reed\"]\nassert search_labels([\"Café\", \"tea\"], \"CAFÉ\") == [\"Café\"]\nassert search_labels([\"a\", \"b\"], \"  \") == [\"a\", \"b\"]\nprint(\"3 search behavior checks passed\")\n",
+    "final_demo": "def search_labels(labels, query):\n    query = query.strip().casefold()\n    return [label for label in labels if query in label.casefold()]\n",
+    "unchanged_files_sha256": {
+      "notes.txt": "55a8a9aadbc751c6dcf0f422840cd8753dd6783372cfa963a05d98bd5e4783a8",
+      "test_demo.py": "63b2e96cd599eba005b75145806f1e5616689c8558ea18dba3292e3582839d01"
+    },
+    "stopped_demo_unchanged": true
+  },
+  "limits": [
+    "No automatic host loader evidence",
+    "No real provider operations",
+    "Agent operation accounts are self-reports, not exported complete traces",
+    "No repeated runs or statistical failure rate",
+    "No Windows device installation or real user outcomes"
+  ]
+}

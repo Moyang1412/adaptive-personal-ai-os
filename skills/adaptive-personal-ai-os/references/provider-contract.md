@@ -70,9 +70,15 @@ because a Skill or package is installed. Shared scopes require a single writer
 or a verified version/lock guard. If the provider cannot protect competing
 writes, do not select it for cross-Agent writes.
 
-A persistent-memory requirement always needs verified cross-session availability,
-even when the caller lists only read or save. Current-session retrieval alone
-does not establish this for native memory, a private profile or an external provider.
+A persistent-memory requirement always needs verified cross-session availability
+and a boundary covering the authorized scope, even when the caller lists only
+read or save. Apply these requirements during selection, not only after choosing
+a provider: otherwise the recommendation can name a provider that routing must
+reject. A boundary can be an already authorized separate store; it need not be a
+new database or a project-tag feature. Current-session retrieval alone does not
+establish persistence or scope isolation for native memory, a private profile or
+an external provider. Native capability inputs mean verified current capabilities,
+not features inferred from the host's brand.
 Reuse current valid evidence; lack of evidence does not authorize a new test write.
 
 Permission to use a private profile is not evidence that its required operations

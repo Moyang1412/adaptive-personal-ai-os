@@ -128,7 +128,7 @@ class ProviderSelectionTests(unittest.TestCase):
         for collection in (list, tuple, set, frozenset):
             requirements = MemoryRequirements(True, collection(['read']), False, True, 'confirm')
             plan = recommend_plan(requirements, native_available=True,
-                                  native_capabilities=collection(['read', 'cross_session']), providers=[])
+                                  native_capabilities=collection(['read', 'cross_session', 'scope']), providers=[])
             self.assertEqual(plan.option, 'A')
 
     def test_caller_mutation_does_not_expand_verified_capabilities_or_scopes(self) -> None:
@@ -169,7 +169,7 @@ class ProviderSelectionTests(unittest.TestCase):
             yield
         requirements = MemoryRequirements(True, frozenset({'save', 'read'}), False, False, 'confirm')
         plan = recommend_plan(requirements, native_available=True,
-                              native_capabilities={'save', 'read', 'cross_session'}, providers=providers())
+                              native_capabilities={'save', 'read', 'cross_session', 'scope'}, providers=providers())
         self.assertEqual(plan.option, 'A')
 
     def test_text_boolean_cannot_claim_verified_evidence(self) -> None:
@@ -221,7 +221,7 @@ class ProviderSelectionTests(unittest.TestCase):
             explicit_gap=False,
             user_consent="confirm",
         )
-        plan = recommend_plan(requirements, native_available=True, native_capabilities=requirements.required_capabilities | {'cross_session'}, providers=[])
+        plan = recommend_plan(requirements, native_available=True, native_capabilities=requirements.required_capabilities | {'cross_session', 'scope'}, providers=[])
         self.assertEqual(plan.option, "A")
         self.assertIsNone(plan.provider_id)
 
@@ -263,7 +263,7 @@ class ProviderSelectionTests(unittest.TestCase):
         self.assertFalse(assessment.eligible)
         self.assertIn('cross_session', assessment.unsupported_capabilities)
         self.assertEqual(recommend_plan(requirements, native_available=False, native_capabilities=set(), providers=[candidate]).option, 'D')
-        self.assertEqual(recommend_plan(requirements, native_available=True, native_capabilities={'read', 'cross_session'}, providers=[]).option, 'A')
+        self.assertEqual(recommend_plan(requirements, native_available=True, native_capabilities={'read', 'cross_session', 'scope'}, providers=[]).option, 'A')
 
     def test_profile_requires_scoping_and_guard_in_addition_to_requested_operations(self) -> None:
         for missing in ('scope', 'concurrent_write_guard'):

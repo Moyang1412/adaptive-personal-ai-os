@@ -1,5 +1,14 @@
 # Validation status
 
+## 2026-10-18 · 1.1.0-preview.1
+
+See the [current optimization record](OPTIMIZATION-2026-10-18.md) and
+[raw synthetic outputs](../evals/results/2026-10-18-forward.json).
+This version adds scope-selection regressions and four single-run forward tasks
+to the prior candidate. The checks cover the local reference code and direct
+instruction use, not automatic host loading or real-user effectiveness.
+Earlier counts below remain tied to their historical snapshots.
+
 ## 2026-10-17 maintenance candidate
 
 Branch: `dot/overnight-improvements-20261017`, based on v1.0.1 main. This is not a new release. Current offline evidence: 101 unit tests now pass after maintainer-only manifest count and package-provenance checks. Regressions first failed for boolean/float file counts and an empty build-source label. Invalid counts are now rejected before file hashing; empty labels are rejected before output creation. Package manifests explicitly mark the supplied source label as unverified by the offline builder; matching it to remote Git still requires a separate check. The previous 99-test run belongs to 827ad45. The installed runtime remains snapshot 2a1a32f; 154 routing-case schema checks and 10 provider-case schema checks pass; reproducible plugin/Skill packaging, CRC/per-file readback and local runtime references. The official specification permits compatibility; a local parsed-field check passes, but the official skills-ref CLI was not run. No live host activation, controlled model-behavior study or learner study was performed in this pass. See the [maintenance record](REUSE-REVIEW-2026-10-17.md) and [life/evaluation expansion](RESEARCH-EXPANSION-2026-10-17.md). Of the offline checks, 18 validate paired-run bookkeeping and 17 validate the optional cash-flow arithmetic helper; authored routing cases remain unexecuted behavior specifications unless a separately scoped pilot states otherwise.

@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.1.0-preview.1 — 2026-10-18
+
+- Give the accumulated maintenance candidate its own version instead of reusing
+  1.0.1. The stable 1.0.1 release remains available; installed copies do not
+  upgrade automatically.
+- Require verified scope boundaries at persistent-memory selection as well as
+  operation routing. Fix native and external selections that could recommend a
+  provider the operation router would reject. Reuse authorized isolated stores
+  and native evidence; no new memory database or history migration is added.
+- Preserve the active goal through status requests, corrections and handoffs,
+  while honoring explicit pauses, cancellations and replacement goals.
+- Move the optional compatibility description into the body so the bundled
+  instructions also pass the available older frontmatter validator; preserve
+  the runtime requirements and stable name.
+- Carry forward the prior candidate's source-grounded tutoring, optional
+  cash-flow arithmetic, resource coordination, uncertain-action recovery and
+  read-only upgrade comparison. The earlier candidate record remains historical.
+- See [this round's changes and evidence](docs/OPTIMIZATION-2026-10-18.md) for
+  regression results and independent synthetic task outputs. These checks do not
+  establish real-learner benefits or activation on other devices/hosts.
+
 ## 1.0.1 — 2026-10-16
 
 ### Claude plugin distribution
