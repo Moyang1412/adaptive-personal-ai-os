@@ -41,6 +41,21 @@ able to repeat the analogy is not evidence of performing the target skill.
 Starting at a course unit or choosing a beginner curriculum records a learning
 plan, not demonstrated competence at that level. Keep those labels separate.
 
+## Format, access and evidence are different
+
+Honor a useful requested format and genuine access needs without diagnosing a
+fixed "visual", "auditory" or "kinesthetic" learner. A preference can guide how
+to present this explanation; it does not establish which method will produce
+better independent learning across subjects. Choose representations for the
+actual content, available tools and observed work, keeping alternatives usable.
+Do not make a style questionnaire a prerequisite or reject captions, text,
+diagrams or another accessible format because style matching is uncertain.
+
+When comparing methods, keep content, difficulty, assistance and assessment
+relevant and comparable. Satisfaction or one successful example is not a causal
+learning advantage. Do not convert a group-average effect into a personal label
+or promise, and do not insist that all individual differences are irrelevant.
+
 ## Capability evidence shared by both routes
 
 Reason about specific capabilities, not a single global beginner/intermediate label. Each useful observation identifies the task and conditions, the learner's actual contribution, assistance received, result, recency when known, and what remains uncertain. Keep this in session unless persistence is authorized.
@@ -113,5 +128,8 @@ transfer; preserve the assistance and consent boundaries above.
 - Shute, Ventura & Kim (2013), Assessment and Learning of Qualitative Physics in Newton's Playground: [doi:10.1080/00220671.2013.832970](https://doi.org/10.1080/00220671.2013.832970). Designed game activities supplied task-specific assessment evidence; arbitrary chat or engagement signals are not validated ability measures.
 - Kestin et al. (2025), purpose-built AI tutoring in specific Harvard physics lessons: [doi:10.1038/s41598-025-97652-6](https://doi.org/10.1038/s41598-025-97652-6). Results for a designed tutor and curriculum do not validate an arbitrary AI teaching protocol.
 - Bastani et al. (2025), assisted performance versus independent mathematics learning: [doi:10.1073/pnas.2422633122](https://doi.org/10.1073/pnas.2422633122). In the studied school setting, better assisted practice did not guarantee better independent performance; the guarded tutor did not significantly outperform the control on unaided exams.
+
+- Pashler et al. (2008 issue), [learning-styles evidence criteria](https://doi.org/10.1111/j.1539-6053.2009.01038.x): preference is not itself evidence for matching instruction; the review does not claim one method suits every task.
+- Clinton-Lisell & Litzinger (2024), [modality-matching meta-analysis](https://doi.org/10.3389/fpsyg.2024.1428732): a small positive aggregate coexists with infrequent crossover findings and quality/long-term limits; it does not justify mandatory style classification.
 
 These support aspects of the rationale; they are not endorsements or trials of ZhiXu.
