@@ -68,6 +68,13 @@ Pending is not completed; a delayed or eventually consistent lookup that finds
 nothing is not necessarily proof of no side effect. Preserve the uncertainty if
 the available evidence cannot resolve it, and continue independent safe work.
 
+For a multi-step action, distinguish confirmed, uncertain and unattempted steps;
+a later failure does not undo earlier effects. Resume the remaining authorized
+work from the verified state without needlessly repeating completed effects. If
+compensation is needed, check the current state, existing authorization and
+service rules, preserve intervening changes and verify the compensation itself.
+An attempted undo does not prove restoration; report any remaining effects.
+
 Replay a mutation only within the existing authorization and the actual provider
 contract. A documented idempotency key must refer to the same intent, payload,
 account and valid deduplication window; changing the key creates a new request,

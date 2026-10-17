@@ -1,5 +1,18 @@
 # Validation status
 
+## 2026-10-18 · 1.1.0-preview.2
+
+See the [research iteration](RESEARCH-ITERATION-2026-10-18.md) and
+[raw record](../evals/results/2026-10-18-round2-forward.json).
+112 offline unit tests pass; 170 routing specifications and 12 provider
+specifications pass schema checks. Five single-run synthetic outputs include
+one baseline/candidate learning pair, candidate file recovery and deletion
+reporting, plus a targeted supported-replay check after a wording refinement.
+The learning pair showed no superiority; unblinded review and unknown exact
+model settings limit interpretation. Initial wording and snapshot hashes are
+retained. These are not automatic host loading, real persistence or user-outcome
+tests. Historical reports below retain their original scope.
+
 ## 2026-10-18 · 1.1.0-preview.1
 
 See the [current optimization record](OPTIMIZATION-2026-10-18.md) and

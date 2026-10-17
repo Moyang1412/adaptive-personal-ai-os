@@ -72,9 +72,12 @@ writes, do not select it for cross-Agent writes.
 
 A persistent-memory requirement always needs verified cross-session availability
 and a boundary covering the authorized scope, even when the caller lists only
-read or save. Apply these requirements during selection, not only after choosing
-a provider: otherwise the recommendation can name a provider that routing must
-reject. A boundary can be an already authorized separate store; it need not be a
+read or save. Carry the actual persistence requirement through both selection
+and each operation's routing; neither stage may silently drop it. An explicitly
+nonpersistent inspection, cleanup or export can still be authorized when
+cross-session availability is unverified, provided every other operation, scope
+and consent check passes. This does not establish persistence or completion.
+A boundary can be an already authorized separate store; it need not be a
 new database or a project-tag feature. Current-session retrieval alone does not
 establish persistence or scope isolation for native memory, a private profile or
 an external provider. Native capability inputs mean verified current capabilities,

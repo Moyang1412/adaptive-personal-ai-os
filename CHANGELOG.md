@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.1.0-preview.2 — 2026-10-18
+
+- Distinguish choosing a relevant method from executing a supplied method; use
+  appropriate mixed practice and feedback without forcing coaching.
+- Carry persistent-memory requirements through operation routing. The offline
+  `RouteRequest` now requires Boolean `persistent_required`; authorized
+  nonpersistent inspection/cleanup retains all other guards.
+- Resume partial work from verified state and verify compensation, preserving
+  intervening changes and supported idempotent replay.
+- Distinguish record deletion from search absence and unverified derived layers.
+- Add seven unit-test methods and ten positive/negative/boundary specifications;
+  preserve research limits and raw synthetic-task evidence in the
+  [iteration record](docs/RESEARCH-ITERATION-2026-10-18.md). No new dependency or
+  verified real-user benefit is introduced.
+
 ## 1.1.0-preview.1 — 2026-10-18
 
 - Give the accumulated maintenance candidate its own version instead of reusing

@@ -3,7 +3,7 @@ name: adaptive-personal-ai-os
 description: "ZhiXu / 智序: planning, learning, life, decisions, research, projects, reflection and memory choices. Use when relevant or requested; skip simple translations, facts, isolated fixes and formatting."
 license: MIT
 metadata:
-  version: "1.1.0-preview.1"
+  version: "1.1.0-preview.2"
 ---
 
 # ZhiXu · 智序

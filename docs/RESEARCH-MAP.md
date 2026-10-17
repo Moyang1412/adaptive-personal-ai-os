@@ -3,7 +3,9 @@
 这页回答：查了什么、采用了什么、为什么没有把所有项目装进来。
 它是维护索引，不是系统综述，也不代表已经搜完GitHub或验证了智序的效果。
 
-[本轮实际改动](CANDIDATE-2026-10-17.md) · [验证状态与版本](VALIDATION.md) · [安装与升级](INSTALL.md)
+[本轮论文、源码与实际改动](RESEARCH-ITERATION-2026-10-18.md) · [验证状态与版本](VALIDATION.md) · [安装与升级](INSTALL.md)
+
+本轮继续核查混合练习、ACE、MemCut、Memora、LoCoMo-Plus、OATutor 与 LangGraph；固定源码、许可边界和未采用机制见上方记录。
 
 ## 已落到候选的改动
 

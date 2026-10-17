@@ -68,6 +68,13 @@ is not meaningful transfer. Keep helpful practice cues separate from assistance
 allowed in an independent check. If a changed prompt is unexpectedly hard, check
 ambiguity and missing premises before inferring that the learner forgot.
 
+When the goal requires choosing a method, distinguish selecting an appropriate
+strategy from executing one already named by the prompt or worksheet. Where
+useful and welcome, mix a small set of previously introduced problem types and
+give corrective feedback, so the learner chooses from relevant problem features.
+Preserve needed initial explanation and direct-help choices. Do not impose
+unrelated topic switching or treat harder practice as proof of better learning.
+
 ## Capability evidence shared by both routes
 
 Reason about specific capabilities, not a single global beginner/intermediate label. Each useful observation identifies the task and conditions, the learner's actual contribution, assistance received, result, recency when known, and what remains uncertain. Keep this in session unless persistence is authorized.
@@ -143,5 +150,6 @@ transfer; preserve the assistance and consent boundaries above.
 
 - Pashler et al. (2008 issue), [learning-styles evidence criteria](https://doi.org/10.1111/j.1539-6053.2009.01038.x): preference is not itself evidence for matching instruction; the review does not claim one method suits every task.
 - Clinton-Lisell & Litzinger (2024), [modality-matching meta-analysis](https://doi.org/10.3389/fpsyg.2024.1428732): a small positive aggregate coexists with infrequent crossover findings and quality/long-term limits; it does not justify mandatory style classification.
+- Rohrer et al. (2020), [interleaved mathematics practice](https://doi.org/10.1037/edu0000367): a classroom trial found better delayed test performance with more mixed practice. This supports considering method-selection practice, not abandoning initial explanation, promising time savings or mixing every subject.
 
 These support aspects of the rationale; they are not endorsements or trials of ZhiXu.

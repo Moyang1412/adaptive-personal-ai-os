@@ -119,6 +119,12 @@ When correcting a fact, identify the original record and inspect the latest file
 
 For forgetting, remove the identified content only with the appropriate user request and host permissions. Do not preserve a copy in a new note or public changelog. Explain that old conversations, native memories, backups and content already in model context are separate. Do not re-import a deleted fact without permission.
 
+Report the deletion layer actually verified, including any known derived summaries
+or index entries left unverified. An empty similarity search or inability to answer
+is not proof that stored records were removed. Use documented receipts/readback
+within the authorized scope; do not widen access or deletion, or recreate a
+forgotten fact, to seek stronger proof.
+
 ## Native-memory bridge
 
 Use relevant already-loaded context first. Additional native-memory access must name approved files or sources. Present a proposed minimal summary before importing; keep originals untouched. Do not bulk-import history or replace the host's own memory system.

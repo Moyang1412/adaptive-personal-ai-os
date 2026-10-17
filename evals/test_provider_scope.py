@@ -54,7 +54,8 @@ class ProviderScopeTests(unittest.TestCase):
                               native_capabilities=set(), providers=[provider])
         self.assertEqual(plan.option, 'C')
         request = RouteRequest(ProviderOperation.READ, 'project:demo', 'authorized',
-                               {'project:demo'}, False, active_provider_id=plan.provider_id)
+                               {'project:demo'}, False, persistent_required=self.requirements.persistent,
+                               active_provider_id=plan.provider_id)
         self.assertEqual(route_operation(request, provider).status, 'provider')
         self.assertEqual(route_operation(replace(request, scope='project:other'), provider).status, 'blocked')
 

@@ -100,7 +100,7 @@ class ProviderSelectionTests(unittest.TestCase):
             with self.subTest(field=field), self.assertRaises(ValueError):
                 replace(requirements, **{field: {'read': False}})
         with self.assertRaises(ValueError):
-            RouteRequest(ProviderOperation.READ, 'personal', 'authorized', {'personal': False}, False)
+            RouteRequest(ProviderOperation.READ, 'personal', 'authorized', {'personal': False}, False, persistent_required=True)
 
     def test_malformed_collection_members_fail_with_value_error(self) -> None:
         for invalid in (None, 12, 'read', [None], ['read', 3], [{}]):
@@ -110,7 +110,7 @@ class ProviderSelectionTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     MemoryRequirements(True, invalid, False, True, 'confirm')
                 with self.assertRaises(ValueError):
-                    RouteRequest(ProviderOperation.READ, 'p', 'authorized', invalid, False)
+                    RouteRequest(ProviderOperation.READ, 'p', 'authorized', invalid, False, persistent_required=True)
 
     def test_nontext_descriptor_and_route_fields_fail_early(self) -> None:
         for field in ('id', 'name', 'version', 'kind', 'location', 'storage_location',
@@ -118,7 +118,7 @@ class ProviderSelectionTests(unittest.TestCase):
             with self.subTest(field=field), self.assertRaises(ValueError):
                 replace(descriptor('bad-text'), **{field: 123})
         for field in ('scope', 'user_consent', 'active_provider_id'):
-            request = RouteRequest(ProviderOperation.READ, 'p', 'authorized', {'p'}, False)
+            request = RouteRequest(ProviderOperation.READ, 'p', 'authorized', {'p'}, False, persistent_required=True)
             with self.subTest(field=field), self.assertRaises(ValueError):
                 replace(request, **{field: 123})
         with self.assertRaises(ValueError):
@@ -132,14 +132,14 @@ class ProviderSelectionTests(unittest.TestCase):
             self.assertEqual(plan.option, 'A')
 
     def test_caller_mutation_does_not_expand_verified_capabilities_or_scopes(self) -> None:
-        capabilities = {'read', 'scope'}
-        verified = {'read', 'scope'}
+        capabilities = {'read', 'scope', 'cross_session'}
+        verified = {'read', 'scope', 'cross_session'}
         base = descriptor('snapshot')
         candidate = ProviderDescriptor(**{**base.__dict__, 'capabilities': capabilities,
             'verified_capabilities': verified, 'unverified_capabilities': frozenset()})
         scopes = {'project-one'}
         request = RouteRequest(ProviderOperation.READ, 'project-two', 'authorized', scopes,
-                               False, active_provider_id='snapshot')
+                               False, persistent_required=True, active_provider_id='snapshot')
         capabilities.add('save'); verified.add('save'); scopes.add('project-two')
         self.assertNotIn('save', candidate.verified_capabilities)
         self.assertNotIn('project-two', request.authorized_scopes)
@@ -178,10 +178,10 @@ class ProviderSelectionTests(unittest.TestCase):
                              callable="false", isolated_test="false")
 
     def test_text_boolean_cannot_authorize_network_or_sharing(self) -> None:
-        for field in ['network_allowed', 'relevant', 'cross_agent', 'sharing_authorized', 'single_writer']:
+        for field in ['network_allowed', 'persistent_required', 'relevant', 'cross_agent', 'sharing_authorized', 'single_writer']:
             with self.subTest(field=field), self.assertRaises(ValueError):
                 values = dict(operation=ProviderOperation.READ, scope='project', user_consent='authorized',
-                              authorized_scopes={'project'}, network_allowed=False)
+                              authorized_scopes={'project'}, network_allowed=False, persistent_required=True)
                 values[field] = 'false'
                 RouteRequest(**values)
 
@@ -194,7 +194,7 @@ class ProviderSelectionTests(unittest.TestCase):
 
     def test_scope_text_is_not_split_into_individual_authorizations(self) -> None:
         with self.assertRaises(ValueError):
-            RouteRequest(ProviderOperation.READ, 'p', 'authorized', 'project', False)
+            RouteRequest(ProviderOperation.READ, 'p', 'authorized', 'project', False, persistent_required=True)
 
     def test_native_availability_must_be_a_boolean(self) -> None:
         requirements = MemoryRequirements(True, frozenset({'read'}), False, False, 'confirm')
@@ -373,6 +373,7 @@ class ProviderSelectionTests(unittest.TestCase):
             user_consent="off",
             authorized_scopes=set(),
             network_allowed=False,
+            persistent_required=True,
             active_provider_id="verified-engine",
         )
         result = route_operation(request, candidate)
@@ -387,6 +388,7 @@ class ProviderSelectionTests(unittest.TestCase):
             user_consent="authorized",
             authorized_scopes={"personal"},
             network_allowed=False,
+            persistent_required=True,
             active_provider_id="verified-engine",
         )
         result = route_operation(request, candidate)
@@ -401,6 +403,7 @@ class ProviderSelectionTests(unittest.TestCase):
             user_consent="authorized",
             authorized_scopes={"personal"},
             network_allowed=False,
+            persistent_required=True,
             active_provider_id="verified-engine",
         )
         result = route_operation(request, candidate)
@@ -485,6 +488,7 @@ class ProviderSelectionTests(unittest.TestCase):
             user_consent="confirm",
             authorized_scopes={"personal"},
             network_allowed=False,
+            persistent_required=True,
             active_provider_id="old",
         )
         result = route_operation(request, candidate)
@@ -492,13 +496,14 @@ class ProviderSelectionTests(unittest.TestCase):
         self.assertIn("明确授权", result.reason)
 
     def test_route_requires_verified_scope_and_relevance(self) -> None:
-        candidate = descriptor("selected", capabilities={"save", "read"})
+        candidate = descriptor("selected", capabilities={"save", "read", "cross_session"})
         request = RouteRequest(
             operation=ProviderOperation.READ,
             scope="personal",
             user_consent="authorized",
             authorized_scopes={"personal"},
             network_allowed=False,
+            persistent_required=True,
             active_provider_id="selected",
         )
         result = route_operation(request, candidate)
@@ -511,6 +516,7 @@ class ProviderSelectionTests(unittest.TestCase):
             user_consent="authorized",
             authorized_scopes={"personal"},
             network_allowed=False,
+            persistent_required=True,
             active_provider_id="selected",
             relevant=False,
         )
@@ -524,6 +530,7 @@ class ProviderSelectionTests(unittest.TestCase):
             user_consent="authorized",
             authorized_scopes={"personal"},
             network_allowed=False,
+            persistent_required=True,
             active_provider_id="shared",
             cross_agent=True,
             sharing_authorized=True,
@@ -532,7 +539,7 @@ class ProviderSelectionTests(unittest.TestCase):
 
         unguarded = descriptor(
             "unguarded",
-            capabilities={"save", "read", "scope", "cross_agent"},
+            capabilities={"save", "read", "scope", "cross_agent", "cross_session"},
         )
         unguarded_request = RouteRequest(
             operation=ProviderOperation.SAVE,
@@ -540,6 +547,7 @@ class ProviderSelectionTests(unittest.TestCase):
             user_consent="authorized",
             authorized_scopes={"personal"},
             network_allowed=False,
+            persistent_required=True,
             active_provider_id="unguarded",
             cross_agent=True,
             sharing_authorized=True,
@@ -554,6 +562,7 @@ class ProviderSelectionTests(unittest.TestCase):
             user_consent="authorized",
             authorized_scopes={"personal"},
             network_allowed=False,
+            persistent_required=True,
             active_provider_id="verified-engine",
         )
         self.assertEqual(route_operation(request, candidate).status, "blocked")

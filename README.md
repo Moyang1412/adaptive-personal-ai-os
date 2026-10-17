@@ -4,7 +4,7 @@
 
 **同一套方法，你自己的记忆，不同的 Agent。**
 
-Adaptive Personal AI OS · **v1.1.0-preview.1 · 开发候选**
+Adaptive Personal AI OS · **v1.1.0-preview.2 · 开发候选**
 
 [开始使用](#开始使用) · [使用示例](docs/EXAMPLES.md) · [记忆方案](docs/PROVIDERS.md) · [私人记忆](docs/MEMORY.md) · [验证状态](docs/VALIDATION.md) · [English](README.en.md)
 
@@ -33,7 +33,7 @@ Adaptive Personal AI OS · **v1.1.0-preview.1 · 开发候选**
 
 ## 开发中候选
 
-**本轮：1.1.0-preview.1。** 修复记忆选择与执行检查不一致，明确工作中询问进度、补充限制与暂停的不同处理，并给累积候选独立版本。105项单元检查和4个隔离场景已执行；范围与限制见[本轮改动和验证](docs/OPTIMIZATION-2026-10-18.md)。当前候选分支为 `codex/zhixu-optimization-20261018`，稳定版仍可选择下面的 v1.0.1。
+**本轮：1.1.0-preview.2。** 结合论文与固定源码，补齐方法选择练习、持久要求的操作检查、部分完成任务续接和删除验证。112项单元检查通过；小样本合成任务与研究取舍见[本轮记录](docs/RESEARCH-ITERATION-2026-10-18.md)。当前候选分支为 `codex/zhixu-optimization-20261018`，稳定版仍可选择下面的 v1.0.1。
 
 [先看这一版的改动摘要与使用边界 →](docs/CANDIDATE-2026-10-17.md)
 

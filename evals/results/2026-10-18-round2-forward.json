@@ -1,0 +1,206 @@
+{
+  "date": "2026-10-18",
+  "timezone": "Asia/Shanghai",
+  "kind": "five single-run synthetic direct-instruction outputs; one learning pair and three candidate-only tasks",
+  "baseline_commit": "10d613235e724b920a066c5d1183e9138620f317",
+  "model_id": null,
+  "sampling_settings": null,
+  "conditions": "Fresh fork_turns=none subagents, inherited default; no expected answers or maintainer diagnosis. Skill-path wrapper plus user task, no permission to modify Skill. Exact model/settings unavailable; host instructions also apply. No automatic activation test.",
+  "review": "Unblinded maintainer review; one separate source/diff/fixture reviewer. Tasks authored during maintenance, no held-out set; one run each, no real learner followup.",
+  "snapshot_note": "The first candidate instruction snapshot was reviewed before publication; wording forbidding whole-sequence replay was narrowed to avoiding needless repeated completed effects. First four outputs retain their original snapshot; fifth uses final snapshot. No model failure observed for initial wording, the conflict was found by source review.",
+  "snapshots": {
+    "baseline": {
+      "files": {
+        "LICENSE": "87f26398e811be77bafa37389d19109b407bb4c574b27bf68dd2d3e4963a0fde",
+        "SKILL.md": "3e8b8522af447cf4963d933e662c27bc1d44773ecfd467b41e20efa2843071db",
+        "VERSION": "583105dbc14931794765f42911184f58e1778e4bb4e3ecd3eed640743b2e02c7",
+        "agents/openai.yaml": "94928fc605279c8d095ab87306802e8598ab34ec077162e631d6f2b6565b13bf",
+        "references/cashflow-check.md": "d30e65164f5a8036d70da5ea4309a46b15678069c220861aad653f47cbc11936",
+        "references/daily-life.md": "9dc69aadaf658da5ea940908383288dc3096c65bf54e9146e96c02668321597c",
+        "references/health-habits.md": "2798fa31a4c6e70a0b2afb90c1be1b192931e2fb07dc2fd06255c25edd1c4393",
+        "references/learning.md": "c880814dc57f6d7ce163575c446bc66f3cabef55eefa694e9008951daedaee04",
+        "references/life.md": "2e59fd8d27ee0d07f3ae6c69fd87d2fbc22bf0ef25ef6ddeec2efeafe32b4288",
+        "references/memory.md": "bd639dbd3f2374731deed0e35462c565f0960dfce2b3d90f66fb64feefa3873f",
+        "references/money-career.md": "3bdb3dd404b7ff6066e4f941bb60715262f5d22177fa4c8a5aa01a30a1982bda",
+        "references/planning-decisions.md": "b46e471c4a3892ad1e6929e7103cca2092c441d6dd3faa944051bcb0f23e4e29",
+        "references/platforms.md": "663aa1cd0b728eb5bd4329f2a531ea4a7ce37952627b41960b49f23211f4f8fc",
+        "references/practical-life.md": "94a4b90f250e817e43a38944ba889183f2117076d3db59da7e3baeb3fdb54749",
+        "references/provider-contract.md": "a1dcbce0b5e3bbf7e14e67067946a1d4e86bcb82cb835190e7aad3b4185dc992",
+        "references/provider-descriptor.schema.json": "c77fc86098463297692351f774a752b4b19209193df830c9699b6c5e553e3078",
+        "references/relationships-rest.md": "fc76d9f24ad7df9cd633fe2f936d11e4afaa30ff7d23e3371e68d06822813c14",
+        "references/research.md": "d2466055b0a5522db8562d9c3eb6e7a0ce4fe0b0c8219d3a50c5b4144712b19d",
+        "references/templates.md": "a92e53072d88d502901a5631c1266bb7c84035c92e14d5700376258a7a3055f6",
+        "references/workflows.md": "b47aad8b1ce81062e356ef52483185347d6d31619ab79304168bca01533f3697",
+        "scripts/check_cashflow.py": "b5653a46a4b9943bf57ae70676ea75700eb9e42196d016decff89d10173fbd80"
+      }
+    },
+    "candidate": {
+      "files": {
+        "LICENSE": "87f26398e811be77bafa37389d19109b407bb4c574b27bf68dd2d3e4963a0fde",
+        "SKILL.md": "30dd6d1c3008ead0d35418187b6aeb154c77295973631293cc824eb433c7c304",
+        "VERSION": "6ad3240c49c1baa90e0af0a636e38a4f0bb03dfc8ee089db636981c103f37485",
+        "agents/openai.yaml": "94928fc605279c8d095ab87306802e8598ab34ec077162e631d6f2b6565b13bf",
+        "references/cashflow-check.md": "d30e65164f5a8036d70da5ea4309a46b15678069c220861aad653f47cbc11936",
+        "references/daily-life.md": "9dc69aadaf658da5ea940908383288dc3096c65bf54e9146e96c02668321597c",
+        "references/health-habits.md": "2798fa31a4c6e70a0b2afb90c1be1b192931e2fb07dc2fd06255c25edd1c4393",
+        "references/learning.md": "a705eed6270506417d1be306e6ac8d821e1f9786a7970588ecd38c963304f5a9",
+        "references/life.md": "2e59fd8d27ee0d07f3ae6c69fd87d2fbc22bf0ef25ef6ddeec2efeafe32b4288",
+        "references/memory.md": "feaf74f06e85489852d7307bbec74449e8f1e8daa95770f2ab45a8630b50e3a7",
+        "references/money-career.md": "3bdb3dd404b7ff6066e4f941bb60715262f5d22177fa4c8a5aa01a30a1982bda",
+        "references/planning-decisions.md": "b46e471c4a3892ad1e6929e7103cca2092c441d6dd3faa944051bcb0f23e4e29",
+        "references/platforms.md": "663aa1cd0b728eb5bd4329f2a531ea4a7ce37952627b41960b49f23211f4f8fc",
+        "references/practical-life.md": "94a4b90f250e817e43a38944ba889183f2117076d3db59da7e3baeb3fdb54749",
+        "references/provider-contract.md": "46a8efe40949aa2710139060dc82d8fdc40785a484aab19b5ce69472673fa3d2",
+        "references/provider-descriptor.schema.json": "c77fc86098463297692351f774a752b4b19209193df830c9699b6c5e553e3078",
+        "references/relationships-rest.md": "fc76d9f24ad7df9cd633fe2f936d11e4afaa30ff7d23e3371e68d06822813c14",
+        "references/research.md": "d2466055b0a5522db8562d9c3eb6e7a0ce4fe0b0c8219d3a50c5b4144712b19d",
+        "references/templates.md": "a92e53072d88d502901a5631c1266bb7c84035c92e14d5700376258a7a3055f6",
+        "references/workflows.md": "92e5cc504d72519f3357441b973887f9341809760c5219de978b858d95091f6e",
+        "scripts/check_cashflow.py": "b5653a46a4b9943bf57ae70676ea75700eb9e42196d016decff89d10173fbd80"
+      }
+    },
+    "final": {
+      "files": {
+        "LICENSE": "87f26398e811be77bafa37389d19109b407bb4c574b27bf68dd2d3e4963a0fde",
+        "SKILL.md": "30dd6d1c3008ead0d35418187b6aeb154c77295973631293cc824eb433c7c304",
+        "VERSION": "6ad3240c49c1baa90e0af0a636e38a4f0bb03dfc8ee089db636981c103f37485",
+        "agents/openai.yaml": "94928fc605279c8d095ab87306802e8598ab34ec077162e631d6f2b6565b13bf",
+        "references/cashflow-check.md": "d30e65164f5a8036d70da5ea4309a46b15678069c220861aad653f47cbc11936",
+        "references/daily-life.md": "9dc69aadaf658da5ea940908383288dc3096c65bf54e9146e96c02668321597c",
+        "references/health-habits.md": "2798fa31a4c6e70a0b2afb90c1be1b192931e2fb07dc2fd06255c25edd1c4393",
+        "references/learning.md": "a705eed6270506417d1be306e6ac8d821e1f9786a7970588ecd38c963304f5a9",
+        "references/life.md": "2e59fd8d27ee0d07f3ae6c69fd87d2fbc22bf0ef25ef6ddeec2efeafe32b4288",
+        "references/memory.md": "feaf74f06e85489852d7307bbec74449e8f1e8daa95770f2ab45a8630b50e3a7",
+        "references/money-career.md": "3bdb3dd404b7ff6066e4f941bb60715262f5d22177fa4c8a5aa01a30a1982bda",
+        "references/planning-decisions.md": "b46e471c4a3892ad1e6929e7103cca2092c441d6dd3faa944051bcb0f23e4e29",
+        "references/platforms.md": "663aa1cd0b728eb5bd4329f2a531ea4a7ce37952627b41960b49f23211f4f8fc",
+        "references/practical-life.md": "94a4b90f250e817e43a38944ba889183f2117076d3db59da7e3baeb3fdb54749",
+        "references/provider-contract.md": "46a8efe40949aa2710139060dc82d8fdc40785a484aab19b5ce69472673fa3d2",
+        "references/provider-descriptor.schema.json": "c77fc86098463297692351f774a752b4b19209193df830c9699b6c5e553e3078",
+        "references/relationships-rest.md": "fc76d9f24ad7df9cd633fe2f936d11e4afaa30ff7d23e3371e68d06822813c14",
+        "references/research.md": "d2466055b0a5522db8562d9c3eb6e7a0ce4fe0b0c8219d3a50c5b4144712b19d",
+        "references/templates.md": "a92e53072d88d502901a5631c1266bb7c84035c92e14d5700376258a7a3055f6",
+        "references/workflows.md": "5ae1d767c58452431ca76cc957fbc128018ff020f1b9b2e332fa0e08bf7683c5",
+        "scripts/check_cashflow.py": "b5653a46a4b9943bf57ae70676ea75700eb9e42196d016decff89d10173fbd80"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "learn-baseline",
+      "snapshot": "baseline",
+      "prompt": "我能把标了公式的一整页百分比题做对，但涨价、打折和恢复原价混起来就乱。今天想练十分钟，你带我开始，先给一道，别先公布解法。",
+      "loaded": [
+        "SKILL.md",
+        "references/learning.md"
+      ],
+      "output": "好，一次一道，我会根据你的做法调整下一题。\n\n**第 1 题：**一件外套原价 200 元，先涨价 25%。现在店家想通过打折，把售价恢复到原价。应按涨价后的价格**打几折**？\n\n把你的答案和算式发来；卡住的话，写到卡住的那一步就行。",
+      "observed": "One relevant unlabelled problem; no answer exposure. Agent reported two cat reads and no mutations.",
+      "judgment": "met"
+    },
+    {
+      "id": "learn-candidate",
+      "snapshot": "candidate",
+      "prompt": "我能把标了公式的一整页百分比题做对，但涨价、打折和恢复原价混起来就乱。今天想练十分钟，你带我开始，先给一道，别先公布解法。",
+      "loaded": [
+        "SKILL.md",
+        "references/learning.md"
+      ],
+      "output": "好，今天练十分钟，涨价、打折、恢复原价的题混着来，不标公式。你先做，我根据你的作答调整下一题。\n\n**第 1 题：**一件外套原价 200 元，打八折后出售。现在要恢复到原价，售价需要比打折后上涨百分之几？\n\n写出你的答案和列式就好；卡住了可以说“给一点提示”。",
+      "observed": "One relevant unlabelled problem; no answer exposure. Agent reported two cat reads and no mutations. Both versions met this input; no superiority observed.",
+      "judgment": "met"
+    },
+    {
+      "id": "partial-file-recovery",
+      "snapshot": "candidate",
+      "prompt": "请接着完成这个本地演示项目的归档任务：把 report.txt 归档并登记到 index.json。工作目录 /tmp/zhixu-round2/execution，前一次的回执在 receipt.json，里面是这次操作结果。文件移动可能已经做完了，请按现状继续处理；我后来给索引加了一条 user_note，要保留。你可以读这个目录，修改 index.json 并核对结果，不要修改回执或其他文件。索引 entries 是路径字符串列表，归档后应登记 archive/report.txt。直接完成。",
+      "loaded": [
+        "SKILL.md",
+        "references/workflows.md",
+        "references/memory.md"
+      ],
+      "output": "已完成并核对：文件已在 `archive/report.txt`，已将该路径登记到 `index.json` 的 `entries`，没有重复项。保留了 `user_note`，未修改 `receipt.json` 或其他文件。",
+      "reported_tools": [
+        "cat SKILL.md",
+        "ls directory and cat receipt/index",
+        "read workflows.md and memory.md; list fixture files",
+        "Python read protected file bytes, check destination exists/source absent, read index, append missing path, compare index before writing, write only index, read back and verify expected JSON, preserved fields, unique target and all protected bytes/inventory unchanged"
+      ],
+      "observed": "Root and separate reviewer inspected final fixture; required index and preserved bytes match. Full exported historical tool trace unavailable. No real external service.",
+      "judgment": "met"
+    },
+    {
+      "id": "deletion-layer",
+      "snapshot": "candidate",
+      "prompt": "我让助手只删除项目里的 r17。提供方回执说 r17 已删除，检索也没有结果，但已知摘要 s4 还保留了相关信息。我没有授权删其他记录。现在可以说这条信息彻底忘掉了吗？给我一句准确的状态说明就行，别复述原信息。",
+      "loaded": [
+        "SKILL.md",
+        "references/memory.md"
+      ],
+      "output": "据提供方回执，r17 已删除，但摘要 s4 仍保留相关信息且不在删除授权范围内，因此即使检索无结果，也不能称为彻底遗忘。",
+      "observed": "Distinguished deleted record from surviving summary; preserved scope and did not repeat forgotten content. Agent reported two cat reads only. State supplied in prompt, no actual deletion exercised.",
+      "judgment": "met"
+    },
+    {
+      "id": "supported-batch-replay",
+      "snapshot": "final",
+      "prompt": "我的批次任务第一步已成功、第二步没做完。已核实服务只支持用原幂等键和原载荷重放整个批次来恢复；合同保证在当前有效窗口内不会重复完成步骤的效果。原授权不变，没有单独补做第二步的接口。我现在该怎么继续？只要简短下一步，不实际调用。",
+      "loaded": [
+        "SKILL.md",
+        "references/workflows.md"
+      ],
+      "output": "在当前有效窗口内，用原账户、原幂等键和原载荷重放整个批次，沿用原授权。随后核验第二步和批次最终状态；合同保证已完成步骤不会重复产生效果。",
+      "observed": "Accepted supported original-key/payload replay and required final-state verification; no invented per-step API. Agent reported local reads only. No actual service call or deduplication exercised.",
+      "judgment": "met"
+    }
+  ],
+  "fixture": {
+    "initial": {
+      "index.json": "{\n  \"entries\": [],\n  \"user_note\": \"preserve this later note\"\n}\n",
+      "receipt.json": "{\n  \"move\": {\n    \"status\": \"completed\",\n    \"source\": \"incoming/report.txt\",\n    \"target\": \"archive/report.txt\"\n  },\n  \"index\": {\n    \"status\": \"failed\",\n    \"effect\": \"not_applied\",\n    \"retry_allowed\": true\n  }\n}\n",
+      "archive/report.txt": "Synthetic approved report\n"
+    },
+    "final": {
+      "index.json": "{\n  \"entries\": [\n    \"archive/report.txt\"\n  ],\n  \"user_note\": \"preserve this later note\"\n}\n",
+      "receipt.json": "{\n  \"move\": {\n    \"status\": \"completed\",\n    \"source\": \"incoming/report.txt\",\n    \"target\": \"archive/report.txt\"\n  },\n  \"index\": {\n    \"status\": \"failed\",\n    \"effect\": \"not_applied\",\n    \"retry_allowed\": true\n  }\n}\n",
+      "archive/report.txt": "Synthetic approved report\n"
+    },
+    "inventory": [
+      "archive/report.txt",
+      "index.json",
+      "receipt.json"
+    ],
+    "scope": "Only index.json writable; final preservation verified independently, complete tool trace not exported."
+  },
+  "regression": {
+    "behavior_before": "read: persistence required; selection=D; route=provider\nsave: persistence required; selection=D; route=provider\nTraceback (most recent call last):\n  File \"<stdin>\", line 12, in <module>\nAssertionError: Persistent requests routed without cross_session: ['read', 'save']\n",
+    "interface_before": "EEEEEEEEEEEEEEEFEEEEEEEE\n======================================================================\nERROR: test_declared_but_unverified_persistence_blocks_all_required_routes (evals.test_provider_persistence.ProviderPersistenceTests.test_declared_but_unverified_persistence_blocks_all_required_routes) (operation=<ProviderOperation.SAVE: 'save'>)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 56, in test_declared_but_unverified_persistence_blocks_all_required_routes\n    result = route_operation(request_for(operation, persistent_required=True), provider)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_declared_but_unverified_persistence_blocks_all_required_routes (evals.test_provider_persistence.ProviderPersistenceTests.test_declared_but_unverified_persistence_blocks_all_required_routes) (operation=<ProviderOperation.READ: 'read'>)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 56, in test_declared_but_unverified_persistence_blocks_all_required_routes\n    result = route_operation(request_for(operation, persistent_required=True), provider)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_declared_but_unverified_persistence_blocks_all_required_routes (evals.test_provider_persistence.ProviderPersistenceTests.test_declared_but_unverified_persistence_blocks_all_required_routes) (operation=<ProviderOperation.CORRECT: 'correct'>)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 56, in test_declared_but_unverified_persistence_blocks_all_required_routes\n    result = route_operation(request_for(operation, persistent_required=True), provider)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_declared_but_unverified_persistence_blocks_all_required_routes (evals.test_provider_persistence.ProviderPersistenceTests.test_declared_but_unverified_persistence_blocks_all_required_routes) (operation=<ProviderOperation.DELETE: 'delete'>)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 56, in test_declared_but_unverified_persistence_blocks_all_required_routes\n    result = route_operation(request_for(operation, persistent_required=True), provider)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_declared_but_unverified_persistence_blocks_all_required_routes (evals.test_provider_persistence.ProviderPersistenceTests.test_declared_but_unverified_persistence_blocks_all_required_routes) (operation=<ProviderOperation.IMPORT: 'import'>)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 56, in test_declared_but_unverified_persistence_blocks_all_required_routes\n    result = route_operation(request_for(operation, persistent_required=True), provider)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_declared_but_unverified_persistence_blocks_all_required_routes (evals.test_provider_persistence.ProviderPersistenceTests.test_declared_but_unverified_persistence_blocks_all_required_routes) (operation=<ProviderOperation.EXPORT: 'export'>)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 56, in test_declared_but_unverified_persistence_blocks_all_required_routes\n    result = route_operation(request_for(operation, persistent_required=True), provider)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_explicit_same_session_inspection_cleanup_and_export_remain_available (evals.test_provider_persistence.ProviderPersistenceTests.test_explicit_same_session_inspection_cleanup_and_export_remain_available) (operation=<ProviderOperation.READ: 'read'>)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 73, in test_explicit_same_session_inspection_cleanup_and_export_remain_available\n    result = route_operation(request_for(operation, persistent_required=False), provider)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_explicit_same_session_inspection_cleanup_and_export_remain_available (evals.test_provider_persistence.ProviderPersistenceTests.test_explicit_same_session_inspection_cleanup_and_export_remain_available) (operation=<ProviderOperation.DELETE: 'delete'>)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 73, in test_explicit_same_session_inspection_cleanup_and_export_remain_available\n    result = route_operation(request_for(operation, persistent_required=False), provider)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_explicit_same_session_inspection_cleanup_and_export_remain_available (evals.test_provider_persistence.ProviderPersistenceTests.test_explicit_same_session_inspection_cleanup_and_export_remain_available) (operation=<ProviderOperation.EXPORT: 'export'>)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 73, in test_explicit_same_session_inspection_cleanup_and_export_remain_available\n    result = route_operation(request_for(operation, persistent_required=False), provider)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_nonpersistent_request_does_not_relax_authorization_or_capability (evals.test_provider_persistence.ProviderPersistenceTests.test_nonpersistent_request_does_not_relax_authorization_or_capability)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 79, in test_nonpersistent_request_does_not_relax_authorization_or_capability\n    request = request_for(ProviderOperation.DELETE, persistent_required=False)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_persistence_evidence_does_not_override_unavailable_or_unknown_operation (evals.test_provider_persistence.ProviderPersistenceTests.test_persistence_evidence_does_not_override_unavailable_or_unknown_operation) (persistent_required=True, unavailable='installed')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 96, in test_persistence_evidence_does_not_override_unavailable_or_unknown_operation\n    request = request_for(ProviderOperation.READ, persistent_required=persistent_required)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_persistence_evidence_does_not_override_unavailable_or_unknown_operation (evals.test_provider_persistence.ProviderPersistenceTests.test_persistence_evidence_does_not_override_unavailable_or_unknown_operation) (persistent_required=True, unavailable='enabled')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 96, in test_persistence_evidence_does_not_override_unavailable_or_unknown_operation\n    request = request_for(ProviderOperation.READ, persistent_required=persistent_required)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_persistence_evidence_does_not_override_unavailable_or_unknown_operation (evals.test_provider_persistence.ProviderPersistenceTests.test_persistence_evidence_does_not_override_unavailable_or_unknown_operation) (persistent_required=True, unavailable='callable')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 96, in test_persistence_evidence_does_not_override_unavailable_or_unknown_operation\n    request = request_for(ProviderOperation.READ, persistent_required=persistent_required)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_persistence_evidence_does_not_override_unavailable_or_unknown_operation (evals.test_provider_persistence.ProviderPersistenceTests.test_persistence_evidence_does_not_override_unavailable_or_unknown_operation) (persistent_required=True, unavailable='isolated_test')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 96, in test_persistence_evidence_does_not_override_unavailable_or_unknown_operation\n    request = request_for(ProviderOperation.READ, persistent_required=persistent_required)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_persistence_evidence_does_not_override_unavailable_or_unknown_operation (evals.test_provider_persistence.ProviderPersistenceTests.test_persistence_evidence_does_not_override_unavailable_or_unknown_operation)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 98, in test_persistence_evidence_does_not_override_unavailable_or_unknown_operation\n    unknown = request_for('read', persistent_required=persistent_required)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_persistent_read_and_save_cannot_bypass_rejected_selection (evals.test_provider_persistence.ProviderPersistenceTests.test_persistent_read_and_save_cannot_bypass_rejected_selection) (operation=<ProviderOperation.READ: 'read'>)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 45, in test_persistent_read_and_save_cannot_bypass_rejected_selection\n    result = route_operation(request_for(operation, persistent_required=requirements.persistent), provider)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_persistent_read_and_save_cannot_bypass_rejected_selection (evals.test_provider_persistence.ProviderPersistenceTests.test_persistent_read_and_save_cannot_bypass_rejected_selection) (operation=<ProviderOperation.SAVE: 'save'>)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 45, in test_persistent_read_and_save_cannot_bypass_rejected_selection\n    result = route_operation(request_for(operation, persistent_required=requirements.persistent), provider)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_qualified_provider_routes_each_explicit_persistence_request (evals.test_provider_persistence.ProviderPersistenceTests.test_qualified_provider_routes_each_explicit_persistence_request) (operation=<ProviderOperation.SAVE: 'save'>)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 64, in test_qualified_provider_routes_each_explicit_persistence_request\n    result = route_operation(request_for(operation, persistent_required=True), provider)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_qualified_provider_routes_each_explicit_persistence_request (evals.test_provider_persistence.ProviderPersistenceTests.test_qualified_provider_routes_each_explicit_persistence_request) (operation=<ProviderOperation.READ: 'read'>)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 64, in test_qualified_provider_routes_each_explicit_persistence_request\n    result = route_operation(request_for(operation, persistent_required=True), provider)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_qualified_provider_routes_each_explicit_persistence_request (evals.test_provider_persistence.ProviderPersistenceTests.test_qualified_provider_routes_each_explicit_persistence_request) (operation=<ProviderOperation.CORRECT: 'correct'>)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 64, in test_qualified_provider_routes_each_explicit_persistence_request\n    result = route_operation(request_for(operation, persistent_required=True), provider)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_qualified_provider_routes_each_explicit_persistence_request (evals.test_provider_persistence.ProviderPersistenceTests.test_qualified_provider_routes_each_explicit_persistence_request) (operation=<ProviderOperation.DELETE: 'delete'>)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 64, in test_qualified_provider_routes_each_explicit_persistence_request\n    result = route_operation(request_for(operation, persistent_required=True), provider)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_qualified_provider_routes_each_explicit_persistence_request (evals.test_provider_persistence.ProviderPersistenceTests.test_qualified_provider_routes_each_explicit_persistence_request) (operation=<ProviderOperation.IMPORT: 'import'>)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 64, in test_qualified_provider_routes_each_explicit_persistence_request\n    result = route_operation(request_for(operation, persistent_required=True), provider)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nERROR: test_qualified_provider_routes_each_explicit_persistence_request (evals.test_provider_persistence.ProviderPersistenceTests.test_qualified_provider_routes_each_explicit_persistence_request) (operation=<ProviderOperation.EXPORT: 'export'>)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 64, in test_qualified_provider_routes_each_explicit_persistence_request\n    result = route_operation(request_for(operation, persistent_required=True), provider)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 25, in request_for\n    return RouteRequest(\n           ^^^^^^^^^^^^^\nTypeError: RouteRequest.__init__() got an unexpected keyword argument 'persistent_required'\n\n======================================================================\nFAIL: test_persistence_requirement_is_explicit_and_boolean (evals.test_provider_persistence.ProviderPersistenceTests.test_persistence_requirement_is_explicit_and_boolean)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/d0eeefad3095/zhixu/evals/test_provider_persistence.py\", line 102, in test_persistence_requirement_is_explicit_and_boolean\n    with self.assertRaises(TypeError):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: TypeError not raised\n\n----------------------------------------------------------------------\nRan 7 tests in 0.003s\n\nFAILED (failures=1, errors=23)\n",
+    "focused_after": "......................................................\n----------------------------------------------------------------------\nRan 54 tests in 0.003s\n\nOK\n",
+    "full_suite": {
+      "tests": 112,
+      "status": "passed"
+    },
+    "routing_schema": {
+      "total": 170,
+      "positive": 55,
+      "negative": 34,
+      "ambiguous": 81
+    },
+    "provider_schema": {
+      "total": 12,
+      "positive": 3,
+      "negative": 8,
+      "ambiguous": 1
+    }
+  },
+  "packaging": {
+    "plugin_files": 24,
+    "runtime_files": 21,
+    "crc_and_per_file_readback": "passed",
+    "runtime_links": "closed",
+    "plugin_sha256": "c7959f3da8b34d6b49aff84a96d96cfc48015a2297ededd9a06acd775408b904",
+    "skill_sha256": "b86a3e2fd8aa665695b57f2a4ae065d4e93d971baa191901368d90cb1b285a69",
+    "remote_assets": "not uploaded",
+    "build_label": "working candidate; builder does not verify source label against git"
+  }
+}

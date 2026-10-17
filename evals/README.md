@@ -6,6 +6,12 @@ must not be counted as observed assistant behavior.
 
 [Validation status](../docs/VALIDATION.md)
 
+As of 1.1.0-preview.2, the offline reference `RouteRequest` requires an explicit
+Boolean `persistent_required`. Carry the actual task requirement into this field;
+do not default to false to bypass an unverified `cross_session` capability.
+Explicit nonpersistent cleanup/inspection retains all other guards. This is a
+reference API change, not an installed host adapter or a persistence test.
+
 [Non-learning candidate pilot](../docs/VALIDATION-NONLEARNING.md) records paired
 synthetic outputs, blind review, regression replays and unverified outcomes. It
 does not establish an improvement over the previous version.

@@ -137,6 +137,7 @@ class MemoryLifecycleTests(unittest.TestCase):
                 user_consent="authorized",
                 authorized_scopes={"personal"},
                 network_allowed=False,
+                persistent_required=False,  # This fixture is same-process only.
                 active_provider_id="synthetic",
                 relevant=False,
             ),
@@ -174,6 +175,7 @@ class MemoryLifecycleTests(unittest.TestCase):
                 user_consent="authorized",
                 authorized_scopes={"personal"},
                 network_allowed=False,
+                persistent_required=False,  # This fixture is same-process only.
                 active_provider_id="new",
             ),
             descriptor,
@@ -204,6 +206,7 @@ class MemoryLifecycleTests(unittest.TestCase):
                 user_consent="authorized",
                 authorized_scopes={"personal"},
                 network_allowed=False,
+                persistent_required=False,  # This fixture is same-process only.
                 active_provider_id="new",
             ),
             old_descriptor,
@@ -243,6 +246,7 @@ class MemoryLifecycleTests(unittest.TestCase):
                 user_consent="confirm",
                 authorized_scopes=frozenset(),
                 network_allowed=False,
+                persistent_required=False,  # This fixture is same-process only.
             ),
             descriptor,
         )

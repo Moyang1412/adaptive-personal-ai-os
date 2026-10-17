@@ -190,6 +190,9 @@ class RouteRequest:
     user_consent: str
     authorized_scopes: FrozenSet[str]
     network_allowed: bool
+    # Carry the actual requirement through routing; an authorized same-session
+    # inspection or cleanup need not claim persistence. No implicit default.
+    persistent_required: bool
     active_provider_id: str | None = None
     relevant: bool = True
     cross_agent: bool = False
@@ -197,7 +200,7 @@ class RouteRequest:
     single_writer: bool = False
 
     def __post_init__(self) -> None:
-        _require_boolean_fields(self, 'network_allowed', 'relevant', 'cross_agent', 'sharing_authorized', 'single_writer')
+        _require_boolean_fields(self, 'network_allowed', 'persistent_required', 'relevant', 'cross_agent', 'sharing_authorized', 'single_writer')
         _require_text_fields(self, 'scope', 'user_consent')
         if self.active_provider_id is not None and not isinstance(self.active_provider_id, str):
             raise ValueError('active_provider_id must be text or None')
@@ -440,6 +443,8 @@ def route_operation(request: RouteRequest, provider: ProviderDescriptor) -> Rout
         return RouteResult("blocked", provider.id, "provider 尚未通过隔离测试")
     if "scope" not in provider.verified_capabilities:
         return RouteResult("blocked", provider.id, "provider 的范围控制尚未验证")
+    if request.persistent_required and "cross_session" not in provider.verified_capabilities:
+        return RouteResult("blocked", provider.id, "本次要求持久记忆，但 provider 的跨会话能力尚未验证")
     if capability not in provider.verified_capabilities:
         return RouteResult("blocked", provider.id, "provider 的该操作尚未验证")
     if not (
