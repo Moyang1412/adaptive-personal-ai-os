@@ -47,6 +47,12 @@ a deadline or appointment date interchangeable. Keep task usefulness and critica
 boundary violations visible separately; success on one cannot cancel failure on
 the other. Do not rank systems by headline scores from unmatched conditions.
 
+For a time-indexed evaluation, freeze what the agent could know at the decision
+time. Keep later outcomes and grader-only labels out of the agent's prompts,
+retrieval index and snapshots. Check actual data flow rather than trusting a field
+called "ground truth"; future outcomes can inform grading without becoming prior
+evidence. Missing grader output remains unjudged, not a clean safety result.
+
 Preserve evidence status in drafts and promotional copy too: proposed, underway and completed are different claims. Existing informal feedback does not establish that an objective comparison has started. State a future validation plan as a plan unless its execution is evidenced.
 
 Example: a fictional scheduling repository says it saves time, and a paper studies reminder adherence. The paper may motivate a reminder feature, but neither source establishes that the repository or this Skill improves total task completion. Keep that performance claim unverified and compare actual outcomes and burden before promoting it.
