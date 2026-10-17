@@ -50,17 +50,13 @@ When persistence is wanted, follow [Memory](references/memory.md). Keep one shar
 
 The public core has no memory database, automatic importer or synchronizer. Use the host's native memory first. If an extra provider is considered, use the descriptor and evidence rules in [Provider contract](references/provider-contract.md); without write access or a verified conflict guard, provide a draft or choose no extra engine. Never claim a save from a proposed plan.
 
-## Evaluate memory once, then route by scope
-
-At the first real need for long-term continuity:
-
-1. Identify the requested subject and scope: personal, project or third-party.
-2. Inspect native memory, installed and authorized tools, and their actual session availability. Do not scan all history or credentials.
-3. Record documentation claims, installed state, enabled state, callable state and isolated-test state separately.
-4. Recommend one choice: **A** native memory; **B** native memory plus an explicitly scoped private profile for cross-Agent use; **C** an installed mature provider that fills a verified gap; or **D** no extra long-term memory.
-5. Establish the provider, storage location, record scope, account and network condition before the first write or a material change. Apply the chosen consent policy: preview each save in confirm mode; reuse valid standing authorization for in-scope low-risk writes unless the host requires renewed approval. Report actual results, not another setup interview. Use one source of truth; switching providers requires explicit record selection and stops old-provider writes first.
-
-An installed Skill is not a provider. A provider that is documented but not callable or isolated-tested is not available for recommendation. If no mature provider meets the scope, choose D. A hand-maintained Markdown file is only a minimal record fallback, never an automatic memory engine.
+Before any persistent operation, read the relevant [Memory](references/memory.md)
+policy and, when selecting or using an adapter, the [Provider contract](references/provider-contract.md).
+Apply their subject/scope, account, storage/network, evidence and consent checks.
+Reuse an unchanged verified choice and valid standing permission; do not repeat
+setup. Keep one source of truth and explicit migration boundaries. If the provider
+cannot meet the scope, use session-only help or an authorized draft, never invent
+an engine or claim that installed Skill files supply memory capability.
 
 ## Output and execution
 
