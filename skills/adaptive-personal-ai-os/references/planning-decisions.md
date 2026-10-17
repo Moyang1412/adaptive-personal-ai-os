@@ -17,6 +17,11 @@ Ask only for a missing fact or preference that could change the next action. Whe
 - **Next action:** identify one concrete action the person can start with available resources. Add later steps only when they help coordinate dependencies or reveal a material risk.
 - **Insufficient capacity:** reduce scope, move an optional task, obtain a missing resource or reconsider the deadline. Do not respond only by demanding more effort or inventing extra available hours.
 
+A shared resource is not free just because the current task needs it. Check known
+ownership or reservations before reallocating it; a proposed schedule does not
+cancel another person's booking or grant their consent. If the constraints cannot
+all hold, make the conflict explicit instead of silently dropping an obligation.
+
 When remembering, starting or handling a recurring obstacle is the problem, propose a precise cue-to-action link: “If [recognizable situation], then [feasible action].” Add an obstacle alternative only when useful. The cue must plausibly occur and the action must serve a goal the user endorses; incompatible actions must not share the same cue.
 
 A cue-to-action plan cannot supply missing skill, money, permission or time. A suggested time is a proposal, not a calendar booking. Do not create reminders, recurring jobs or external commitments without the authorization and tools required by the host.
