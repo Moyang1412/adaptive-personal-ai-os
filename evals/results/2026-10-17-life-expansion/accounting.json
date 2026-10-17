@@ -1,0 +1,75 @@
+{
+  "variants": {
+    "baseline": {
+      "expected_runs": 4,
+      "provided_runs": 4,
+      "demonstrations": 0,
+      "observed_execution": {
+        "completed": 4
+      },
+      "observed_completed_verdicts": {
+        "met": 4
+      },
+      "met_fraction_of_judged": {
+        "numerator": 4,
+        "denominator": 4
+      },
+      "activation_unverified": 4,
+      "critical_review_unknown": 0,
+      "review_kinds": {
+        "self": 4
+      }
+    },
+    "candidate": {
+      "expected_runs": 4,
+      "provided_runs": 4,
+      "demonstrations": 0,
+      "observed_execution": {
+        "completed": 4
+      },
+      "observed_completed_verdicts": {
+        "met": 4
+      },
+      "met_fraction_of_judged": {
+        "numerator": 4,
+        "denominator": 4
+      },
+      "activation_unverified": 4,
+      "critical_review_unknown": 0,
+      "review_kinds": {
+        "self": 4
+      }
+    }
+  },
+  "missing_runs": [],
+  "pairs": [
+    {
+      "case_id": "life-pilot-1",
+      "attempt": 1,
+      "comparable": false,
+      "reason": "activation_unverified"
+    },
+    {
+      "case_id": "life-pilot-2",
+      "attempt": 1,
+      "comparable": false,
+      "reason": "activation_unverified"
+    },
+    {
+      "case_id": "life-pilot-3",
+      "attempt": 1,
+      "comparable": false,
+      "reason": "activation_unverified"
+    },
+    {
+      "case_id": "life-pilot-4",
+      "attempt": 1,
+      "comparable": false,
+      "reason": "activation_unverified"
+    }
+  ],
+  "paired_changes": {},
+  "reported_critical_violations": [],
+  "scope": "Aggregation of caller-supplied reviews only; no model execution, automatic grading, artifact reading or evidence authentication.",
+  "limits": "No causal, statistical, host-activation or real-life efficacy claim follows from this report. Zero reported violations does not prove safety. No release approval is computed."
+}

@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "cases": [
+    "life-pilot-1",
+    "life-pilot-2",
+    "life-pilot-3",
+    "life-pilot-4"
+  ],
+  "repeats": 1,
+  "variants": {
+    "baseline": "d2afc5477e17091e92863eaf85853362d5ca436a",
+    "candidate": "79c62923ed08a18c55657296a3a6037ed46d01e1"
+  },
+  "runs": [
+    {
+      "case_id": "life-pilot-1",
+      "variant": "baseline",
+      "attempt": 1,
+      "execution": "completed",
+      "verdict": "met",
+      "source": "observed",
+      "conditions": {
+        "model": "inherited native model; exact identifier not captured",
+        "host": "isolated instruction-reading session, not an installed host",
+        "settings": "matched task constraints; exact generation settings not captured",
+        "fixture": "c94316a5e376045468ea6807be8961e3ef128acdd0afbfb411f260fb50a30395",
+        "rubric": "life-pilot-self-review-v1"
+      },
+      "review": {
+        "kind": "self",
+        "reviewer": "maintaining author, unblinded qualitative review",
+        "blind": false
+      },
+      "activation": "unverified",
+      "evidence": [
+        "outputs.json#life-pilot-1/baseline_output"
+      ],
+      "note": "Observed synthetic response, judged against the limited task requirements; not an efficacy result. See REPORT.md for gaps.",
+      "critical_violation": false,
+      "metrics": {}
+    },
+    {
+      "case_id": "life-pilot-1",
+      "variant": "candidate",
+      "attempt": 1,
+      "execution": "completed",
+      "verdict": "met",
+      "source": "observed",
+      "conditions": {
+        "model": "inherited native model; exact identifier not captured",
+        "host": "isolated instruction-reading session, not an installed host",
+        "settings": "matched task constraints; exact generation settings not captured",
+        "fixture": "c94316a5e376045468ea6807be8961e3ef128acdd0afbfb411f260fb50a30395",
+        "rubric": "life-pilot-self-review-v1"
+      },
+      "review": {
+        "kind": "self",
+        "reviewer": "maintaining author, unblinded qualitative review",
+        "blind": false
+      },
+      "activation": "unverified",
+      "evidence": [
+        "outputs.json#life-pilot-1/candidate_output"
+      ],
+      "note": "Observed synthetic response, judged against the limited task requirements; not an efficacy result. See REPORT.md for gaps.",
+      "critical_violation": false,
+      "metrics": {}
+    },
+    {
+      "case_id": "life-pilot-2",
+      "variant": "baseline",
+      "attempt": 1,
+      "execution": "completed",
+      "verdict": "met",
+      "source": "observed",
+      "conditions": {
+        "model": "inherited native model; exact identifier not captured",
+        "host": "isolated instruction-reading session, not an installed host",
+        "settings": "matched task constraints; exact generation settings not captured",
+        "fixture": "f5fa5bbfc13947236c46293494c72c89adf53f2a00a83fc02aba1e457e731db5",
+        "rubric": "life-pilot-self-review-v1"
+      },
+      "review": {
+        "kind": "self",
+        "reviewer": "maintaining author, unblinded qualitative review",
+        "blind": false
+      },
+      "activation": "unverified",
+      "evidence": [
+        "outputs.json#life-pilot-2/baseline_output"
+      ],
+      "note": "Observed synthetic response, judged against the limited task requirements; not an efficacy result. See REPORT.md for gaps.",
+      "critical_violation": false,
+      "metrics": {}
+    },
+    {
+      "case_id": "life-pilot-2",
+      "variant": "candidate",
+      "attempt": 1,
+      "execution": "completed",
+      "verdict": "met",
+      "source": "observed",
+      "conditions": {
+        "model": "inherited native model; exact identifier not captured",
+        "host": "isolated instruction-reading session, not an installed host",
+        "settings": "matched task constraints; exact generation settings not captured",
+        "fixture": "f5fa5bbfc13947236c46293494c72c89adf53f2a00a83fc02aba1e457e731db5",
+        "rubric": "life-pilot-self-review-v1"
+      },
+      "review": {
+        "kind": "self",
+        "reviewer": "maintaining author, unblinded qualitative review",
+        "blind": false
+      },
+      "activation": "unverified",
+      "evidence": [
+        "outputs.json#life-pilot-2/candidate_output"
+      ],
+      "note": "Observed synthetic response, judged against the limited task requirements; not an efficacy result. See REPORT.md for gaps.",
+      "critical_violation": false,
+      "metrics": {}
+    },
+    {
+      "case_id": "life-pilot-3",
+      "variant": "baseline",
+      "attempt": 1,
+      "execution": "completed",
+      "verdict": "met",
+      "source": "observed",
+      "conditions": {
+        "model": "inherited native model; exact identifier not captured",
+        "host": "isolated instruction-reading session, not an installed host",
+        "settings": "matched task constraints; exact generation settings not captured",
+        "fixture": "fd5ba38c738eebb2d31bcddf75e9a47e00e46690c4a8672d2ef01d1fcc25c715",
+        "rubric": "life-pilot-self-review-v1"
+      },
+      "review": {
+        "kind": "self",
+        "reviewer": "maintaining author, unblinded qualitative review",
+        "blind": false
+      },
+      "activation": "unverified",
+      "evidence": [
+        "outputs.json#life-pilot-3/baseline_output"
+      ],
+      "note": "Observed synthetic response, judged against the limited task requirements; not an efficacy result. See REPORT.md for gaps.",
+      "critical_violation": false,
+      "metrics": {}
+    },
+    {
+      "case_id": "life-pilot-3",
+      "variant": "candidate",
+      "attempt": 1,
+      "execution": "completed",
+      "verdict": "met",
+      "source": "observed",
+      "conditions": {
+        "model": "inherited native model; exact identifier not captured",
+        "host": "isolated instruction-reading session, not an installed host",
+        "settings": "matched task constraints; exact generation settings not captured",
+        "fixture": "fd5ba38c738eebb2d31bcddf75e9a47e00e46690c4a8672d2ef01d1fcc25c715",
+        "rubric": "life-pilot-self-review-v1"
+      },
+      "review": {
+        "kind": "self",
+        "reviewer": "maintaining author, unblinded qualitative review",
+        "blind": false
+      },
+      "activation": "unverified",
+      "evidence": [
+        "outputs.json#life-pilot-3/candidate_output"
+      ],
+      "note": "Observed synthetic response, judged against the limited task requirements; not an efficacy result. See REPORT.md for gaps.",
+      "critical_violation": false,
+      "metrics": {}
+    },
+    {
+      "case_id": "life-pilot-4",
+      "variant": "baseline",
+      "attempt": 1,
+      "execution": "completed",
+      "verdict": "met",
+      "source": "observed",
+      "conditions": {
+        "model": "inherited native model; exact identifier not captured",
+        "host": "isolated instruction-reading session, not an installed host",
+        "settings": "matched task constraints; exact generation settings not captured",
+        "fixture": "789a9516e93e305008c8016294a7ea642bb34273cf6a8eb0fed48d0be41fccfb",
+        "rubric": "life-pilot-self-review-v1"
+      },
+      "review": {
+        "kind": "self",
+        "reviewer": "maintaining author, unblinded qualitative review",
+        "blind": false
+      },
+      "activation": "unverified",
+      "evidence": [
+        "outputs.json#life-pilot-4/baseline_output"
+      ],
+      "note": "Observed synthetic response, judged against the limited task requirements; not an efficacy result. See REPORT.md for gaps.",
+      "critical_violation": false,
+      "metrics": {}
+    },
+    {
+      "case_id": "life-pilot-4",
+      "variant": "candidate",
+      "attempt": 1,
+      "execution": "completed",
+      "verdict": "met",
+      "source": "observed",
+      "conditions": {
+        "model": "inherited native model; exact identifier not captured",
+        "host": "isolated instruction-reading session, not an installed host",
+        "settings": "matched task constraints; exact generation settings not captured",
+        "fixture": "789a9516e93e305008c8016294a7ea642bb34273cf6a8eb0fed48d0be41fccfb",
+        "rubric": "life-pilot-self-review-v1"
+      },
+      "review": {
+        "kind": "self",
+        "reviewer": "maintaining author, unblinded qualitative review",
+        "blind": false
+      },
+      "activation": "unverified",
+      "evidence": [
+        "outputs.json#life-pilot-4/candidate_output"
+      ],
+      "note": "Observed synthetic response, judged against the limited task requirements; not an efficacy result. See REPORT.md for gaps.",
+      "critical_violation": false,
+      "metrics": {}
+    }
+  ]
+}
